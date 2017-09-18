@@ -585,7 +585,6 @@ provide a human-readable description of this supply chain.
 
 The "keys" list will contain a list of all the public keys used in the steps
 section, as they are described in 4.2.
-// FIXME: needs to fix the referencews to the sections.
 
 The `"steps"` section will contain a list of restrictions for each step within
 the supply chain. It is also possible to further define steps by means of
