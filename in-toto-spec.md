@@ -457,10 +457,11 @@ how it is laid out within link and layout metadata.
 ### 4.1 Metaformat
 
 To provide descriptive examples, we will adopt "canonical JSON," as described
-in http://wiki.laptop.org/go/Canonical\_JSON, as the data format. However,
-applications that desire to implement in-toto are not required to use JSON.
-Discussion about the intended data format for in-toto can be found in the
-in-toto website.
+in
+[http://wiki.laptop.org/go/Canonical\_JSON](http://wiki.laptop.org/go/Canonical_JSON),
+as the data format. However, applications that desire to implement in-toto are
+not required to use JSON.  Discussion about the intended data format for
+in-toto can be found in the in-toto website.
 
 ### 4.2 File formats: general principles
 
@@ -468,13 +469,13 @@ All signed files (i.e., link and layout files) have the format:
 
 ```json
 {
-    "signed" : "<ROLE>",
-    "signatures" : [
-        { "keyid" : "<KEYID>",
-          "method" : "<METHOD>",
-          "sig" : "<SIGNATURE>" }, 
-    "..."
-    ]
+  "signed" : "<ROLE>",
+  "signatures" : [
+      { "keyid" : "<KEYID>",
+        "method" : "<METHOD>",
+        "sig" : "<SIGNATURE>" }, 
+  "..."
+  ]
 }
 ```
 
@@ -491,6 +492,7 @@ type, or cryptographic library:
 The underlying hash function is SHA256.
 *   "ed25519" : Elliptic curve digital signature algorithm based on
     [TwistedEdwards curves](http://ed25519.cr.yp.to/).
+*   "ecdsa" : [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
 
 All keys have the format:
 
@@ -516,7 +518,7 @@ The 'rsa' format is:
 where PUBLIC and PRIVATE are in PEM format and are strings.  All RSA keys must
 be at least 2048 bits.
 
-The 'ed25519' format is:
+The elliptic-curve variants ('ed25519' and ecdsa) format are:
 
 ```json
   { "keytype" : "ed25519",
@@ -525,7 +527,14 @@ The 'ed25519' format is:
   }
 ```
 
-where PUBLIC and PRIVATE are both 32-byte strings.
+```json
+  { "keytype" : "ecdsa",
+    "keyval" : { "public" : "<PUBLIC>",
+                 "private" : "<PRIVATE>" }
+  }
+```
+
+where PUBLIC and PRIVATE are both 32-byte (256-bit) strings.
 
 Link and Layout metadata does not include the private portion of the key
 object:
@@ -685,8 +694,8 @@ Similar to steps, the `NAME` string will be used to identify this inspection
 within the supply chain. NAME values are unique and so they MUST NOT repeat in
 either steps or inspections.
 
-Materials and products fields behave in the same way as they do for the steps
-as defined in section 4.3.1.
+The `"expected_materials"` and `"expected_products"` products fields behave in
+the same way as they do for the steps as defined in section 4.3.1.
 
 Finally, the `"run"` field contains the command to run. This field will be used
 to spawn a new process in the verification system to create a new piece of link
@@ -760,6 +769,12 @@ match any materials.
   other words, this path must appear as a material and a product within this
 step and their hashes must not match.
 
+The artifact rules contained in the `"expected_materials"` and
+`"expected_products"` fields operate in a similar fashion as a firewal. This
+means that the first rule that matches a specific artifact in the link metadata
+will be used to match that artifact. Likewise, there is an implicit `ALLOW *`
+at the end of such fields.
+
 ##### 4.3.3.1 MATCH rule behavior
 
 The `MATCH` rule is used to tie different steps together, by means of their
@@ -781,8 +796,8 @@ MATCH(source_materials_or_products_set, destination_materials_or_products_set,
 source_artifacts_filtered = filter(rule.source_prefix + rule.source_pattern,
                                    source_materials_or_products_set)
 
-destination_artifacts_filtered\
-    = filter(rule.destination_prefix + rule.destination_pattern,
+destination_artifacts_filtered = \
+    filter(rule.destination_prefix + rule.destination_pattern,
              destination_materials_or_products_set)
 
 # Apply the IN clauses, to the paths, if any
@@ -828,13 +843,10 @@ artifacts = load_artifacts_as_queue(link)
 for rule in rules:
   matched_artifacts, rule_error = apply_rule(rule, artifacts)
 
-
   if rule_error:
     return ERROR("Rule failed to verify!")
 
-
   artifacts -= matched_artifacts
-
 
 # check if there were any artifacts that weren't matched by the rules
 if artifacts is not empty:
@@ -866,7 +878,7 @@ thresholds higher than one.
 The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
 ```json
-{ "_type" :  "link",
+{ "_type" : "link",
   "_name" :  "<NAME>",
   "command" : "<COMMAND>",
   "materials": {
@@ -881,6 +893,11 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
     "stdin": "",
     "stdout": "",
     "return-value": ""
+  },
+  "environment": {
+    "variables": "<ENV>",
+    "filesystem": "<FS>",
+    "workdir": "<CWD>"
   }
 }
 ```
@@ -903,6 +920,62 @@ further scrutiny during an inspection step. At a minimum, the byproducts
 dictionary should have standard output (stdout), standard input (stdin) and
 return value (return-value), even if no values are filled in.
 
+Finally, the environment dictionary contains information about the environment
+in which the step was carried out. Although the environment dictionary is an
+opaque field, it should at least contain the `"variables"`, `"filesystem"`, and
+`"workdir"` keys, even if no values are filled in for them. 
+
+#### 4.4.1 Environment Information
+
+The format of the environment information is not mandated by the in-toto
+specification, but we recommend to store the following:
+
+    * **variables**: a list of environment variables set in the host system.
+    * **filesystem**: a list of filepath/hash values of the relevant files in the filesystem. Another alternative could be to store an MTREE of the relevant directories. A third alternative would be to use the hashes of the relevante layerfs layers.
+    * **workdir**: the path of the current working directory.
+
+These values can be used to detect mistakes during compilation or invalid hosts
+carriying out steps.
+
+The following is a depiction of the previous recommendation:
+
+```json
+{ "environment": {
+  "Variables": [
+  "LANG=en_US.UTF-8",
+  "USER=santiago",
+  "PWD=/home/santiago",
+  "HOME=/home/santiago",
+  "SHELL=/bin/bash",
+  "PATH=/home/santiago/bin:/home/santiago/bin:/usr/local/sbin",
+  ],
+  "filesystem": [" "
+  " #           user: (null)", 
+  " #        machine: LykOS",
+  " #           tree: /home/santiago/Documents/personal/programas/in-toto/docs",
+  " #           date: Thu Jul 27 16:02:58 2017",
+  " ",
+  " ",
+  " # .",
+  " /set type=file uid=1000 gid=1000 mode=0644 nlink=1 flags=none",
+  " .               type=dir mode=0755 nlink=3 size=4096 \",
+  "                 time=1495734432.214631931",
+  "     LICENSE     size=1086 time=1495734432.214631931",
+  "     README.md   size=50 time=1495734432.214631931",
+  "     in-toto-spec.pdf \",
+  "                 size=220978 time=1495734432.217965320",
+  " .."],
+  "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs",
+  }
+``` 
+ 
+ The previous example contains a list of environment variables as printed out
+by the env command, a list of files as printed out by the mtree -c command and,
+finally, the output of the pwd command. This information can be used to infer
+information about the current execution environment. Operating systems and
+containerization solutions could use tools to record and store information
+relevant to their toolchain (e.g., dpkg-query list for debian, or information
+about the layer-fs manifest in docker).
 
 ### 4.5 Specifying sublayouts
 
@@ -915,7 +988,7 @@ call these additional layouts sublayouts.
 
 To create a sublayout, a series of steps are declared, and thus the functionary
 will take the role of a third party project owner. Sublayouts are saved with
-the [name].[hashprefix].link format, and they will have the same format
+the `[name].[keyid-prefix].link` format, and they will have the same format
 described for a layout file described in section 4.3 instead of the usual
 contents of a link metadata file.
 
@@ -953,10 +1026,9 @@ metadata filename without the .link metadata suffix. This is necessary to avoid
 clashes between step names on layouts and sublayouts, as the creator of a
 layout may not be aware of the names used by the creators of sublayouts.
 
-
 In our example above, the layout file would be stored under the name
-`build.BOBS_KEYID.link`, and the corresponding pieces of link metadata will be
-stored on a folder named `build.BOBS_KEYID`.
+`build.BOBS-KEYID-PREFIX.link`, and the corresponding pieces of link metadata
+will be stored on a folder named `build.BOBS-KEYID-PREFIX`.
 
 #### 4.5.3 Inspections on sublayouts
 
@@ -977,6 +1049,8 @@ layout.
 
 ## 5 Detailed workflows
 
+
+### 5.1 Workflow description 
 To provide further detail of in-toto’s workflow, we describe a detailed case
 that includes most of the concepts explained in sections 3 and 4. This is an
 error-free case.
@@ -989,36 +1063,40 @@ to further verify accompanying metadata.
    each step.
 1. Once all the steps are performed, the final product is shipped to the
    client.
-1. in-oto's verification tools are run on the final product.
-1. in-oto inspects the final product to find a root.layout file that describes
-   the top-level layout for the project. The signature(s) on the file are
-checked using previously-acquired project owner public key(s). Subsequently, if
-the layout signature verification passes, the functionaries’ public keys are
-loaded from the layout.
-1. The expiration time is verified to ensure that this layout is still fresh.
-1. The steps, as defined in the layout, are loaded. For each step in the
-   layout, one or more pieces of link or layout metadata is loaded.
-1. If the file loaded metadata is a link metadata file, a data structure
-   containing the materials and products is populated with the reported values.
-
-If more than one piece of link metadata are loaded due to the threshold value,
-their materials and products fields must exactly match.
-
-
-1. If the file is a layout file instead, the algorithm will recurse into that
-   layout, starting from step 5.
-1. If there is a layout file in conjunction with a link file (i.e., one of the
-   functionaries made a sublayout while others didn’t), then verification
-should fail. The reason as to why this happens is to avoid ambiguities between
-both versions of the supply chain.
-1. Inspection steps are executed, and the corresponding materials and products
-   data structures are populated.
-1. Matching rules are applied against the products and materials reported by
-   each step as described by the algorithm in section 4.3.3.2.
+1. in-toto's verification tools are run on the final product.
 1. If all these steps are successful, verification is done. The user can now
    use the final product.
 
-### 5.1 Supply chain examples
+### 5.2 Verifying the final product
+  
+ 
+The following algorithm contains an in-depth description of the verification
+procedure.
+ 
+1. Toto inspects the final product to find a root.layout file that describes
+   the top-level layout for the project. The signature(s) on the file are
+checked using previously-acquired project owner public key(s).
+1. The expiration time is verified to ensure that this layout is still fresh.
+   If the system's date is newer than the expiration date on the layout's
+expiration field, verification should fail.
+1. Subsequently, if the layout signature and expiration are valid, the
+   functionaries’ public keys are loaded from the root.layout in the pubkeys
+field.
+1. The steps, as defined in the layout, are loaded. For each step in the
+   layout, one or more pieces of link or layout metadata is loaded. 
+  1. If the file loaded metadata is a link metadata file, a data structure
+   containing the materials and products is populated with the reported values.
+  1. If the file is a layout file instead, the algorithm will recurse into that
+   layout, starting from step 1. All the metadata relevant to that sub-layout
+  should be contained in a subdirectory named after this step. 
+1. Matching rules are applied against the products and materials reported by
+   each step as described by the algorithm in section 4.3.3.2.
+1. Inspection steps are executed, and the corresponding materials and products
+   data structures are populated.
+1. Matching rules are applied against the products and materials reported by
+   each inspection as described by the algorithm in section 4.3.3.2.
+
+### 5.3 Supply chain examples
 
 To better understand how in-toto works, we provide a series of examples of the
 framework being used in practice. We will start with a simple example to
@@ -1026,7 +1104,7 @@ showcase how the relevant aspects of in-toto come into play. After this, we
 will present a more complete and realistic example. Additional link and layout
 metadata examples can be found at in-toto.io.
 
-#### 5.1.2 Alice's Python script
+#### 5.3.1 Alice's Python script
 
 This first example covers a simple scenario to show in-toto's elements without
 focusing on the details of a real-life supply chain.
@@ -1118,7 +1196,7 @@ metadata:
 
 ```json
 { "signed" : {
-    "_type" :  "link",
+    "_type" : "link",
     "name": "write-code",
     "command" : "vi foo.py",
     "materials": { },
@@ -1130,6 +1208,11 @@ metadata:
       "stdout": "",
       "return-value": "0"
       }
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
+    } 
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
@@ -1145,7 +1228,7 @@ metadata:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "Name": "package",
     "command" : "tar zcvf foo.tar.gz foo.py",
     "materials": {
@@ -1158,13 +1241,18 @@ metadata:
       "stdin": "",
       "stdout": "foo.py",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
       "method" : "ed25519",
       "sig" :
-          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a"
       }
     ]
 }
@@ -1177,10 +1265,10 @@ When Carl is verifying, his  installer will perform the following checks:
 
 1. The root.layout file exists and is signed with a trusted key (in this case,
    Alice's).
-1. Every step in the layout has a corresponding [name].link metadata file
-   signed by the intended functionary.
-1. All the matching rules on every step match the rest of the [name].link
-   metadata files.
+1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
+   metadata file signed by the intended functionary.
+1. All the matching rules on every step match the rest of the
+   `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
 will be extracted using `inspect_tarball.sh` and the contents will be checked
@@ -1188,7 +1276,7 @@ against the script that Alice reported in the link metadata.
 
 If all of these verifications pass, then installation continues as usual.
 
-#### 5.1.2 Alice uses testing (with a threshold of 2)
+#### 5.3.2 Alice uses testing (with a threshold of 2)
 
 The first example covered a simple scenario to show in-toto's elements without
 focusing on the details of a real-life supply chain. We will complicate things
@@ -1305,7 +1393,7 @@ metadata:
 
 ```json
 { "signed" : {
-    "_type" :  "link",
+    "_type" : "link",
     "name": "write-code",
     "command" : "vi foo.py",
     "materials": { },
@@ -1317,6 +1405,11 @@ metadata:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1333,7 +1426,7 @@ metadata:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "Name": "package",
     "command" : "python test.py",
     "materials": {
@@ -1345,6 +1438,11 @@ metadata:
       "stdin": "",
       "stdout": "....\nOk",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1363,7 +1461,7 @@ looks really similar (modulo the signature and the filename).
 ##### `package.[BOB-KEYID-PREFIX].link:`
 
 ```json
-{ "signed" : { "_type" :  "link",
+{ "signed" : { "_type" : "link",
     "Name": "package",
     "command" : "tar zcvf foo.tar.gz foo.py",
     "materials": {
@@ -1376,6 +1474,11 @@ looks really similar (modulo the signature and the filename).
       "stdin": "",
       "stdout": "foo.py",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1393,15 +1496,14 @@ verification and install Alice's `foo.py` script.
 
 When Carl is verifying, his  installer will perform the following checks:
 
-
 1. The root.layout file exists and is signed with a trusted key (in this case,
    Alice's).
 1. The code that Alice wrote was tested by two people, in this case, Caroline
    and Alfred.
-1. Every step in the layout has a corresponding [name].link metadata file
+1. Every step in the layout has a corresponding [name].[keyid-prefix].link metadata file
    signed by the intended functionary.
-1. All the matching rules on every step match the rest of the [name].link
-   metadata files.
+1. All the matching rules on every step match the rest of the
+   [name].[keyid-prefix.].link metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
 will be extracted using `inspect_tarball.sh` and the contents will be checked
@@ -1543,11 +1645,11 @@ for the script and its parameters are agnostic to in-toto.
 When the three steps are carried out, we expect to see the following pieces of
 link metadata:
 
-##### `checkout-vcs.[KEID].link`:
+##### `checkout-vcs.[ALICES-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "checkout-vcs",
     "command" : "git tag 1.0",
     "materials": { },
@@ -1560,7 +1662,12 @@ link metadata:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
-     }
+     },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
+    }
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
@@ -1572,11 +1679,11 @@ link metadata:
 }
 ```
 
-##### `compilation.link`:
+##### `compilation.[ELEANORS-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
     "materials": {
@@ -1589,7 +1696,12 @@ link metadata:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
-     }
+     },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
+    }
    },
   "signatures" : [
     { "keyid" : "<ELEANORS_KEYID>",
@@ -1600,11 +1712,11 @@ link metadata:
 }
 ```
 
-##### `package.link`:
+##### `package.[BOBS-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
     "materials": {
@@ -1617,6 +1729,11 @@ link metadata:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1631,7 +1748,7 @@ link metadata:
 With these three pieces of metadata, along with foo.tar.gz, Carl can now
 perform verification as we described in the previous example.
 
-#### 5.1.4  Alice uses a third party sublayout
+#### 5.3.3  Alice uses a third party sublayout
 
 A common scenario in software distributions is that source code is produced
 upstream. For example, in Linux distributions, the source code for bash (the
@@ -1707,7 +1824,7 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `fetch-upstream.[KEYID].link`:
+##### `fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
@@ -1768,11 +1885,11 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `check-out-vcs.[KEYID].link`:
+##### `check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
     "materials": { },
@@ -1784,6 +1901,11 @@ A root.layout file that fulfills these requirements would look like this:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1795,11 +1917,11 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `compile-docs.[KEYID].link`:
+##### `compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "package",
     "command" : "",
     "materials": {
@@ -1812,7 +1934,12 @@ A root.layout file that fulfills these requirements would look like this:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
-     }
+     },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
+    }
   },
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV2_KEYID>",
@@ -1823,11 +1950,11 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `verify-vcs-commits.[KEYID]link` (upstream inspection):
+##### `verify-vcs-commits.[KEYID-PREFIX]link` (upstream inspection):
 
 ```json
 {"signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "package",
     "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
     "materials": {
@@ -1840,6 +1967,11 @@ A root.layout file that fulfills these requirements would look like this:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1851,11 +1983,11 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `compilation.[KEYID].link`:
+##### `compilation.[ELEANORS-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
     "materials": {
@@ -1868,6 +2000,11 @@ A root.layout file that fulfills these requirements would look like this:
      "stdin": "",
      "stdout": "",
      "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
@@ -1879,11 +2016,11 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `package.[KEYID].link`:
+##### `package.[BOBS-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { 
-    "_type" :  "link",
+    "_type" : "link",
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
     "materials": {
@@ -1896,6 +2033,11 @@ A root.layout file that fulfills these requirements would look like this:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
+    },
+    "environment": {
+      "variables": [""],
+      "filesystem" : "",
+      "workdir": "",
     }
   },
   "signatures" : [
