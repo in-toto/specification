@@ -947,9 +947,9 @@ The following is a depiction of the previous recommendation:
   "PWD=/home/santiago",
   "HOME=/home/santiago",
   "SHELL=/bin/bash",
-  "PATH=/home/santiago/bin:/home/santiago/bin:/usr/local/sbin",
+  "PATH=/home/santiago/bin:/home/santiago/bin:/usr/local/sbin"
   ],
-  "filesystem": [" "
+  "filesystem": [" ",
   " #           user: (null)", 
   " #        machine: LykOS",
   " #           tree: /home/santiago/Documents/personal/programas/in-toto/docs",
@@ -958,15 +958,16 @@ The following is a depiction of the previous recommendation:
   " ",
   " # .",
   " /set type=file uid=1000 gid=1000 mode=0644 nlink=1 flags=none",
-  " .               type=dir mode=0755 nlink=3 size=4096 \",
+  " .               type=dir mode=0755 nlink=3 size=4096 \\",
   "                 time=1495734432.214631931",
   "     LICENSE     size=1086 time=1495734432.214631931",
   "     README.md   size=50 time=1495734432.214631931",
-  "     in-toto-spec.pdf \",
+  "     in-toto-spec.pdf \\",
   "                 size=220978 time=1495734432.217965320",
   " .."],
-  "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs",
+  "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs"
   }
+}
 ``` 
  
  The previous example contains a list of environment variables as printed out
@@ -1207,11 +1208,11 @@ metadata:
       "stdin": "",
       "stdout": "",
       "return-value": "0"
-      }
+    },
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     } 
   },
   "signatures" : [
@@ -1245,7 +1246,7 @@ metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1409,7 +1410,7 @@ metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1442,7 +1443,7 @@ metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1478,7 +1479,7 @@ looks really similar (modulo the signature and the filename).
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1666,7 +1667,7 @@ link metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1700,7 +1701,7 @@ link metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
    },
   "signatures" : [
@@ -1733,7 +1734,7 @@ link metadata:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1905,7 +1906,7 @@ A root.layout file that fulfills these requirements would look like this:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1938,7 +1939,7 @@ A root.layout file that fulfills these requirements would look like this:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -1971,7 +1972,7 @@ A root.layout file that fulfills these requirements would look like this:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -2004,7 +2005,7 @@ A root.layout file that fulfills these requirements would look like this:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
@@ -2037,7 +2038,7 @@ A root.layout file that fulfills these requirements would look like this:
     "environment": {
       "variables": [""],
       "filesystem" : "",
-      "workdir": "",
+      "workdir": ""
     }
   },
   "signatures" : [
