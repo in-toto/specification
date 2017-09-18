@@ -1,7 +1,9 @@
-﻿# in-toto Specification #
+﻿# in-toto Specification
 
 Apr 11, 2017
+
 https://in-toto.io
+
 Version 0.9
 
 ## 1 Introduction
@@ -32,7 +34,7 @@ Although many frameworks ensuring security in the "last mile" (e.g., software
 updaters) exist, they may be providing integrity and authentication to a
 product that is already vulnerable; it is possible that, by the time the
 package makes it to a software update repository, it has already been
-compromised.  
+compromised.
 
 ### 1.3 History and credit
 
@@ -46,7 +48,7 @@ A software supply chain is the series of steps performed when writing, testing,
 packaging, and distributing software. In a typical software supply chain, these
 multiple steps that transform (e.g., compiling) or verify the state (e.g.,
 linting) of the project are "chained" together in order to drive it to a final
-product. 
+product.
 
 ### 1.5 Goals
 
@@ -97,7 +99,7 @@ performing operations other than the ones intended for a supply chain. For
 example, if two people are in charge of running the packaging scripts, in-toto
 can verify that this is the case by verifying in-toto metadata regarding this
 operation.  We assume that there will not be two colluding (or deceived)
-developers who jointly introduce a vulnerability. 
+developers who jointly introduce a vulnerability.
 
 We also assume the project owner laid out the supply chain (using a supply
 chain layout as described in section 4.3) so that testing, code review, and
@@ -111,7 +113,7 @@ untrusted server --- which is an incredibly insecure configuration.  While this
 may be visible to users installing the software, in-toto's role is not to judge
 or block layouts  that are insecure. However, tools that integrate into in-toto
 may independently block or make judgments about the security of a specific
-layout.  
+layout.
 
 #### 1.5.3 Assumptions
 
@@ -215,7 +217,7 @@ system.
 
 The main goal of in-toto is to provide authentication, integrity and
 auditability guarantees for the supply chain that created a final product that
-a client will install. 
+a client will install.
 
 To avoid ambiguity, we will refer to any files in the final product that
 in-toto does not use to verify supply chain integrity as "target files." Target
@@ -253,7 +255,7 @@ usual.
 ### 2.1 Involved parties and their roles
 
 In the context of in-toto, a role is a set of duties and actions that an actor
-must perform. 
+must perform.
 
 In the description of the roles that follows, it is important to remember that
 the framework has been designed to allow a large amount of flexibility for many
@@ -265,7 +267,7 @@ There are three roles in the framework:
 
 * **Project owner**: defines the layout of a software supply chain
 * **Functionary**: performs a step in the supply chain and provides a piece of
-  link metadata as a record that such a step was carried out. 
+  link metadata as a record that such a step was carried out.
 * **Client**: Performs verification on the final product by checking the
   provided layout and link metadata.
 
@@ -273,7 +275,7 @@ In addition, there are third-party equivalents of the above roles, which are
 managed by the sublayout mechanism, described in section 2.1.3. We will
 elaborate on these roles in depth now.
 
-#### 2.1.1 Project owner 
+#### 2.1.1 Project owner
 
 As previously stated, the project owner sets the required steps to be performed
 in the supply chain. For each step, its requirements, and the specific public
@@ -297,7 +299,7 @@ this sublayout.
 
 #### 2.1.3 Clients
 
-Clients are users or automated tools who want to use the product. 
+Clients are users or automated tools who want to use the product.
 
 The client will perform verification on the final product. This includes
 verifying the layout metadata, and that the link metadata provided matches the
@@ -324,7 +326,7 @@ developers of each package.
 
 ### 2.2 in-toto components
 
-A in-toto implementation contains three main components: 
+A in-toto implementation contains three main components:
 
 * A tool to generate and design supply chain layouts. This tool will be used by
   the project owner to generate a desired supply chain layout file. There are
@@ -344,7 +346,7 @@ the reference implementation, the tool performing this operation is
 
 To exemplify how these roles interact, we will describe a simple scenario. We
 provide more specific scenarios in section 5.1, after we have presented a more
-thorough description of the framework. 
+thorough description of the framework.
 
 Consider a project owner, Alice, and her two functionaries, Diana and Bob.
 Alice wants Diana to write a Python script (foo.py).  Then, Alice wants Bob to
@@ -355,7 +357,7 @@ foo.tar.gz.
 When providing the tarball to Carl, Alice will create a layout file that Carl
 will use to make sure of the following:
 
-* That the script was written by Diana 
+* That the script was written by Diana
 * That the packaging was done by Bob
 * That the script contained in the tarball matches the one that Diana wrote, so
   if Bob is malicious or if the packaging program has an error, Carl will
@@ -371,7 +373,7 @@ When Carl verifies the final product, his installer will perform the following
 checks:
 
 1. The layout file exists and is signed with a trusted key (in this case,
-   Alice's). 
+   Alice's).
 1. Every step in the layout has one or more corresponding link metadata files
    signed by the intended functionaries, as described in the layout (in this
 case, the link metadata provided by Bob and Diana).
@@ -382,10 +384,10 @@ transit. In this case, the products reported by Diana should match the
 materials reported by Bob and so on.
 1. Finally, as is specified in the layout metadata, inspection steps are run on
    the client side. In this case, the tarball will be inspected to verify that
-the extracted foo.py matches the one that was written by Diana. 
+the extracted foo.py matches the one that was written by Diana.
 
 If all of these verifications pass, then installation continues as usual.
-  
+
 ![figure 1](https://raw.githubusercontent.com/in-toto/image-resources/master/diagrams/png/in-toto-metadata.png)
     `Figure 1: The supply chain pieces for this example`
 
@@ -400,11 +402,11 @@ An installer or package manager uses the framework to inspect the final product
 and verify its contents. Each project will have specific requirements to
 verify. For example, a project may want to impose a review policy on the VCS.
 Thus, it requires in-toto to validate additional accompanying link and layout
-metadata to verify the review policy was followed. 
+metadata to verify the review policy was followed.
 
-### 3.1 Contents  
+### 3.1 Contents
 
-The final product must contain at least these three files:   
+The final product must contain at least these three files:
 
 * The supply chain layout
 * A link metadata file
@@ -422,7 +424,7 @@ requirements, as well as the public keys used by functionaries to sign the link
 metadata for  steps within the chain.
 
 The layout will also specify how each piece of link metadata will be verified,
-and how the chain steps are interconnected via their materials and products. 
+and how the chain steps are interconnected via their materials and products.
 
 #### 3.1.2 Link metadata
 
@@ -450,7 +452,7 @@ In order to achieve the properties described in Section 1, link and layout
 metadata must contain information that correctly depicts which operations are
 intended, and that presents specifics of each operation within the supply
 chain. In the following section, we describe which information is gathered and
-how it is laid out within link and layout metadata. 
+how it is laid out within link and layout metadata.
 
 ### 4.1 Metaformat
 
@@ -458,21 +460,22 @@ To provide descriptive examples, we will adopt "canonical JSON," as described
 in http://wiki.laptop.org/go/Canonical\_JSON, as the data format. However,
 applications that desire to implement in-toto are not required to use JSON.
 Discussion about the intended data format for in-toto can be found in the
-in-toto website. 
+in-toto website.
 
 ### 4.2 File formats: general principles
 
 All signed files (i.e., link and layout files) have the format:
 
 ```json
-   {
-    "signed" : ROLE,
-     "signatures" : [
-        { "keyid" : KEYID,
-          "method" : METHOD,
-          "sig" : SIGNATURE }
-        , ... ]
-   }
+{
+    "signed" : "<ROLE>",
+    "signatures" : [
+        { "keyid" : "<KEYID>",
+          "method" : "<METHOD>",
+          "sig" : "<SIGNATURE>" }, 
+    "..."
+    ]
+}
 ```
 
 Where, ROLE is a dictionary whose "\_type" field describes the metadata type (as
@@ -483,17 +486,17 @@ signature. SIGNATURE is a signature of the canonical JSON form of ROLE.
 The current reference implementation of in-toto defines two signing methods,
 although in-toto is not restricted to any particular key signing method, key
 type, or cryptographic library:
-   
-*   "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).  
+
+*   "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
 The underlying hash function is SHA256.
-*   "ed25519" : Elliptic curve digital signature algorithm based on 
+*   "ed25519" : Elliptic curve digital signature algorithm based on
     [TwistedEdwards curves](http://ed25519.cr.yp.to/).
 
 All keys have the format:
 
 ```json
-  { "keytype" : KEYTYPE,
-    "keyval" : KEYVAL }
+  { "keytype" : "<KEYTYPE>",
+    "keyval" : "<KEYVAL>" }
 ```
 
 where KEYTYPE is a string describing the type of the key, and how it is used to
@@ -505,8 +508,8 @@ The 'rsa' format is:
 
 ```json
   { "keytype" : "rsa",
-    "keyval" : { "public" : PUBLIC,
-                 "private" : PRIVATE }
+    "keyval" : { "public" : "<PUBLIC>",
+                 "private" : "<PRIVATE>" }
   }
 ```
 
@@ -517,8 +520,8 @@ The 'ed25519' format is:
 
 ```json
   { "keytype" : "ed25519",
-    "keyval" : { "public" : PUBLIC,
-                 "private" : PRIVATE }
+    "keyval" : { "public" : "<PUBLIC>",
+                 "private" : "<PRIVATE>" }
   }
 ```
 
@@ -529,7 +532,7 @@ object:
 
 ```json
   { "keytype" : "rsa",
-    "keyval" : { "public" : PUBLIC}
+    "keyval" : { "public" : "<PUBLIC>"}
   }
 ```
 
@@ -557,20 +560,21 @@ metadata, as well as the required steps to perform in this supply chain.
 The format of the layout file is as follows:
 
 ```json
-    { "_type" : "layout",
-       "expires" : EXPIRES,
-       "readme": README,
-       "keys" : {
-           KEYID : KEY
-           , ... },
-       },
-       "steps" : [
-           {... },
-       ],
-       "inspections" : [
-           {... },
-       ],
-    }
+{ "_type" : "layout",
+  "expires" : "<EXPIRES>",
+  "readme": "<README>",
+  "keys" : {
+     "<KEYID>" : "<PUBKEY_OBJECT>"
+  },
+  "steps" : [
+    "<STEP>",
+    "..."
+  ],
+  "inspections" : [
+    "<INSPECTION>",
+    "..."
+  ]
+}
 ```
 
 EXPIRES determines when layout metadata should be considered expired and no
@@ -595,28 +599,27 @@ verification. We will elaborate on the specifics of this process in section
 4.3.2.
 
 
-#### 4.3.1 Steps 
+#### 4.3.1 Steps
 
 Steps performed by a functionary in the supply chain are declared as follows:
 
 ```json
-    {
-      "_name": NAME,
-      "threshold": THRESHOLD,
-      "expected_materials": [
-         [ARTIFACT_RULE],
-         ...
-      ],
-      "expected_products": [
-         [ARTIFACT_RULE],
-         ...
-      ]
-      "pubkeys": [
-         KEYID,
-         ...
-      ],
-      "expected_command": COMMAND,
-    }
+{ "_name": "<NAME>",
+  "threshold": "<THRESHOLD>",
+  "expected_materials": [
+     [ "<ARTIFACT_RULE>" ],
+     "..."
+  ],
+  "expected_products": [
+     [ "<ARTIFACT_RULE>" ],
+     "..."
+  ],
+  "pubkeys": [
+     "<KEYID>",
+     "..."
+  ],
+  "expected_command": "<COMMAND>"
+}
 ```
 
 The `NAME` string will be used to identify this step within the supply chain.
@@ -651,9 +654,9 @@ verification fail, as these changes are not necessarily a problem.
 
 It is also possible to divide a subchain by having a third-party project owner
 define a layout for a section of the supply chain. This can be done by means of
-sublayouts (as described in section 4.5). 
+sublayouts (as described in section 4.5).
 
-#### 4.3.2 Inspections 
+#### 4.3.2 Inspections
 
 In contrast to steps, inspections indicate operations that need to be performed
 on the final product at the time of verification.  For example, unpacking a tar
@@ -666,19 +669,17 @@ chain.
 An inspection contains the following fields.
 
 ```json
-    {
-      "_name": NAME,
-      "expected_materials": [
-         [ARTIFACT_RULE],
-         ...
-      ],
-      "expected_products": [
-         [ARTIFACT_RULE],
-         ...
-      ]
-      "run": COMMAND,
-      ...
-    }
+{ "_name": "<NAME>",
+  "expected_materials": [
+     [ "<ARTIFACT_RULE>" ],
+     "..."
+  ],
+  "expected_products": [
+     [ "<ARTIFACT_RULE>" ],
+     "..."
+  ],
+  "run": "<COMMAND>"
+}
 ```
 
 Similar to steps, the `NAME` string will be used to identify this inspection
@@ -706,7 +707,7 @@ tool, in the same fashion as used to collect steps.
 * If the result is greater than 0 and less than 127, then the inspection was
   not successful and validation should halt.
 
-#### 4.3.3 Artifact Rules 
+#### 4.3.3 Artifact Rules
 
 Artifact rules are used to connect steps together through their materials or
 products. When connecting steps together,  in-toto allows the project owner to
@@ -715,8 +716,8 @@ only be created in the create-documentation step) and authorize operations on
 artifacts (e.g., the compile step can use the materials from the checkout-vcs).
 The `ARTIFACT_RULE` format is the following:
 
-```json
-    {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> || 
+```bash
+    {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> ||
     CREATE <pattern> ||
     DELETE <pattern> ||
     MODIFY <pattern> ||
@@ -774,43 +775,42 @@ describe the way it operates. To avoid any ambiguities, this will be done with
 the following pseudocode:
 
 ```python
-MATCH(source_materials_or_products_set, destination_materials_or_products_set, 
-      rule)
+MATCH(source_materials_or_products_set, destination_materials_or_products_set,
+  rule)
 
 # Filter source and destination materials using the rule’s patterns
-source_artifacts_filtered = filter(rule.source_prefix + rule.source_pattern,  
+source_artifacts_filtered = filter(rule.source_prefix + rule.source_pattern,
                                    source_materials_or_products_set)
 
 destination_artifacts_filtered\
-     = filter(rule.destination_prefix + rule.destination_pattern, 
-                                        destination_materials_or_products_set) 
+    = filter(rule.destination_prefix + rule.destination_pattern,
+             destination_materials_or_products_set)
 
 # Apply the IN clauses, to the paths, if any
 for artifact in source_artifacts_filtered:
-        artifact.path -= rule.source_in_clause
+  artifact.path -= rule.source_in_clause
 for artifact in destination_artifacts_filtered:
-        artifact.path -= rule.destination_in_clause
+  artifact.path -= rule.destination_in_clause
 
 # compare both sets
 for artifact in source_artifacts_filtered:
-        destination_artifact = find_artifact_by_path(destination_artifacts,
-                                                    artifact.path)
-        # the artifact with this path does not exist?
-        if destination_artifact == NULL:
-                return FAIL
- 
-        # are the files not the same?
-        if destination_artifact.hash != artifact.hash:
-                return FAIL
+  destination_artifact = find_artifact_by_path(destination_artifacts,
+                                                artifact.path)
+  # the artifact with this path does not exist?
+  if destination_artifact == NULL:
+    return FAIL
 
+  # are the files not the same?
+  if destination_artifact.hash != artifact.hash:
+    return FAIL
 
-# all of the files filtered by the source materials exist 
+# all of the files filtered by the source materials exist
 return SUCCESS
 ```
 
 Notice that if a source pattern does not match anything, verification will pass
 as long as no target artifact is matched either. To enforce that an artifact
-exists, the CREATE rule must be applied in the intended step. 
+exists, the CREATE rule must be applied in the intended step.
 
 
 ##### 4.3.3.2 Verifying `expected_products` and `expected_materials`
@@ -821,27 +821,25 @@ illustrate the behavior of the rules being applied
 
 ```python
 VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
-                
+
 # load the artifacts from the link
 artifacts = load_artifacts_as_queue(link)
 
-
 # iterate over all the rules
 for rule in rules:
-        matched_artifacts, rule_error = apply_rule(rule, artifacts)
+  matched_artifacts, rule_error = apply_rule(rule, artifacts)
 
 
-        if rule_error:
-                return ERROR("Rule failed to verify!")
+  if rule_error:
+    return ERROR("Rule failed to verify!")
 
 
-        artifacts -= matched_artifacts
+  artifacts -= matched_artifacts
 
 
 # check if there were any artifacts that weren't matched by the rules
 if artifacts is not empty:
-        return ERROR("There were unmatched artifacts in this set!")
-
+  return ERROR("There were unmatched artifacts in this set!")
 
 return SUCCESS
 ```
@@ -869,23 +867,23 @@ thresholds higher than one.
 The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
 ```json
- { "_type" :  "link",
-   "_name" :  NAME,
-   "command" : COMMAND,
-   "materials": {
-      PATH: HASH,
-      ...
-   },
-   "products": {
-      PATH: HASH,
-      ...
-   },
-   "byproducts": {
-        "stdin": "",
-        "stdout", "",
-        "return-value": "",
-        }
- }
+{ "_type" :  "link",
+  "_name" :  "<NAME>",
+  "command" : "<COMMAND>",
+  "materials": {
+     "<PATH>": "<HASH>",
+     "..." : "..."
+  },
+  "products": {
+     "<PATH>": "<HASH>",
+     "..." : "..."
+  },
+  "byproducts": {
+    "stdin": "",
+    "stdout": "",
+    "return-value": ""
+  }
+}
 ```
 
 To identify to which step a piece of link metadata belongs, the `NAME` field must
@@ -907,7 +905,7 @@ dictionary should have standard output (stdout), standard input (stdin) and
 return value (return-value), even if no values are filled in.
 
 
-### 4.5 Specifying sublayouts 
+### 4.5 Specifying sublayouts
 
 It is possible that a project owner cannot define all the steps at the
 appropriate level of detail. Such a case might occur with a software project
@@ -920,7 +918,7 @@ To create a sublayout, a series of steps are declared, and thus the functionary
 will take the role of a third party project owner. Sublayouts are saved with
 the [name].[hashprefix].link format, and they will have the same format
 described for a layout file described in section 4.3 instead of the usual
-contents of a link metadata file. 
+contents of a link metadata file.
 
 For example, consider a project in which the build step is not completely clear
 for the project owner (Alice). However, Alice trusts Bob to perform this
@@ -931,7 +929,7 @@ contain further steps, keyids and artifact rules within the steps.  The
 signature of this new layout file must match the one the top-level project
 owner intended for this step (in this case, Bob's).
 
-#### 4.5.1 Artifact rules in sublayouts 
+#### 4.5.1 Artifact rules in sublayouts
 
 When using sublayouts, the artifact rules that apply to the equivalent step are
 applied to the materials of the first step in the sublayout and the products of
@@ -982,7 +980,7 @@ layout.
 
 To provide further detail of in-toto’s workflow, we describe a detailed case
 that includes most of the concepts explained in sections 3 and 4. This is an
-error-free case. 
+error-free case.
 
 1. The project owner defines the layout to be followed by, e.g. using the
    in-toto CLI tools. When doing so, he or she instructs who is intended to
@@ -992,15 +990,15 @@ to further verify accompanying metadata.
    each step.
 1. Once all the steps are performed, the final product is shipped to the
    client.
-1. in-oto's verification tools are run on the final product. 
+1. in-oto's verification tools are run on the final product.
 1. in-oto inspects the final product to find a root.layout file that describes
    the top-level layout for the project. The signature(s) on the file are
 checked using previously-acquired project owner public key(s). Subsequently, if
 the layout signature verification passes, the functionaries’ public keys are
-loaded from the layout.        
+loaded from the layout.
 1. The expiration time is verified to ensure that this layout is still fresh.
 1. The steps, as defined in the layout, are loaded. For each step in the
-   layout, one or more pieces of link or layout metadata is loaded. 
+   layout, one or more pieces of link or layout metadata is loaded.
 1. If the file loaded metadata is a link metadata file, a data structure
    containing the materials and products is populated with the reported values.
 
@@ -1009,7 +1007,7 @@ their materials and products fields must exactly match.
 
 
 1. If the file is a layout file instead, the algorithm will recurse into that
-   layout, starting from step 5. 
+   layout, starting from step 5.
 1. If there is a layout file in conjunction with a link file (i.e., one of the
    functionaries made a sublayout while others didn’t), then verification
 should fail. The reason as to why this happens is to avoid ambiguities between
@@ -1027,9 +1025,9 @@ To better understand how in-toto works, we provide a series of examples of the
 framework being used in practice. We will start with a simple example to
 showcase how the relevant aspects of in-toto come into play. After this, we
 will present a more complete and realistic example. Additional link and layout
-metadata examples can be found at in-toto.io.  
+metadata examples can be found at in-toto.io.
 
-#### 5.1.2 Alice's Python script 
+#### 5.1.2 Alice's Python script
 
 This first example covers a simple scenario to show in-toto's elements without
 focusing on the details of a real-life supply chain.
@@ -1042,7 +1040,7 @@ the client, Carl, as part of the final product.
 When providing Carl with the tarball, Alice's layout tells Carl's installation
 script that it must make sure of the following:
 
-* That the script was written by Alice herself 
+* That the script was written by Alice herself
 * That the packaging was done by Bob
 * Finally, since Bob is sometimes sloppy when packaging, Carl must also make
   sure that the script contained in the tarball matches the one that Alice
@@ -1052,61 +1050,58 @@ As a result of this, Alice's layout would have two steps and one inspection.
 A `root.layout` file that fulfills these requirements would look like this:
 
 ```json
-    {"signed" : { 
-      "_type" : "layout",
-      "expires" : EXPIRES,
-      "keys" : {
-          BOBS_KEYID : BOBS_PUBKEY
-          ALICES_KEYID: ALICES_PUBKEY
-       },
-      "steps" : [
-           {
-             "_name": "write-code",
-             "threshold": 1,
-             "expected_materials": [ ],
-             "expected_products": [
-                [["CREATE", "foo.py"]],
-             ]
-             "pubkeys": [
-                ALICES_KEYID,
-             ],
-             "expected_command": "vi",
-           },
-           {
-             "_name": "package",
-             "threshold": 1,
-             "expected_materials": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ],
-             "expected_products": [
-                [["CREATE", "foo.tar.gz"]],
-             ]
-             "pubkeys": [
-                "BOBS_KEYID",
-             ],
-             "expected_command": "tar zcvf foo.tar.gz foo.py",
-           }]
-        "inspect": [
-           {
-             "_name": "inspect_tarball",
-             "expected_materials": [
-                [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
-             ],
-             "expected_products": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ]
-             "run": "inspect_tarball.sh foo.tar.gz",
-           }
+{ "signed" : {
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "keys" : {
+        "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
+        "<ALICES_KEYID>": "<ALICES_PUBKEY>"
+     },
+    "steps" : [
+      { "_name": "write-code",
+        "threshold": 1,
+        "expected_materials": [],
+        "expected_products": [
+          ["CREATE", "foo.py"]
         ],
-        },
-        "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
-              }
-            ]
+        "pubkeys": [
+          "<ALICES_KEYID>"
+        ],
+        "expected_command": "vi"
+      },
+      { "_name": "package",
+        "threshold": 1,
+        "expected_materials": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "expected_products": [
+          ["CREATE", "foo.tar.gz"]
+        ],
+        "pubkeys": [
+          "<BOBS_KEYID>"
+        ],
+        "expected_command": "tar zcvf foo.tar.gz foo.py"
+      }
+    ],
+    "inspect": [
+      { "_name": "inspect_tarball",
+        "expected_materials": [
+          ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]
+        ],
+        "expected_products": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "run": "inspect_tarball.sh foo.tar.gz"
+      }
+    ]
+  },
+  "signatures" : [
+    { "keyid" : "<ALICES_KEYID>",
+      "method" : "ed25519",
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
     }
+  ]
+}
 ```
 
 From this layout file, we can see that Alice is expected to create a foo.py
@@ -1123,58 +1118,57 @@ metadata:
 #### `write-code.[ALICE-KEYID-PREFIX].link:`
 
 ```json
-    {"signed" : { 
-           "_type" :  "link",
-           "name": write-code,
-           "command" : "vi foo.py",
-           "materials": { },
-           "products": {
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-           },
-           "byproducts": {
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-     }
-         }
-    "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
-              }
-            ]
-    }    
+{ "signed" : {
+    "_type" :  "link",
+    "name": "write-code",
+    "command" : "vi foo.py",
+    "materials": { },
+    "products": {
+      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+      }
+  },
+  "signatures" : [
+    { "keyid" : "<ALICES_KEYID>",
+      "method" : "ed25519",
+      "sig" :
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
+      }
+    ]
+}
 ```
 
 #### `package.[BOB-KEYID-PREFIX].link:`
 
 ```json
-{"signed" : { "_type" :  "link",
-       "Name": "package",
-       "command" : "tar zcvf foo.tar.gz foo.py",
-       "materials": { 
-          "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-       },
-       "products": {
-          "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-       },
-       "byproducts": {             
-         "stdin": "",
- "stdout": "foo.py",
-         "return-value": "0"
-         }
-     }
-"signatures" : [
-        { "keyid" : BOBS_KEYID,
-          "method" : "ed25519",
-          "sig" :
-          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-          a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-          }
+{ "signed" : { 
+    "_type" :  "link",
+    "Name": "package",
+    "command" : "tar zcvf foo.tar.gz foo.py",
+    "materials": {
+      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+    },
+    "products": {
+      "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "foo.py",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<BOBS_KEYID>",
+      "method" : "ed25519",
+      "sig" :
+          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+      }
     ]
-} 
+}
 ```
 
 With these three pieces of metadata, along with foo.tar.gz, Carl can now
@@ -1183,7 +1177,7 @@ perform verification and install Alice's foo.py script.
 When Carl is verifying, his  installer will perform the following checks:
 
 1. The root.layout file exists and is signed with a trusted key (in this case,
-   Alice's). 
+   Alice's).
 1. Every step in the layout has a corresponding [name].link metadata file
    signed by the intended functionary.
 1. All the matching rules on every step match the rest of the [name].link
@@ -1213,7 +1207,7 @@ When providing Carl with the tarball, Alice's layout tells Carl's installation
 script that it must make sure of the following:
 
 
-* That the script was written by Alice herself 
+* That the script was written by Alice herself
 * That the test suite was run by Caroline and Alfred
 * That the packaging was done by Bob
 * Finally, since Bob is sometimes sloppy when packaging, Carl must also make
@@ -1225,77 +1219,76 @@ As a result of this, Alice's layout would have two steps and one inspection.
 A `root.layout` file that fulfills these requirements would look like this:
 
 ```json
-    {"signed" : { 
-      "_type" : "layout",
-      "expires" : EXPIRES,
-      "keys" : {
-          BOBS_KEYID : BOBS_PUBKEY,
-          ALICES_KEYID: ALICES_PUBKEY,
-          CAROLINES_KEYID: CAROLINES_PUBKEY,
-          ALFREDS_KEYID: ALFREDS_PUBKEY,
-       },
-      "steps" : [
-           {
-             "_name": "write-code",
-             "threshold": 1,
-             "expected_materials": [ ],
-             "expected_products": [
-                [["CREATE", "foo.py"]],
-             ]
-             "pubkeys": [
-                ALICES_KEYID,
-             ],
-             "expected_command": "vi",
-           },
-           {
-             "_name": "test",
-             "threshold": 2,
-             "expected_materials": [
-                         [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
-                           ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
-         ],
-             "expected_products": []
-             "pubkeys": [
-                CAROLINES_KEYID,
-                ALFREDS_KEYID
-             ],
-             "expected_command": "python test.py",
-           },
-           {
-             "_name": "package",
-             "threshold": 1,
-             "expected_materials": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ],
-             "expected_products": [
-                [["CREATE", "foo.tar.gz"]],
-             ]
-             "pubkeys": [
-                "BOBS_KEYID",
-             ],
-             "expected_command": "tar zcvf foo.tar.gz foo.py",
-           }]
-        "inspect": [
-           {
-             "_name": "inspect_tarball",
-             "expected_materials": [
-                [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
-             ],
-             "expected_products": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ]
-             "run": "inspect_tarball.sh foo.tar.gz",
-           }
+{ "signed" : {
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "keys" : {
+      "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
+      "<ALICES_KEYID>" : "<ALICES_PUBKEY>",
+      "<CAROLINES_KEYID>" : "<CAROLINES_PUBKEY>",
+      "<ALFREDS_KEYID>" : "<ALFREDS_PUBKEY>"
+     },
+    "steps" : [
+       {"_name": "write-code",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+          ["CREATE", "foo.py"]
         ],
-        },
-        "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
-              }
-            ]
-    }    
+        "pubkeys": [
+          "<ALICES_KEYID>"
+        ],
+        "expected_command": "vi"
+       },
+       {
+         "_name": "test",
+         "threshold": 2,
+         "expected_materials": [
+            ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
+            ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "expected_products": [],
+        "pubkeys": [
+          "<CAROLINES_KEYID>",
+          "<ALFREDS_KEYID>"
+        ],
+        "expected_command": "python test.py"
+       },
+       {
+        "_name": "package",
+        "threshold": 1,
+        "expected_materials": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "expected_products": [
+          ["CREATE", "foo.tar.gz"]
+        ],
+        "pubkeys": [
+          "<BOBS_KEYID>"
+        ],
+        "expected_command": "tar zcvf foo.tar.gz foo.py"
+        }
+    ],
+    "inspect": [
+       {
+         "_name": "inspect_tarball",
+         "expected_materials": [
+            [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
+         ],
+         "expected_products": [
+            ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+         ],
+         "run": "inspect_tarball.sh foo.tar.gz"
+       }
+    ]
+  },
+  "signatures" : [
+      { "keyid" : "<ALICES_KEYID>",
+        "method" : "ed25519",
+        "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+      }
+  ]
+}
 ```
 
 From this layout file, we can see that Alice is expected to create a foo.py
@@ -1312,59 +1305,57 @@ metadata:
 ##### `write-code.[ALICE-KEYID-PREFIX].link:`
 
 ```json
-    {"signed" : { 
-           "_type" :  "link",
-           "name": write-code,
-           "command" : "vi foo.py",
-           "materials": { },
-           "products": {
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",},
-      "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb",}
-           },
-           "byproducts": {
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-     }
-         }
-    "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
-              }
-            ]
-    }    
+{ "signed" : {
+    "_type" :  "link",
+    "name": "write-code",
+    "command" : "vi foo.py",
+    "materials": { },
+    "products": {
+       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+       "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<ALICES_KEYID>",
+      "method" : "ed25519",
+      "sig" :
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f"
+      }
+    ]
+}
 ```
 
 ##### `test.[CAROLINES_KEYID_PREFIX].link:`
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "Name": "package",
-           "command" : "python test.py",
-           "materials": { 
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-      "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb",}
-           },
-           "products": {
-           },
-           "byproducts": {             
-             "stdin": "",
-     "stdout": "....\nOk",
-             "return-value": "0"
-     }
-         }
-    "signatures" : [
-            { "keyid" : CAROLINES_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a6c2
-              a6a93a9f5771eb3df42894623d580beb61f736a698e0890d7a12c300dce3"
-              }
-            ]
+{ "signed" : { 
+    "_type" :  "link",
+    "Name": "package",
+    "command" : "python test.py",
+    "materials": {
+       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+        "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
+    },
+    "products": { },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "....\nOk",
+      "return-value": "0"
     }
+  },
+  "signatures" : [
+      { "keyid" : "<CAROLINES_KEYID>",
+        "method" : "ed25519",
+        "sig" :
+        "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a6c2"
+        }
+    ]
+}
 ```
 
 To avoid repetitivity, we omit Alfred's version of the link metadata, which
@@ -1373,30 +1364,29 @@ looks really similar (modulo the signature and the filename).
 ##### `package.[BOB-KEYID-PREFIX].link:`
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "Name": "package",
-           "command" : "tar zcvf foo.tar.gz foo.py",
-           "materials": { 
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-           },
-           "products": {
-              "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "byproducts": {             
-             "stdin": "",
-     "stdout": "foo.py",
-             "return-value": "0"
-     }
-         }
-    "signatures" : [
-            { "keyid" : BOBS_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-            ]
-    } 
+{ "signed" : { "_type" :  "link",
+    "Name": "package",
+    "command" : "tar zcvf foo.tar.gz foo.py",
+    "materials": {
+       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+    },
+    "products": {
+       "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "foo.py",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+      { "keyid" : "<BOBS_KEYID>",
+        "method" : "ed25519",
+        "sig" :
+        "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      }
+    ]
+}
 ```
 
 With these five pieces of metadata, along with foo.tar.gz, Carl can now perform
@@ -1406,7 +1396,7 @@ When Carl is verifying, his  installer will perform the following checks:
 
 
 1. The root.layout file exists and is signed with a trusted key (in this case,
-   Alice's). 
+   Alice's).
 1. The code that Alice wrote was tested by two people, in this case, Caroline
    and Alfred.
 1. Every step in the layout has a corresponding [name].link metadata file
@@ -1429,7 +1419,7 @@ assigned to compile the binary.
 
 In this case, Alice and Diana commit to their central repository, and update
 their source file (src/foo.c). When all the milestones are met, Alice --- and
-only Alice ---  will tag the sources and send them to Eleanor for compilation. 
+only Alice ---  will tag the sources and send them to Eleanor for compilation.
 
 When Eleanor receives the tarball, she is required to compile the source code
 into the binary (foo), and send it over to Bob, who is still in charge of
@@ -1456,94 +1446,94 @@ As a result of this, Alice's layout would have three steps and two inspections.
 A `root.layout` file that fulfills these requirements would look like this:
 
 ```json
-    {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
-           "keys" : {
-               BOBS_KEYID : BOBS_PUBKEY,
-               DIANAS_KEYID : DIANAS_PUBKEY,
-               ELEANORS_KEYID : ELEANORS_PUBKEY,
-               ALICES_KEYID: ALICES_PUBKEY,
-            },
-           "steps" : [
-                {
-                  "_name": "checkout-vcs",
-                           "threshold": 1,
-                  "expected_materials": [ ],
-                  "expected_products": [
-                     ["CREATE", "src/foo.c"],
-                     ["CREATE", "vcs.log"],
-                  ],
-                  "pubkeys": [
-                     ALICES_KEYID,
-                  ],
-                  "expected_command": "git tag",
-                },
-                {
-                  "_name": "compilation",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
-                  ],
-                  "expected_products": [
-                     ["CREATE", "foo"],
-                  ],
-                  "pubkeys": [
-                     "ELEANORS_KEYID",
-                  ],
-                  "expected_command": "gcc -o foo src/foo.c",
-                },
-                {
-                  "_name": "package",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"],
-                  ],
-                  "expected_products": [
-                     ["CREATE", "foo.tar.gz"],
-                  ],
-                  "pubkeys": [
-                     "BOBS_KEYID",
-                  ],
-                  "expected_command": "tar -zcvf foo.tar.gz foo",
-                }
-            ],
-            "inspect": [
-                {
-                  "_name": "check-package",
-                  "expected_materials": [
-                     ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
-                  ],
-                  "expected_products": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"],
-                  ],
-                  "run": "inspect_tarball.sh foo.tar.gz",
-                },
-                {
-                  "_name": "verify-vcs-commits",
-                  "expected_materials": [
-                     ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
-                  ],
-                  "expected_products": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"],
-                  ],
-                  "run": "inspect_vcs_log -l vcs.log -P ALICES_PUBKEY -P DIANAS_PUBKEY",
-                }
-           ],
-        },
-    "signatures" : [
-        { "keyid" : ALICES_KEYID,
-          "method" : "ed25519",
-          "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-         f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
-          }
-        ]
-    }    
+{ "signed" : { 
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "keys" : {
+      "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
+      "<DIANAS_KEYID>" : "<DIANAS_PUBKEY>",
+      "<ELEANORS_KEYID>" : "<ELEANORS_PUBKEY>",
+      "<ALICES_KEYID>" : "<ALICES_PUBKEY>"
+    },
+    "steps" : [
+      {
+        "_name": "checkout-vcs",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+           ["CREATE", "src/foo.c"],
+           ["CREATE", "vcs.log"]
+        ],
+        "pubkeys": [
+          "<ALICES_KEYID>"
+        ],
+        "expected_command": "git tag"
+      },
+      {
+        "_name": "compilation",
+        "threshold": 1,
+        "expected_materials": [
+           ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
+        ],
+        "expected_products": [
+           ["CREATE", "foo"]
+        ],
+        "pubkeys": [
+           "<ELEANORS_KEYID>"
+        ],
+        "expected_command": "gcc -o foo src/foo.c"
+      },
+      {
+        "_name": "package",
+        "threshold": 1,
+        "expected_materials": [
+           ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"]
+        ],
+        "expected_products": [
+           ["CREATE", "foo.tar.gz"]
+        ],
+        "pubkeys": [
+           "<BOBS_KEYID>"
+        ],
+        "expected_command": "tar -zcvf foo.tar.gz foo"
+      }
+    ],
+    "inspect": [
+      {
+        "_name": "check-package",
+        "expected_materials": [
+           ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
+        ],
+        "expected_products": [
+           ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
+        ],
+        "run": "inspect_tarball.sh foo.tar.gz"
+      },
+      {
+        "_name": "verify-vcs-commits",
+        "expected_materials": [
+           ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
+        ],
+        "expected_products": [
+           ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
+        ],
+        "run": "inspect_vcs_log -l vcs.log -P ALICES_PUBKEY -P DIANAS_PUBKEY"
+      }
+    ]
+  },
+  "signatures" : [
+  { "keyid" : "<ALICES_KEYID>",
+    "method" : "ed25519",
+    "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+    }
+  ]
+}
 ```
 
 In contrast to the previous example, Carl will perform two different
 inspections on the final product. While the inspection of the tarball will be
 performed in the same manner as in the previous example, there is a new
-inspection phase that must verify a signed log from the VCS. 
+inspection phase that must verify a signed log from the VCS.
 
 Because of this, the `vcs.log` is listed as a product from the first step. It
 will be used to verify the operations within the VCS by executing a
@@ -1557,88 +1547,86 @@ link metadata:
 ##### `checkout-vcs.[KEID].link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-            "name": "checkout-vcs",
-           "command" : "git tag 1.0",
-           "materials": { },
-           "products": {
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-              "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7"
-           },
-           "return-value": "0",
-           "byproducts": {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         }
-    "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
-              }
-        ]
-    }    
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "checkout-vcs",
+    "command" : "git tag 1.0",
+    "materials": { },
+    "products": {
+       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+       "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7"}
+    },
+    "return-value": "0",
+    "byproducts": {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+     }
+  },
+  "signatures" : [
+    { "keyid" : "<ALICES_KEYID>",
+      "method" : "ed25519",
+      "sig" :
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f"
+    }
+  ]
+}
 ```
 
 ##### `compilation.link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-            "name": "compilation",
-           "command" : "gcc -o foo foo.c",
-           "materials": { 
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-           },
-           "products": {
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "byproducts": {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         }
-    "signatures" : [
-            { "keyid" : ELEANORS_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-        ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "compilation",
+    "command" : "gcc -o foo foo.c",
+    "materials": {
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+    },
+    "products": {
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+     }
+   },
+  "signatures" : [
+    { "keyid" : "<ELEANORS_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 ##### `package.link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "name": "package",
-           "command" : "tar zcvf foo.tar.gz foo",
-           "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "products": {
-              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
-           },
-           "byproducts":  {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-        },
-    "signatures" : [
-            { "keyid" : BOBS_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-            }
-        ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "package",
+    "command" : "tar zcvf foo.tar.gz foo",
+    "materials": {
+       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "products": {
+       "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+    },
+    "byproducts":  {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<BOBS_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a699e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 With these three pieces of metadata, along with foo.tar.gz, Carl can now
@@ -1650,7 +1638,7 @@ A common scenario in software distributions is that source code is produced
 upstream. For example, in Linux distributions, the source code for bash (the
 default shell in many distributions) is written by the Free Software
 Foundation. Given this, the task of writing the source code, is left to the
-third-party, often referred to as "upstream," to define. 
+third-party, often referred to as "upstream," to define.
 
 In this example, the maintainer will let the upstream developers define  the
 "write-code" task in a sublayout, while the compilation and package steps will
@@ -1661,286 +1649,275 @@ inspections on the top-level layout will be omitted to simplify both layouts.
 A root.layout file that fulfills these requirements would look like this:
 
 ```json
-    {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
-           "keys" : {
-               BOBS_KEYID : BOBS_PUBKEY
-               DIANAS_KEYID : DIANAS_PUBKEY
-               ELEANORS_KEYID : ELEANORS_PUBKEY
-               UPSTREAM_KEYID: UPSTREAM_KEYID
-            },
-           "steps" : [
-                {
-                  "_name": "fetch-upstream",
-                           "threshold": 1,
-                  "expected_materials": [ ],
-                  "expected_products": [
-                     ["CREATE", "src/*"],
-                  ],
-                  "pubkeys": [
-                     UPSTREAM_KEYID,
-                  ],
-                  "expected_command": "",
-                },
-                {
-                  "_name": "compilation",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"],
-                  ],
-                  "expected_products": [
-                     ["CREATE", "foo"],
-                  ],
-                  "pubkeys": [
-                     "ELEANORS_KEYID",
-                  ],
-                  "expected_command": "gcc -o foo src/*",
-                },
-                {
-                  "_name": "package",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"],
-                  ],
-                  "expected_products": [
-                     ["CREATE", "foo.tar.gz"],
-                  ],
-                  "pubkeys": [
-                     "BOBS_KEYID",
-                  ],
-                  "expected_command": "tar -zcvf foo.tar.gz foo",
-                }
-            ],
-            "inspect": [],
-        },
-    "signatures" : [
-            { "keyid" : ALICES_KEYID,
-              "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
-              }
-            ]
-    }    
+{ "signed" : { 
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "keys" : {
+        "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
+        "<DIANAS_KEYID>" : "<DIANAS_PUBKEY>",
+        "<ELEANORS_KEYID>" : "<ELEANORS_PUBKEY>",
+        "<UPSTREAM_KEYID>" : "<UPSTREAM_KEYID>"
+     },
+    "steps" : [
+      { "_name": "fetch-upstream",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+           ["CREATE", "src/*"]
+        ],
+        "pubkeys": [
+          "<UPSTREAM_KEYID>"
+        ],
+        "expected_command": ""
+      },
+      { "_name": "compilation",
+        "threshold": 1,
+        "expected_materials": [
+          ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"]
+        ],
+        "expected_products": [
+          ["CREATE", "foo"]
+        ],
+        "pubkeys": [
+          "<ELEANORS_KEYID>"
+        ],
+        "expected_command": "gcc -o foo src/*"
+      },
+      { "_name": "package",
+        "threshold": 1,
+        "expected_materials": [
+           ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"]
+        ],
+        "expected_products": [
+           ["CREATE", "foo.tar.gz"]
+        ],
+        "pubkeys": [
+           "<BOBS_KEYID>"
+        ],
+        "expected_command": "tar -zcvf foo.tar.gz foo"
+      }
+     ],
+     "inspect": []
+  },
+  "signatures" : [
+    { "keyid" : "<ALICES_KEYID>",
+      "method" : "ed25519",
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d1089462"
+    }
+  ]
+}
 ```
 
 ##### `fetch-upstream.[KEYID].link`:
 
-````json
-    {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
-           "keys" : {
-               UPSTREAM_DEV1_KEYID: UPSTREAM_DEV1_KEY,
-               UPSTREAM_DEV2_KEYID: UPSTREAM_DEV2_KEY,
-            },
-           "steps" : [
-                {
-                  "_name": "checkout-vcs",
-                           "threshold": 1,
-                  "expected_materials": [ ],
-                  "expected_products": [
-                     ["CREATE", "src/*"],
-                      ["CREATE", "vcs.log"]
-                  ],
-                  "pubkeys": [
-                     UPSTREAM_DEV1_KEYID,
-                  ],
-                  "expected_command": "git tag -s",
-                },
-                {
-                  "_name": "compile-docs",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"],
-                  ],
-                  "expected_products": [
-                     ["CREATE", "doc/*"],
-                  ],
-                  "pubkeys": [
-                     "UPSTREAM_DEV2_KEYID",
-                  ],
-                  "expected_command": "sphinx",
-                },
-                {
-            ],
-            "inspect": [
-                {
-                  "_name": "verify-vcs-commits",
-                  "expected_materials": [
-                     ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
-                  ],
-                  "expected_products": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"],
-                  ]
-                  "run": "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
-                }
-            ],
-        },
-    "signatures" : [
-            { "keyid" : UPSTREAM_KEYID,
-              "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
-              }
-        ]
+```json
+{ "signed" : { 
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "keys" : {
+        "<UPSTREAM_DEV1_KEYID>" : "<UPSTREAM_DEV1_KEY>",
+        "<UPSTREAM_DEV2_KEYID>" : "<UPSTREAM_DEV2_KEY>"
+     },
+    "steps" : [
+      {
+        "_name": "checkout-vcs",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+          ["CREATE", "src/*"],
+          ["CREATE", "vcs.log"]
+        ],
+        "pubkeys": [
+          "<UPSTREAM_DEV1_KEYID>"
+        ],
+        "expected_command": "git tag -s"
+      },
+      {
+        "_name": "compile-docs",
+        "threshold": 1,
+        "expected_materials": [
+          ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
+        ],
+        "expected_products": [
+          ["CREATE", "doc/*"]
+        ],
+        "pubkeys": [
+          "UPSTREAM_DEV2_KEYID"
+        ],
+        "expected_command": "sphinx"
+      }
+     ],
+     "inspect": [
+      {
+        "_name": "verify-vcs-commits",
+        "expected_materials": [
+           ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
+        ],
+        "expected_products": [
+           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
+        ],
+        "run": "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY"
+      }
+    ]
+  },
+  "signatures" : [
+    { "keyid" : "<UPSTREAM_KEYID>",
+      "method" : "ed25519",
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd5"
     }
+  ]
+}
 ```
 
 ##### `check-out-vcs.[KEYID].link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-            "name": "compilation",
-           "command" : "gcc -o foo foo.c",
-           "materials": { 
-           },
-           "products": {
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "byproducts":  {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         },
-    "signatures" : [
-            { "keyid" : UPSTREAM_DEV1_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-        ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "compilation",
+    "command" : "gcc -o foo foo.c",
+    "materials": { },
+    "products": {
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts":  {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<UPSTREAM_DEV1_KEYID>",
+      "method" : "ed25519",
+      "sig" : "a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+    }
+  ]
+}
 ```
 
 ##### `compile-docs.[KEYID].link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "name": "package",
-           "command" : "tar zcvf foo.tar.gz foo",
-           "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "products": {
-              "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
-           },
-           "byproducts":  {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         },
-    "signatures" : [
-            { "keyid" : UPSTREAM_DEV2_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-        ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "package",
+    "command" : "",
+    "materials": {
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "products": {
+      "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+    },
+    "byproducts":  {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+     }
+  },
+  "signatures" : [
+    { "keyid" : "<UPSTREAM_DEV2_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 ##### `verify-vcs-commits.[KEYID]link` (upstream inspection):
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "name": "package",
-           "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P
-                  UPSTREAM_PUBKEY",
-           "materials": {
-              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-            },
-           "products": {
-      "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-            },
-           "byproducts": {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         },
-    "signatures" : [
-            { "keyid" : UPSTREAM_DEV2_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-        ]
-    } 
+{"signed" : { 
+    "_type" :  "link",
+    "name": "package",
+    "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
+    "materials": {
+      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "products": {
+      "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts": {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<UPSTREAM_DEV2_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 ##### `compilation.[KEYID].link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-            "name": "compilation",
-           "command" : "gcc -o foo foo.c",
-           "materials": { 
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-           },
-           "products": {
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "byproducts":  {             
-             "stdin": "",
-             "stdout": "",
-             "return-value": "0"
-            }
-         },
-    "signatures" : [
-            { "keyid" : ELEANORS_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-            ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "compilation",
+    "command" : "gcc -o foo foo.c",
+    "materials": {
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+    },
+    "products": {
+       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "byproducts":  {
+     "stdin": "",
+     "stdout": "",
+     "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<ELEANORS_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 ##### `package.[KEYID].link`:
 
 ```json
-    {"signed" : { "_type" :  "link",
-           "name": "package",
-           "command" : "tar zcvf foo.tar.gz foo",
-           "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
-           },
-           "products": {
-              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
-           },
-           "byproducts":  {             
-             "stdin": "",
-              "stdout": "",
-             "return-value": "0"
-             }
-         },
-    "signatures" : [
-            { "keyid" : BOBS_KEYID,
-              "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-        ]
-    } 
+{ "signed" : { 
+    "_type" :  "link",
+    "name": "package",
+    "command" : "tar zcvf foo.tar.gz foo",
+    "materials": {
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+    },
+    "products": {
+      "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+    },
+    "byproducts":  {
+      "stdin": "",
+      "stdout": "",
+      "return-value": "0"
+    }
+  },
+  "signatures" : [
+    { "keyid" : "<BOBS_KEYID>",
+      "method" : "ed25519",
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+    }
+  ]
+}
 ```
 
 From this example, we can see that the "fetch-upstream" link is actually a
 layout file that further defines two steps: check-out-vcs and compile docs.
 These two steps are performed and verified in the same way as the top-level
-link metadata. 
+link metadata.
 
 Notice also, that the inspection is run by the upstream developer, and produces
 link metadata that is signed with the same key as the layout. If this piece of
 link metadata was missing, the client would be in charge of running the
 inspection (which would require the vcs.log file to be shipped along with the
-final product).  
+final product).
 
 ## 6 Learn More
 
