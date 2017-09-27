@@ -491,7 +491,7 @@ type, or cryptographic library:
 *   "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
 The underlying hash function is SHA256.
 *   "ed25519" : Elliptic curve digital signature algorithm based on
-    [TwistedEdwards curves](http://ed25519.cr.yp.to/).
+    [Twisted Edwards curves](http://ed25519.cr.yp.to/).
 *   "ecdsa" : [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
 
 All keys have the format:
@@ -770,7 +770,7 @@ match any materials.
 step and their hashes must not match.
 
 The artifact rules contained in the `"expected_materials"` and
-`"expected_products"` fields operate in a similar fashion as a firewal. This
+`"expected_products"` fields operate in a similar fashion as a firewall. This
 means that the first rule that matches a specific artifact in the link metadata
 will be used to match that artifact. Likewise, there is an implicit `ALLOW *`
 at the end of such fields.
@@ -931,11 +931,14 @@ The format of the environment information is not mandated by the in-toto
 specification, but we recommend to store the following:
 
     * **variables**: a list of environment variables set in the host system.
-    * **filesystem**: a list of filepath/hash values of the relevant files in the filesystem. Another alternative could be to store an MTREE of the relevant directories. A third alternative would be to use the hashes of the relevante layerfs layers.
+    * **filesystem**: a list of filepath/hash values of the relevant files in
+      the filesystem. Another alternative could be to store an MTREE of the
+relevant directories. A third alternative would be to use the hashes of the
+relevant filesystem layers.
     * **workdir**: the path of the current working directory.
 
 These values can be used to detect mistakes during compilation or invalid hosts
-carriying out steps.
+carrying out steps.
 
 The following is a depiction of the previous recommendation:
 
@@ -976,7 +979,7 @@ finally, the output of the pwd command. This information can be used to infer
 information about the current execution environment. Operating systems and
 containerization solutions could use tools to record and store information
 relevant to their toolchain (e.g., dpkg-query list for debian, or information
-about the layer-fs manifest in docker).
+about the docker layers in the manifest).
 
 ### 4.5 Specifying sublayouts
 
