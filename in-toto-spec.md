@@ -1024,15 +1024,16 @@ step of Bob's sublayout.
 
 #### 4.5.2 Namespacing link metadata
 
-Link metadata that pertains to a sublayout must be placed on a folder for such
-layout. The name of the folder will be have the same format as the link
-metadata filename without the .link metadata suffix. This is necessary to avoid
-clashes between step names on layouts and sublayouts, as the creator of a
-layout may not be aware of the names used by the creators of sublayouts.
+Link metadata that pertains to a sublayout must be placed in a file system
+directory for such layout. The name of the directory will be have the same
+format as the link metadata filename without the .link metadata suffix. This is
+necessary to avoid clashes between step names on layouts and sublayouts, as the
+creator of a layout may not be aware of the names used by the creators of
+sublayouts.
 
 In our example above, the layout file would be stored under the name
 `build.BOBS-KEYID-PREFIX.link`, and the corresponding pieces of link metadata
-will be stored on a folder named `build.BOBS-KEYID-PREFIX`.
+will be stored in a directory named `build.BOBS-KEYID-PREFIX`.
 
 #### 4.5.3 Inspections on sublayouts
 
@@ -1088,11 +1089,13 @@ expiration field, verification should fail.
 field.
 1. The steps, as defined in the layout, are loaded. For each step in the
    layout, one or more pieces of link or layout metadata is loaded. 
-  1. If the file loaded metadata is a link metadata file, a data structure
-   containing the materials and products is populated with the reported values.
-  1. If the file is a layout file instead, the algorithm will recurse into that
-   layout, starting from step 1. All the metadata relevant to that sub-layout
-  should be contained in a subdirectory named after this step. 
+      1. If the loaded metadata file is a link metadata file, a data structure
+         containing the materials and products is populated with the reported
+values.
+      1. If the loaded metadata file is a layout file instead, the algorithm
+         will recurse into that layout, starting from step 1. All the metadata
+relevant to that sub-layout should be contained in a subdirectory named after
+this step. 
 1. Matching rules are applied against the products and materials reported by
    each step as described by the algorithm in section 4.3.3.2.
 1. Inspection steps are executed, and the corresponding materials and products
