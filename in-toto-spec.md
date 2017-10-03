@@ -389,7 +389,7 @@ the extracted foo.py matches the one that was written by Diana.
 If all of these verifications pass, then installation continues as usual.
 
 ![figure 1](https://raw.githubusercontent.com/in-toto/image-resources/master/diagrams/png/in-toto-metadata.png)
-    `Figure 1: The supply chain pieces for this example`
+    <sup>Figure 1: The supply chain pieces for this example</sup>
 
 ## 3 The final product
 
@@ -770,10 +770,10 @@ match any materials.
 step and their hashes must not match.
 
 The artifact rules contained in the `"expected_materials"` and
-`"expected_products"` fields operate in a similar fashion as a firewall. This
-means that the first rule that matches a specific artifact in the link metadata
-will be used to match that artifact. Likewise, there is an implicit `ALLOW *`
-at the end of such fields.
+`"expected_products"` fields operate in a similar fashion as firewall rules do.
+This means that the first rule that matches a specific artifact in the link
+metadata will be used to match that artifact. Likewise, there is an implicit
+`ALLOW *` at the end of such fields.
 
 ##### 4.3.3.1 MATCH rule behavior
 
@@ -930,12 +930,12 @@ opaque field, it should at least contain the `"variables"`, `"filesystem"`, and
 The format of the environment information is not mandated by the in-toto
 specification, but we recommend to store the following:
 
-    * **variables**: a list of environment variables set in the host system.
-    * **filesystem**: a list of filepath/hash values of the relevant files in
-      the filesystem. Another alternative could be to store an MTREE of the
-relevant directories. A third alternative would be to use the hashes of the
-relevant filesystem layers.
-    * **workdir**: the path of the current working directory.
+* **variables**: a list of environment variables set in the host system.
+* **filesystem**: a list of filepath/hash values of the relevant files in the
+  filesystem. Another alternative could be to store an MTREE of the relevant
+directories. A third alternative would be to use the hashes of the relevant
+filesystem layers.
+* **workdir**: the path of the current working directory.
 
 These values can be used to detect mistakes during compilation or invalid hosts
 carrying out steps.
@@ -1106,7 +1106,10 @@ To better understand how in-toto works, we provide a series of examples of the
 framework being used in practice. We will start with a simple example to
 showcase how the relevant aspects of in-toto come into play. After this, we
 will present a more complete and realistic example. Additional link and layout
-metadata examples can be found at in-toto.io.
+metadata examples can be found at [in-toto.io](https://in-toto.io).
+
+File hashes are truncated and ellipsized for the sake of readability. Likewise,
+the keyid values have been replaced with placeholders for the same reason.
 
 #### 5.3.1 Alice's Python script
 
@@ -1179,7 +1182,7 @@ A `root.layout` file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
       "method" : "ed25519",
-      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580be..."
     }
   ]
 }
@@ -1205,7 +1208,7 @@ metadata:
     "command" : "vi foo.py",
     "materials": { },
     "products": {
-      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1222,7 +1225,7 @@ metadata:
     { "keyid" : "<ALICES_KEYID>",
       "method" : "ed25519",
       "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92e..."
       }
     ]
 }
@@ -1236,10 +1239,10 @@ metadata:
     "Name": "package",
     "command" : "tar zcvf foo.tar.gz foo.py",
     "materials": {
-      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "products": {
-      "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1256,7 +1259,7 @@ metadata:
     { "keyid" : "<BOBS_KEYID>",
       "method" : "ed25519",
       "sig" :
-          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a"
+          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a..."
       }
     ]
 }
@@ -1376,7 +1379,7 @@ A `root.layout` file that fulfills these requirements would look like this:
   "signatures" : [
       { "keyid" : "<ALICES_KEYID>",
         "method" : "ed25519",
-        "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+        "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080..."
       }
   ]
 }
@@ -1402,8 +1405,8 @@ metadata:
     "command" : "vi foo.py",
     "materials": { },
     "products": {
-       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
-       "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
+       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
+       "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1420,7 +1423,7 @@ metadata:
     { "keyid" : "<ALICES_KEYID>",
       "method" : "ed25519",
       "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f"
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
       }
     ]
 }
@@ -1453,7 +1456,7 @@ metadata:
       { "keyid" : "<CAROLINES_KEYID>",
         "method" : "ed25519",
         "sig" :
-        "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a6c2"
+        "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a..."
         }
     ]
 }
@@ -1469,10 +1472,10 @@ looks really similar (modulo the signature and the filename).
     "Name": "package",
     "command" : "tar zcvf foo.tar.gz foo.py",
     "materials": {
-       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "products": {
-       "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+       "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1489,7 +1492,7 @@ looks really similar (modulo the signature and the filename).
       { "keyid" : "<BOBS_KEYID>",
         "method" : "ed25519",
         "sig" :
-        "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+        "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
       }
     ]
 }
@@ -1504,10 +1507,10 @@ When Carl is verifying, his  installer will perform the following checks:
    Alice's).
 1. The code that Alice wrote was tested by two people, in this case, Caroline
    and Alfred.
-1. Every step in the layout has a corresponding [name].[keyid-prefix].link metadata file
-   signed by the intended functionary.
+1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
+   metadata file signed by the intended functionary.
 1. All the matching rules on every step match the rest of the
-   [name].[keyid-prefix.].link metadata files.
+   `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
 will be extracted using `inspect_tarball.sh` and the contents will be checked
@@ -1629,7 +1632,7 @@ A `root.layout` file that fulfills these requirements would look like this:
   "signatures" : [
   { "keyid" : "<ALICES_KEYID>",
     "method" : "ed25519",
-    "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+    "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d..."
     }
   ]
 }
@@ -1658,8 +1661,8 @@ link metadata:
     "command" : "git tag 1.0",
     "materials": { },
     "products": {
-       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
-       "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7"}
+       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
+       "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7..."}
     },
     "return-value": "0",
     "byproducts": {
@@ -1677,7 +1680,7 @@ link metadata:
     { "keyid" : "<ALICES_KEYID>",
       "method" : "ed25519",
       "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f"
+      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
     }
   ]
 }
@@ -1691,10 +1694,10 @@ link metadata:
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
     "materials": {
-      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "products": {
-      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1710,7 +1713,7 @@ link metadata:
   "signatures" : [
     { "keyid" : "<ELEANORS_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c..."
     }
   ]
 }
@@ -1724,10 +1727,10 @@ link metadata:
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
     "materials": {
-       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "products": {
-       "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+       "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
       "stdin": "",
@@ -1743,7 +1746,7 @@ link metadata:
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a699e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a699e082e12c300dfe5022a06c7a6c2..."
     }
   ]
 }
@@ -1822,7 +1825,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
       "method" : "ed25519",
-      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d1089462"
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d1089..."
     }
   ]
 }
@@ -1883,7 +1886,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<UPSTREAM_KEYID>",
       "method" : "ed25519",
-      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd5"
+      "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd5..."
     }
   ]
 }
@@ -1898,8 +1901,8 @@ A root.layout file that fulfills these requirements would look like this:
     "command" : "gcc -o foo foo.c",
     "materials": { },
     "products": {
-      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
-      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
+      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts":  {
       "stdin": "",
@@ -1915,7 +1918,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV1_KEYID>",
       "method" : "ed25519",
-      "sig" : "a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed"
+      "sig" : "a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed..."
     }
   ]
 }
@@ -1929,10 +1932,10 @@ A root.layout file that fulfills these requirements would look like this:
     "name": "package",
     "command" : "",
     "materials": {
-      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "products": {
-      "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+      "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
       "stdin": "",
@@ -1948,7 +1951,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV2_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
 }
@@ -1962,10 +1965,10 @@ A root.layout file that fulfills these requirements would look like this:
     "name": "package",
     "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
     "materials": {
-      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "products": {
-      "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
       "stdin": "",
@@ -1981,7 +1984,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV2_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
 }
@@ -1995,10 +1998,10 @@ A root.layout file that fulfills these requirements would look like this:
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
     "materials": {
-      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
+      "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "products": {
-       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts":  {
      "stdin": "",
@@ -2014,7 +2017,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<ELEANORS_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
 }
@@ -2028,10 +2031,10 @@ A root.layout file that fulfills these requirements would look like this:
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
     "materials": {
-      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
+      "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "products": {
-      "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
+      "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
       "stdin": "",
@@ -2047,7 +2050,7 @@ A root.layout file that fulfills these requirements would look like this:
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
       "method" : "ed25519",
-      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2"
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
 }
