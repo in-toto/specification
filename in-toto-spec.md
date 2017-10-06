@@ -484,7 +484,7 @@ described in sections 4.3 and 4.4). KEYID is the identifier of the key signing
 the ROLE dictionary. METHOD is the key signing method used to generate the
 signature. SIGNATURE is a signature of the canonical JSON form of ROLE.
 
-The current reference implementation of in-toto defines two signing methods,
+The current reference implementation of in-toto defines three signing methods,
 although in-toto is not restricted to any particular key signing method, key
 type, or cryptographic library:
 
@@ -772,7 +772,7 @@ step and their hashes must not match.
 The artifact rules contained in the `"expected_materials"` and
 `"expected_products"` fields operate in a similar fashion as firewall rules do.
 This means that the first rule that matches a specific artifact in the link
-metadata will be used to match that artifact. Likewise, there is an implicit
+metadata will be used to match that artifact. In addition, there is an implicit
 `ALLOW *` at the end of such fields.
 
 ##### 4.3.3.1 MATCH rule behavior
@@ -944,31 +944,31 @@ The following is a depiction of the previous recommendation:
 
 ```json
 { "environment": {
-  "Variables": [
-  "LANG=en_US.UTF-8",
-  "USER=santiago",
-  "PWD=/home/santiago",
-  "HOME=/home/santiago",
-  "SHELL=/bin/bash",
-  "PATH=/home/santiago/bin:/home/santiago/bin:/usr/local/sbin"
-  ],
-  "filesystem": [" ",
-  " #           user: (null)", 
-  " #        machine: LykOS",
-  " #           tree: /home/santiago/Documents/personal/programas/in-toto/docs",
-  " #           date: Thu Jul 27 16:02:58 2017",
-  " ",
-  " ",
-  " # .",
-  " /set type=file uid=1000 gid=1000 mode=0644 nlink=1 flags=none",
-  " .               type=dir mode=0755 nlink=3 size=4096 \\",
-  "                 time=1495734432.214631931",
-  "     LICENSE     size=1086 time=1495734432.214631931",
-  "     README.md   size=50 time=1495734432.214631931",
-  "     in-toto-spec.pdf \\",
-  "                 size=220978 time=1495734432.217965320",
-  " .."],
-  "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs"
+    "Variables": [
+      "LANG=en_US.UTF-8",
+      "USER=santiago",
+      "PWD=/home/santiago",
+      "HOME=/home/santiago",
+      "SHELL=/bin/bash",
+      "PATH=/home/santiago/bin:/home/santiago/bin:/usr/local/sbin"
+    ],
+    "filesystem": [" ",
+      " #           user: (null)", 
+      " #        machine: LykOS",
+      " #           tree: /home/santiago/Documents/personal/programas/in-toto/docs",
+      " #           date: Thu Jul 27 16:02:58 2017",
+      " ",
+      " ",
+      " # .",
+      " /set type=file uid=1000 gid=1000 mode=0644 nlink=1 flags=none",
+      " .               type=dir mode=0755 nlink=3 size=4096 \\",
+      "                 time=1495734432.214631931",
+      "     LICENSE     size=1086 time=1495734432.214631931",
+      "     README.md   size=50 time=1495734432.214631931",
+      "     in-toto-spec.pdf \\",
+      "                 size=220978 time=1495734432.217965320",
+      " .."],
+      "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs"
   }
 }
 ``` 
