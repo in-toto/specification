@@ -518,7 +518,7 @@ The 'rsa' format is:
 where PUBLIC and PRIVATE are in PEM format and are strings.  All RSA keys must
 be at least 2048 bits.
 
-The elliptic-curve variants ('ed25519' and ecdsa) format are:
+The elliptic-curve variants ('ed25519' and 'ecdsa') format are:
 
 ```json
   { "keytype" : "ed25519",
@@ -1024,8 +1024,8 @@ step of Bob's sublayout.
 
 #### 4.5.2 Namespacing link metadata
 
-Link metadata that pertains to a sublayout must be placed in a file system
-directory for such layout. The name of the directory will be have the same
+Link metadata that pertains to a sublayout must be placed in a filesystem
+directory for such layout. The name of the directory will have the same
 format as the link metadata filename without the .link metadata suffix. This is
 necessary to avoid clashes between step names on layouts and sublayouts, as the
 creator of a layout may not be aware of the names used by the creators of
@@ -1078,7 +1078,7 @@ to further verify accompanying metadata.
 The following algorithm contains an in-depth description of the verification
 procedure.
  
-1. Toto inspects the final product to find a root.layout file that describes
+1. in-toto inspects the final product to find a root.layout file that describes
    the top-level layout for the project. The signature(s) on the file are
 checked using previously-acquired project owner public key(s).
 1. The expiration time is verified to ensure that this layout is still fresh.
