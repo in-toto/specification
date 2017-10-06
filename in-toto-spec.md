@@ -848,10 +848,6 @@ for rule in rules:
 
   artifacts -= matched_artifacts
 
-# check if there were any artifacts that weren't matched by the rules
-if artifacts is not empty:
-  return ERROR("There were unmatched artifacts in this set!")
-
 return SUCCESS
 ```
 
