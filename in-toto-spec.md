@@ -940,7 +940,7 @@ The following is a depiction of the previous recommendation:
 
 ```json
 { "environment": {
-    "Variables": [
+    "variables": [
       "LANG=en_US.UTF-8",
       "USER=santiago",
       "PWD=/home/santiago",
