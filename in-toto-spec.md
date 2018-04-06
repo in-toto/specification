@@ -7,6 +7,7 @@ https://in-toto.io
 Version 0.9
 
 ## 1 Introduction
+
 ### 1.1 Scope
 
 This document describes in-toto, a system for securing the way in which
@@ -190,7 +191,7 @@ for a step further down the chain (e.g., linking).
   persistent (e.g,. files), and are often meant to be used as materials on
 subsequent steps. Products are recorded as part of link metadata.
 * **Artifact**: a material or a product, as described above.
-* Byproducts: indirect results of carrying out a step, often used to verify
+* **Byproducts**: indirect results of carrying out a step, often used to verify
   that a step was performed correctly. A byproduct is information that will not
 be used as a material in a subsequent step, but may provide insight about the
 process. For example, the stdout, stdin and return values are common byproducts
@@ -1437,7 +1438,7 @@ metadata:
     "command" : "python test.py",
     "materials": {
        "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
-        "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
+       "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
     },
     "products": { },
     "byproducts": {
