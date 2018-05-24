@@ -466,12 +466,12 @@ All signed files (i.e., link and layout files) have the format:
 
 ```json
    {
-    "signed" : ROLE,
+    "signed" : "ROLE",
      "signatures" : [
-        { "keyid" : KEYID,
-          "method" : METHOD,
-          "sig" : SIGNATURE }
-        , ... ]
+        { "keyid" : "KEYID",
+          "method" : "METHOD",
+          "sig" : "SIGNATURE" }
+        , "..."]
    }
 ```
 
@@ -492,8 +492,8 @@ The underlying hash function is SHA256.
 All keys have the format:
 
 ```json
-  { "keytype" : KEYTYPE,
-    "keyval" : KEYVAL }
+  { "keytype" : "KEYTYPE",
+    "keyval" : "KEYVAL" }
 ```
 
 where KEYTYPE is a string describing the type of the key, and how it is used to
@@ -505,8 +505,8 @@ The 'rsa' format is:
 
 ```json
   { "keytype" : "rsa",
-    "keyval" : { "public" : PUBLIC,
-                 "private" : PRIVATE }
+    "keyval" : { "public" : "PUBLIC",
+                 "private" : "PRIVATE" }
   }
 ```
 
@@ -517,8 +517,8 @@ The 'ed25519' format is:
 
 ```json
   { "keytype" : "ed25519",
-    "keyval" : { "public" : PUBLIC,
-                 "private" : PRIVATE }
+    "keyval" : { "public" : "PUBLIC",
+                 "private" : "PRIVATE" }
   }
 ```
 
@@ -529,7 +529,7 @@ object:
 
 ```json
   { "keytype" : "rsa",
-    "keyval" : { "public" : PUBLIC}
+    "keyval" : { "public" : "PUBLIC" }
   }
 ```
 
@@ -558,18 +558,18 @@ The format of the layout file is as follows:
 
 ```json
     { "_type" : "layout",
-       "expires" : EXPIRES,
-       "readme": README,
+       "expires" : "EXPIRES",
+       "readme": "README",
        "keys" : {
-           KEYID : KEY
-           , ... },
-       },
+           "KEYID" : "KEY",
+            "...":"..." 
+        },
        "steps" : [
-           {... },
+           {"...":"..."}
        ],
        "inspections" : [
-           {... },
-       ],
+           {"...": "..."}
+       ]
     }
 ```
 
@@ -601,21 +601,21 @@ Steps performed by a functionary in the supply chain are declared as follows:
 
 ```json
     {
-      "_name": NAME,
-      "threshold": THRESHOLD,
+      "_name": "NAME",
+      "threshold": "THRESHOLD",
       "expected_materials": [
-         [ARTIFACT_RULE],
-         ...
+         ["ARTIFACT_RULE"],
+         "..."
       ],
       "expected_products": [
-         [ARTIFACT_RULE],
-         ...
-      ]
-      "pubkeys": [
-         KEYID,
-         ...
+         ["ARTIFACT_RULE"],
+         "..."
       ],
-      "expected_command": COMMAND,
+      "pubkeys": [
+         "KEYID",
+         "..."
+      ],
+      "expected_command": "COMMAND"
     }
 ```
 
@@ -667,17 +667,16 @@ An inspection contains the following fields.
 
 ```json
     {
-      "_name": NAME,
+      "_name": "NAME",
       "expected_materials": [
-         [ARTIFACT_RULE],
-         ...
+         ["ARTIFACT_RULE"],
+         "..."
       ],
       "expected_products": [
-         [ARTIFACT_RULE],
-         ...
-      ]
-      "run": COMMAND,
-      ...
+         ["ARTIFACT_RULE"],
+         "..."
+      ],
+      "run": "COMMAND"
     }
 ```
 
@@ -715,7 +714,7 @@ only be created in the create-documentation step) and authorize operations on
 artifacts (e.g., the compile step can use the materials from the checkout-vcs).
 The `ARTIFACT_RULE` format is the following:
 
-```json
+```
     {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> || 
     CREATE <pattern> ||
     DELETE <pattern> ||
@@ -870,21 +869,21 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
 ```json
  { "_type" :  "link",
-   "_name" :  NAME,
-   "command" : COMMAND,
+   "_name" :  "NAME",
+   "command" : "COMMAND",
    "materials": {
-      PATH: HASH,
-      ...
+      "PATH": "HASH",
+      "...": "..."
    },
    "products": {
-      PATH: HASH,
-      ...
+      "PATH": "HASH",
+      "...": "..."
    },
    "byproducts": {
         "stdin": "",
-        "stdout", "",
-        "return-value": "",
-        }
+        "stdout": "",
+        "return-value": ""
+    }
  }
 ```
 
@@ -1054,10 +1053,10 @@ A `root.layout` file that fulfills these requirements would look like this:
 ```json
     {"signed" : { 
       "_type" : "layout",
-      "expires" : EXPIRES,
+      "expires" : "EXPIRES",
       "keys" : {
-          BOBS_KEYID : BOBS_PUBKEY
-          ALICES_KEYID: ALICES_PUBKEY
+          "BOBS_KEYID" : "BOBS_PUBKEY",
+          "ALICES_KEYID": "ALICES_PUBKEY"
        },
       "steps" : [
            {
@@ -1065,27 +1064,27 @@ A `root.layout` file that fulfills these requirements would look like this:
              "threshold": 1,
              "expected_materials": [ ],
              "expected_products": [
-                [["CREATE", "foo.py"]],
-             ]
-             "pubkeys": [
-                ALICES_KEYID,
+                [["CREATE", "foo.py"]]
              ],
-             "expected_command": "vi",
+             "pubkeys": [
+                "ALICES_KEYID"
+             ],
+             "expected_command": "vi"
            },
            {
              "_name": "package",
              "threshold": 1,
              "expected_materials": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
+                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]]
              ],
              "expected_products": [
-                [["CREATE", "foo.tar.gz"]],
-             ]
-             "pubkeys": [
-                "BOBS_KEYID",
+                [["CREATE", "foo.tar.gz"]]
              ],
-             "expected_command": "tar zcvf foo.tar.gz foo.py",
-           }]
+             "pubkeys": [
+                "BOBS_KEYID"
+             ],
+             "expected_command": "tar zcvf foo.tar.gz foo.py"
+           }],
         "inspect": [
            {
              "_name": "inspect_tarball",
@@ -1093,17 +1092,15 @@ A `root.layout` file that fulfills these requirements would look like this:
                 [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
              ],
              "expected_products": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ]
-             "run": "inspect_tarball.sh foo.tar.gz",
+                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]]
+             ],
+             "run": "inspect_tarball.sh foo.tar.gz"
            }
-        ],
-        },
+        ]},
         "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580beb..."
               }
             ]
     }
@@ -1125,26 +1122,25 @@ metadata:
 ```json
     {"signed" : { 
            "_type" :  "link",
-           "name": write-code,
+           "name": "write-code",
            "command" : "vi foo.py",
            "materials": { },
            "products": {
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
+              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
            },
            "byproducts": {
              "stdin": "",
              "stdout": "",
              "return-value": "0"
-     }
-         }
+            }
+    },
     "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
               "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
+              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
               }
-            ]
+        ]
     }    
 ```
 
@@ -1155,23 +1151,22 @@ metadata:
        "Name": "package",
        "command" : "tar zcvf foo.tar.gz foo.py",
        "materials": { 
-          "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
+          "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
        },
        "products": {
-          "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+          "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
        },
        "byproducts": {             
          "stdin": "",
  "stdout": "foo.py",
          "return-value": "0"
          }
-     }
+     },
 "signatures" : [
-        { "keyid" : BOBS_KEYID,
+        { "keyid" : "BOBS_KEYID",
           "method" : "ed25519",
           "sig" :
-          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-          a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
           }
     ]
 } 
@@ -1227,12 +1222,12 @@ A `root.layout` file that fulfills these requirements would look like this:
 ```json
     {"signed" : { 
       "_type" : "layout",
-      "expires" : EXPIRES,
+      "expires" : "EXPIRES",
       "keys" : {
-          BOBS_KEYID : BOBS_PUBKEY,
-          ALICES_KEYID: ALICES_PUBKEY,
-          CAROLINES_KEYID: CAROLINES_PUBKEY,
-          ALFREDS_KEYID: ALFREDS_PUBKEY,
+          "BOBS_KEYID" : "BOBS_PUBKEY",
+          "ALICES_KEYID" : "ALICES_PUBKEY",
+          "CAROLINES_KEYID" : "CAROLINES_PUBKEY",
+          "ALFREDS_KEYID" : "ALFREDS_PUBKEY"
        },
       "steps" : [
            {
@@ -1240,41 +1235,41 @@ A `root.layout` file that fulfills these requirements would look like this:
              "threshold": 1,
              "expected_materials": [ ],
              "expected_products": [
-                [["CREATE", "foo.py"]],
-             ]
-             "pubkeys": [
-                ALICES_KEYID,
+                [["CREATE", "foo.py"]]
              ],
-             "expected_command": "vi",
+             "pubkeys": [
+                "ALICES_KEYID"
+             ],
+             "expected_command": "vi"
            },
            {
              "_name": "test",
              "threshold": 2,
              "expected_materials": [
-                         [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
-                           ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
-         ],
-             "expected_products": []
+                ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
+                ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+            ],
+             "expected_products": [],
              "pubkeys": [
-                CAROLINES_KEYID,
-                ALFREDS_KEYID
+                "CAROLINES_KEYID",
+                "ALFREDS_KEYID"
              ],
-             "expected_command": "python test.py",
+             "expected_command": "python test.py"
            },
            {
              "_name": "package",
              "threshold": 1,
              "expected_materials": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
+                ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
              ],
              "expected_products": [
-                [["CREATE", "foo.tar.gz"]],
-             ]
-             "pubkeys": [
-                "BOBS_KEYID",
+                ["CREATE", "foo.tar.gz"]
              ],
-             "expected_command": "tar zcvf foo.tar.gz foo.py",
-           }]
+             "pubkeys": [
+                "BOBS_KEYID"
+             ],
+             "expected_command": "tar zcvf foo.tar.gz foo.py"
+           }],
         "inspect": [
            {
              "_name": "inspect_tarball",
@@ -1282,17 +1277,15 @@ A `root.layout` file that fulfills these requirements would look like this:
                 [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
              ],
              "expected_products": [
-                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]],
-             ]
-             "run": "inspect_tarball.sh foo.tar.gz",
+                [["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]]
+             ],
+             "run": "inspect_tarball.sh foo.tar.gz"
            }
-        ],
-        },
+        ]},
         "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93d..."
               }
             ]
     }    
@@ -1314,27 +1307,26 @@ metadata:
 ```json
     {"signed" : { 
            "_type" :  "link",
-           "name": write-code,
+           "name": "write-code",
            "command" : "vi foo.py",
            "materials": { },
            "products": {
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",},
-      "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb",}
+              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+              "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
            },
            "byproducts": {
              "stdin": "",
              "stdout": "",
              "return-value": "0"
-     }
-         }
+            }
+    },
     "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
               "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
-              }
-            ]
+              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
+            }
+        ]
     }    
 ```
 
@@ -1345,25 +1337,23 @@ metadata:
            "Name": "package",
            "command" : "python test.py",
            "materials": { 
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-      "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb",}
+              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+              "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
            },
-           "products": {
-           },
+           "products": {},
            "byproducts": {             
              "stdin": "",
-     "stdout": "....\nOk",
+             "stdout": "....\nOk",
              "return-value": "0"
-     }
-         }
+            }
+         },
     "signatures" : [
-            { "keyid" : CAROLINES_KEYID,
+            { "keyid" : "CAROLINES_KEYID",
               "method" : "ed25519",
               "sig" :
-              "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a6c2
-              a6a93a9f5771eb3df42894623d580beb61f736a698e0890d7a12c300dce3"
-              }
-            ]
+              "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df..."
+            }
+        ]
     }
 ```
 
@@ -1377,25 +1367,24 @@ looks really similar (modulo the signature and the filename).
            "Name": "package",
            "command" : "tar zcvf foo.tar.gz foo.py",
            "materials": { 
-              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
+              "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
            },
            "products": {
-              "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "byproducts": {             
              "stdin": "",
-     "stdout": "foo.py",
+              "stdout": "foo.py",
              "return-value": "0"
-     }
-         }
+            }
+    },
     "signatures" : [
-            { "keyid" : BOBS_KEYID,
+            { "keyid" : "BOBS_KEYID",
               "method" : "ed25519",
               "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
-              }
-            ]
+              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
+            }
+        ]
     } 
 ```
 
@@ -1457,12 +1446,12 @@ A `root.layout` file that fulfills these requirements would look like this:
 
 ```json
     {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
+           "expires" : "EXPIRES",
            "keys" : {
-               BOBS_KEYID : BOBS_PUBKEY,
-               DIANAS_KEYID : DIANAS_PUBKEY,
-               ELEANORS_KEYID : ELEANORS_PUBKEY,
-               ALICES_KEYID: ALICES_PUBKEY,
+               "BOBS_KEYID" : "BOBS_PUBKEY",
+               "DIANAS_KEYID" : "DIANAS_PUBKEY",
+               "ELEANORS_KEYID" : "ELEANORS_PUBKEY",
+               "ALICES_KEYID": "ALICES_PUBKEY"
             },
            "steps" : [
                 {
@@ -1471,40 +1460,40 @@ A `root.layout` file that fulfills these requirements would look like this:
                   "expected_materials": [ ],
                   "expected_products": [
                      ["CREATE", "src/foo.c"],
-                     ["CREATE", "vcs.log"],
+                     ["CREATE", "vcs.log"]
                   ],
                   "pubkeys": [
-                     ALICES_KEYID,
+                    "ALICES_KEYID"
                   ],
-                  "expected_command": "git tag",
+                  "expected_command": "git tag"
                 },
                 {
                   "_name": "compilation",
-                           "threshold": 1,
-                  "expected_materials": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
+                        "threshold": 1,
+                        "expected_materials": [
+                        ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
                   ],
                   "expected_products": [
-                     ["CREATE", "foo"],
+                     ["CREATE", "foo"]
                   ],
                   "pubkeys": [
-                     "ELEANORS_KEYID",
+                     "ELEANORS_KEYID"
                   ],
-                  "expected_command": "gcc -o foo src/foo.c",
+                  "expected_command": "gcc -o foo src/foo.c"
                 },
                 {
                   "_name": "package",
                            "threshold": 1,
                   "expected_materials": [
-                     ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"],
+                     ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"]
                   ],
                   "expected_products": [
-                     ["CREATE", "foo.tar.gz"],
+                     ["CREATE", "foo.tar.gz"]
                   ],
                   "pubkeys": [
-                     "BOBS_KEYID",
+                     "BOBS_KEYID"
                   ],
-                  "expected_command": "tar -zcvf foo.tar.gz foo",
+                  "expected_command": "tar -zcvf foo.tar.gz foo"
                 }
             ],
             "inspect": [
@@ -1514,9 +1503,9 @@ A `root.layout` file that fulfills these requirements would look like this:
                      ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
                   ],
                   "expected_products": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"],
+                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
                   ],
-                  "run": "inspect_tarball.sh foo.tar.gz",
+                  "run": "inspect_tarball.sh foo.tar.gz"
                 },
                 {
                   "_name": "verify-vcs-commits",
@@ -1524,17 +1513,16 @@ A `root.layout` file that fulfills these requirements would look like this:
                      ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
                   ],
                   "expected_products": [
-                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"],
+                     ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
                   ],
-                  "run": "inspect_vcs_log -l vcs.log -P ALICES_PUBKEY -P DIANAS_PUBKEY",
+                  "run": "inspect_vcs_log -l vcs.log -P ALICES_PUBKEY -P DIANAS_PUBKEY"
                 }
-           ],
-        },
+           ]
+    },
     "signatures" : [
-        { "keyid" : ALICES_KEYID,
+        { "keyid" : "ALICES_KEYID",
           "method" : "ed25519",
-          "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-         f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+          "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc....."
           }
         ]
     }    
@@ -1562,22 +1550,21 @@ link metadata:
            "command" : "git tag 1.0",
            "materials": { },
            "products": {
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-              "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7"
+              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+              "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7"}
            },
            "return-value": "0",
-           "byproducts": {             
+           "byproducts": {
              "stdin": "",
              "stdout": "",
              "return-value": "0"
             }
-         }
+         },
     "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
               "sig" :
-              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f
-              022a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa3"
+              "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
               }
         ]
     }    
@@ -1590,23 +1577,22 @@ link metadata:
             "name": "compilation",
            "command" : "gcc -o foo foo.c",
            "materials": { 
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
+              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
            },
            "products": {
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "byproducts": {             
              "stdin": "",
              "stdout": "",
              "return-value": "0"
             }
-         }
+         },
     "signatures" : [
-            { "keyid" : ELEANORS_KEYID,
+            { "keyid" : "ELEANORS_KEYID",
               "method" : "ed25519",
               "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
               }
         ]
     } 
@@ -1619,10 +1605,10 @@ link metadata:
            "name": "package",
            "command" : "tar zcvf foo.tar.gz foo",
            "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "products": {
-              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
+              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
            },
            "byproducts":  {             
              "stdin": "",
@@ -1631,11 +1617,9 @@ link metadata:
             }
         },
     "signatures" : [
-            { "keyid" : BOBS_KEYID,
+            { "keyid" : "BOBS_KEYID",
               "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "sig" : "ae3aee92ea3a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
             }
         ]
     } 
@@ -1662,12 +1646,12 @@ A root.layout file that fulfills these requirements would look like this:
 
 ```json
     {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
+           "expires" : "EXPIRES",
            "keys" : {
-               BOBS_KEYID : BOBS_PUBKEY
-               DIANAS_KEYID : DIANAS_PUBKEY
-               ELEANORS_KEYID : ELEANORS_PUBKEY
-               UPSTREAM_KEYID: UPSTREAM_KEYID
+               "BOBS_KEYID" : "BOBS_PUBKEY",
+               "DIANAS_KEYID" : "DIANAS_PUBKEY",
+               "ELEANORS_KEYID" : "ELEANORS_PUBKEY",
+               "UPSTREAM_KEYID": "UPSTREAM_KEYID"
             },
            "steps" : [
                 {
@@ -1675,92 +1659,90 @@ A root.layout file that fulfills these requirements would look like this:
                            "threshold": 1,
                   "expected_materials": [ ],
                   "expected_products": [
-                     ["CREATE", "src/*"],
+                     ["CREATE", "src/*"]
                   ],
                   "pubkeys": [
-                     UPSTREAM_KEYID,
+                     "UPSTREAM_KEYID"
                   ],
-                  "expected_command": "",
+                  "expected_command": ""
                 },
                 {
                   "_name": "compilation",
-                           "threshold": 1,
+                  "threshold": 1,
                   "expected_materials": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"],
+                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"]
                   ],
                   "expected_products": [
-                     ["CREATE", "foo"],
+                     ["CREATE", "foo"]
                   ],
                   "pubkeys": [
-                     "ELEANORS_KEYID",
+                     "ELEANORS_KEYID"
                   ],
-                  "expected_command": "gcc -o foo src/*",
+                  "expected_command": "gcc -o foo src/*"
                 },
                 {
                   "_name": "package",
                            "threshold": 1,
                   "expected_materials": [
-                     ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"],
+                     ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"]
                   ],
                   "expected_products": [
-                     ["CREATE", "foo.tar.gz"],
+                     ["CREATE", "foo.tar.gz"]
                   ],
                   "pubkeys": [
-                     "BOBS_KEYID",
+                     "BOBS_KEYID"
                   ],
-                  "expected_command": "tar -zcvf foo.tar.gz foo",
+                  "expected_command": "tar -zcvf foo.tar.gz foo"
                 }
             ],
-            "inspect": [],
+            "inspect": []
         },
     "signatures" : [
-            { "keyid" : ALICES_KEYID,
+            { "keyid" : "ALICES_KEYID",
               "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc20..."
               }
-            ]
+        ]
     }    
 ```
 
 ##### `fetch-upstream.[KEYID].link`:
 
-````json
+```json
     {"signed" : { "_type" : "layout",
-           "expires" : EXPIRES,
+           "expires" : "EXPIRES",
            "keys" : {
-               UPSTREAM_DEV1_KEYID: UPSTREAM_DEV1_KEY,
-               UPSTREAM_DEV2_KEYID: UPSTREAM_DEV2_KEY,
+               "UPSTREAM_DEV1_KEYID": "UPSTREAM_DEV1_KEY",
+               "UPSTREAM_DEV2_KEYID": "UPSTREAM_DEV2_KEY"
             },
            "steps" : [
                 {
                   "_name": "checkout-vcs",
-                           "threshold": 1,
+                  "threshold": 1,
                   "expected_materials": [ ],
                   "expected_products": [
                      ["CREATE", "src/*"],
-                      ["CREATE", "vcs.log"]
+                     ["CREATE", "vcs.log"]
                   ],
                   "pubkeys": [
-                     UPSTREAM_DEV1_KEYID,
+                     "UPSTREAM_DEV1_KEYID"
                   ],
-                  "expected_command": "git tag -s",
+                  "expected_command": "git tag -s"
                 },
                 {
                   "_name": "compile-docs",
-                           "threshold": 1,
+                  "threshold": 1,
                   "expected_materials": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"],
+                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
                   ],
                   "expected_products": [
-                     ["CREATE", "doc/*"],
+                     ["CREATE", "doc/*"]
                   ],
                   "pubkeys": [
-                     "UPSTREAM_DEV2_KEYID",
+                     "UPSTREAM_DEV2_KEYID"
                   ],
-                  "expected_command": "sphinx",
-                },
-                {
+                  "expected_command": "sphinx"
+                }
             ],
             "inspect": [
                 {
@@ -1769,17 +1751,16 @@ A root.layout file that fulfills these requirements would look like this:
                      ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
                   ],
                   "expected_products": [
-                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"],
-                  ]
-                  "run": "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
+                     ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
+                  ],
+                  "run": "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY"
                 }
-            ],
+            ]
         },
     "signatures" : [
-            { "keyid" : UPSTREAM_KEYID,
+            { "keyid" : "UPSTREAM_KEYID",
               "method" : "ed25519",
-              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed
-             f4df84891d5aa37ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f02"
+              "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2..."
               }
         ]
     }
@@ -1794,8 +1775,8 @@ A root.layout file that fulfills these requirements would look like this:
            "materials": { 
            },
            "products": {
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
-              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
+              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "byproducts":  {             
              "stdin": "",
@@ -1804,11 +1785,10 @@ A root.layout file that fulfills these requirements would look like this:
             }
          },
     "signatures" : [
-            { "keyid" : UPSTREAM_DEV1_KEYID,
+            { "keyid" : "UPSTREAM_DEV1_KEYID",
               "method" : "ed25519",
               "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
               }
         ]
     } 
@@ -1821,10 +1801,10 @@ A root.layout file that fulfills these requirements would look like this:
            "name": "package",
            "command" : "tar zcvf foo.tar.gz foo",
            "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "products": {
-              "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
+              "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
            },
            "byproducts":  {             
              "stdin": "",
@@ -1833,11 +1813,9 @@ A root.layout file that fulfills these requirements would look like this:
             }
          },
     "signatures" : [
-            { "keyid" : UPSTREAM_DEV2_KEYID,
+            { "keyid" : "UPSTREAM_DEV2_KEYID",
               "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
               }
         ]
     } 
@@ -1848,13 +1826,12 @@ A root.layout file that fulfills these requirements would look like this:
 ```json
     {"signed" : { "_type" :  "link",
            "name": "package",
-           "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P
-                  UPSTREAM_PUBKEY",
+           "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
            "materials": {
-              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
             },
            "products": {
-      "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
             },
            "byproducts": {             
              "stdin": "",
@@ -1863,11 +1840,9 @@ A root.layout file that fulfills these requirements would look like this:
             }
          },
     "signatures" : [
-            { "keyid" : UPSTREAM_DEV2_KEYID,
+            { "keyid" : "UPSTREAM_DEV2_KEYID",
               "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "sig" : "aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
               }
         ]
     } 
@@ -1880,10 +1855,10 @@ A root.layout file that fulfills these requirements would look like this:
             "name": "compilation",
            "command" : "gcc -o foo foo.c",
            "materials": { 
-              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d",}
+              "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"}
            },
            "products": {
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "byproducts":  {             
              "stdin": "",
@@ -1892,13 +1867,11 @@ A root.layout file that fulfills these requirements would look like this:
             }
          },
     "signatures" : [
-            { "keyid" : ELEANORS_KEYID,
+            { "keyid" : "ELEANORS_KEYID",
               "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022aa6c2..."
               }
-            ]
+        ]
     } 
 ```
 
@@ -1909,10 +1882,10 @@ A root.layout file that fulfills these requirements would look like this:
            "name": "package",
            "command" : "tar zcvf foo.tar.gz foo",
            "materials": { 
-              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b",}
+              "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b"}
            },
            "products": {
-              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e",}
+              "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e"}
            },
            "byproducts":  {             
              "stdin": "",
@@ -1921,11 +1894,9 @@ A root.layout file that fulfills these requirements would look like this:
              }
          },
     "signatures" : [
-            { "keyid" : BOBS_KEYID,
+            { "keyid" : "BOBS_KEYID",
               "method" : "ed25519",
-              "sig" :
-              "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2
-              a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaedf1d5aa394df84890d7ace3"
+              "sig" : "aea92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
               }
         ]
     } 
