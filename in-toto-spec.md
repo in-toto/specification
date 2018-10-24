@@ -1092,11 +1092,11 @@ values.
          will recurse into that layout, starting from step 1. All the metadata
 relevant to that sub-layout should be contained in a subdirectory named after
 this step. 
-1. Matching rules are applied against the products and materials reported by
+1. Artifact rules are applied against the products and materials reported by
    each step as described by the algorithm in section 4.3.3.2.
 1. Inspection steps are executed, and the corresponding materials and products
    data structures are populated.
-1. Matching rules are applied against the products and materials reported by
+1. Artifact rules are applied against the products and materials reported by
    each inspection as described by the algorithm in section 4.3.3.2.
 
 ### 5.3 Supply chain examples
@@ -1273,7 +1273,7 @@ When Carl is verifying, his  installer will perform the following checks:
    Alice's).
 1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
    metadata file signed by the intended functionary.
-1. All the matching rules on every step match the rest of the
+1. All the artifact rules on every step match the rest of the
    `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
@@ -1508,7 +1508,7 @@ When Carl is verifying, his  installer will perform the following checks:
    and Alfred.
 1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
    metadata file signed by the intended functionary.
-1. All the matching rules on every step match the rest of the
+1. All the artifact rules on every step match the rest of the
    `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
