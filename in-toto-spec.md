@@ -346,7 +346,7 @@ the reference implementation, the tool performing this operation is
 ### 2.3 System workflow example
 
 To exemplify how these roles interact, we will describe a simple scenario. We
-provide more specific scenarios in section 5.1, after we have presented a more
+provide more specific scenarios in section 5.3, after we have presented a more
 thorough description of the framework.
 
 Consider a project owner, Alice, and her two functionaries, Diana and Bob.
@@ -745,7 +745,7 @@ destination step with the destination-path-prefix/pattern filter. For example,
 `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file foo, a
 product of the step `"compilation,"` must correspond to either a material or a
 product in this step (depending on where this artifact rule was listed).  More
-complex uses of the MATCH rule are presented in the examples of section 5.1.
+complex uses of the MATCH rule are presented in the examples of section 5.3.
 
 The `"IN <prefix>` clauses are optional, and they are used to match products
 and materials whose path differs from the one presented in the destination
