@@ -822,11 +822,17 @@ return consumed_artifacts
 ```
 
 
-##### 4.3.3.2 Verifying `expected_products` and `expected_materials`
+##### 4.3.3.2 Rule processing
 
-Rules inside the `"expected_products"` and `"expected_materials"` field are matched
-in the same way that a firewall behaves. Here, we describe an algorithm to
-illustrate the behavior of the rules being applied
+Artifact rules reside in the `"expected_products"` and `"expected_materials"`
+fields of a step and are applied sequentially on a queue of `"materials"` or
+`"products"` from the step's corresponding link metadata. They operate in a
+similar fashion as firewall rules do. This means if an artifact is successfully
+consumed by a rule, it is removed from the queue and cannot be consumed by
+subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
+list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
+artifact was not consumed by an earlier rule. Here, we describe an algorithm to
+illustrate the behavior of the rules being applied:
 
 ```python
 VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
@@ -836,19 +842,15 @@ artifacts = load_artifacts_as_queue(link)
 
 # iterate over all the rules
 for rule in rules:
-  matched_artifacts, rule_error = apply_rule(rule, artifacts)
+  consumed_artifacts, rule_error = apply_rule(rule, artifacts)
 
   if rule_error:
     return ERROR("Rule failed to verify!")
 
-  artifacts -= matched_artifacts
+  artifacts -= consumed_artifacts
 
 return SUCCESS
 ```
-
-This algorithm ensures that all the files have a rule that allows them to be
-there. Notice that these rules apply sequentially, so if there are two rules
-that apply to the same artifact, only the first one will be used.
 
 
 ### 4.4 File formats: `[name].[KEYID-PREFIX].link`
