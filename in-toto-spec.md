@@ -718,11 +718,11 @@ tool, in the same fashion as used to collect steps.
 #### 4.3.3 Artifact Rules
 
 Artifact rules are used to connect steps together through their materials or
-products. When connecting steps together,  in-toto allows the project owner to
-enforce the existence of certain artifacts within a step (e.g., the README can
-only be created in the create-documentation step) and authorize operations on
-artifacts (e.g., the compile step can use the materials from the checkout-vcs).
-The `ARTIFACT_RULE` format is the following:
+products. When connecting steps together, in-toto allows the project owner to
+enforce the existence of certain artifacts within a step (e.g., a "README.md" file can
+only be created in the "create-documentation" step) and authorize operations on
+artifacts (e.g., the "compile" step can use the materials from the "checkout-vcs" step).
+The artifact rule format is the following:
 
 ```bash
     {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> ||
@@ -735,33 +735,33 @@ The `ARTIFACT_RULE` format is the following:
 ```
 
 The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  "\*"). The
+reported in the link metadata, including bash-style wildcards (e.g.,  `"\*"`). The
 following rules can be specified for a step or inspection:
 
 * **MATCH**: indicates that the files filtered in using
-  source-path-prefix/pattern must be matched to a MATERIAL or PRODUCT  from a
-destination step with the destination-path-prefix/pattern filter. For example,
-`"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file foo, a
-product of the step `"compilation,"` must correspond to either a material or a
+  `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"` from a
+destination step with the `"destination-path-prefix/pattern"` filter. For example,
+`"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file `"foo"`, a
+product of the step `"compilation"`, must correspond to either a material or a
 product in this step (depending on where this artifact rule was listed).  More
-complex uses of the MATCH rule are presented in the examples of section 5.1.
+complex uses of the match rule are presented in the examples of section 5.1.
 
-The `"IN <prefix>` clauses are optional, and they are used to match products
+The `"IN <prefix>"` clauses are optional, and they are used to match products
 and materials whose path differs from the one presented in the destination
-step. This is the case of steps that relocate files as part of their tasks. For
-example MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation will ensure
-that the file lib/foo matches build/lib/foo from the compilation step.
+step. This is the case for steps that relocate files as part of their tasks. For
+example `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure
+that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 
 
-* **ALLOW**: indicates that the pattern appears as material or a product of
+* **ALLOW**: indicates that the pattern appears as a material or a product of
   this step.
-* **DISALLOW**: indicates that no files matching a pattern can appear as a
+* **DISALLOW**: indicates that no files matching the pattern can appear as a
   material or a product on this step.
 * **REQUIRE**: indicates that a pattern must appear as a material or product of
   this step.
-* **CREATE**: Indicates that products matched by the pattern must not appear as
+* **CREATE**: indicates that products matched by the pattern must not appear as
   materials of this step. Note, the rule still passes if the pattern does not
-match any products
+match any products.
 * **DELETE**: indicates that materials matched by the pattern must not appear
   as products of this step. Note, the rule still passes if the pattern does not
 match any materials.
@@ -773,18 +773,18 @@ The artifact rules contained in the `"expected_materials"` and
 `"expected_products"` fields operate in a similar fashion as firewall rules do.
 This means that the first rule that matches a specific artifact in the link
 metadata will be used to match that artifact. In addition, there is an implicit
-`ALLOW *` at the end of such fields.
+`"ALLOW *"` at the end of such fields.
 
 ##### 4.3.3.1 MATCH rule behavior
 
-The `MATCH` rule is used to tie different steps together, by means of their
-materials and products. The main rationale behind the MATCH rule is to identify
+The match rule is used to tie different steps together, by means of their
+materials and products. The main rationale behind the match rule is to identify
 the sources of artifacts as they are passed around in the supply chain. In this
-sense, the MATCH rule will be used to identify which step should be providing a
+sense, the match rule will be used to identify which step should be providing a
 material used in a step, as well as force products to match with products of
 previous steps.
 
-In order to ensure the correctness of the MATCH rule, it is important to
+In order to ensure the correctness of the match rule, it is important to
 describe the way it operates. To avoid any ambiguities, this will be done with
 the following pseudocode:
 
@@ -824,12 +824,12 @@ return SUCCESS
 
 Notice that if a source pattern does not match anything, verification will pass
 as long as no target artifact is matched either. To enforce that an artifact
-exists, the CREATE rule must be applied in the intended step.
+exists, the `"CREATE"` rule must be applied in the intended step.
 
 
 ##### 4.3.3.2 Verifying `expected_products` and `expected_materials`
 
-Rules inside the `expected_products` and `expected_materials` field are matched
+Rules inside the `"expected_products"` and `"expected_materials"` field are matched
 in the same way that a firewall behaves. Here, we describe an algorithm to
 illustrate the behavior of the rules being applied
 
