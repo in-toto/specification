@@ -7,6 +7,7 @@ https://in-toto.io
 Version 0.9
 
 ## 1 Introduction
+
 ### 1.1 Scope
 
 This document describes in-toto, a system for securing the way in which
@@ -190,7 +191,7 @@ for a step further down the chain (e.g., linking).
   persistent (e.g,. files), and are often meant to be used as materials on
 subsequent steps. Products are recorded as part of link metadata.
 * **Artifact**: a material or a product, as described above.
-* Byproducts: indirect results of carrying out a step, often used to verify
+* **Byproducts**: indirect results of carrying out a step, often used to verify
   that a step was performed correctly. A byproduct is information that will not
 be used as a material in a subsequent step, but may provide insight about the
 process. For example, the stdout, stdin and return values are common byproducts
@@ -345,7 +346,7 @@ the reference implementation, the tool performing this operation is
 ### 2.3 System workflow example
 
 To exemplify how these roles interact, we will describe a simple scenario. We
-provide more specific scenarios in section 5.1, after we have presented a more
+provide more specific scenarios in section 5.3, after we have presented a more
 thorough description of the framework.
 
 Consider a project owner, Alice, and her two functionaries, Diana and Bob.
@@ -744,7 +745,7 @@ destination step with the `"destination-path-prefix/pattern"` filter. For exampl
 `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file `"foo"`, a
 product of the step `"compilation"`, must correspond to either a material or a
 product in this step (depending on where this artifact rule was listed).  More
-complex uses of the match rule are presented in the examples of section 5.1.
+complex uses of the MATCH rule are presented in the examples of section 5.3.
 
 The `"IN <prefix>"` clauses are optional, and they are used to match products
 and materials whose path differs from the one presented in the destination
@@ -1451,7 +1452,7 @@ metadata:
     "command" : "python test.py",
     "materials": {
        "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
-        "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
+       "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
     },
     "products": { },
     "byproducts": {
