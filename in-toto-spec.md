@@ -738,7 +738,7 @@ The `"pattern"` value is a path-pattern that will be matched against paths
 reported in the link metadata, including bash-style wildcards (e.g.,  `"\*"`). The
 following rules can be specified for a step or inspection:
 
-* **MATCH**: indicates that the files filtered in using
+* **MATCH**: indicates that the artifacts filtered in using
   `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"` from a
 destination step with the `"destination-path-prefix/pattern"` filter. For example,
 `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file `"foo"`, a
@@ -753,27 +753,20 @@ example `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ens
 that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 
 
-* **ALLOW**: indicates that the pattern appears as a material or a product of
-  this step.
-* **DISALLOW**: indicates that no files matching the pattern can appear as a
-  material or a product on this step.
+* **ALLOW**: indicates that artifacts matched by the pattern are allowed as
+  materials or products of this step.
+* **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
+  as materials or products of this step.
 * **REQUIRE**: indicates that a pattern must appear as a material or product of
   this step.
 * **CREATE**: indicates that products matched by the pattern must not appear as
-  materials of this step. Note, the rule still passes if the pattern does not
-match any products.
+  materials of this step.
 * **DELETE**: indicates that materials matched by the pattern must not appear
-  as products of this step. Note, the rule still passes if the pattern does not
-match any materials.
-* **MODIFY**: indicates that the PATH's hash must be updated in this step. In
-  other words, this path must appear as a material and a product within this
-step and their hashes must not match.
+  as products of this step.
+* **MODIFY**: indicates that products matched by this pattern must appear as
+  materials of this step, and their hashes must not by the same.
 
-The artifact rules contained in the `"expected_materials"` and
-`"expected_products"` fields operate in a similar fashion as firewall rules do.
-This means that the first rule that matches a specific artifact in the link
-metadata will be used to match that artifact. In addition, there is an implicit
-`"ALLOW *"` at the end of such fields.
+
 
 ##### 4.3.3.1 MATCH rule behavior
 
