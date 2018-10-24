@@ -767,8 +767,39 @@ that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
   materials of this step, and their hashes must not by the same.
 
 
+##### 4.3.3.1 Rule processing
 
-##### 4.3.3.1 MATCH rule behavior
+Artifact rules reside in the `"expected_products"` and `"expected_materials"`
+fields of a step and are applied sequentially on a queue of `"materials"` or
+`"products"` from the step's corresponding link metadata. They operate in a
+similar fashion as firewall rules do. This means if an artifact is successfully
+consumed by a rule, it is removed from the queue and cannot be consumed by
+subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
+list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
+artifact was not consumed by an earlier rule. Here, we describe an algorithm to
+illustrate the behavior of the rules being applied:
+
+```python
+VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
+
+# load the artifacts from the link
+artifacts = load_artifacts_as_queue(link)
+
+# iterate over all the rules
+for rule in rules:
+  consumed_artifacts, rule_error = apply_rule(rule, artifacts)
+
+  if rule_error:
+    return ERROR("Rule failed to verify!")
+
+  artifacts -= consumed_artifacts
+
+return SUCCESS
+```
+
+
+
+##### 4.3.3.2 MATCH rule behavior
 
 The match rule is used to tie different steps together, by means of their
 materials and products. The main rationale behind the match rule is to identify
@@ -821,36 +852,6 @@ for artifact in source_artifacts_filtered:
 return consumed_artifacts
 ```
 
-
-##### 4.3.3.2 Rule processing
-
-Artifact rules reside in the `"expected_products"` and `"expected_materials"`
-fields of a step and are applied sequentially on a queue of `"materials"` or
-`"products"` from the step's corresponding link metadata. They operate in a
-similar fashion as firewall rules do. This means if an artifact is successfully
-consumed by a rule, it is removed from the queue and cannot be consumed by
-subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
-list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
-artifact was not consumed by an earlier rule. Here, we describe an algorithm to
-illustrate the behavior of the rules being applied:
-
-```python
-VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
-
-# load the artifacts from the link
-artifacts = load_artifacts_as_queue(link)
-
-# iterate over all the rules
-for rule in rules:
-  consumed_artifacts, rule_error = apply_rule(rule, artifacts)
-
-  if rule_error:
-    return ERROR("Rule failed to verify!")
-
-  artifacts -= consumed_artifacts
-
-return SUCCESS
-```
 
 
 ### 4.4 File formats: `[name].[KEYID-PREFIX].link`
