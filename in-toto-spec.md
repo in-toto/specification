@@ -772,7 +772,7 @@ that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 
 The match rule is used to tie different steps together, by means of their
 materials and products. The main rationale behind the match rule is to identify
-the sources of artifacts as they are passed around in the supply chain. In this
+the provenience of artifacts as they are passed around in the supply chain. In this
 sense, the match rule will be used to identify which step should be providing a
 material used in a step, as well as force products to match with products of
 previous steps.
@@ -799,25 +799,27 @@ for artifact in source_artifacts_filtered:
 for artifact in destination_artifacts_filtered:
   artifact.path -= rule.destination_in_clause
 
+# Create an empty list for consumed artifacts
+consumed_artifacts = []
+
 # compare both sets
 for artifact in source_artifacts_filtered:
   destination_artifact = find_artifact_by_path(destination_artifacts,
                                                 artifact.path)
   # the artifact with this path does not exist?
   if destination_artifact == NULL:
-    return FAIL
+    continue
 
   # are the files not the same?
   if destination_artifact.hash != artifact.hash:
-    return FAIL
+    continue
 
-# all of the files filtered by the source materials exist
-return SUCCESS
+  # Only if source and destination artifact match, will we mark it as consumed
+  add_to_consumed_artifacts(artifact)
+
+# Return consumed artifacts to modify the queue for further rule processing
+return consumed_artifacts
 ```
-
-Notice that if a source pattern does not match anything, verification will pass
-as long as no target artifact is matched either. To enforce that an artifact
-exists, the `"CREATE"` rule must be applied in the intended step.
 
 
 ##### 4.3.3.2 Verifying `expected_products` and `expected_materials`
