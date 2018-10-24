@@ -798,7 +798,6 @@ return SUCCESS
 ```
 
 
-
 ##### 4.3.3.2 MATCH rule behavior
 
 The match rule is used to tie different steps together, by means of their
@@ -853,6 +852,23 @@ return consumed_artifacts
 ```
 
 
+##### 4.3.3.3 DISALLOW rule behavior
+
+The disallow rule is the only rule that can error out of rule processing. If a
+disallow rule pattern finds any remaining files in the artifact queue it means
+that no prior rule has successfully consumed those artifacts, i.e. the
+artifacts were not authorized by any rule.
+
+```python
+DISALLOW(rule, artifacts)
+
+artifacts = filter(rule.pattern, artifacts)
+
+if artifacts
+  return ERROR
+
+return SUCCESS
+```
 
 ### 4.4 File formats: `[name].[KEYID-PREFIX].link`
 
