@@ -736,7 +736,7 @@ The artifact rule format is the following:
 ```
 
 The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  `"\*"`). The
+reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`). The
 following rules can be specified for a step or inspection:
 
 * **MATCH**: indicates that the artifacts filtered in using
