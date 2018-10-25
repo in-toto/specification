@@ -1108,11 +1108,11 @@ values.
 relevant to that sub-layout should be contained in a subdirectory named after
 this step. 
 1. Artifact rules are applied against the products and materials reported by
-   each step as described by the algorithm in section 4.3.3.2.
+   each step as described by the algorithm in section 4.3.3.1.
 1. Inspection steps are executed, and the corresponding materials and products
    data structures are populated.
 1. Artifact rules are applied against the products and materials reported by
-   each inspection as described by the algorithm in section 4.3.3.2.
+   each inspection as described by the algorithm in section 4.3.3.1.
 
 ### 5.3 Supply chain examples
 
