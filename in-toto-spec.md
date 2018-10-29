@@ -803,7 +803,7 @@ return SUCCESS
 
 The match rule is used to tie different steps together, by means of their
 materials and products. The main rationale behind the match rule is to identify
-the provenience of artifacts as they are passed around in the supply chain. In this
+the origins of artifacts as they are passed around in the supply chain. In this
 sense, the match rule will be used to identify which step should be providing a
 material used in a step, as well as force products to match with products of
 previous steps.
