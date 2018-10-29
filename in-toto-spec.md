@@ -719,11 +719,11 @@ tool, in the same fashion as used to collect steps.
 #### 4.3.3 Artifact Rules
 
 Artifact rules are used to connect steps together through their materials or
-products. When connecting steps together,  in-toto allows the project owner to
-enforce the existence of certain artifacts within a step (e.g., the README can
-only be created in the create-documentation step) and authorize operations on
-artifacts (e.g., the compile step can use the materials from the checkout-vcs).
-The `ARTIFACT_RULE` format is the following:
+products. When connecting steps together, in-toto allows the project owner to
+enforce the existence of certain artifacts within a step (e.g., a "README.md" file can
+only be created in the "create-documentation" step) and authorize operations on
+artifacts (e.g., the "compile" step can use the materials from the "checkout-vcs" step).
+The artifact rule format is the following:
 
 ```bash
     {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> ||
@@ -736,56 +736,79 @@ The `ARTIFACT_RULE` format is the following:
 ```
 
 The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  "\*"). The
+reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`). The
 following rules can be specified for a step or inspection:
 
-* **MATCH**: indicates that the files filtered in using
-  source-path-prefix/pattern must be matched to a MATERIAL or PRODUCT  from a
-destination step with the destination-path-prefix/pattern filter. For example,
-`"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file foo, a
-product of the step `"compilation,"` must correspond to either a material or a
+* **MATCH**: indicates that the artifacts filtered in using
+  `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"` from a
+destination step with the `"destination-path-prefix/pattern"` filter. For example,
+`"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file `"foo"`, a
+product of the step `"compilation"`, must correspond to either a material or a
 product in this step (depending on where this artifact rule was listed).  More
 complex uses of the MATCH rule are presented in the examples of section 5.3.
 
-The `"IN <prefix>` clauses are optional, and they are used to match products
+The `"IN <prefix>"` clauses are optional, and they are used to match products
 and materials whose path differs from the one presented in the destination
-step. This is the case of steps that relocate files as part of their tasks. For
-example MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation will ensure
-that the file lib/foo matches build/lib/foo from the compilation step.
+step. This is the case for steps that relocate files as part of their tasks. For
+example `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure
+that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 
 
-* **ALLOW**: indicates that the pattern appears as material or a product of
-  this step.
-* **DISALLOW**: indicates that no files matching a pattern can appear as a
-  material or a product on this step.
+* **ALLOW**: indicates that artifacts matched by the pattern are allowed as
+  materials or products of this step.
+* **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
+  as materials or products of this step.
 * **REQUIRE**: indicates that a pattern must appear as a material or product of
   this step.
-* **CREATE**: Indicates that products matched by the pattern must not appear as
-  materials of this step. Note, the rule still passes if the pattern does not
-match any products
+* **CREATE**: indicates that products matched by the pattern must not appear as
+  materials of this step.
 * **DELETE**: indicates that materials matched by the pattern must not appear
-  as products of this step. Note, the rule still passes if the pattern does not
-match any materials.
-* **MODIFY**: indicates that the PATH's hash must be updated in this step. In
-  other words, this path must appear as a material and a product within this
-step and their hashes must not match.
+  as products of this step.
+* **MODIFY**: indicates that products matched by this pattern must appear as
+  materials of this step, and their hashes must not by the same.
 
-The artifact rules contained in the `"expected_materials"` and
-`"expected_products"` fields operate in a similar fashion as firewall rules do.
-This means that the first rule that matches a specific artifact in the link
-metadata will be used to match that artifact. In addition, there is an implicit
-`ALLOW *` at the end of such fields.
 
-##### 4.3.3.1 MATCH rule behavior
+##### 4.3.3.1 Rule processing
 
-The `MATCH` rule is used to tie different steps together, by means of their
-materials and products. The main rationale behind the MATCH rule is to identify
-the sources of artifacts as they are passed around in the supply chain. In this
-sense, the MATCH rule will be used to identify which step should be providing a
+Artifact rules reside in the `"expected_products"` and `"expected_materials"`
+fields of a step and are applied sequentially on a queue of `"materials"` or
+`"products"` from the step's corresponding link metadata. They operate in a
+similar fashion as firewall rules do. This means if an artifact is successfully
+consumed by a rule, it is removed from the queue and cannot be consumed by
+subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
+list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
+artifact was not consumed by an earlier rule. Here, we describe an algorithm to
+illustrate the behavior of the rules being applied:
+
+```python
+VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
+
+# load the artifacts from the link
+artifacts = load_artifacts_as_queue(link)
+
+# iterate over all the rules
+for rule in rules:
+  consumed_artifacts, rule_error = apply_rule(rule, artifacts)
+
+  if rule_error:
+    return ERROR("Rule failed to verify!")
+
+  artifacts -= consumed_artifacts
+
+return SUCCESS
+```
+
+
+##### 4.3.3.2 MATCH rule behavior
+
+The match rule is used to tie different steps together, by means of their
+materials and products. The main rationale behind the match rule is to identify
+the origins of artifacts as they are passed around in the supply chain. In this
+sense, the match rule will be used to identify which step should be providing a
 material used in a step, as well as force products to match with products of
 previous steps.
 
-In order to ensure the correctness of the MATCH rule, it is important to
+In order to ensure the correctness of the match rule, it is important to
 describe the way it operates. To avoid any ambiguities, this will be done with
 the following pseudocode:
 
@@ -807,55 +830,46 @@ for artifact in source_artifacts_filtered:
 for artifact in destination_artifacts_filtered:
   artifact.path -= rule.destination_in_clause
 
+# Create an empty list for consumed artifacts
+consumed_artifacts = []
+
 # compare both sets
 for artifact in source_artifacts_filtered:
   destination_artifact = find_artifact_by_path(destination_artifacts,
                                                 artifact.path)
   # the artifact with this path does not exist?
   if destination_artifact == NULL:
-    return FAIL
+    continue
 
   # are the files not the same?
   if destination_artifact.hash != artifact.hash:
-    return FAIL
+    continue
 
-# all of the files filtered by the source materials exist
-return SUCCESS
+  # Only if source and destination artifact match, will we mark it as consumed
+  add_to_consumed_artifacts(artifact)
+
+# Return consumed artifacts to modify the queue for further rule processing
+return consumed_artifacts
 ```
 
-Notice that if a source pattern does not match anything, verification will pass
-as long as no target artifact is matched either. To enforce that an artifact
-exists, the CREATE rule must be applied in the intended step.
 
+##### 4.3.3.3 DISALLOW rule behavior
 
-##### 4.3.3.2 Verifying `expected_products` and `expected_materials`
-
-Rules inside the `expected_products` and `expected_materials` field are matched
-in the same way that a firewall behaves. Here, we describe an algorithm to
-illustrate the behavior of the rules being applied
+The disallow rule is the only rule that can error out of rule processing. If a
+disallow rule pattern finds any remaining files in the artifact queue it means
+that no prior rule has successfully consumed those artifacts, i.e. the
+artifacts were not authorized by any rule.
 
 ```python
-VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
+DISALLOW(rule, artifacts)
 
-# load the artifacts from the link
-artifacts = load_artifacts_as_queue(link)
+artifacts = filter(rule.pattern, artifacts)
 
-# iterate over all the rules
-for rule in rules:
-  matched_artifacts, rule_error = apply_rule(rule, artifacts)
-
-  if rule_error:
-    return ERROR("Rule failed to verify!")
-
-  artifacts -= matched_artifacts
+if artifacts
+  return ERROR
 
 return SUCCESS
 ```
-
-This algorithm ensures that all the files have a rule that allows them to be
-there. Notice that these rules apply sequentially, so if there are two rules
-that apply to the same artifact, only the first one will be used.
-
 
 ### 4.4 File formats: `[name].[KEYID-PREFIX].link`
 
@@ -1093,12 +1107,12 @@ values.
          will recurse into that layout, starting from step 1. All the metadata
 relevant to that sub-layout should be contained in a subdirectory named after
 this step. 
-1. Matching rules are applied against the products and materials reported by
-   each step as described by the algorithm in section 4.3.3.2.
+1. Artifact rules are applied against the products and materials reported by
+   each step as described by the algorithm in section 4.3.3.1.
 1. Inspection steps are executed, and the corresponding materials and products
    data structures are populated.
-1. Matching rules are applied against the products and materials reported by
-   each inspection as described by the algorithm in section 4.3.3.2.
+1. Artifact rules are applied against the products and materials reported by
+   each inspection as described by the algorithm in section 4.3.3.1.
 
 ### 5.3 Supply chain examples
 
@@ -1274,7 +1288,7 @@ When Carl is verifying, his  installer will perform the following checks:
    Alice's).
 1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
    metadata file signed by the intended functionary.
-1. All the matching rules on every step match the rest of the
+1. All the artifact rules on every step match the rest of the
    `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
@@ -1509,7 +1523,7 @@ When Carl is verifying, his  installer will perform the following checks:
    and Alfred.
 1. Every step in the layout has a corresponding `[name].[keyid-prefix].link`
    metadata file signed by the intended functionary.
-1. All the matching rules on every step match the rest of the
+1. All the artifact rules on every step match the rest of the
    `[name].[keyid-prefix].link` metadata files.
 
 Finally, inspection steps are run on the client side. In this case, the tarball
