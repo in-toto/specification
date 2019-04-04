@@ -25,8 +25,8 @@ The in-toto community has toyed with the idea of formalizing two ITE's so far:
 1. resource-type identifiers for artifacts: a way to represent artifacts that
    go beyond files, such as Docker containers, SPDX metadata and OCIv2 images.
    Although it is possible to secure artifacts of this nature already, a richer
-   language will allow integrators to further introspect in the artifacts
-   created, consumed and modified.
+   language will allow integrators to further introspect the artifacts created,
+   consumed and modified.
 2. A TUF+in-toto recommendation ITE. We want to allow integrators to refer to a
    document that can simplify the deployment of both technologies together with
    meaningful security guarantees. Batteries included.
@@ -36,7 +36,7 @@ The in-toto community has toyed with the idea of formalizing two ITE's so far:
 
 The in-toto specification drives the behavior of all of our implementations,
 yet 100% compliance is not yet achieved by all of them. This year we will focus
-efforts on making sure that the existing implementations have follow
+efforts on making sure that the existing implementations follow the
 specification to the word. 
 
 ## Maturing of existing sub-projects
@@ -89,5 +89,5 @@ We intend to review the progress done in these efforts on these time windows.
 - End of August
 - End of November
 
-These time windows will also be used update all stakeholders the status of the
-in-toto project.
+These time windows will also be used to update all stakeholders with the status
+of the in-toto project.
