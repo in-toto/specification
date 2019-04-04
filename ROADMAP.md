@@ -69,7 +69,7 @@ containerd/runc to intelligently handle container resource-types.
 We intend to move the GPG components to securesystemslib and standardize this as
 either a TAP or an ITE so our sister project, TUF can benefit from GPG support.
 
-# Apt transport and rebuilders
+### Apt transport and rebuilders
 
 An in-toto transport method for apt to verify the reproducibility of Debian
 packages before their installation using link metadata from custom rebuilders,
