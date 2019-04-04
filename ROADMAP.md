@@ -30,14 +30,13 @@ The in-toto community has toyed with the idea of formalizing two ITE's so far:
 2. A TUF+in-toto recommendation ITE. We want to allow integrators to refer to a
    document that can simplify the deployment of both technologies together with
    meaningful security guarantees. Batteries included.
-   
-   
+
 ## Tighter spec compliance
 
 The in-toto specification drives the behavior of all of our implementations,
 yet 100% compliance is not yet achieved by all of them. This year we will focus
 efforts on making sure that the existing implementations follow the
-specification to the word. 
+specification to the word.
 
 ## Maturing of existing sub-projects
 
@@ -80,7 +79,7 @@ This calls for promoting the project to the related community and finding
 packagers for the transport as well as its dependencies, in-toto and
 securesystemslib. Furthermore, we intend to make the in-toto rebuilders more
 robust and better document their usage, so that independent organizations can
-easily provide evidence of reproducibility. 
+easily provide evidence of reproducibility.
 
 # Roadmap review schedule
 
