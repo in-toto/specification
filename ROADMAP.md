@@ -3,7 +3,7 @@ Roadmap
 
 This document spans the Roadmap for the in-toto project for the time window
 from April 2019 to April 2020. The main theme of this year's efforts are
-focused on cross-implementation interoperability, two ITE proposals, tigher
+focused on cross-implementation interoperability, two ITE proposals, tighter
 spec compliance checks and maturing of the existing sub-projects.
 
 ## Cross-implementation interoperability
@@ -22,10 +22,10 @@ more thorough integration test harness.
 
 The in-toto community has toyed with the idea of formalizing two ITE's so far:
 
-1. resource-type identifiers for artifactss: a way to represent artifacts that
+1. resource-type identifiers for artifacts: a way to represent artifacts that
    go beyond files, such as Docker containers, SPDX metadata and OCIv2 images.
    Although it is possible to secure artifacts of this nature already, a richer
-   langauge will allow integrators to further introspect in the artifacts
+   language will allow integrators to further introspect in the artifacts
    created, consumed and modified.
 2. A TUF+in-toto recommendation ITE. We want to allow integrators to refer to a
    document that can simplify the deployment of both technologies together with
@@ -48,7 +48,7 @@ at least the following components:
 ### Jenkins plugin
 
 The official Jenkins plugin is already usable, yet some features like
-stdin/stdout registration are desireable, other environment information is
+stdin/stdout registration are desirable, other environment information is
 worth having.
 
 This also calls for a more mature Java implementation, with higher test
@@ -66,7 +66,7 @@ containerd/runc to intelligently handle container resource-types.
 
 ### GPG support
 
-We intend to move the GPG components to securesystemslib and standarize this as
+We intend to move the GPG components to securesystemslib and standardize this as
 either a TAP or an ITE so our sister project, TUF can benefit from GPG support.
 
 # Apt transport and rebuilders
@@ -79,12 +79,12 @@ from the Debian community.
 This calls for promoting the project to the related community and finding
 packagers for the transport as well as its dependencies, in-toto and
 securesystemslib. Furthermore, we intend to make the in-toto rebuilders more
-robust and better document their usage, so that independent organziations can
+robust and better document their usage, so that independent organizations can
 easily provide evidence of reproducibility. 
 
 # Roadmap review schedule
 
-We indtend to review the progress done in this efforts on these time windows.
+We intend to review the progress done in these efforts on these time windows.
 
 - End of August
 - End of November
