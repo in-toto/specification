@@ -22,7 +22,7 @@ more thorough integration test harness.
 
 The in-toto community has toyed with the idea of formalizing two ITE's so far:
 
-1. resource-type identifiers for artifacts: a way to represent artifacts that
+1. resource-type identifiers for artifacts. A way to represent artifacts that
    go beyond files, such as Docker containers, SPDX metadata and OCIv2 images.
    Although it is possible to secure artifacts of this nature already, a richer
    language will allow integrators to further introspect the artifacts created,
