@@ -1,850 +1,853 @@
 {
-    "_type": "Link",
-    "byproducts": {
-        "stderr": "",
-        "stdout": ""
-    },
-    "command": [
-        "tar",
-        "xf",
-        "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz"
-    ],
-    "materials": {
-        "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz": {
-            "sha256": "87d1d193917b41a96e8c69b5df268a5ac044f3b892b3392a472daef8c94adae3"
-        }
-    },
-    "name": "dummy-untar-linux-base-installer",
-    "products": {
-        "seattle/install.sh": {
-            "sha256": "ca523d1ca5b331278fc4eb7a09c0296314b00dd7d90e47e90dee3d7572fe73ea"
-        },
-        "seattle/seattle_repy/BandwidthClient.py": {
-            "sha256": "3538c302e2412d095c15cd00b1b85f68af6b42cff0a624aa53dc560cc0341770"
-        },
-        "seattle/seattle_repy/BandwidthServer.py": {
-            "sha256": "3369ef9eaf7e7ce02c304c55699738c0a6a6c21dcc1e053b7e10875f9d5dc4ff"
-        },
-        "seattle/seattle_repy/LICENSE": {
-            "sha256": "95fd62575bd6de09864bce5286e3654989ef4be834e039e92f5b6b3e533069f2"
-        },
-        "seattle/seattle_repy/LICENSE.txt": {
-            "sha256": "c349ed2c887cc4798462516fb3fbeea19e4f8dcf81444983006ef7e15d876de9"
-        },
-        "seattle/seattle_repy/Linux_resources.py": {
-            "sha256": "b2520913a0a27ae6c716190fa3f4c23a3b02fc174da99b816c90f20acf57dfb6"
-        },
-        "seattle/seattle_repy/Mac_BSD_resources.py": {
-            "sha256": "a56e6e1725f22d4b055b9a9bd5e7e6a349a1a18b180992c42563936d4c7f9e3f"
-        },
-        "seattle/seattle_repy/README.txt": {
-            "sha256": "6a72741a949dba40179472a93c7b458f7cfd38f2261baf131712b9139ebaa921"
-        },
-        "seattle/seattle_repy/Win_WinCE_resources.py": {
-            "sha256": "137856aac0ca9b6c1116ffb19c39cc355ce4734afe97911a39e1664698ea16af"
-        },
-        "seattle/seattle_repy/advertise.r2py": {
-            "sha256": "30b979fa11919eb7adbdf931788cbba28e7cc4210e172ba8ae7468a3fff6570a"
-        },
-        "seattle/seattle_repy/advertise_objects.r2py": {
-            "sha256": "f76eee0a4b595335c7894d8db26cddb4574bcaac652f5d8f3154dbad16e791e7"
-        },
-        "seattle/seattle_repy/advertisepipe.r2py": {
-            "sha256": "8ca0f7c2fca8fb481ae87bc4f0b1c0843ff05626dd9c5315593675d23c59e37b"
-        },
-        "seattle/seattle_repy/advertiseserver_v2.r2py": {
-            "sha256": "51952a3c7c025017c9ee1d53a27c96b2ba8e57d559a16682d0dbff914cc508d6"
-        },
-        "seattle/seattle_repy/affix_exceptions.r2py": {
-            "sha256": "809ff340dffb0972797844fb956a53ff3d26418180553ff13ee4fa81db0a6bc3"
-        },
-        "seattle/seattle_repy/affix_repy_network_api_wrapper.r2py": {
-            "sha256": "dc1e91306e28dfb40d21ceb6de82b6cffff207c9fca36f3e2c2d613d35e3ce4c"
-        },
-        "seattle/seattle_repy/affix_stack.r2py": {
-            "sha256": "97b147a4f3cf2bda14486def2af8d06fe96208747b239ad8c36d73efceb72e7c"
-        },
-        "seattle/seattle_repy/affix_wrapper_lib.r2py": {
-            "sha256": "9f225939d3507c90a58ae8a6157f254390612d78e94c72d67ebe56375e193bfe"
-        },
-        "seattle/seattle_repy/appveyor.yml": {
-            "sha256": "8d9eab5b578723043ce354bcadc3fcb2695a39b964f68a6601ac2f911a1108ef"
-        },
-        "seattle/seattle_repy/argparse.r2py": {
-            "sha256": "a1057faa6631c8077c427a6a961899f44c7222dc00ba16bf905ba0e1401a01f9"
-        },
-        "seattle/seattle_repy/bandwidthestimator.py": {
-            "sha256": "3ecad05235f2365757e563b7be346d82395bfee1f62a6e1cfaa8ca447e35aa74"
-        },
-        "seattle/seattle_repy/base64.r2py": {
-            "sha256": "ff0b77447dd36cb203cf03afdbd2d1aaeab8c9e8a3831c0416a04c74b0873b7d"
-        },
-        "seattle/seattle_repy/baseaffix.r2py": {
-            "sha256": "8b21380dc7a25403b279c077ff9d326ea4a0a4f73f84737f0675b9452b46ad13"
-        },
-        "seattle/seattle_repy/benchmark_resources.py": {
-            "sha256": "d946a632e798fa058fa48b5a0c546beb7d32a92c4dd87e26013a204a7ee9b053"
-        },
-        "seattle/seattle_repy/binascii.r2py": {
-            "sha256": "729964fc206911c840ca0b7eeb3c56336ce41c79356121cd6c4417f06b5f3119"
-        },
-        "seattle/seattle_repy/cachedadvertise.r2py": {
-            "sha256": "4624d52ee5e255a34a579ddc5a3101abb62600326d463258d8bdf041bee3af34"
-        },
-        "seattle/seattle_repy/canihear.r2py": {
-            "sha256": "fb5e95a2b921160d2446e38003280a0b49b71ff83214b12c76c8db845a9bf888"
-        },
-        "seattle/seattle_repy/centralizedadvertise.r2py": {
-            "sha256": "07a57fb9a6c7cf4eb1bd0b719118fb30da7f15177ef3ff9df457d77c5efb23b0"
-        },
-        "seattle/seattle_repy/centralizedadvertise_v2.r2py": {
-            "sha256": "0c7e2c67c185b086fe99bf725acf055e1893f6581c1e615809765cc5c8ffb1f9"
-        },
-        "seattle/seattle_repy/checkpythonversion.py": {
-            "sha256": "a978bf704f044e62f505e378cf75562734355b7c80ad89d524090b279553349b"
-        },
-        "seattle/seattle_repy/command_callbacks.py": {
-            "sha256": "101faf751df38a354326dae31b271d78b3fdb27656ca4ffe98aa25600958d6cc"
-        },
-        "seattle/seattle_repy/convert_print_to_log.sh": {
-            "sha256": "b55271b5dba40fcaa181179ed7cb1a3eaa9d12d6b32c113f4e4eeb4d0f27b444"
-        },
-        "seattle/seattle_repy/coordinationaffix.r2py": {
-            "sha256": "faa278cbb71d2d046fd8aa6db3c6fd20dbbe553d47b258f75bb6033a74b7ff98"
-        },
-        "seattle/seattle_repy/create_installer_state.py": {
-            "sha256": "f4ad6f93f9038c551554f89598340d01ee5bc18549983273e49085c98d3b8f8f"
-        },
-        "seattle/seattle_repy/createnodekeys.py": {
-            "sha256": "5d141d27611917360f67f6b0169e9422d1b60fc629e09c15602a3a371a344df0"
-        },
-        "seattle/seattle_repy/cv.r2py": {
-            "sha256": "ef41d888cf4f96c5d09058322776d49a19f1993e0b47c8aa422106821f3e1224"
-        },
-        "seattle/seattle_repy/daemon.py": {
-            "sha256": "2ccad0e68aaa6d31f6445b45fc5129aabd52db799e7babeb2d768cd31a77878b"
-        },
-        "seattle/seattle_repy/darwin_api.py": {
-            "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
-        },
-        "seattle/seattle_repy/deserialize.r2py": {
-            "sha256": "17ed7598d71f82d0397a0a9757a86592363f5826147c227e16336a92bf70b82a"
-        },
-        "seattle/seattle_repy/determine_threading_environ.py": {
-            "sha256": "083e4d950a81c8a1aece65f416b05d8862e44ea6a5fb888e2bba3158246e249e"
-        },
-        "seattle/seattle_repy/dnscommon.r2py": {
-            "sha256": "278fc5cfe19c084501b7d49ac5fc9b8b4b62f82ac150cfe12eef3710cee3b8fa"
-        },
-        "seattle/seattle_repy/domainnameinfo.r2py": {
-            "sha256": "51bfb899a75375bb1c18db1a242d94c9aa8385247329f7b06d6ead851f44f9ee"
-        },
-        "seattle/seattle_repy/doradvertise.r2py": {
-            "sha256": "2131244fbbfe91c6f65e0cdeb689d0c5b715540d4e4d23a0d58e1cc27dbc56ab"
-        },
-        "seattle/seattle_repy/dylink.r2py": {
-            "sha256": "225d3ff14735246bb8113c298c352524608ac7dc3770d67fe6af354b6157b484"
-        },
-        "seattle/seattle_repy/dylink_r2py.py": {
-            "sha256": "4a4a39fcdf0672943121c5074b3bfb0ca6f7b35a0b5f5b3e1156ca28b5964eb5"
-        },
-        "seattle/seattle_repy/emulcomm.py": {
-            "sha256": "97db5585c7df4ca1a855c67030b303aac9d45c33dac53235c346a7ae0171d208"
-        },
-        "seattle/seattle_repy/emulfile.py": {
-            "sha256": "f1f1f2e7cf503be193c849402a09dbe2efb4c072451f7739fbdc8c9c193704b9"
-        },
-        "seattle/seattle_repy/emulmisc.py": {
-            "sha256": "65c5c3a11497dff9fbf1d3e7bb1f11fc10b16fbd7e905dab63cffa9be45299c8"
-        },
-        "seattle/seattle_repy/emultimer.py": {
-            "sha256": "7da8bf8195cbad1fa801b0a184d5b78b9e437cc108b90cb2fcb37bedc82524c7"
-        },
-        "seattle/seattle_repy/encasementlib.r2py": {
-            "sha256": "03ae785befa9598689cd609b14ed43beee6471431ac873e93abfed1ea84b8f76"
-        },
-        "seattle/seattle_repy/encoding_header.py": {
-            "sha256": "13e6367f0f06775fb462296639fc8d0aa1fee6ec493c3802b8b42ffdefdc951e"
-        },
-        "seattle/seattle_repy/exception_hierarchy.py": {
-            "sha256": "13f09a6c5368ddf3e0b62d8c64a92705689758a75d41b86e34a7306e44f50d95"
-        },
-        "seattle/seattle_repy/experimentlib.r2py": {
-            "sha256": "3efede9b7e9cbaf2a9c0577049b83bafd7d69476e2d8b59a036ebe972521e437"
-        },
-        "seattle/seattle_repy/fakelinecache.py": {
-            "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
-        },
-        "seattle/seattle_repy/fastnmclient.py": {
-            "sha256": "95c83178417aecbf0faa087ea1ba67e86d0eb7afc80f03daf3954afb2c413a54"
-        },
-        "seattle/seattle_repy/fastsigneddata.py": {
-            "sha256": "4b3560c04fac47a37a16d5fba9644c8a31917e1b220b5dfa318924c586c08262"
-        },
-        "seattle/seattle_repy/freebsd_api.py": {
-            "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
-        },
-        "seattle/seattle_repy/freebsd_kinfo.py": {
-            "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
-        },
-        "seattle/seattle_repy/generatekeys.py": {
-            "sha256": "f35e64eab099eb5bba922ce6133765245f16c19e2a934df9e21072015763f3d8"
-        },
-        "seattle/seattle_repy/geoip_client.r2py": {
-            "sha256": "d652bd3117f7715de27e0bc2c223e0b956b5479a0a76386ce4e32ed8d7c9e569"
-        },
-        "seattle/seattle_repy/getvesselresources.r2py": {
-            "sha256": "2329b3e2e73706f7f73a7bcb02f2b5e93ebeb2ed5e2d1326ad10e1c773b4a038"
-        },
-        "seattle/seattle_repy/harshexit.py": {
-            "sha256": "f2065d260e9675567ef0f6c371ee7d9953f8cdb17913d304c12ef6ab84a18c31"
-        },
-        "seattle/seattle_repy/httpretrieve.r2py": {
-            "sha256": "7497266fd0cf8f271c6bbd4ecc09bf5975f979a1afe0413f9f543efe9072b392"
-        },
-        "seattle/seattle_repy/httpserver.r2py": {
-            "sha256": "fc77939c356cfc8ee618cd4a3157732c784e21cc83665cab026ea4d8a492e68e"
-        },
-        "seattle/seattle_repy/idhelper.py": {
-            "sha256": "d86ec8f59cf760598532e175859c1c8030c413045aa3488b8952e5638ae18205"
-        },
-        "seattle/seattle_repy/install.sh": {
-            "sha256": "c19261c52ab0f8535e9fc8c8f93bb190eada8ac55aa049b3a5faf95ed33a3e66"
-        },
-        "seattle/seattle_repy/librepy.r2py": {
-            "sha256": "387a18e690f40020cb8047a5ba39491fe4476059a3dd183d9336c5f688900d84"
-        },
-        "seattle/seattle_repy/librepyfile.r2py": {
-            "sha256": "139c8b1aad5a1a15047684cbf2cdc918cf1877e10b24845e39285f8bb3726105"
-        },
-        "seattle/seattle_repy/librepyrandom.r2py": {
-            "sha256": "fb56b4a90b3d9ffddda87ff13c9b55fab5d98a287c0d14cb3c4d36666a26fbdb"
-        },
-        "seattle/seattle_repy/librepyrunloop.r2py": {
-            "sha256": "df44529ad938dc08a50171c420a258445578c2ed4009c8ffb06b810dfbdd1718"
-        },
-        "seattle/seattle_repy/librepysocket.r2py": {
-            "sha256": "428fa3f0db524e1859849a94ed74b4e894ca585267d8496d63a88e723969a004"
-        },
-        "seattle/seattle_repy/librepythread.r2py": {
-            "sha256": "c6a41251a70af0c56a9152f89940949df45456ef7dca1a49da01aa2095f2a6c5"
-        },
-        "seattle/seattle_repy/linux_api.py": {
-            "sha256": "d3ce556d9211f2b9ecb0174fae82c1177c1165a32d82673b08063c5ca3bc0c05"
-        },
-        "seattle/seattle_repy/listops.r2py": {
-            "sha256": "27698671e32cbc0895590d1234da9203e92348f5ba7f064d0ae5536286a2139b"
-        },
-        "seattle/seattle_repy/loggingaffix.r2py": {
-            "sha256": "01d5d07c952fc9212cb7ed7f9bcf695ca1a5e0ea6c2e27d78387ac4bafe52ca5"
-        },
-        "seattle/seattle_repy/loggingrepy.py": {
-            "sha256": "767eb44beeef6046c1e4bad99c9a9bf18f2ac077772cec6a42c8cebcce566104"
-        },
-        "seattle/seattle_repy/loggingrepy_core.py": {
-            "sha256": "3a77270e4f6021244da3540433ac1376a1282bfa6ba01ecf197af0fc5de7a153"
-        },
-        "seattle/seattle_repy/makemehearaffix.r2py": {
-            "sha256": "80efbd2f7ee37db70caeb6d889e69a4348c1dffc05819f8c3545f6afdf6d299d"
-        },
-        "seattle/seattle_repy/manifest.txt": {
-            "sha256": "c1854793b08f0ae4cfe39e9f0c0dd36eb4e8b4dcd763f44e0da425dcafb7f2d6"
-        },
-        "seattle/seattle_repy/math.r2py": {
-            "sha256": "c9c07bc11435f157cc879775ec88286ebc18bb42d8672c0cd07568a290c59cbf"
-        },
-        "seattle/seattle_repy/md5py.r2py": {
-            "sha256": "d0cc94873faadb20ca9d89f7089452f53ad3c4e67082014a5e4c53421ccd0853"
-        },
-        "seattle/seattle_repy/measure_random.py": {
-            "sha256": "c5c776faea79193cb032a9589d745b0e410ef86020d8e80aa69371f2cbbdbd58"
-        },
-        "seattle/seattle_repy/measuredisk.py": {
-            "sha256": "d08d7aa19641cbea46cf6e7e61c734a9a2fcbb8ffc138e5fe3e911ad2245e58e"
-        },
-        "seattle/seattle_repy/modules/clearinghouse/__init__.py": {
-            "sha256": "7fe86b6a18cee894b67138ff78bd4ec3df2782b5411d6ab6d8a3feac8b3fcbe1"
-        },
-        "seattle/seattle_repy/modules/clearinghouse/clearinghouse.py": {
-            "sha256": "a8fe9f1b18f49826d20ab50ce8ed6affe4bc5f00baa209aae796fbb2516905a9"
-        },
-        "seattle/seattle_repy/modules/clearinghouse/command_callbacks.py": {
-            "sha256": "d06b7a0a48843cdfdb96aadd59c340ef895b56aaef6c9b901ec96abdcbd4e483"
-        },
-        "seattle/seattle_repy/modules/factoids/__init__.py": {
-            "sha256": "71747f096a4179fb3157e614500d0538e2dc2ac9915cab989188ff9c8eabc620"
-        },
-        "seattle/seattle_repy/modules/factoids/factoid.txt": {
-            "sha256": "6e1427f3f5acb2909b32d42fb269b9801ee756e68d67152741feb003e3d402c5"
-        },
-        "seattle/seattle_repy/modules/geoip/__init__.py": {
-            "sha256": "1b3dbea9ace30583cc2b8ba1ff4c193429e646cea793f881490d03f95d4d233e"
-        },
-        "seattle/seattle_repy/modules/modules/__init__.py": {
-            "sha256": "ad461435721c9cd51954fe13fa2a237fa597821f7a8d4ce1f272e4ea1ee77099"
-        },
-        "seattle/seattle_repy/modules/modules/command_callbacks.py": {
-            "sha256": "047ccd738e8ef7b880f0ad69b6b8422475f3e709f3550cb73992ee94863ca0d9"
-        },
-        "seattle/seattle_repy/modules/variables/__init__.py": {
-            "sha256": "8a318f0546b699b0ba6fa6565ab1cfdf4e8e21a6e7edf2b1c18fe591080d5b0d"
-        },
-        "seattle/seattle_repy/multiplexer.r2py": {
-            "sha256": "5247b9cc1b6daca2f41d4645371e44ec03e084df9474a319d5396e328d97b448"
-        },
-        "seattle/seattle_repy/namespace.py": {
-            "sha256": "12c5ad61a3c87cc06d5c2025510e692dccd1cd789169de39bf78355e3e12b8be"
-        },
-        "seattle/seattle_repy/namingandresolveraffix.r2py": {
-            "sha256": "69bf371378133cf1437c7b3dea83454974389b1fdd1b26344f906f6a03e6ea42"
-        },
-        "seattle/seattle_repy/nanny.py": {
-            "sha256": "75b9cf036daca0904447f1993dcf6a78ded020110cc4abd71f195d95212cc0ad"
-        },
-        "seattle/seattle_repy/nat_advertisement.r2py": {
-            "sha256": "8ea67fa5b0d9d98662efab028dd7f0ef6b2de926dc9fd3e54aa236fcc8c6932f"
-        },
-        "seattle/seattle_repy/natlayer_rpc.r2py": {
-            "sha256": "5a75fb48ef8fd32e6f16a2e0273f976b6033524713264b95e4b37e870df91044"
-        },
-        "seattle/seattle_repy/nix_common_api.py": {
-            "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
-        },
-        "seattle/seattle_repy/nmAPI.py": {
-            "sha256": "ceb1cf85ec85ef1997106b31fc6b3f9e04eba5be6054e700a65338cdcbe7b0b3"
-        },
-        "seattle/seattle_repy/nmadvertise.py": {
-            "sha256": "f2eebb32abe69cd8934713118e9085dc27c7236ae53615b2c4b3c03cf6142e5f"
-        },
-        "seattle/seattle_repy/nmclient.r2py": {
-            "sha256": "6e111c753df5cd630b9fec8f03c253b79a3dc5b3c4c52fe65930c594a89e8ea7"
-        },
-        "seattle/seattle_repy/nmconnectionmanager.py": {
-            "sha256": "937342a072963e33fe7326b0fd84e3a9ba451f4469c5f4970b4c9c02f6661d6a"
-        },
-        "seattle/seattle_repy/nminit.py": {
-            "sha256": "8c48e384489f4ffc36c67983ce1faf7a80a3e7eb154234d41caa5db37b82fbd4"
-        },
-        "seattle/seattle_repy/nmmain.py": {
-            "sha256": "94ce0048af56b2ed49ceb7867ed769a41cf90f3a54a6d5e113c880f1956fa191"
-        },
-        "seattle/seattle_repy/nmrequesthandler.py": {
-            "sha256": "f31fd6228e0acb522c02b90bf623f101f9620bca7d1b3b1a0f9c3b3362b43768"
-        },
-        "seattle/seattle_repy/nmresourcemath.py": {
-            "sha256": "38f3bb801fdda4914a73102c5aa0b3167150a4cd67004933ada4424b34299900"
-        },
-        "seattle/seattle_repy/nmrestrictionsprocessor.py": {
-            "sha256": "1b937cdb8c30b8c29dd64deb4c3978ca45451be4746221ef88a5ef87fa9cd267"
-        },
-        "seattle/seattle_repy/nmstatusinterface.py": {
-            "sha256": "9a0cb18d762264d805553f56f77802c58756a8bd447d1bb60f92de07593659b2"
-        },
-        "seattle/seattle_repy/nmstatusmonitor.py": {
-            "sha256": "02f21c8701338c01f80f10c0af7b2e274bb075bd2d297b13095eccbcb4eca5ef"
-        },
-        "seattle/seattle_repy/nmthreadingerror.py": {
-            "sha256": "6e2a79c2c5d61b1d46411e3f48296c6010e679b48e08fceb1da5fb96e1ccf4bb"
-        },
-        "seattle/seattle_repy/nodeman.cfg": {
-            "sha256": "c17ddb8ebe773868479f1482fd12efa8bdcd100c88a195d43e6daaabbe3d1ab7"
-        },
-        "seattle/seattle_repy/nonportable.py": {
-            "sha256": "4e3ad1fc2f0aad83ffc112008a0e40669afdacadc7d1ec8fd5274d5d3cbb7598"
-        },
-        "seattle/seattle_repy/noopaffix.r2py": {
-            "sha256": "9767bf14a38ff02fb7123e52dc25e9c8c6a0bf95bb56e332cbca70be38caa325"
-        },
-        "seattle/seattle_repy/ntp_time.r2py": {
-            "sha256": "c6afd06ffb1e558d12f8b4f5774cc25d0615877550d5b5c3c8dfc8ba369a7f6a"
-        },
-        "seattle/seattle_repy/opendhtadvertise.r2py": {
-            "sha256": "c6d78fec32ee1fb4b471b0d540d66126e44d422e954b93ed56ecd91f9fa14160"
-        },
-        "seattle/seattle_repy/parallelize.r2py": {
-            "sha256": "4733c3014d34abdeb4a37711a37b5cb3d2eeb5b6dc7839b06ecb1fea1dbf43aa"
-        },
-        "seattle/seattle_repy/persist.py": {
-            "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
-        },
-        "seattle/seattle_repy/portable_popen.py": {
-            "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
-        },
-        "seattle/seattle_repy/priority_queue.r2py": {
-            "sha256": "a48ad9eeaf7d547baaf4f3b994ca2d211956a1009f0b1926875058989a4f4bda"
-        },
-        "seattle/seattle_repy/py_BandwidthClient.py": {
-            "sha256": "254c538954784d77d5e112df7a1e080bdcc7a603bd71ae2aaf5da5dd3fdc65c8"
-        },
-        "seattle/seattle_repy/py_BandwidthServer.py": {
-            "sha256": "b84b66a62a0588c0531d985cf4c2f85f2bf110322a3c70ff037506147a2367c8"
-        },
-        "seattle/seattle_repy/pycryptorsa.r2py": {
-            "sha256": "1514a99ec7fd66c490369ec18141ee74cb1f5bf33779fbdbf9dc34c6c9a9d21d"
-        },
-        "seattle/seattle_repy/pydes.r2py": {
-            "sha256": "90aea5ecd95a76225e2d109a9fa2687d9e957c9a770f5d0d9f4deb67932d44a7"
-        },
-        "seattle/seattle_repy/random.r2py": {
-            "sha256": "ea738753d2879a2ca890f9f6e7cd50572eb50e20ce85040f569c599529dfdf80"
-        },
-        "seattle/seattle_repy/readline.so.mac": {
-            "sha256": "ecdbe3a0d185adfdc8863b1bcf385c1490212758fe7a2996670be2d9fda7ed8c"
-        },
-        "seattle/seattle_repy/readline_windows.py": {
-            "sha256": "045124de3ac863802217af87fb23a0377ba240882e98e48958acafff55083c53"
-        },
-        "seattle/seattle_repy/registerhttpcallback.r2py": {
-            "sha256": "89aa23559e0d2766f340cb06797ef49924bf68d48e7ac0940fd5438b14cca05a"
-        },
-        "seattle/seattle_repy/repy.py": {
-            "sha256": "803514dfd12dead8654b1ea4796952f864bd3b3d35c3e87e3c2d3f8eb1e3706c"
-        },
-        "seattle/seattle_repy/repyV1/checkpythonversion.py": {
-            "sha256": "e7d59f9fe55cfbeecae0a2cda6710db517e3a1ec58fe94bd5e24071f6b1453b7"
-        },
-        "seattle/seattle_repy/repyV1/darwin_api.py": {
-            "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
-        },
-        "seattle/seattle_repy/repyV1/emulcomm.py": {
-            "sha256": "d888b50de794405ddaab1ee8e4ab2b2b98355dd75bb3d43c7b6dbe931021787c"
-        },
-        "seattle/seattle_repy/repyV1/emulfile.py": {
-            "sha256": "c3f100e73b288c7a98f464dbf0d48854dc3a68970a33f7728e438bcb3903cd56"
-        },
-        "seattle/seattle_repy/repyV1/emulmisc.py": {
-            "sha256": "effbd70bbaab644370d14977a9ec29e5dda60a958ea2eeae574c1a196216a068"
-        },
-        "seattle/seattle_repy/repyV1/emultimer.py": {
-            "sha256": "4562dc3759c0c230dc386e041a439f17876875ab218a9c4cee5722fa2b7f28cf"
-        },
-        "seattle/seattle_repy/repyV1/fakelinecache.py": {
-            "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
-        },
-        "seattle/seattle_repy/repyV1/freebsd_api.py": {
-            "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
-        },
-        "seattle/seattle_repy/repyV1/freebsd_kinfo.py": {
-            "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
-        },
-        "seattle/seattle_repy/repyV1/harshexit.py": {
-            "sha256": "67e187513d2b560ccf2f805d78bac9b5c78aa4884177be94030389ef6ede3a2b"
-        },
-        "seattle/seattle_repy/repyV1/idhelper.py": {
-            "sha256": "7281fd181fe7f789b2d46911487467637c06d54d966158b39c8a9493106e876a"
-        },
-        "seattle/seattle_repy/repyV1/linux_api.py": {
-            "sha256": "c1c50a8d0ec7063560be9d10251e1c59dc836dedab827aedf5fe91fdc7a082f6"
-        },
-        "seattle/seattle_repy/repyV1/loggingrepy.py": {
-            "sha256": "53839f13f8448bd50660b8450d2f6b2c61fda322e97919ca3226af98be0fd6e9"
-        },
-        "seattle/seattle_repy/repyV1/loggingrepy_core.py": {
-            "sha256": "e7437350f6c9a71f31b26c901bb42acab1e99c23ad785743095bfb4700ecac73"
-        },
-        "seattle/seattle_repy/repyV1/misc.py": {
-            "sha256": "7cf3bdca0c7811608d82431b12c1e2e4bf7b12d2f7b9846704d0fbfeb0621cfd"
-        },
-        "seattle/seattle_repy/repyV1/namespace.py": {
-            "sha256": "24dda39500e4e8330719174b03a5c2cc30e3336b8aa9c849e483b36859b9d031"
-        },
-        "seattle/seattle_repy/repyV1/nanny.py": {
-            "sha256": "706c09523312b584464e0b76ebf5a5ca4a5945f682603fbf82dd9b3ffbd98267"
-        },
-        "seattle/seattle_repy/repyV1/nanny_resource_limits.py": {
-            "sha256": "222d67cfd354c94ba399633cb2ca341ced09a2507e222e07c7075033be8df2f4"
-        },
-        "seattle/seattle_repy/repyV1/nix_common_api.py": {
-            "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
-        },
-        "seattle/seattle_repy/repyV1/nmstatusinterface.py": {
-            "sha256": "27d2655af8978e921e7d4cde581d5764669691b3106e175b5cb8bea82bbad4d8"
-        },
-        "seattle/seattle_repy/repyV1/nonportable.py": {
-            "sha256": "dc0131fd3c93e45f0d6d3afece9e08db86e0f85c240e0c7c8e309fb00332afcb"
-        },
-        "seattle/seattle_repy/repyV1/persist.py": {
-            "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
-        },
-        "seattle/seattle_repy/repyV1/portable_popen.py": {
-            "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
-        },
-        "seattle/seattle_repy/repyV1/repy.py": {
-            "sha256": "e0c67cc1b5b154023c5df58fce26f831f1146a47b682226d0729b0af12cd1d8f"
-        },
-        "seattle/seattle_repy/repyV1/repy_constants.py": {
-            "sha256": "50fa416eb43afb123b631949c7884d013337559be6e6ad2d8f364b2a0df5fd36"
-        },
-        "seattle/seattle_repy/repyV1/restrictions.py": {
-            "sha256": "dac4458aa8922a4afcdd8278f52a9954e5d2ca6b15bff1e82f6d8f345f618eab"
-        },
-        "seattle/seattle_repy/repyV1/safe.py": {
-            "sha256": "09cd31f5dd4212acc79e87cc32ddacc596113ec8a4bde2610f769e3363d5ef5a"
-        },
-        "seattle/seattle_repy/repyV1/safe_check.py": {
-            "sha256": "f0bb3303119e1aa30cb5cc342cad891ba61eb6ed6b7685f4cae188bd2759e1d8"
-        },
-        "seattle/seattle_repy/repyV1/safety_exceptions.py": {
-            "sha256": "86af242f8815cd2655f59b1f1c629d3df0ed6723d243840aa0a194ecb4b311fc"
-        },
-        "seattle/seattle_repy/repyV1/statusstorage.py": {
-            "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
-        },
-        "seattle/seattle_repy/repyV1/tracebackrepy.py": {
-            "sha256": "7355815c7215ffcf91aedcde3716d7057dc1f038ab5773298e630f278ca0124a"
-        },
-        "seattle/seattle_repy/repyV1/virtual_namespace.py": {
-            "sha256": "75ee32a495454b86f0592a9bafd18f73e748500b0fa089a9b5798df5bdc30980"
-        },
-        "seattle/seattle_repy/repyV1/win_cpu_nanny.py": {
-            "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
-        },
-        "seattle/seattle_repy/repyV1/windows_api.py": {
-            "sha256": "83ed1f52cde40f9aa021136eb7a56477dbb71993378ceac6c7542d8ab177b954"
-        },
-        "seattle/seattle_repy/repyV2/appveyor.yml": {
-            "sha256": "8d9eab5b578723043ce354bcadc3fcb2695a39b964f68a6601ac2f911a1108ef"
-        },
-        "seattle/seattle_repy/repyV2/checkpythonversion.py": {
-            "sha256": "a978bf704f044e62f505e378cf75562734355b7c80ad89d524090b279553349b"
-        },
-        "seattle/seattle_repy/repyV2/darwin_api.py": {
-            "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
-        },
-        "seattle/seattle_repy/repyV2/dylink.r2py": {
-            "sha256": "225d3ff14735246bb8113c298c352524608ac7dc3770d67fe6af354b6157b484"
-        },
-        "seattle/seattle_repy/repyV2/emulcomm.py": {
-            "sha256": "97db5585c7df4ca1a855c67030b303aac9d45c33dac53235c346a7ae0171d208"
-        },
-        "seattle/seattle_repy/repyV2/emulfile.py": {
-            "sha256": "f1f1f2e7cf503be193c849402a09dbe2efb4c072451f7739fbdc8c9c193704b9"
-        },
-        "seattle/seattle_repy/repyV2/emulmisc.py": {
-            "sha256": "65c5c3a11497dff9fbf1d3e7bb1f11fc10b16fbd7e905dab63cffa9be45299c8"
-        },
-        "seattle/seattle_repy/repyV2/emultimer.py": {
-            "sha256": "7da8bf8195cbad1fa801b0a184d5b78b9e437cc108b90cb2fcb37bedc82524c7"
-        },
-        "seattle/seattle_repy/repyV2/encoding_header.py": {
-            "sha256": "13e6367f0f06775fb462296639fc8d0aa1fee6ec493c3802b8b42ffdefdc951e"
-        },
-        "seattle/seattle_repy/repyV2/exception_hierarchy.py": {
-            "sha256": "13f09a6c5368ddf3e0b62d8c64a92705689758a75d41b86e34a7306e44f50d95"
-        },
-        "seattle/seattle_repy/repyV2/fakelinecache.py": {
-            "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
-        },
-        "seattle/seattle_repy/repyV2/freebsd_api.py": {
-            "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
-        },
-        "seattle/seattle_repy/repyV2/freebsd_kinfo.py": {
-            "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
-        },
-        "seattle/seattle_repy/repyV2/harshexit.py": {
-            "sha256": "f2065d260e9675567ef0f6c371ee7d9953f8cdb17913d304c12ef6ab84a18c31"
-        },
-        "seattle/seattle_repy/repyV2/idhelper.py": {
-            "sha256": "d86ec8f59cf760598532e175859c1c8030c413045aa3488b8952e5638ae18205"
-        },
-        "seattle/seattle_repy/repyV2/linux_api.py": {
-            "sha256": "d3ce556d9211f2b9ecb0174fae82c1177c1165a32d82673b08063c5ca3bc0c05"
-        },
-        "seattle/seattle_repy/repyV2/loggingrepy.py": {
-            "sha256": "767eb44beeef6046c1e4bad99c9a9bf18f2ac077772cec6a42c8cebcce566104"
-        },
-        "seattle/seattle_repy/repyV2/loggingrepy_core.py": {
-            "sha256": "3a77270e4f6021244da3540433ac1376a1282bfa6ba01ecf197af0fc5de7a153"
-        },
-        "seattle/seattle_repy/repyV2/namespace.py": {
-            "sha256": "12c5ad61a3c87cc06d5c2025510e692dccd1cd789169de39bf78355e3e12b8be"
-        },
-        "seattle/seattle_repy/repyV2/nanny.py": {
-            "sha256": "75b9cf036daca0904447f1993dcf6a78ded020110cc4abd71f195d95212cc0ad"
-        },
-        "seattle/seattle_repy/repyV2/nix_common_api.py": {
-            "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
-        },
-        "seattle/seattle_repy/repyV2/nmstatusinterface.py": {
-            "sha256": "9a0cb18d762264d805553f56f77802c58756a8bd447d1bb60f92de07593659b2"
-        },
-        "seattle/seattle_repy/repyV2/nonportable.py": {
-            "sha256": "4e3ad1fc2f0aad83ffc112008a0e40669afdacadc7d1ec8fd5274d5d3cbb7598"
-        },
-        "seattle/seattle_repy/repyV2/persist.py": {
-            "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
-        },
-        "seattle/seattle_repy/repyV2/portable_popen.py": {
-            "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
-        },
-        "seattle/seattle_repy/repyV2/repy.py": {
-            "sha256": "803514dfd12dead8654b1ea4796952f864bd3b3d35c3e87e3c2d3f8eb1e3706c"
-        },
-        "seattle/seattle_repy/repyV2/repy_constants.py": {
-            "sha256": "a80bd7a1a5dcb776d79565b4d148efcf6ccf8c8396c65d4046272186a6f50857"
-        },
-        "seattle/seattle_repy/repyV2/repyhelper.py": {
-            "sha256": "f9439edc3a2689b3e6382eccaf97e48d7fcdca51db73f023be76b6d7fbeb0444"
-        },
-        "seattle/seattle_repy/repyV2/repyportability.py": {
-            "sha256": "3ea8e0ad30bd2f2afacd533a4ce8329b287fdf3cb7e12aea6d87b4cf859e6cfa"
-        },
-        "seattle/seattle_repy/repyV2/resource_constants.py": {
-            "sha256": "98c4d1db057e85ad37bfd33ef28b81b2dd17577edee76cfebcd684b43476065e"
-        },
-        "seattle/seattle_repy/repyV2/resourcemanipulation.py": {
-            "sha256": "e4c92d18519f6acb2f9a53b9031195fa7a7feec087059ca848d7a32497c6d4d0"
-        },
-        "seattle/seattle_repy/repyV2/safe.py": {
-            "sha256": "b36b0951163d5d8c936248e4b1e395ec6c538fa097e61143b5548c64d0c41438"
-        },
-        "seattle/seattle_repy/repyV2/safe_check.py": {
-            "sha256": "2c269579ebddda74a5ef7741029b09b464c9bed134136750dcaa79768f8699b9"
-        },
-        "seattle/seattle_repy/repyV2/servicelogger.py": {
-            "sha256": "ef629a8e08150c6d93f4cb59bd27a47af25ea8efa7e0946cc148d186041c5ef5"
-        },
-        "seattle/seattle_repy/repyV2/statusstorage.py": {
-            "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
-        },
-        "seattle/seattle_repy/repyV2/textops.py": {
-            "sha256": "2234cce888144ccf5d6b81926713837b1a6612e8d95aa98b2e0ec07faca7d24a"
-        },
-        "seattle/seattle_repy/repyV2/tracebackrepy.py": {
-            "sha256": "3641f4d65f077405c835f19563ce36b309eb8f6afdf115fda4c21b0aee0da0bc"
-        },
-        "seattle/seattle_repy/repyV2/virtual_namespace.py": {
-            "sha256": "01c7754a549f4d148b865a5a32146124a13383c4556d600e92a5884a2caedb9d"
-        },
-        "seattle/seattle_repy/repyV2/win_cpu_nanny.py": {
-            "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
-        },
-        "seattle/seattle_repy/repyV2/windows_api.py": {
-            "sha256": "ffbf30714032555d696f64d65268ebdc0b0db4c8a2261d173187893d295d2dfe"
-        },
-        "seattle/seattle_repy/repy_constants.py": {
-            "sha256": "a80bd7a1a5dcb776d79565b4d148efcf6ccf8c8396c65d4046272186a6f50857"
-        },
-        "seattle/seattle_repy/repyhelper.py": {
-            "sha256": "f9439edc3a2689b3e6382eccaf97e48d7fcdca51db73f023be76b6d7fbeb0444"
-        },
-        "seattle/seattle_repy/repyportability.py": {
-            "sha256": "3ea8e0ad30bd2f2afacd533a4ce8329b287fdf3cb7e12aea6d87b4cf859e6cfa"
-        },
-        "seattle/seattle_repy/repypp.py": {
-            "sha256": "61946e6690179f5e54f6550e960cf3a9c60bece7cf3e2b1b83aa767a281fdb6c"
-        },
-        "seattle/seattle_repy/repyunit.r2py": {
-            "sha256": "e441f1c5ac7aaf133e48593840e7d02e115d06f5a4f112818f2d21d38cde9e0b"
-        },
-        "seattle/seattle_repy/resource_constants.py": {
-            "sha256": "98c4d1db057e85ad37bfd33ef28b81b2dd17577edee76cfebcd684b43476065e"
-        },
-        "seattle/seattle_repy/resourcemanipulation.py": {
-            "sha256": "e4c92d18519f6acb2f9a53b9031195fa7a7feec087059ca848d7a32497c6d4d0"
-        },
-        "seattle/seattle_repy/resources.offcut": {
-            "sha256": "f129f2ff52e60e431100cf8c487b29a05e82af5371690e07835f9e32edc42d49"
-        },
-        "seattle/seattle_repy/restrictions.default": {
-            "sha256": "91a2cbb2e8d9386786e362580935e6c1bd65c0ca266496141d19cdfffc2b11e0"
-        },
-        "seattle/seattle_repy/restrictions.tcp_relay": {
-            "sha256": "91a2cbb2e8d9386786e362580935e6c1bd65c0ca266496141d19cdfffc2b11e0"
-        },
-        "seattle/seattle_repy/rhizoma.mix": {
-            "sha256": "1b572b9f740de500d65a80c92ebc30bc58b633387e12e08573f74033be8bd6f5"
-        },
-        "seattle/seattle_repy/rsa.r2py": {
-            "sha256": "0ede3de548992f81f31414fc6e28fda7866913b58d0e6a7b9aea01151617a2c8"
-        },
-        "seattle/seattle_repy/runonce.py": {
-            "sha256": "b7ad9c05915e2a1e9532cb85288a36bf86daaf5d190c078c8f4faad0542f68cc"
-        },
-        "seattle/seattle_repy/safe.py": {
-            "sha256": "b36b0951163d5d8c936248e4b1e395ec6c538fa097e61143b5548c64d0c41438"
-        },
-        "seattle/seattle_repy/safe_check.py": {
-            "sha256": "2c269579ebddda74a5ef7741029b09b464c9bed134136750dcaa79768f8699b9"
-        },
-        "seattle/seattle_repy/safe_eval.r2py": {
-            "sha256": "aec23614759b0e6cb2e49c68a598d36de7052aed9c0a5cac37320f0ec6bf79fc"
-        },
-        "seattle/seattle_repy/seash.py": {
-            "sha256": "1cdd9f6fbdea49cef93e0df1ea3c7df598e9e077113012a15f724af8437e2af8"
-        },
-        "seattle/seattle_repy/seash_dictionary.py": {
-            "sha256": "96c1d81bdfd1c711ad4fe2f3e1b92335365cbfb5cdbf2e1e2b86ab607b6e6fc0"
-        },
-        "seattle/seattle_repy/seash_exceptions.py": {
-            "sha256": "63bccf4a8782dbeea76392b3631bb3c612ca9ea8f49b3ba7942d2c7fb3bf98b2"
-        },
-        "seattle/seattle_repy/seash_global_variables.py": {
-            "sha256": "6806beb8895c0f72c03bda3494c4fdf4412be7deff5910f96ddd44f13024a614"
-        },
-        "seattle/seattle_repy/seash_helper.py": {
-            "sha256": "e23b4457ef8e425f38ac2fe09982ff8c28782418cbbbe0a685ac12560db41874"
-        },
-        "seattle/seattle_repy/seash_modules.py": {
-            "sha256": "577455d9494eec1fc821f3d4c7c46030c56c4243a36e8850e4d0d47f1a1509b1"
-        },
-        "seattle/seattle_repy/seattleclearinghouse_xmlrpc.py": {
-            "sha256": "c82996d2b06711cf0171cbad6c937503c52b02eb59f7fb0812fac846b349353d"
-        },
-        "seattle/seattle_repy/seattleinstaller.py": {
-            "sha256": "07afffa65338b22e73082f569d1a803d24b7452703d45659494a13f28c6cff7d"
-        },
-        "seattle/seattle_repy/seattleuninstaller.py": {
-            "sha256": "196048760269785f3aaf17a581edb35175bf19aa9fc8189a0141ff81aff1a2cf"
-        },
-        "seattle/seattle_repy/secureadvertise_client.r2py": {
-            "sha256": "4ba270869112b9ded3f609804701f7f50523485d0072e7ad0abc7934bf8b6894"
-        },
-        "seattle/seattle_repy/secureadvertise_server.r2py": {
-            "sha256": "c070bfec13df89d0c04d35fbfec1cf119198d73c8523dc1170635d6277320663"
-        },
-        "seattle/seattle_repy/secureclient.r2py": {
-            "sha256": "1117f11f52f0c02f9f7df8876652dac1f5b20b0d3695e0e2e811f76ed0fd7067"
-        },
-        "seattle/seattle_repy/semaphore.r2py": {
-            "sha256": "df1ea0f9cdcb8172e36cf6b32e6abee0e0f994533e9ed5b515b38fdef64f9e5f"
-        },
-        "seattle/seattle_repy/serialize.r2py": {
-            "sha256": "ada677c3f96655c1db99c739f7ccd9fdd1177d555ef2a350eaa999b8fd5a0bca"
-        },
-        "seattle/seattle_repy/servicelogger.py": {
-            "sha256": "ef629a8e08150c6d93f4cb59bd27a47af25ea8efa7e0946cc148d186041c5ef5"
-        },
-        "seattle/seattle_repy/servicelookup.r2py": {
-            "sha256": "d305ce15ef2918f38f317f2ea6d6a8fe1999bd79389a8b9748850956ae92e11e"
-        },
-        "seattle/seattle_repy/session.r2py": {
-            "sha256": "1c5d9a0810d9d08c729b07dc24935f48e99338ec0e708e1378bec32798c90d4c"
-        },
-        "seattle/seattle_repy/sha.r2py": {
-            "sha256": "83b807f8f6b6abe337db175d2d4867806a53895d576a1cb1da7b8a2ee5627016"
-        },
-        "seattle/seattle_repy/signeddata.r2py": {
-            "sha256": "685c04ad799321dc08dea3efa2df4af6162e3cfac6537c3ecf0266b95501449f"
-        },
-        "seattle/seattle_repy/sockettimeout.r2py": {
-            "sha256": "23b9f3b539349b1b3b08fd2f3e49781c0063e07fbdaedb70fbecb39aaaf9a85b"
-        },
-        "seattle/seattle_repy/softwareupdater.py": {
-            "sha256": "805499d90edbb66f8ff213675e397eef459c49d98bda5b44a9f3b54a059b0d42"
-        },
-        "seattle/seattle_repy/sshkey.r2py": {
-            "sha256": "efe5c2683cffb4e13a450defdddc8cd9ff183ea2469a13c7afcfd36f466eaa21"
-        },
-        "seattle/seattle_repy/sshkey_paramiko.r2py": {
-            "sha256": "8f6218522670d50100d3f6a4a528e5fd7cab117e5de18fcefef3d69fd5ee0fd9"
-        },
-        "seattle/seattle_repy/start_seattle.sh": {
-            "sha256": "b89af2480a1d1e119dccd2314bc8f5bed64e2e10caf7c12cbfb57f8e9ecbd697"
-        },
-        "seattle/seattle_repy/statusstorage.py": {
-            "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
-        },
-        "seattle/seattle_repy/stop_all_seattle_processes.py": {
-            "sha256": "86e3829f0ca8de18224bb11681f515b5f300c867f6d18ed133fc3f97e78f5e86"
-        },
-        "seattle/seattle_repy/stop_seattle.sh": {
-            "sha256": "0b0405a9a0933501f389e6d5985cb9f09cc09aa6ab42a322b6a13d5520b406c2"
-        },
-        "seattle/seattle_repy/strace.py": {
-            "sha256": "fa8082418b09925749cd0d8051dd59939da7e35739cb20d587b7f2c171112c78"
-        },
-        "seattle/seattle_repy/tab_completer.py": {
-            "sha256": "abd2980129f0bd405772d61c626cf3f9432f0ac054604f1562d344d32107fc0b"
-        },
-        "seattle/seattle_repy/tcp_relay.r2py": {
-            "sha256": "c4fbf90294ce38ceaca21def1560d2fd2d9b0ceadd500ae70d1a2bec73cdd031"
-        },
-        "seattle/seattle_repy/tcp_relay_common_lib.r2py": {
-            "sha256": "539d8b61fba988aeb942d4357c395a9d9b7ffa41accd3411a1bce80b38d4b01f"
-        },
-        "seattle/seattle_repy/tcp_time.r2py": {
-            "sha256": "9e09c592233f4c55a4b77715cac850596a45b4327bb9d23b33028e49c7d4d1a5"
-        },
-        "seattle/seattle_repy/tcprelayaffix.r2py": {
-            "sha256": "6cc52e112b031b713986f5f719ac042f28a0f7b365e7fcfee65a58f29207b1ba"
-        },
-        "seattle/seattle_repy/textops.py": {
-            "sha256": "2234cce888144ccf5d6b81926713837b1a6612e8d95aa98b2e0ec07faca7d24a"
-        },
-        "seattle/seattle_repy/time.r2py": {
-            "sha256": "c65063a9edd6a1ea1c9320059d5824d2719d98c5655c5a16728b60d1f08101ab"
-        },
-        "seattle/seattle_repy/time_interface.r2py": {
-            "sha256": "23a8550286e2e7bbef8ffe45569436cc66858a4a1b77675748aa035948a5647c"
-        },
-        "seattle/seattle_repy/timeout_xmlrpclib.py": {
-            "sha256": "55edaf6b257d417d2ae30b415ef6068b321e97178b8c1b95f6425610c3d5a493"
-        },
-        "seattle/seattle_repy/tracebackrepy.py": {
-            "sha256": "3641f4d65f077405c835f19563ce36b309eb8f6afdf115fda4c21b0aee0da0bc"
-        },
-        "seattle/seattle_repy/udpcentralizedadvertise.r2py": {
-            "sha256": "ccbea752619a01a80d2577628ef10855724cbb1a74dc7be01fd429ceb29b18e2"
-        },
-        "seattle/seattle_repy/uninstall.sh": {
-            "sha256": "5e77cfc483cc068b961cb420fa6c1cd76702b1eaa94e6419cf436d6dfd09a536"
-        },
-        "seattle/seattle_repy/uniqueid.r2py": {
-            "sha256": "13a04b67c55209d7ee5e8915847573177ddf51a0e071e629fdc8af73066d1c89"
-        },
-        "seattle/seattle_repy/urllib.r2py": {
-            "sha256": "901d9e933fa0f85d60c6f10049ab05281748d020ae8fc4972be045d8be9cf1f5"
-        },
-        "seattle/seattle_repy/urlparse.r2py": {
-            "sha256": "e69eadb512ca25e083dbda94b0402a6ed905dcb8131b355fcaae273438044848"
-        },
-        "seattle/seattle_repy/vessel.restrictions": {
-            "sha256": "74fb08287753dd56b3dc96e4b9d8fa7511df7bd344c41b24e8707d39f7da6a31"
-        },
-        "seattle/seattle_repy/virtual_namespace.py": {
-            "sha256": "01c7754a549f4d148b865a5a32146124a13383c4556d600e92a5884a2caedb9d"
-        },
-        "seattle/seattle_repy/win_cpu_nanny.py": {
-            "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
-        },
-        "seattle/seattle_repy/windows_api.py": {
-            "sha256": "ffbf30714032555d696f64d65268ebdc0b0db4c8a2261d173187893d295d2dfe"
-        },
-        "seattle/seattle_repy/wrapper.r2py": {
-            "sha256": "c7525c95cbd30202ce5c3379b2636bcf25cfcdb0f2748badda108f2b0c35ee5a"
-        },
-        "seattle/seattle_repy/writemetainfo.py": {
-            "sha256": "32e2157348130ba4fe50d6f1cdab8ede568cd5c37fd36fb1877b15b9a49e8d77"
-        },
-        "seattle/seattle_repy/xmlparse.r2py": {
-            "sha256": "aa1bcb4394e4bb51334a1a31651896f19221f8aa0aaccad362ffdc86a9bf3eb7"
-        },
-        "seattle/seattle_repy/xmlrpc_client.r2py": {
-            "sha256": "63d09aa85f53cb421a9ea267345593b591e9bbadf76864f4103dca07c4e7cf02"
-        },
-        "seattle/seattle_repy/xmlrpc_common.r2py": {
-            "sha256": "a89fd2f3e80dde6e9ba24cb151447862fbb87a247a3516251200377414c5a589"
-        },
-        "seattle/seattle_repy/xmlrpc_server.r2py": {
-            "sha256": "0fe598b53d75f74c184981fc3dc2ea9fe2783c0905af53c018c900601052c086"
-        },
-        "seattle/start_seattle.sh": {
-            "sha256": "5eba75b2940dd3e62293050399fd24547a5202b04ae607a7b2d824657b76b66c"
-        },
-        "seattle/stop_seattle.sh": {
-            "sha256": "ffc8f44a6da4e0b6871a6a32d1ee6534b6257f5474a516191ceffa9de4e527ec"
-        },
-        "seattle/uninstall.sh": {
-            "sha256": "01670d7c23fc8c996232ccec27c0f8406380e06dc783965e4d353a7647ee3277"
-        }
-    },
-    "return_value": 0,
-    "signatures": [
-        {
-            "keyid": "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5",
-            "method": "RSASSA-PSS",
-            "sig": "aa05b3773b3cad3a1d70b7ae43fd37f168a59c7e65b24affe81dae0a290981e10e01f55421cd98396fe2fc8b23dbb0862ab5412703357064a47e3cf72a900ed8763bcb234ac0f443b660e6b0aa3e4fd90fa6a284abdb0ce534d6a893c9ce76376e48db1c7c542c7865fffb247aabbdecddaff29eb71786093279e91d1d548ddee08527d47c08a15a5be95c688e108f1416edaf6cd96979193fab1feebf8a470b121fd2fb38fd108831eb91982cccbceb1845f643796fe3d1e6f00bff2f7ce9aa9229dea01deff2b469c95f8b23cbd1420017d436c69d001cac86feb7fb1d0e36524578cadd1c0d6523ef466418c9c4376917bf515296a2c54ea16582db70d742af0aa06727b63750ac0b331c3d4f95dd3e669dc599bed9f0ffd037199d23f6530f9658e20294d3f5b5dc3ccaf685392774ccadbe3931ac7030c3cf9ca4cd89492babcafc76c7285e6b44ad93a00f92cca50e10464e97594f2ebd140167ff4883aa8d0336592f8bfbc2ca8dff41167f34f532711c7685028a4cdcbda8f12c7c23"
-        }
-    ]
+ "signatures": [
+  {
+   "keyid": "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5",
+   "method": "RSASSA-PSS",
+   "sig": "aa05b3773b3cad3a1d70b7ae43fd37f168a59c7e65b24affe81dae0a290981e10e01f55421cd98396fe2fc8b23dbb0862ab5412703357064a47e3cf72a900ed8763bcb234ac0f443b660e6b0aa3e4fd90fa6a284abdb0ce534d6a893c9ce76376e48db1c7c542c7865fffb247aabbdecddaff29eb71786093279e91d1d548ddee08527d47c08a15a5be95c688e108f1416edaf6cd96979193fab1feebf8a470b121fd2fb38fd108831eb91982cccbceb1845f643796fe3d1e6f00bff2f7ce9aa9229dea01deff2b469c95f8b23cbd1420017d436c69d001cac86feb7fb1d0e36524578cadd1c0d6523ef466418c9c4376917bf515296a2c54ea16582db70d742af0aa06727b63750ac0b331c3d4f95dd3e669dc599bed9f0ffd037199d23f6530f9658e20294d3f5b5dc3ccaf685392774ccadbe3931ac7030c3cf9ca4cd89492babcafc76c7285e6b44ad93a00f92cca50e10464e97594f2ebd140167ff4883aa8d0336592f8bfbc2ca8dff41167f34f532711c7685028a4cdcbda8f12c7c23"
+  }
+ ],
+ "signed": {
+  "_type": "link",
+  "byproducts": {
+   "return_value": 0,
+   "stderr": "",
+   "stdout": ""
+  },
+  "command": [
+   "tar",
+   "xf",
+   "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz"
+  ],
+  "environment": {},
+  "materials": {
+   "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz": {
+    "sha256": "87d1d193917b41a96e8c69b5df268a5ac044f3b892b3392a472daef8c94adae3"
+   }
+  },
+  "name": "dummy-untar-linux-base-installer",
+  "products": {
+   "seattle/install.sh": {
+    "sha256": "ca523d1ca5b331278fc4eb7a09c0296314b00dd7d90e47e90dee3d7572fe73ea"
+   },
+   "seattle/seattle_repy/BandwidthClient.py": {
+    "sha256": "3538c302e2412d095c15cd00b1b85f68af6b42cff0a624aa53dc560cc0341770"
+   },
+   "seattle/seattle_repy/BandwidthServer.py": {
+    "sha256": "3369ef9eaf7e7ce02c304c55699738c0a6a6c21dcc1e053b7e10875f9d5dc4ff"
+   },
+   "seattle/seattle_repy/LICENSE": {
+    "sha256": "95fd62575bd6de09864bce5286e3654989ef4be834e039e92f5b6b3e533069f2"
+   },
+   "seattle/seattle_repy/LICENSE.txt": {
+    "sha256": "c349ed2c887cc4798462516fb3fbeea19e4f8dcf81444983006ef7e15d876de9"
+   },
+   "seattle/seattle_repy/Linux_resources.py": {
+    "sha256": "b2520913a0a27ae6c716190fa3f4c23a3b02fc174da99b816c90f20acf57dfb6"
+   },
+   "seattle/seattle_repy/Mac_BSD_resources.py": {
+    "sha256": "a56e6e1725f22d4b055b9a9bd5e7e6a349a1a18b180992c42563936d4c7f9e3f"
+   },
+   "seattle/seattle_repy/README.txt": {
+    "sha256": "6a72741a949dba40179472a93c7b458f7cfd38f2261baf131712b9139ebaa921"
+   },
+   "seattle/seattle_repy/Win_WinCE_resources.py": {
+    "sha256": "137856aac0ca9b6c1116ffb19c39cc355ce4734afe97911a39e1664698ea16af"
+   },
+   "seattle/seattle_repy/advertise.r2py": {
+    "sha256": "30b979fa11919eb7adbdf931788cbba28e7cc4210e172ba8ae7468a3fff6570a"
+   },
+   "seattle/seattle_repy/advertise_objects.r2py": {
+    "sha256": "f76eee0a4b595335c7894d8db26cddb4574bcaac652f5d8f3154dbad16e791e7"
+   },
+   "seattle/seattle_repy/advertisepipe.r2py": {
+    "sha256": "8ca0f7c2fca8fb481ae87bc4f0b1c0843ff05626dd9c5315593675d23c59e37b"
+   },
+   "seattle/seattle_repy/advertiseserver_v2.r2py": {
+    "sha256": "51952a3c7c025017c9ee1d53a27c96b2ba8e57d559a16682d0dbff914cc508d6"
+   },
+   "seattle/seattle_repy/affix_exceptions.r2py": {
+    "sha256": "809ff340dffb0972797844fb956a53ff3d26418180553ff13ee4fa81db0a6bc3"
+   },
+   "seattle/seattle_repy/affix_repy_network_api_wrapper.r2py": {
+    "sha256": "dc1e91306e28dfb40d21ceb6de82b6cffff207c9fca36f3e2c2d613d35e3ce4c"
+   },
+   "seattle/seattle_repy/affix_stack.r2py": {
+    "sha256": "97b147a4f3cf2bda14486def2af8d06fe96208747b239ad8c36d73efceb72e7c"
+   },
+   "seattle/seattle_repy/affix_wrapper_lib.r2py": {
+    "sha256": "9f225939d3507c90a58ae8a6157f254390612d78e94c72d67ebe56375e193bfe"
+   },
+   "seattle/seattle_repy/appveyor.yml": {
+    "sha256": "8d9eab5b578723043ce354bcadc3fcb2695a39b964f68a6601ac2f911a1108ef"
+   },
+   "seattle/seattle_repy/argparse.r2py": {
+    "sha256": "a1057faa6631c8077c427a6a961899f44c7222dc00ba16bf905ba0e1401a01f9"
+   },
+   "seattle/seattle_repy/bandwidthestimator.py": {
+    "sha256": "3ecad05235f2365757e563b7be346d82395bfee1f62a6e1cfaa8ca447e35aa74"
+   },
+   "seattle/seattle_repy/base64.r2py": {
+    "sha256": "ff0b77447dd36cb203cf03afdbd2d1aaeab8c9e8a3831c0416a04c74b0873b7d"
+   },
+   "seattle/seattle_repy/baseaffix.r2py": {
+    "sha256": "8b21380dc7a25403b279c077ff9d326ea4a0a4f73f84737f0675b9452b46ad13"
+   },
+   "seattle/seattle_repy/benchmark_resources.py": {
+    "sha256": "d946a632e798fa058fa48b5a0c546beb7d32a92c4dd87e26013a204a7ee9b053"
+   },
+   "seattle/seattle_repy/binascii.r2py": {
+    "sha256": "729964fc206911c840ca0b7eeb3c56336ce41c79356121cd6c4417f06b5f3119"
+   },
+   "seattle/seattle_repy/cachedadvertise.r2py": {
+    "sha256": "4624d52ee5e255a34a579ddc5a3101abb62600326d463258d8bdf041bee3af34"
+   },
+   "seattle/seattle_repy/canihear.r2py": {
+    "sha256": "fb5e95a2b921160d2446e38003280a0b49b71ff83214b12c76c8db845a9bf888"
+   },
+   "seattle/seattle_repy/centralizedadvertise.r2py": {
+    "sha256": "07a57fb9a6c7cf4eb1bd0b719118fb30da7f15177ef3ff9df457d77c5efb23b0"
+   },
+   "seattle/seattle_repy/centralizedadvertise_v2.r2py": {
+    "sha256": "0c7e2c67c185b086fe99bf725acf055e1893f6581c1e615809765cc5c8ffb1f9"
+   },
+   "seattle/seattle_repy/checkpythonversion.py": {
+    "sha256": "a978bf704f044e62f505e378cf75562734355b7c80ad89d524090b279553349b"
+   },
+   "seattle/seattle_repy/command_callbacks.py": {
+    "sha256": "101faf751df38a354326dae31b271d78b3fdb27656ca4ffe98aa25600958d6cc"
+   },
+   "seattle/seattle_repy/convert_print_to_log.sh": {
+    "sha256": "b55271b5dba40fcaa181179ed7cb1a3eaa9d12d6b32c113f4e4eeb4d0f27b444"
+   },
+   "seattle/seattle_repy/coordinationaffix.r2py": {
+    "sha256": "faa278cbb71d2d046fd8aa6db3c6fd20dbbe553d47b258f75bb6033a74b7ff98"
+   },
+   "seattle/seattle_repy/create_installer_state.py": {
+    "sha256": "f4ad6f93f9038c551554f89598340d01ee5bc18549983273e49085c98d3b8f8f"
+   },
+   "seattle/seattle_repy/createnodekeys.py": {
+    "sha256": "5d141d27611917360f67f6b0169e9422d1b60fc629e09c15602a3a371a344df0"
+   },
+   "seattle/seattle_repy/cv.r2py": {
+    "sha256": "ef41d888cf4f96c5d09058322776d49a19f1993e0b47c8aa422106821f3e1224"
+   },
+   "seattle/seattle_repy/daemon.py": {
+    "sha256": "2ccad0e68aaa6d31f6445b45fc5129aabd52db799e7babeb2d768cd31a77878b"
+   },
+   "seattle/seattle_repy/darwin_api.py": {
+    "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
+   },
+   "seattle/seattle_repy/deserialize.r2py": {
+    "sha256": "17ed7598d71f82d0397a0a9757a86592363f5826147c227e16336a92bf70b82a"
+   },
+   "seattle/seattle_repy/determine_threading_environ.py": {
+    "sha256": "083e4d950a81c8a1aece65f416b05d8862e44ea6a5fb888e2bba3158246e249e"
+   },
+   "seattle/seattle_repy/dnscommon.r2py": {
+    "sha256": "278fc5cfe19c084501b7d49ac5fc9b8b4b62f82ac150cfe12eef3710cee3b8fa"
+   },
+   "seattle/seattle_repy/domainnameinfo.r2py": {
+    "sha256": "51bfb899a75375bb1c18db1a242d94c9aa8385247329f7b06d6ead851f44f9ee"
+   },
+   "seattle/seattle_repy/doradvertise.r2py": {
+    "sha256": "2131244fbbfe91c6f65e0cdeb689d0c5b715540d4e4d23a0d58e1cc27dbc56ab"
+   },
+   "seattle/seattle_repy/dylink.r2py": {
+    "sha256": "225d3ff14735246bb8113c298c352524608ac7dc3770d67fe6af354b6157b484"
+   },
+   "seattle/seattle_repy/dylink_r2py.py": {
+    "sha256": "4a4a39fcdf0672943121c5074b3bfb0ca6f7b35a0b5f5b3e1156ca28b5964eb5"
+   },
+   "seattle/seattle_repy/emulcomm.py": {
+    "sha256": "97db5585c7df4ca1a855c67030b303aac9d45c33dac53235c346a7ae0171d208"
+   },
+   "seattle/seattle_repy/emulfile.py": {
+    "sha256": "f1f1f2e7cf503be193c849402a09dbe2efb4c072451f7739fbdc8c9c193704b9"
+   },
+   "seattle/seattle_repy/emulmisc.py": {
+    "sha256": "65c5c3a11497dff9fbf1d3e7bb1f11fc10b16fbd7e905dab63cffa9be45299c8"
+   },
+   "seattle/seattle_repy/emultimer.py": {
+    "sha256": "7da8bf8195cbad1fa801b0a184d5b78b9e437cc108b90cb2fcb37bedc82524c7"
+   },
+   "seattle/seattle_repy/encasementlib.r2py": {
+    "sha256": "03ae785befa9598689cd609b14ed43beee6471431ac873e93abfed1ea84b8f76"
+   },
+   "seattle/seattle_repy/encoding_header.py": {
+    "sha256": "13e6367f0f06775fb462296639fc8d0aa1fee6ec493c3802b8b42ffdefdc951e"
+   },
+   "seattle/seattle_repy/exception_hierarchy.py": {
+    "sha256": "13f09a6c5368ddf3e0b62d8c64a92705689758a75d41b86e34a7306e44f50d95"
+   },
+   "seattle/seattle_repy/experimentlib.r2py": {
+    "sha256": "3efede9b7e9cbaf2a9c0577049b83bafd7d69476e2d8b59a036ebe972521e437"
+   },
+   "seattle/seattle_repy/fakelinecache.py": {
+    "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
+   },
+   "seattle/seattle_repy/fastnmclient.py": {
+    "sha256": "95c83178417aecbf0faa087ea1ba67e86d0eb7afc80f03daf3954afb2c413a54"
+   },
+   "seattle/seattle_repy/fastsigneddata.py": {
+    "sha256": "4b3560c04fac47a37a16d5fba9644c8a31917e1b220b5dfa318924c586c08262"
+   },
+   "seattle/seattle_repy/freebsd_api.py": {
+    "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
+   },
+   "seattle/seattle_repy/freebsd_kinfo.py": {
+    "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
+   },
+   "seattle/seattle_repy/generatekeys.py": {
+    "sha256": "f35e64eab099eb5bba922ce6133765245f16c19e2a934df9e21072015763f3d8"
+   },
+   "seattle/seattle_repy/geoip_client.r2py": {
+    "sha256": "d652bd3117f7715de27e0bc2c223e0b956b5479a0a76386ce4e32ed8d7c9e569"
+   },
+   "seattle/seattle_repy/getvesselresources.r2py": {
+    "sha256": "2329b3e2e73706f7f73a7bcb02f2b5e93ebeb2ed5e2d1326ad10e1c773b4a038"
+   },
+   "seattle/seattle_repy/harshexit.py": {
+    "sha256": "f2065d260e9675567ef0f6c371ee7d9953f8cdb17913d304c12ef6ab84a18c31"
+   },
+   "seattle/seattle_repy/httpretrieve.r2py": {
+    "sha256": "7497266fd0cf8f271c6bbd4ecc09bf5975f979a1afe0413f9f543efe9072b392"
+   },
+   "seattle/seattle_repy/httpserver.r2py": {
+    "sha256": "fc77939c356cfc8ee618cd4a3157732c784e21cc83665cab026ea4d8a492e68e"
+   },
+   "seattle/seattle_repy/idhelper.py": {
+    "sha256": "d86ec8f59cf760598532e175859c1c8030c413045aa3488b8952e5638ae18205"
+   },
+   "seattle/seattle_repy/install.sh": {
+    "sha256": "c19261c52ab0f8535e9fc8c8f93bb190eada8ac55aa049b3a5faf95ed33a3e66"
+   },
+   "seattle/seattle_repy/librepy.r2py": {
+    "sha256": "387a18e690f40020cb8047a5ba39491fe4476059a3dd183d9336c5f688900d84"
+   },
+   "seattle/seattle_repy/librepyfile.r2py": {
+    "sha256": "139c8b1aad5a1a15047684cbf2cdc918cf1877e10b24845e39285f8bb3726105"
+   },
+   "seattle/seattle_repy/librepyrandom.r2py": {
+    "sha256": "fb56b4a90b3d9ffddda87ff13c9b55fab5d98a287c0d14cb3c4d36666a26fbdb"
+   },
+   "seattle/seattle_repy/librepyrunloop.r2py": {
+    "sha256": "df44529ad938dc08a50171c420a258445578c2ed4009c8ffb06b810dfbdd1718"
+   },
+   "seattle/seattle_repy/librepysocket.r2py": {
+    "sha256": "428fa3f0db524e1859849a94ed74b4e894ca585267d8496d63a88e723969a004"
+   },
+   "seattle/seattle_repy/librepythread.r2py": {
+    "sha256": "c6a41251a70af0c56a9152f89940949df45456ef7dca1a49da01aa2095f2a6c5"
+   },
+   "seattle/seattle_repy/linux_api.py": {
+    "sha256": "d3ce556d9211f2b9ecb0174fae82c1177c1165a32d82673b08063c5ca3bc0c05"
+   },
+   "seattle/seattle_repy/listops.r2py": {
+    "sha256": "27698671e32cbc0895590d1234da9203e92348f5ba7f064d0ae5536286a2139b"
+   },
+   "seattle/seattle_repy/loggingaffix.r2py": {
+    "sha256": "01d5d07c952fc9212cb7ed7f9bcf695ca1a5e0ea6c2e27d78387ac4bafe52ca5"
+   },
+   "seattle/seattle_repy/loggingrepy.py": {
+    "sha256": "767eb44beeef6046c1e4bad99c9a9bf18f2ac077772cec6a42c8cebcce566104"
+   },
+   "seattle/seattle_repy/loggingrepy_core.py": {
+    "sha256": "3a77270e4f6021244da3540433ac1376a1282bfa6ba01ecf197af0fc5de7a153"
+   },
+   "seattle/seattle_repy/makemehearaffix.r2py": {
+    "sha256": "80efbd2f7ee37db70caeb6d889e69a4348c1dffc05819f8c3545f6afdf6d299d"
+   },
+   "seattle/seattle_repy/manifest.txt": {
+    "sha256": "c1854793b08f0ae4cfe39e9f0c0dd36eb4e8b4dcd763f44e0da425dcafb7f2d6"
+   },
+   "seattle/seattle_repy/math.r2py": {
+    "sha256": "c9c07bc11435f157cc879775ec88286ebc18bb42d8672c0cd07568a290c59cbf"
+   },
+   "seattle/seattle_repy/md5py.r2py": {
+    "sha256": "d0cc94873faadb20ca9d89f7089452f53ad3c4e67082014a5e4c53421ccd0853"
+   },
+   "seattle/seattle_repy/measure_random.py": {
+    "sha256": "c5c776faea79193cb032a9589d745b0e410ef86020d8e80aa69371f2cbbdbd58"
+   },
+   "seattle/seattle_repy/measuredisk.py": {
+    "sha256": "d08d7aa19641cbea46cf6e7e61c734a9a2fcbb8ffc138e5fe3e911ad2245e58e"
+   },
+   "seattle/seattle_repy/modules/clearinghouse/__init__.py": {
+    "sha256": "7fe86b6a18cee894b67138ff78bd4ec3df2782b5411d6ab6d8a3feac8b3fcbe1"
+   },
+   "seattle/seattle_repy/modules/clearinghouse/clearinghouse.py": {
+    "sha256": "a8fe9f1b18f49826d20ab50ce8ed6affe4bc5f00baa209aae796fbb2516905a9"
+   },
+   "seattle/seattle_repy/modules/clearinghouse/command_callbacks.py": {
+    "sha256": "d06b7a0a48843cdfdb96aadd59c340ef895b56aaef6c9b901ec96abdcbd4e483"
+   },
+   "seattle/seattle_repy/modules/factoids/__init__.py": {
+    "sha256": "71747f096a4179fb3157e614500d0538e2dc2ac9915cab989188ff9c8eabc620"
+   },
+   "seattle/seattle_repy/modules/factoids/factoid.txt": {
+    "sha256": "6e1427f3f5acb2909b32d42fb269b9801ee756e68d67152741feb003e3d402c5"
+   },
+   "seattle/seattle_repy/modules/geoip/__init__.py": {
+    "sha256": "1b3dbea9ace30583cc2b8ba1ff4c193429e646cea793f881490d03f95d4d233e"
+   },
+   "seattle/seattle_repy/modules/modules/__init__.py": {
+    "sha256": "ad461435721c9cd51954fe13fa2a237fa597821f7a8d4ce1f272e4ea1ee77099"
+   },
+   "seattle/seattle_repy/modules/modules/command_callbacks.py": {
+    "sha256": "047ccd738e8ef7b880f0ad69b6b8422475f3e709f3550cb73992ee94863ca0d9"
+   },
+   "seattle/seattle_repy/modules/variables/__init__.py": {
+    "sha256": "8a318f0546b699b0ba6fa6565ab1cfdf4e8e21a6e7edf2b1c18fe591080d5b0d"
+   },
+   "seattle/seattle_repy/multiplexer.r2py": {
+    "sha256": "5247b9cc1b6daca2f41d4645371e44ec03e084df9474a319d5396e328d97b448"
+   },
+   "seattle/seattle_repy/namespace.py": {
+    "sha256": "12c5ad61a3c87cc06d5c2025510e692dccd1cd789169de39bf78355e3e12b8be"
+   },
+   "seattle/seattle_repy/namingandresolveraffix.r2py": {
+    "sha256": "69bf371378133cf1437c7b3dea83454974389b1fdd1b26344f906f6a03e6ea42"
+   },
+   "seattle/seattle_repy/nanny.py": {
+    "sha256": "75b9cf036daca0904447f1993dcf6a78ded020110cc4abd71f195d95212cc0ad"
+   },
+   "seattle/seattle_repy/nat_advertisement.r2py": {
+    "sha256": "8ea67fa5b0d9d98662efab028dd7f0ef6b2de926dc9fd3e54aa236fcc8c6932f"
+   },
+   "seattle/seattle_repy/natlayer_rpc.r2py": {
+    "sha256": "5a75fb48ef8fd32e6f16a2e0273f976b6033524713264b95e4b37e870df91044"
+   },
+   "seattle/seattle_repy/nix_common_api.py": {
+    "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
+   },
+   "seattle/seattle_repy/nmAPI.py": {
+    "sha256": "ceb1cf85ec85ef1997106b31fc6b3f9e04eba5be6054e700a65338cdcbe7b0b3"
+   },
+   "seattle/seattle_repy/nmadvertise.py": {
+    "sha256": "f2eebb32abe69cd8934713118e9085dc27c7236ae53615b2c4b3c03cf6142e5f"
+   },
+   "seattle/seattle_repy/nmclient.r2py": {
+    "sha256": "6e111c753df5cd630b9fec8f03c253b79a3dc5b3c4c52fe65930c594a89e8ea7"
+   },
+   "seattle/seattle_repy/nmconnectionmanager.py": {
+    "sha256": "937342a072963e33fe7326b0fd84e3a9ba451f4469c5f4970b4c9c02f6661d6a"
+   },
+   "seattle/seattle_repy/nminit.py": {
+    "sha256": "8c48e384489f4ffc36c67983ce1faf7a80a3e7eb154234d41caa5db37b82fbd4"
+   },
+   "seattle/seattle_repy/nmmain.py": {
+    "sha256": "94ce0048af56b2ed49ceb7867ed769a41cf90f3a54a6d5e113c880f1956fa191"
+   },
+   "seattle/seattle_repy/nmrequesthandler.py": {
+    "sha256": "f31fd6228e0acb522c02b90bf623f101f9620bca7d1b3b1a0f9c3b3362b43768"
+   },
+   "seattle/seattle_repy/nmresourcemath.py": {
+    "sha256": "38f3bb801fdda4914a73102c5aa0b3167150a4cd67004933ada4424b34299900"
+   },
+   "seattle/seattle_repy/nmrestrictionsprocessor.py": {
+    "sha256": "1b937cdb8c30b8c29dd64deb4c3978ca45451be4746221ef88a5ef87fa9cd267"
+   },
+   "seattle/seattle_repy/nmstatusinterface.py": {
+    "sha256": "9a0cb18d762264d805553f56f77802c58756a8bd447d1bb60f92de07593659b2"
+   },
+   "seattle/seattle_repy/nmstatusmonitor.py": {
+    "sha256": "02f21c8701338c01f80f10c0af7b2e274bb075bd2d297b13095eccbcb4eca5ef"
+   },
+   "seattle/seattle_repy/nmthreadingerror.py": {
+    "sha256": "6e2a79c2c5d61b1d46411e3f48296c6010e679b48e08fceb1da5fb96e1ccf4bb"
+   },
+   "seattle/seattle_repy/nodeman.cfg": {
+    "sha256": "c17ddb8ebe773868479f1482fd12efa8bdcd100c88a195d43e6daaabbe3d1ab7"
+   },
+   "seattle/seattle_repy/nonportable.py": {
+    "sha256": "4e3ad1fc2f0aad83ffc112008a0e40669afdacadc7d1ec8fd5274d5d3cbb7598"
+   },
+   "seattle/seattle_repy/noopaffix.r2py": {
+    "sha256": "9767bf14a38ff02fb7123e52dc25e9c8c6a0bf95bb56e332cbca70be38caa325"
+   },
+   "seattle/seattle_repy/ntp_time.r2py": {
+    "sha256": "c6afd06ffb1e558d12f8b4f5774cc25d0615877550d5b5c3c8dfc8ba369a7f6a"
+   },
+   "seattle/seattle_repy/opendhtadvertise.r2py": {
+    "sha256": "c6d78fec32ee1fb4b471b0d540d66126e44d422e954b93ed56ecd91f9fa14160"
+   },
+   "seattle/seattle_repy/parallelize.r2py": {
+    "sha256": "4733c3014d34abdeb4a37711a37b5cb3d2eeb5b6dc7839b06ecb1fea1dbf43aa"
+   },
+   "seattle/seattle_repy/persist.py": {
+    "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
+   },
+   "seattle/seattle_repy/portable_popen.py": {
+    "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
+   },
+   "seattle/seattle_repy/priority_queue.r2py": {
+    "sha256": "a48ad9eeaf7d547baaf4f3b994ca2d211956a1009f0b1926875058989a4f4bda"
+   },
+   "seattle/seattle_repy/py_BandwidthClient.py": {
+    "sha256": "254c538954784d77d5e112df7a1e080bdcc7a603bd71ae2aaf5da5dd3fdc65c8"
+   },
+   "seattle/seattle_repy/py_BandwidthServer.py": {
+    "sha256": "b84b66a62a0588c0531d985cf4c2f85f2bf110322a3c70ff037506147a2367c8"
+   },
+   "seattle/seattle_repy/pycryptorsa.r2py": {
+    "sha256": "1514a99ec7fd66c490369ec18141ee74cb1f5bf33779fbdbf9dc34c6c9a9d21d"
+   },
+   "seattle/seattle_repy/pydes.r2py": {
+    "sha256": "90aea5ecd95a76225e2d109a9fa2687d9e957c9a770f5d0d9f4deb67932d44a7"
+   },
+   "seattle/seattle_repy/random.r2py": {
+    "sha256": "ea738753d2879a2ca890f9f6e7cd50572eb50e20ce85040f569c599529dfdf80"
+   },
+   "seattle/seattle_repy/readline.so.mac": {
+    "sha256": "ecdbe3a0d185adfdc8863b1bcf385c1490212758fe7a2996670be2d9fda7ed8c"
+   },
+   "seattle/seattle_repy/readline_windows.py": {
+    "sha256": "045124de3ac863802217af87fb23a0377ba240882e98e48958acafff55083c53"
+   },
+   "seattle/seattle_repy/registerhttpcallback.r2py": {
+    "sha256": "89aa23559e0d2766f340cb06797ef49924bf68d48e7ac0940fd5438b14cca05a"
+   },
+   "seattle/seattle_repy/repy.py": {
+    "sha256": "803514dfd12dead8654b1ea4796952f864bd3b3d35c3e87e3c2d3f8eb1e3706c"
+   },
+   "seattle/seattle_repy/repyV1/checkpythonversion.py": {
+    "sha256": "e7d59f9fe55cfbeecae0a2cda6710db517e3a1ec58fe94bd5e24071f6b1453b7"
+   },
+   "seattle/seattle_repy/repyV1/darwin_api.py": {
+    "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
+   },
+   "seattle/seattle_repy/repyV1/emulcomm.py": {
+    "sha256": "d888b50de794405ddaab1ee8e4ab2b2b98355dd75bb3d43c7b6dbe931021787c"
+   },
+   "seattle/seattle_repy/repyV1/emulfile.py": {
+    "sha256": "c3f100e73b288c7a98f464dbf0d48854dc3a68970a33f7728e438bcb3903cd56"
+   },
+   "seattle/seattle_repy/repyV1/emulmisc.py": {
+    "sha256": "effbd70bbaab644370d14977a9ec29e5dda60a958ea2eeae574c1a196216a068"
+   },
+   "seattle/seattle_repy/repyV1/emultimer.py": {
+    "sha256": "4562dc3759c0c230dc386e041a439f17876875ab218a9c4cee5722fa2b7f28cf"
+   },
+   "seattle/seattle_repy/repyV1/fakelinecache.py": {
+    "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
+   },
+   "seattle/seattle_repy/repyV1/freebsd_api.py": {
+    "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
+   },
+   "seattle/seattle_repy/repyV1/freebsd_kinfo.py": {
+    "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
+   },
+   "seattle/seattle_repy/repyV1/harshexit.py": {
+    "sha256": "67e187513d2b560ccf2f805d78bac9b5c78aa4884177be94030389ef6ede3a2b"
+   },
+   "seattle/seattle_repy/repyV1/idhelper.py": {
+    "sha256": "7281fd181fe7f789b2d46911487467637c06d54d966158b39c8a9493106e876a"
+   },
+   "seattle/seattle_repy/repyV1/linux_api.py": {
+    "sha256": "c1c50a8d0ec7063560be9d10251e1c59dc836dedab827aedf5fe91fdc7a082f6"
+   },
+   "seattle/seattle_repy/repyV1/loggingrepy.py": {
+    "sha256": "53839f13f8448bd50660b8450d2f6b2c61fda322e97919ca3226af98be0fd6e9"
+   },
+   "seattle/seattle_repy/repyV1/loggingrepy_core.py": {
+    "sha256": "e7437350f6c9a71f31b26c901bb42acab1e99c23ad785743095bfb4700ecac73"
+   },
+   "seattle/seattle_repy/repyV1/misc.py": {
+    "sha256": "7cf3bdca0c7811608d82431b12c1e2e4bf7b12d2f7b9846704d0fbfeb0621cfd"
+   },
+   "seattle/seattle_repy/repyV1/namespace.py": {
+    "sha256": "24dda39500e4e8330719174b03a5c2cc30e3336b8aa9c849e483b36859b9d031"
+   },
+   "seattle/seattle_repy/repyV1/nanny.py": {
+    "sha256": "706c09523312b584464e0b76ebf5a5ca4a5945f682603fbf82dd9b3ffbd98267"
+   },
+   "seattle/seattle_repy/repyV1/nanny_resource_limits.py": {
+    "sha256": "222d67cfd354c94ba399633cb2ca341ced09a2507e222e07c7075033be8df2f4"
+   },
+   "seattle/seattle_repy/repyV1/nix_common_api.py": {
+    "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
+   },
+   "seattle/seattle_repy/repyV1/nmstatusinterface.py": {
+    "sha256": "27d2655af8978e921e7d4cde581d5764669691b3106e175b5cb8bea82bbad4d8"
+   },
+   "seattle/seattle_repy/repyV1/nonportable.py": {
+    "sha256": "dc0131fd3c93e45f0d6d3afece9e08db86e0f85c240e0c7c8e309fb00332afcb"
+   },
+   "seattle/seattle_repy/repyV1/persist.py": {
+    "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
+   },
+   "seattle/seattle_repy/repyV1/portable_popen.py": {
+    "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
+   },
+   "seattle/seattle_repy/repyV1/repy.py": {
+    "sha256": "e0c67cc1b5b154023c5df58fce26f831f1146a47b682226d0729b0af12cd1d8f"
+   },
+   "seattle/seattle_repy/repyV1/repy_constants.py": {
+    "sha256": "50fa416eb43afb123b631949c7884d013337559be6e6ad2d8f364b2a0df5fd36"
+   },
+   "seattle/seattle_repy/repyV1/restrictions.py": {
+    "sha256": "dac4458aa8922a4afcdd8278f52a9954e5d2ca6b15bff1e82f6d8f345f618eab"
+   },
+   "seattle/seattle_repy/repyV1/safe.py": {
+    "sha256": "09cd31f5dd4212acc79e87cc32ddacc596113ec8a4bde2610f769e3363d5ef5a"
+   },
+   "seattle/seattle_repy/repyV1/safe_check.py": {
+    "sha256": "f0bb3303119e1aa30cb5cc342cad891ba61eb6ed6b7685f4cae188bd2759e1d8"
+   },
+   "seattle/seattle_repy/repyV1/safety_exceptions.py": {
+    "sha256": "86af242f8815cd2655f59b1f1c629d3df0ed6723d243840aa0a194ecb4b311fc"
+   },
+   "seattle/seattle_repy/repyV1/statusstorage.py": {
+    "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
+   },
+   "seattle/seattle_repy/repyV1/tracebackrepy.py": {
+    "sha256": "7355815c7215ffcf91aedcde3716d7057dc1f038ab5773298e630f278ca0124a"
+   },
+   "seattle/seattle_repy/repyV1/virtual_namespace.py": {
+    "sha256": "75ee32a495454b86f0592a9bafd18f73e748500b0fa089a9b5798df5bdc30980"
+   },
+   "seattle/seattle_repy/repyV1/win_cpu_nanny.py": {
+    "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
+   },
+   "seattle/seattle_repy/repyV1/windows_api.py": {
+    "sha256": "83ed1f52cde40f9aa021136eb7a56477dbb71993378ceac6c7542d8ab177b954"
+   },
+   "seattle/seattle_repy/repyV2/appveyor.yml": {
+    "sha256": "8d9eab5b578723043ce354bcadc3fcb2695a39b964f68a6601ac2f911a1108ef"
+   },
+   "seattle/seattle_repy/repyV2/checkpythonversion.py": {
+    "sha256": "a978bf704f044e62f505e378cf75562734355b7c80ad89d524090b279553349b"
+   },
+   "seattle/seattle_repy/repyV2/darwin_api.py": {
+    "sha256": "83f6d5f7db2d93f6d7b0cbd5c846c72ef9f4e496a2dc49da67be3eb27b97557c"
+   },
+   "seattle/seattle_repy/repyV2/dylink.r2py": {
+    "sha256": "225d3ff14735246bb8113c298c352524608ac7dc3770d67fe6af354b6157b484"
+   },
+   "seattle/seattle_repy/repyV2/emulcomm.py": {
+    "sha256": "97db5585c7df4ca1a855c67030b303aac9d45c33dac53235c346a7ae0171d208"
+   },
+   "seattle/seattle_repy/repyV2/emulfile.py": {
+    "sha256": "f1f1f2e7cf503be193c849402a09dbe2efb4c072451f7739fbdc8c9c193704b9"
+   },
+   "seattle/seattle_repy/repyV2/emulmisc.py": {
+    "sha256": "65c5c3a11497dff9fbf1d3e7bb1f11fc10b16fbd7e905dab63cffa9be45299c8"
+   },
+   "seattle/seattle_repy/repyV2/emultimer.py": {
+    "sha256": "7da8bf8195cbad1fa801b0a184d5b78b9e437cc108b90cb2fcb37bedc82524c7"
+   },
+   "seattle/seattle_repy/repyV2/encoding_header.py": {
+    "sha256": "13e6367f0f06775fb462296639fc8d0aa1fee6ec493c3802b8b42ffdefdc951e"
+   },
+   "seattle/seattle_repy/repyV2/exception_hierarchy.py": {
+    "sha256": "13f09a6c5368ddf3e0b62d8c64a92705689758a75d41b86e34a7306e44f50d95"
+   },
+   "seattle/seattle_repy/repyV2/fakelinecache.py": {
+    "sha256": "815bcd414176cbeeafc0faa2e2058381961a83fd4e232627180ece3784055044"
+   },
+   "seattle/seattle_repy/repyV2/freebsd_api.py": {
+    "sha256": "4329ae6a5aee805c50a02fdca58073d44b0271bbda7f8da74c7310a69c680fbb"
+   },
+   "seattle/seattle_repy/repyV2/freebsd_kinfo.py": {
+    "sha256": "d19a0ee606540cd4b6ba2442ab01dd8e51fa6b50a1b89fe8adbd60505f57c0a9"
+   },
+   "seattle/seattle_repy/repyV2/harshexit.py": {
+    "sha256": "f2065d260e9675567ef0f6c371ee7d9953f8cdb17913d304c12ef6ab84a18c31"
+   },
+   "seattle/seattle_repy/repyV2/idhelper.py": {
+    "sha256": "d86ec8f59cf760598532e175859c1c8030c413045aa3488b8952e5638ae18205"
+   },
+   "seattle/seattle_repy/repyV2/linux_api.py": {
+    "sha256": "d3ce556d9211f2b9ecb0174fae82c1177c1165a32d82673b08063c5ca3bc0c05"
+   },
+   "seattle/seattle_repy/repyV2/loggingrepy.py": {
+    "sha256": "767eb44beeef6046c1e4bad99c9a9bf18f2ac077772cec6a42c8cebcce566104"
+   },
+   "seattle/seattle_repy/repyV2/loggingrepy_core.py": {
+    "sha256": "3a77270e4f6021244da3540433ac1376a1282bfa6ba01ecf197af0fc5de7a153"
+   },
+   "seattle/seattle_repy/repyV2/namespace.py": {
+    "sha256": "12c5ad61a3c87cc06d5c2025510e692dccd1cd789169de39bf78355e3e12b8be"
+   },
+   "seattle/seattle_repy/repyV2/nanny.py": {
+    "sha256": "75b9cf036daca0904447f1993dcf6a78ded020110cc4abd71f195d95212cc0ad"
+   },
+   "seattle/seattle_repy/repyV2/nix_common_api.py": {
+    "sha256": "4b8c91f5aa8bb4c92f1cfc507a62a4770420f5fd22a7fc275a2e56214b0bf541"
+   },
+   "seattle/seattle_repy/repyV2/nmstatusinterface.py": {
+    "sha256": "9a0cb18d762264d805553f56f77802c58756a8bd447d1bb60f92de07593659b2"
+   },
+   "seattle/seattle_repy/repyV2/nonportable.py": {
+    "sha256": "4e3ad1fc2f0aad83ffc112008a0e40669afdacadc7d1ec8fd5274d5d3cbb7598"
+   },
+   "seattle/seattle_repy/repyV2/persist.py": {
+    "sha256": "211b807a6a0949998ebb87423a19c74f0b15fe5035fb2a9dfb429af9387cbefa"
+   },
+   "seattle/seattle_repy/repyV2/portable_popen.py": {
+    "sha256": "cd1b7fac916a4b8cb7d55481bafe932de6bc6e633daa35a46e07032185029052"
+   },
+   "seattle/seattle_repy/repyV2/repy.py": {
+    "sha256": "803514dfd12dead8654b1ea4796952f864bd3b3d35c3e87e3c2d3f8eb1e3706c"
+   },
+   "seattle/seattle_repy/repyV2/repy_constants.py": {
+    "sha256": "a80bd7a1a5dcb776d79565b4d148efcf6ccf8c8396c65d4046272186a6f50857"
+   },
+   "seattle/seattle_repy/repyV2/repyhelper.py": {
+    "sha256": "f9439edc3a2689b3e6382eccaf97e48d7fcdca51db73f023be76b6d7fbeb0444"
+   },
+   "seattle/seattle_repy/repyV2/repyportability.py": {
+    "sha256": "3ea8e0ad30bd2f2afacd533a4ce8329b287fdf3cb7e12aea6d87b4cf859e6cfa"
+   },
+   "seattle/seattle_repy/repyV2/resource_constants.py": {
+    "sha256": "98c4d1db057e85ad37bfd33ef28b81b2dd17577edee76cfebcd684b43476065e"
+   },
+   "seattle/seattle_repy/repyV2/resourcemanipulation.py": {
+    "sha256": "e4c92d18519f6acb2f9a53b9031195fa7a7feec087059ca848d7a32497c6d4d0"
+   },
+   "seattle/seattle_repy/repyV2/safe.py": {
+    "sha256": "b36b0951163d5d8c936248e4b1e395ec6c538fa097e61143b5548c64d0c41438"
+   },
+   "seattle/seattle_repy/repyV2/safe_check.py": {
+    "sha256": "2c269579ebddda74a5ef7741029b09b464c9bed134136750dcaa79768f8699b9"
+   },
+   "seattle/seattle_repy/repyV2/servicelogger.py": {
+    "sha256": "ef629a8e08150c6d93f4cb59bd27a47af25ea8efa7e0946cc148d186041c5ef5"
+   },
+   "seattle/seattle_repy/repyV2/statusstorage.py": {
+    "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
+   },
+   "seattle/seattle_repy/repyV2/textops.py": {
+    "sha256": "2234cce888144ccf5d6b81926713837b1a6612e8d95aa98b2e0ec07faca7d24a"
+   },
+   "seattle/seattle_repy/repyV2/tracebackrepy.py": {
+    "sha256": "3641f4d65f077405c835f19563ce36b309eb8f6afdf115fda4c21b0aee0da0bc"
+   },
+   "seattle/seattle_repy/repyV2/virtual_namespace.py": {
+    "sha256": "01c7754a549f4d148b865a5a32146124a13383c4556d600e92a5884a2caedb9d"
+   },
+   "seattle/seattle_repy/repyV2/win_cpu_nanny.py": {
+    "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
+   },
+   "seattle/seattle_repy/repyV2/windows_api.py": {
+    "sha256": "ffbf30714032555d696f64d65268ebdc0b0db4c8a2261d173187893d295d2dfe"
+   },
+   "seattle/seattle_repy/repy_constants.py": {
+    "sha256": "a80bd7a1a5dcb776d79565b4d148efcf6ccf8c8396c65d4046272186a6f50857"
+   },
+   "seattle/seattle_repy/repyhelper.py": {
+    "sha256": "f9439edc3a2689b3e6382eccaf97e48d7fcdca51db73f023be76b6d7fbeb0444"
+   },
+   "seattle/seattle_repy/repyportability.py": {
+    "sha256": "3ea8e0ad30bd2f2afacd533a4ce8329b287fdf3cb7e12aea6d87b4cf859e6cfa"
+   },
+   "seattle/seattle_repy/repypp.py": {
+    "sha256": "61946e6690179f5e54f6550e960cf3a9c60bece7cf3e2b1b83aa767a281fdb6c"
+   },
+   "seattle/seattle_repy/repyunit.r2py": {
+    "sha256": "e441f1c5ac7aaf133e48593840e7d02e115d06f5a4f112818f2d21d38cde9e0b"
+   },
+   "seattle/seattle_repy/resource_constants.py": {
+    "sha256": "98c4d1db057e85ad37bfd33ef28b81b2dd17577edee76cfebcd684b43476065e"
+   },
+   "seattle/seattle_repy/resourcemanipulation.py": {
+    "sha256": "e4c92d18519f6acb2f9a53b9031195fa7a7feec087059ca848d7a32497c6d4d0"
+   },
+   "seattle/seattle_repy/resources.offcut": {
+    "sha256": "f129f2ff52e60e431100cf8c487b29a05e82af5371690e07835f9e32edc42d49"
+   },
+   "seattle/seattle_repy/restrictions.default": {
+    "sha256": "91a2cbb2e8d9386786e362580935e6c1bd65c0ca266496141d19cdfffc2b11e0"
+   },
+   "seattle/seattle_repy/restrictions.tcp_relay": {
+    "sha256": "91a2cbb2e8d9386786e362580935e6c1bd65c0ca266496141d19cdfffc2b11e0"
+   },
+   "seattle/seattle_repy/rhizoma.mix": {
+    "sha256": "1b572b9f740de500d65a80c92ebc30bc58b633387e12e08573f74033be8bd6f5"
+   },
+   "seattle/seattle_repy/rsa.r2py": {
+    "sha256": "0ede3de548992f81f31414fc6e28fda7866913b58d0e6a7b9aea01151617a2c8"
+   },
+   "seattle/seattle_repy/runonce.py": {
+    "sha256": "b7ad9c05915e2a1e9532cb85288a36bf86daaf5d190c078c8f4faad0542f68cc"
+   },
+   "seattle/seattle_repy/safe.py": {
+    "sha256": "b36b0951163d5d8c936248e4b1e395ec6c538fa097e61143b5548c64d0c41438"
+   },
+   "seattle/seattle_repy/safe_check.py": {
+    "sha256": "2c269579ebddda74a5ef7741029b09b464c9bed134136750dcaa79768f8699b9"
+   },
+   "seattle/seattle_repy/safe_eval.r2py": {
+    "sha256": "aec23614759b0e6cb2e49c68a598d36de7052aed9c0a5cac37320f0ec6bf79fc"
+   },
+   "seattle/seattle_repy/seash.py": {
+    "sha256": "1cdd9f6fbdea49cef93e0df1ea3c7df598e9e077113012a15f724af8437e2af8"
+   },
+   "seattle/seattle_repy/seash_dictionary.py": {
+    "sha256": "96c1d81bdfd1c711ad4fe2f3e1b92335365cbfb5cdbf2e1e2b86ab607b6e6fc0"
+   },
+   "seattle/seattle_repy/seash_exceptions.py": {
+    "sha256": "63bccf4a8782dbeea76392b3631bb3c612ca9ea8f49b3ba7942d2c7fb3bf98b2"
+   },
+   "seattle/seattle_repy/seash_global_variables.py": {
+    "sha256": "6806beb8895c0f72c03bda3494c4fdf4412be7deff5910f96ddd44f13024a614"
+   },
+   "seattle/seattle_repy/seash_helper.py": {
+    "sha256": "e23b4457ef8e425f38ac2fe09982ff8c28782418cbbbe0a685ac12560db41874"
+   },
+   "seattle/seattle_repy/seash_modules.py": {
+    "sha256": "577455d9494eec1fc821f3d4c7c46030c56c4243a36e8850e4d0d47f1a1509b1"
+   },
+   "seattle/seattle_repy/seattleclearinghouse_xmlrpc.py": {
+    "sha256": "c82996d2b06711cf0171cbad6c937503c52b02eb59f7fb0812fac846b349353d"
+   },
+   "seattle/seattle_repy/seattleinstaller.py": {
+    "sha256": "07afffa65338b22e73082f569d1a803d24b7452703d45659494a13f28c6cff7d"
+   },
+   "seattle/seattle_repy/seattleuninstaller.py": {
+    "sha256": "196048760269785f3aaf17a581edb35175bf19aa9fc8189a0141ff81aff1a2cf"
+   },
+   "seattle/seattle_repy/secureadvertise_client.r2py": {
+    "sha256": "4ba270869112b9ded3f609804701f7f50523485d0072e7ad0abc7934bf8b6894"
+   },
+   "seattle/seattle_repy/secureadvertise_server.r2py": {
+    "sha256": "c070bfec13df89d0c04d35fbfec1cf119198d73c8523dc1170635d6277320663"
+   },
+   "seattle/seattle_repy/secureclient.r2py": {
+    "sha256": "1117f11f52f0c02f9f7df8876652dac1f5b20b0d3695e0e2e811f76ed0fd7067"
+   },
+   "seattle/seattle_repy/semaphore.r2py": {
+    "sha256": "df1ea0f9cdcb8172e36cf6b32e6abee0e0f994533e9ed5b515b38fdef64f9e5f"
+   },
+   "seattle/seattle_repy/serialize.r2py": {
+    "sha256": "ada677c3f96655c1db99c739f7ccd9fdd1177d555ef2a350eaa999b8fd5a0bca"
+   },
+   "seattle/seattle_repy/servicelogger.py": {
+    "sha256": "ef629a8e08150c6d93f4cb59bd27a47af25ea8efa7e0946cc148d186041c5ef5"
+   },
+   "seattle/seattle_repy/servicelookup.r2py": {
+    "sha256": "d305ce15ef2918f38f317f2ea6d6a8fe1999bd79389a8b9748850956ae92e11e"
+   },
+   "seattle/seattle_repy/session.r2py": {
+    "sha256": "1c5d9a0810d9d08c729b07dc24935f48e99338ec0e708e1378bec32798c90d4c"
+   },
+   "seattle/seattle_repy/sha.r2py": {
+    "sha256": "83b807f8f6b6abe337db175d2d4867806a53895d576a1cb1da7b8a2ee5627016"
+   },
+   "seattle/seattle_repy/signeddata.r2py": {
+    "sha256": "685c04ad799321dc08dea3efa2df4af6162e3cfac6537c3ecf0266b95501449f"
+   },
+   "seattle/seattle_repy/sockettimeout.r2py": {
+    "sha256": "23b9f3b539349b1b3b08fd2f3e49781c0063e07fbdaedb70fbecb39aaaf9a85b"
+   },
+   "seattle/seattle_repy/softwareupdater.py": {
+    "sha256": "805499d90edbb66f8ff213675e397eef459c49d98bda5b44a9f3b54a059b0d42"
+   },
+   "seattle/seattle_repy/sshkey.r2py": {
+    "sha256": "efe5c2683cffb4e13a450defdddc8cd9ff183ea2469a13c7afcfd36f466eaa21"
+   },
+   "seattle/seattle_repy/sshkey_paramiko.r2py": {
+    "sha256": "8f6218522670d50100d3f6a4a528e5fd7cab117e5de18fcefef3d69fd5ee0fd9"
+   },
+   "seattle/seattle_repy/start_seattle.sh": {
+    "sha256": "b89af2480a1d1e119dccd2314bc8f5bed64e2e10caf7c12cbfb57f8e9ecbd697"
+   },
+   "seattle/seattle_repy/statusstorage.py": {
+    "sha256": "7f5a150dd9a9a823021ac67d1b9ab55013a7b9c98bcf4252eb025506d2813504"
+   },
+   "seattle/seattle_repy/stop_all_seattle_processes.py": {
+    "sha256": "86e3829f0ca8de18224bb11681f515b5f300c867f6d18ed133fc3f97e78f5e86"
+   },
+   "seattle/seattle_repy/stop_seattle.sh": {
+    "sha256": "0b0405a9a0933501f389e6d5985cb9f09cc09aa6ab42a322b6a13d5520b406c2"
+   },
+   "seattle/seattle_repy/strace.py": {
+    "sha256": "fa8082418b09925749cd0d8051dd59939da7e35739cb20d587b7f2c171112c78"
+   },
+   "seattle/seattle_repy/tab_completer.py": {
+    "sha256": "abd2980129f0bd405772d61c626cf3f9432f0ac054604f1562d344d32107fc0b"
+   },
+   "seattle/seattle_repy/tcp_relay.r2py": {
+    "sha256": "c4fbf90294ce38ceaca21def1560d2fd2d9b0ceadd500ae70d1a2bec73cdd031"
+   },
+   "seattle/seattle_repy/tcp_relay_common_lib.r2py": {
+    "sha256": "539d8b61fba988aeb942d4357c395a9d9b7ffa41accd3411a1bce80b38d4b01f"
+   },
+   "seattle/seattle_repy/tcp_time.r2py": {
+    "sha256": "9e09c592233f4c55a4b77715cac850596a45b4327bb9d23b33028e49c7d4d1a5"
+   },
+   "seattle/seattle_repy/tcprelayaffix.r2py": {
+    "sha256": "6cc52e112b031b713986f5f719ac042f28a0f7b365e7fcfee65a58f29207b1ba"
+   },
+   "seattle/seattle_repy/textops.py": {
+    "sha256": "2234cce888144ccf5d6b81926713837b1a6612e8d95aa98b2e0ec07faca7d24a"
+   },
+   "seattle/seattle_repy/time.r2py": {
+    "sha256": "c65063a9edd6a1ea1c9320059d5824d2719d98c5655c5a16728b60d1f08101ab"
+   },
+   "seattle/seattle_repy/time_interface.r2py": {
+    "sha256": "23a8550286e2e7bbef8ffe45569436cc66858a4a1b77675748aa035948a5647c"
+   },
+   "seattle/seattle_repy/timeout_xmlrpclib.py": {
+    "sha256": "55edaf6b257d417d2ae30b415ef6068b321e97178b8c1b95f6425610c3d5a493"
+   },
+   "seattle/seattle_repy/tracebackrepy.py": {
+    "sha256": "3641f4d65f077405c835f19563ce36b309eb8f6afdf115fda4c21b0aee0da0bc"
+   },
+   "seattle/seattle_repy/udpcentralizedadvertise.r2py": {
+    "sha256": "ccbea752619a01a80d2577628ef10855724cbb1a74dc7be01fd429ceb29b18e2"
+   },
+   "seattle/seattle_repy/uninstall.sh": {
+    "sha256": "5e77cfc483cc068b961cb420fa6c1cd76702b1eaa94e6419cf436d6dfd09a536"
+   },
+   "seattle/seattle_repy/uniqueid.r2py": {
+    "sha256": "13a04b67c55209d7ee5e8915847573177ddf51a0e071e629fdc8af73066d1c89"
+   },
+   "seattle/seattle_repy/urllib.r2py": {
+    "sha256": "901d9e933fa0f85d60c6f10049ab05281748d020ae8fc4972be045d8be9cf1f5"
+   },
+   "seattle/seattle_repy/urlparse.r2py": {
+    "sha256": "e69eadb512ca25e083dbda94b0402a6ed905dcb8131b355fcaae273438044848"
+   },
+   "seattle/seattle_repy/vessel.restrictions": {
+    "sha256": "74fb08287753dd56b3dc96e4b9d8fa7511df7bd344c41b24e8707d39f7da6a31"
+   },
+   "seattle/seattle_repy/virtual_namespace.py": {
+    "sha256": "01c7754a549f4d148b865a5a32146124a13383c4556d600e92a5884a2caedb9d"
+   },
+   "seattle/seattle_repy/win_cpu_nanny.py": {
+    "sha256": "80f8aaf851e7ccc76882af05bc0ee40a0368ed046f61d17bab8f640b042d3af6"
+   },
+   "seattle/seattle_repy/windows_api.py": {
+    "sha256": "ffbf30714032555d696f64d65268ebdc0b0db4c8a2261d173187893d295d2dfe"
+   },
+   "seattle/seattle_repy/wrapper.r2py": {
+    "sha256": "c7525c95cbd30202ce5c3379b2636bcf25cfcdb0f2748badda108f2b0c35ee5a"
+   },
+   "seattle/seattle_repy/writemetainfo.py": {
+    "sha256": "32e2157348130ba4fe50d6f1cdab8ede568cd5c37fd36fb1877b15b9a49e8d77"
+   },
+   "seattle/seattle_repy/xmlparse.r2py": {
+    "sha256": "aa1bcb4394e4bb51334a1a31651896f19221f8aa0aaccad362ffdc86a9bf3eb7"
+   },
+   "seattle/seattle_repy/xmlrpc_client.r2py": {
+    "sha256": "63d09aa85f53cb421a9ea267345593b591e9bbadf76864f4103dca07c4e7cf02"
+   },
+   "seattle/seattle_repy/xmlrpc_common.r2py": {
+    "sha256": "a89fd2f3e80dde6e9ba24cb151447862fbb87a247a3516251200377414c5a589"
+   },
+   "seattle/seattle_repy/xmlrpc_server.r2py": {
+    "sha256": "0fe598b53d75f74c184981fc3dc2ea9fe2783c0905af53c018c900601052c086"
+   },
+   "seattle/start_seattle.sh": {
+    "sha256": "5eba75b2940dd3e62293050399fd24547a5202b04ae607a7b2d824657b76b66c"
+   },
+   "seattle/stop_seattle.sh": {
+    "sha256": "ffc8f44a6da4e0b6871a6a32d1ee6534b6257f5474a516191ceffa9de4e527ec"
+   },
+   "seattle/uninstall.sh": {
+    "sha256": "01670d7c23fc8c996232ccec27c0f8406380e06dc783965e4d353a7647ee3277"
+   }
+  }
+ }
 }
