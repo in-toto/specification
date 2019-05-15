@@ -1,4 +1,24 @@
 #!/usr/bin/env python
+"""
+<Program Name>
+  metadata.py
+
+<Author>
+  Santiago Torres <santiago@nyu.edu>
+  Lukas Puehringer <lukas.puehringer@nyu.edu>
+
+<Started>
+  Oct 24, 2017
+
+<Copyright>
+  See LICENSE for licensing information.
+
+<Purpose>
+  Generate Markdown-formatted summary from in-toto software supply chain layout
+  and link metadata. Metadata fields are ordered and long strings are
+  truncated for readability.
+
+"""
 import os
 import json
 import argparse
