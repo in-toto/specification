@@ -1,206 +1,434 @@
-debian/
-=======
+debian
+======
+*There is no readme for this layout*
 
-There is no readme for this layout
+## Layout
 
-# Layout metadata
-## debian/root.layout
-```json
-{"_type": "layout",
- "expires": "2017-09-02T12:57:02Z",
- "inspect": [],
- "keys": {"12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2": {"keyid": "...",
-                                                                               "keytype": "rsa",
-                                                                               "keyval": {"private": "",
-                                                                                          "public": "..."}}},
- "signatures": ["..."],
- "steps": [{"_type": "step",
-            "expected_command": ["dget",
-                                 "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc"],
-            "expected_materials": [["DISALLOW", "*"]],
-            "expected_products": [["ALLOW", "*"]],
-            "name": "fetch",
-            "pubkeys": ["12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"],
-            "threshold": 1},
-           {"_type": "step",
-            "expected_command": ["dpkg-source", "-x", "grep_2.12-2.dsc"],
-            "expected_materials": [["MATCH",
-                                    "*",
-                                    "WITH",
-                                    "PRODUCTS",
-                                    "FROM",
-                                    "fetch"]],
-            "expected_products": [["ALLOW", "*"]],
-            "name": "extract",
-            "pubkeys": ["12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"],
-            "threshold": 1},
-           {"_type": "step",
-            "expected_command": [],
-            "expected_materials": [["MATCH",
-                                    "*",
-                                    "WITH",
-                                    "PRODUCTS",
-                                    "FROM",
-                                    "extract"]],
-            "expected_products": [["ALLOW", "*"]],
-            "name": "modify",
-            "pubkeys": ["12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"],
-            "threshold": 1},
-           {"_type": "step",
-            "expected_command": ["dpkg-buildpackage", "-us", "-uc"],
-            "expected_materials": [["MATCH",
-                                    "*",
-                                    "WITH",
-                                    "PRODUCTS",
-                                    "FROM",
-                                    "modify"]],
-            "expected_products": [["ALLOW", "*"]],
-            "name": "build",
-            "pubkeys": ["12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"],
-            "threshold": 1}]}
-```
-
-# Link metadata
-
-## debian/extract.link
+### debian/root.layout
 ``` json
-{"_type": "Link",
- "byproducts": {"stderr": "gpgv: Signature made Sun 13 May 2012 08:23:12 AM "
-                          "EDT using DSA key ID 6FECCDE0\n"
-                          "gpgv: Can’t check signature: public key not found\n"
-                          "dpkg-source: warning: failed to verify signature on "
-                          "./grep_2.12-2.dsc\n",
-                "stdout": "dpkg-source: info: extracting grep in grep-2.12\n"
-                          "dpkg-source: info: unpacking "
-                          "grep_2.12.orig.tar.bz2\n"
-                          "dpkg-source: info: unpacking "
-                          "grep_2.12-2.debian.tar.bz2\n"
-                          "dpkg-source: info: applying 02-man_rgrep.pat..."},
- "command": ["dpkg-source", "-x", "grep_2.12-2.dsc"],
- "materials": {"...": "...",
-               "/home/lukas/demo/grep_2.12-2.debian.tar.bz2": {"sha256": "37887..."},
-               "/home/lukas/demo/grep_2.12-2.dsc": {"sha256": "a6a63..."},
-               "/home/lukas/demo/grep_2.12.orig.tar.bz2": {"sha256": "01199..."}},
- "name": "extract",
- "products": {"...": "...",
-              "/home/lukas/demo/grep-2.12/configure.ac": {"sha256": "72946..."},
-              "/home/lukas/demo/grep-2.12/gnulib-tests/unsetenv.c": {"sha256": "a06e3..."},
-              "/home/lukas/demo/grep-2.12/lib/dirfd.c": {"sha256": "a0540..."},
-              "/home/lukas/demo/grep-2.12/lib/gettext.h": {"sha256": "a3e97..."},
-              "/home/lukas/demo/grep-2.12/lib/quote.h": {"sha256": "3eeb3..."},
-              "/home/lukas/demo/grep-2.12/m4/dup.m4": {"sha256": "9db31..."},
-              "/home/lukas/demo/grep-2.12/m4/fts.m4": {"sha256": "36bbe..."},
-              "/home/lukas/demo/grep-2.12/m4/warn-on-use.m4": {"sha256": "b79d1..."},
-              "/home/lukas/demo/grep-2.12/tests/bre.tests": {"sha256": "caf58..."}},
- "return_value": 0,
- "signatures": [{"keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
-                 "method": "RSASSA-PSS",
-                 "sig": "9b89cf0a74a1d53359460982cdc3dcbdef2b291a..."}]}
-```
+{
+  "signed": {
+    "_type": "layout",
+    "readme": "",
+    "expires": "2017-09-02T12:57:02Z",
+    "steps": [
+      {
+        "_type": "step",
+        "name": "fetch",
+        "expected_command": [
+          "dget",
+          "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc"
+        ],
+        "pubkeys": [
+          "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"
+        ],
+        "threshold": 1,
+        "expected_materials": [
+          [
+            "DISALLOW",
+            "*"
+          ]
+        ],
+        "expected_products": [
+          [
+            "ALLOW",
+            "*"
+          ]
+        ]
+      },
+      {
+        "_type": "step",
+        "name": "extract",
+        "expected_command": [
+          "dpkg-source",
+          "-x",
+          "grep_2.12-2.dsc"
+        ],
+        "pubkeys": [
+          "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"
+        ],
+        "threshold": 1,
+        "expected_materials": [
+          [
+            "MATCH",
+            "*",
+            "WITH",
+            "PRODUCTS",
+            "FROM",
+            "fetch"
+          ]
+        ],
+        "expected_products": [
+          [
+            "ALLOW",
+            "*"
+          ]
+        ]
+      },
+      {
+        "_type": "step",
+        "name": "modify",
+        "expected_command": [],
+        "pubkeys": [
+          "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"
+        ],
+        "threshold": 1,
+        "expected_materials": [
+          [
+            "MATCH",
+            "*",
+            "WITH",
+            "PRODUCTS",
+            "FROM",
+            "extract"
+          ]
+        ],
+        "expected_products": [
+          [
+            "ALLOW",
+            "*"
+          ]
+        ]
+      },
+      {
+        "_type": "step",
+        "name": "build",
+        "expected_command": [
+          "dpkg-buildpackage",
+          "-us",
+          "-uc"
+        ],
+        "pubkeys": [
+          "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2"
+        ],
+        "threshold": 1,
+        "expected_materials": [
+          [
+            "MATCH",
+            "*",
+            "WITH",
+            "PRODUCTS",
+            "FROM",
+            "modify"
+          ]
+        ],
+        "expected_products": [
+          [
+            "ALLOW",
+            "*"
+          ]
+        ]
+      }
+    ],
+    "inspect": [],
+    "keys": {
+      "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2": {
+        "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+        "keytype": "rsa",
+        "keyval": {
+          "private": "",
+          "public": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKC..."
+        }
+      }
+    }
+  },
+  "signatures": [
+    {
+      "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+      "method": "RSASSA-PSS",
+      "sig": "9c3a5609e79ea68f9d7aa4b72e5ab1f00b7773f06912b789add45da026f46621b9e..."
+    }
+  ]
+}
 
-
-## debian/modify.link
-``` json
-{"_type": "Link",
- "byproducts": {},
- "command": [],
- "materials": {"...": "...",
-               "/home/lukas/demo/grep-2.12/gnulib-tests/test-exclude4.sh": {"sha256": "55979..."},
-               "/home/lukas/demo/grep-2.12/gnulib-tests/test-iswblank.c": {"sha256": "3b548..."},
-               "/home/lukas/demo/grep-2.12/gnulib-tests/test-sys_stat.c": {"sha256": "a3a52..."},
-               "/home/lukas/demo/grep-2.12/lib/binary-io.h": {"sha256": "f03de..."},
-               "/home/lukas/demo/grep-2.12/lib/fd-safer.c": {"sha256": "ccd06..."},
-               "/home/lukas/demo/grep-2.12/lib/iconv_close.c": {"sha256": "45702..."},
-               "/home/lukas/demo/grep-2.12/m4/environ.m4": {"sha256": "fb236..."},
-               "/home/lukas/demo/grep-2.12/m4/strtoumax.m4": {"sha256": "732a0..."},
-               "/home/lukas/demo/grep-2.12/tests/spencer1": {"sha256": "d03fc..."}},
- "name": "modify",
- "products": {"...": "...",
-              "/home/lukas/demo/grep-2.12/build-aux/useless-if-before-free": {"sha256": "c06f0..."},
-              "/home/lukas/demo/grep-2.12/lib/i-ring.h": {"sha256": "38177..."},
-              "/home/lukas/demo/grep-2.12/lib/iconv_open-osf.h": {"sha256": "9d361..."},
-              "/home/lukas/demo/grep-2.12/lib/ignore-value.h": {"sha256": "19463..."},
-              "/home/lukas/demo/grep-2.12/lib/isblank.c": {"sha256": "407be..."},
-              "/home/lukas/demo/grep-2.12/lib/unistd--.h": {"sha256": "7ba49..."},
-              "/home/lukas/demo/grep-2.12/lib/xstriconv.c": {"sha256": "2bd69..."},
-              "/home/lukas/demo/grep-2.12/m4/environ.m4": {"sha256": "fb236..."},
-              "/home/lukas/demo/grep-2.12/po/stamp-po": {"sha256": "2cd8e..."}},
- "return_value": 0,
- "signatures": [{"keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
-                 "method": "RSASSA-PSS",
-                 "sig": "6c922765260c71bbe0eef0267c2ad6f226eeec43..."}]}
-```
-
-
-## debian/fetch.link
-``` json
-{"_type": "Link",
- "byproducts": {"stderr": "--2017-08-08 11:05:06--  "
-                          "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc\n"
-                          "Resolving cdn.debian.net (cdn.debian.net)... "
-                          "149.20.4.15, 5.153.231.4, 128.31.0.62, ...\n"
-                          "Connecting to cdn.debian....",
-                "stdout": "dget: retrieving "
-                          "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc\n"
-                          "dget: retrieving "
-                          "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12.orig.tar.bz2\n"
-                          "dget: retrieving http://cdn.debian...."},
- "command": ["dget",
-             "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc"],
- "materials": {"...": "..."},
- "name": "fetch",
- "products": {"...": "...",
-              "/home/lukas/demo/grep_2.12-2.debian.tar.bz2": {"sha256": "37887..."},
-              "/home/lukas/demo/grep_2.12-2.dsc": {"sha256": "a6a63..."},
-              "/home/lukas/demo/grep_2.12.orig.tar.bz2": {"sha256": "01199..."}},
- "return_value": 1,
- "signatures": [{"keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
-                 "method": "RSASSA-PSS",
-                 "sig": "a0d3237a59a96343b2e2caee2bf0e27a249a01f7..."}]}
 ```
 
 
-## debian/build.link
+## Links
+
+### debian/fetch.12c55e46.link
 ``` json
-{"_type": "Link",
- "byproducts": {"stderr": " dpkg-source --before-build grep-2.12\n"
-                          " fakeroot debian/rules clean\n"
-                          " dpkg-source -b grep-2.12\n"
-                          " debian/rules build\n"
-                          "configure: WARNING: Included lib/regex.c not used\n"
-                          " fakeroot debian/rules binary\n"
-                          "dpkg-sh...",
-                "stdout": "dpkg-buildpackage: source package grep\n"
-                          "dpkg-buildpackage: source version 2.12-2.1\n"
-                          "dpkg-buildpackage: source distribution UNRELEASED\n"
-                          "dpkg-buildpackage: source changed by Lukas "
-                          "Puehringer <lukas.puehrin..."},
- "command": ["dpkg-buildpackage", "-us", "-uc"],
- "materials": {"...": "...",
-               "/home/lukas/demo/grep-2.12/doc/version.texi": {"sha256": "5f969..."},
-               "/home/lukas/demo/grep-2.12/gnulib-tests/test-exclude4.sh": {"sha256": "55979..."},
-               "/home/lukas/demo/grep-2.12/gnulib-tests/test-quotearg-simple.c": {"sha256": "2e95c..."},
-               "/home/lukas/demo/grep-2.12/lib/fd-safer.c": {"sha256": "ccd06..."},
-               "/home/lukas/demo/grep-2.12/lib/strerror.c": {"sha256": "7cfff..."},
-               "/home/lukas/demo/grep-2.12/lib/strings.in.h": {"sha256": "65bd7..."},
-               "/home/lukas/demo/grep-2.12/m4/putenv.m4": {"sha256": "9e9c2..."},
-               "/home/lukas/demo/grep-2.12/po/eo.gmo": {"sha256": "9304e..."},
-               "/home/lukas/demo/grep-2.12/po/tr.po": {"sha256": "b05b9..."}},
- "name": "build",
- "products": {"...": "...",
-              "/home/lukas/demo/grep-2.12/Makefile.in": {"sha256": "e913f..."},
-              "/home/lukas/demo/grep-2.12/debian/grep/usr/share/locale/eo/LC_MESSAGES/grep.mo": {"sha256": "9304e..."},
-              "/home/lukas/demo/grep-2.12/gnulib-tests/test-environ.c": {"sha256": "99f3b..."},
-              "/home/lukas/demo/grep-2.12/gnulib-tests/test-exclude6.sh": {"sha256": "86e7f..."},
-              "/home/lukas/demo/grep-2.12/gnulib-tests/test-localeconv.c": {"sha256": "cd744..."},
-              "/home/lukas/demo/grep-2.12/lib/msvc-nothrow.c": {"sha256": "2f664..."},
-              "/home/lukas/demo/grep-2.12/lib/xstriconv.h": {"sha256": "392ce..."},
-              "/home/lukas/demo/grep-2.12/po/he.gmo": {"sha256": "fdfee..."},
-              "/home/lukas/demo/grep-2.12/tests/file": {"sha256": "30dae..."}},
- "return_value": 0,
- "signatures": [{"keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
-                 "method": "RSASSA-PSS",
-                 "sig": "3877a06dee3f6e140e20d5100964adb38c1c63dd..."}]}
+{
+  "signed": {
+    "_type": "link",
+    "name": "fetch",
+    "command": [
+      "dget",
+      "http://cdn.debian.net/debian/pool/main/g/grep/grep_2.12-2.dsc"
+    ],
+    "materials": {},
+    "products": {
+      "/home/lukas/demo/grep_2.12-2.debian.tar.bz2": {
+        "sha256": "37887d8aecec66e75365abd8c41be94f75e7a3acf1d6b27fc121584f47281525"
+      },
+      "/home/lukas/demo/grep_2.12-2.dsc": {
+        "sha256": "a6a63fd21da40d11ce6ae2bc6f633bd27cd206c2348b2ef306e1b68120f7e58e"
+      },
+      "/home/lukas/demo/grep_2.12.orig.tar.bz2": {
+        "sha256": "0119987171cd60b87c89557524fc6636bdad770dae71917adcaef6abffb1be67"
+      }
+    },
+    "byproducts": {
+      "return_value": 1,
+      "stdout": "dget: retrieving http://cdn.debian.net/debian/pool/main/g/grep/grep...",
+      "stderr": "--2017-08-08 11:05:06--  http://cdn.debian.net/debian/pool/main/g/g..."
+    },
+    "environment": {}
+  },
+  "signatures": [
+    {
+      "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+      "method": "RSASSA-PSS",
+      "sig": "a0d3237a59a96343b2e2caee2bf0e27a249a01f796c3fec53f184fc2720b44dd7b2..."
+    }
+  ]
+}
+
+```
+
+
+### debian/extract.12c55e46.link
+``` json
+{
+  "signed": {
+    "_type": "link",
+    "name": "extract",
+    "command": [
+      "dpkg-source",
+      "-x",
+      "grep_2.12-2.dsc"
+    ],
+    "materials": {
+      "/home/lukas/demo/grep_2.12-2.debian.tar.bz2": {
+        "sha256": "37887d8aecec66e75365abd8c41be94f75e7a3acf1d6b27fc121584f47281525"
+      },
+      "/home/lukas/demo/grep_2.12-2.dsc": {
+        "sha256": "a6a63fd21da40d11ce6ae2bc6f633bd27cd206c2348b2ef306e1b68120f7e58e"
+      },
+      "/home/lukas/demo/grep_2.12.orig.tar.bz2": {
+        "sha256": "0119987171cd60b87c89557524fc6636bdad770dae71917adcaef6abffb1be67"
+      }
+    },
+    "products": {
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_patches": {
+        "sha256": "0623de532bc23399e87e6c1914e8e90e999efbfd26b6b956666a493893739f0d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_series": {
+        "sha256": "9afbb183d1b683d2770aecb9b379093804ccc56027f07ecf7fc252d5b93a8df2"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.version": {
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/02-man_rgrep.patch/doc/grep.in.1": {
+        "sha256": "0c933cbdacb739761f7cf9be1d9c0543b8a5cb0c1cf4031fc7add8e81146c1a6"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/configure": {
+        "sha256": "fda1f6c62f081999b74177f560e14db0b0b2f93cd632ed4a02f6ac2582fc27bf"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/src/pcresearch.c": {
+        "sha256": "08e24565e42cf5e2aeff2ca65cc4e3a8de5fa65260ea1a2d1ae872b45c3b6a25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/04-446854-grep.1.patch/doc/grep.in.1": {
+        "sha256": "90b74e6c5542b0db506c372f77c45ceab8d7289432cfe37bce11d611a4827a4d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/70-man_apostrophe.patch/doc/grep.in.1": {
+        "sha256": "eee01bf4de92df307b7f1b6fa740e1c0e0c8c28d6a12b6939ddec0708699da25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/80-587930-man-ere-reference.patch/doc/grep.in.1": {
+        "sha256": "30378876bf1c1a13449c993fb7a6406089f7f77a34f96fed5c6c742e75a395b6"
+      },
+      "...": "..."
+    },
+    "byproducts": {
+      "return_value": 0,
+      "stdout": "dpkg-source: info: extracting grep in grep-2.12\ndpkg-source: info: ...",
+      "stderr": "gpgv: Signature made Sun 13 May 2012 08:23:12 AM EDT using DSA key ..."
+    },
+    "environment": {}
+  },
+  "signatures": [
+    {
+      "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+      "method": "RSASSA-PSS",
+      "sig": "9b89cf0a74a1d53359460982cdc3dcbdef2b291a284b977fadb839501d7324fe581..."
+    }
+  ]
+}
+
+```
+
+
+### debian/modify.12c55e46.link
+``` json
+{
+  "signed": {
+    "_type": "link",
+    "name": "modify",
+    "command": [],
+    "materials": {
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_patches": {
+        "sha256": "0623de532bc23399e87e6c1914e8e90e999efbfd26b6b956666a493893739f0d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_series": {
+        "sha256": "9afbb183d1b683d2770aecb9b379093804ccc56027f07ecf7fc252d5b93a8df2"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.version": {
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/02-man_rgrep.patch/doc/grep.in.1": {
+        "sha256": "0c933cbdacb739761f7cf9be1d9c0543b8a5cb0c1cf4031fc7add8e81146c1a6"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/configure": {
+        "sha256": "fda1f6c62f081999b74177f560e14db0b0b2f93cd632ed4a02f6ac2582fc27bf"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/src/pcresearch.c": {
+        "sha256": "08e24565e42cf5e2aeff2ca65cc4e3a8de5fa65260ea1a2d1ae872b45c3b6a25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/04-446854-grep.1.patch/doc/grep.in.1": {
+        "sha256": "90b74e6c5542b0db506c372f77c45ceab8d7289432cfe37bce11d611a4827a4d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/70-man_apostrophe.patch/doc/grep.in.1": {
+        "sha256": "eee01bf4de92df307b7f1b6fa740e1c0e0c8c28d6a12b6939ddec0708699da25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/80-587930-man-ere-reference.patch/doc/grep.in.1": {
+        "sha256": "30378876bf1c1a13449c993fb7a6406089f7f77a34f96fed5c6c742e75a395b6"
+      },
+      "...": "..."
+    },
+    "products": {
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_patches": {
+        "sha256": "0623de532bc23399e87e6c1914e8e90e999efbfd26b6b956666a493893739f0d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_series": {
+        "sha256": "9afbb183d1b683d2770aecb9b379093804ccc56027f07ecf7fc252d5b93a8df2"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.version": {
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/02-man_rgrep.patch/doc/grep.in.1": {
+        "sha256": "0c933cbdacb739761f7cf9be1d9c0543b8a5cb0c1cf4031fc7add8e81146c1a6"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/configure": {
+        "sha256": "fda1f6c62f081999b74177f560e14db0b0b2f93cd632ed4a02f6ac2582fc27bf"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/src/pcresearch.c": {
+        "sha256": "08e24565e42cf5e2aeff2ca65cc4e3a8de5fa65260ea1a2d1ae872b45c3b6a25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/04-446854-grep.1.patch/doc/grep.in.1": {
+        "sha256": "90b74e6c5542b0db506c372f77c45ceab8d7289432cfe37bce11d611a4827a4d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/70-man_apostrophe.patch/doc/grep.in.1": {
+        "sha256": "eee01bf4de92df307b7f1b6fa740e1c0e0c8c28d6a12b6939ddec0708699da25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/80-587930-man-ere-reference.patch/doc/grep.in.1": {
+        "sha256": "30378876bf1c1a13449c993fb7a6406089f7f77a34f96fed5c6c742e75a395b6"
+      },
+      "...": "..."
+    },
+    "byproducts": {
+      "return_value": null
+    },
+    "environment": {}
+  },
+  "signatures": [
+    {
+      "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+      "method": "RSASSA-PSS",
+      "sig": "6c922765260c71bbe0eef0267c2ad6f226eeec43ef45b5dcba6314f52adba655265..."
+    }
+  ]
+}
+
+```
+
+
+### debian/build.12c55e46.link
+``` json
+{
+  "signed": {
+    "_type": "link",
+    "name": "build",
+    "command": [
+      "dpkg-buildpackage",
+      "-us",
+      "-uc"
+    ],
+    "materials": {
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_patches": {
+        "sha256": "0623de532bc23399e87e6c1914e8e90e999efbfd26b6b956666a493893739f0d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_series": {
+        "sha256": "9afbb183d1b683d2770aecb9b379093804ccc56027f07ecf7fc252d5b93a8df2"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.version": {
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/02-man_rgrep.patch/doc/grep.in.1": {
+        "sha256": "0c933cbdacb739761f7cf9be1d9c0543b8a5cb0c1cf4031fc7add8e81146c1a6"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/configure": {
+        "sha256": "fda1f6c62f081999b74177f560e14db0b0b2f93cd632ed4a02f6ac2582fc27bf"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/src/pcresearch.c": {
+        "sha256": "08e24565e42cf5e2aeff2ca65cc4e3a8de5fa65260ea1a2d1ae872b45c3b6a25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/04-446854-grep.1.patch/doc/grep.in.1": {
+        "sha256": "90b74e6c5542b0db506c372f77c45ceab8d7289432cfe37bce11d611a4827a4d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/70-man_apostrophe.patch/doc/grep.in.1": {
+        "sha256": "eee01bf4de92df307b7f1b6fa740e1c0e0c8c28d6a12b6939ddec0708699da25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/80-587930-man-ere-reference.patch/doc/grep.in.1": {
+        "sha256": "30378876bf1c1a13449c993fb7a6406089f7f77a34f96fed5c6c742e75a395b6"
+      },
+      "...": "..."
+    },
+    "products": {
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_patches": {
+        "sha256": "0623de532bc23399e87e6c1914e8e90e999efbfd26b6b956666a493893739f0d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.quilt_series": {
+        "sha256": "9afbb183d1b683d2770aecb9b379093804ccc56027f07ecf7fc252d5b93a8df2"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/.version": {
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/02-man_rgrep.patch/doc/grep.in.1": {
+        "sha256": "0c933cbdacb739761f7cf9be1d9c0543b8a5cb0c1cf4031fc7add8e81146c1a6"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/configure": {
+        "sha256": "fda1f6c62f081999b74177f560e14db0b0b2f93cd632ed4a02f6ac2582fc27bf"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/03-397262-dlopen-pcre.patch/src/pcresearch.c": {
+        "sha256": "08e24565e42cf5e2aeff2ca65cc4e3a8de5fa65260ea1a2d1ae872b45c3b6a25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/04-446854-grep.1.patch/doc/grep.in.1": {
+        "sha256": "90b74e6c5542b0db506c372f77c45ceab8d7289432cfe37bce11d611a4827a4d"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/70-man_apostrophe.patch/doc/grep.in.1": {
+        "sha256": "eee01bf4de92df307b7f1b6fa740e1c0e0c8c28d6a12b6939ddec0708699da25"
+      },
+      "/home/lukas/demo/grep-2.12/.pc/80-587930-man-ere-reference.patch/doc/grep.in.1": {
+        "sha256": "30378876bf1c1a13449c993fb7a6406089f7f77a34f96fed5c6c742e75a395b6"
+      },
+      "...": "..."
+    },
+    "byproducts": {
+      "return_value": 0,
+      "stdout": "dpkg-buildpackage: source package grep\ndpkg-buildpackage: source ve...",
+      "stderr": " dpkg-source --before-build grep-2.12\n fakeroot debian/rules clean\n..."
+    },
+    "environment": {}
+  },
+  "signatures": [
+    {
+      "keyid": "12c55e46654c682d3ffd3b63492adf422e6812eb1ac41574d083b9e770d1e4c2",
+      "method": "RSASSA-PSS",
+      "sig": "3877a06dee3f6e140e20d5100964adb38c1c63dd89803087204d561c0adbfed17c2..."
+    }
+  ]
+}
+
 ```
 
 
