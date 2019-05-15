@@ -28,25 +28,21 @@ import six
 from collections import OrderedDict
 from pprint import pformat
 
-MAIN_TEMPLATE = """{name}
-=======
-
+MAIN_TEMPLATE = """{title}
+======
 {description}
 
-# Layout metadata
-## {layout_filename}
-```json
-{layout_metadata}
-```
-
-# Link metadata
-{link_template}
+## Layout
+{layout_str}
+## Links
+{links_str}
 """
 
-LINK_TEMPLATE = """
-## {name}.link
+METADATA_TEMPLATE = """
+### {title}
 ``` json
 {metadata}
+
 ```
 
 """
@@ -130,104 +126,91 @@ def _beautify(obj, **kw):
   return obj
 
 
-def load_layout_metadata(folder):
-  return _load_metadata(folder, 'root.layout')
+def beautify_layout(layout):
+  """Beautify in-toto layout with layout-specific dict field ordering. """
+  return beautify(layout, dict_key_order_lists=[
+      ["signed", "signatures"],
+      ["_type", "readme", "expires", "steps", "inspect", "keys"],
+      ["keyid", "keytype", "keyval"],
+      ["_type", "name", "expected_command", "pubkeys", "threshold",
+       "expected_materials", "expected_products"],
+      ["_type", "name", "run", "expected_materials", "expected_products"]])
 
-def load_link_metadata(folder, name, keyid):
-  return _load_metadata(folder, "{}.{}.link".format(name, keyid))
 
-def populate_link_template(folder):
+def beautify_link(link):
+  """Beautify in-toto link with link-specific dict field ordering. """
+  return beautify(link, dict_key_order_lists=[
+      ["signed", "signatures"],
+      ["_type", "name", "command",  "materials", "products", "byproducts",
+      "environment"],
+      ["return_value", "stdout", "stderr"]])
 
-  links = glob.glob(os.path.join(folder, "*.link"))
 
-  resulting_template = ""
+def load_metadata(path):
+  with open(path) as fp:
+    metadata = json.load(fp)
+  return metadata
 
-  for link in links:
-    name, keyid, _ = link.split(".")
-    metadata = load_link_metadata(folder, name.split(os.path.sep)[1], keyid)
 
-    if len(metadata['products']) > 10:
-      new_list = random.sample(metadata['products'].keys(), 9)
-      product_subset = {x: metadata['products'][x] for x in new_list}
-      metadata['products'] = product_subset
+def create_markdown_summary(folder):
+  """ From passed folder load 'root.layout' and '*.link' files corresponding
+  to the steps defined in the layout and create a markdown-formatted
+  summary in the current working directory.
 
-    for product in metadata['products']:
-      metadata['products'][product]['sha256'] =  metadata['products'][product]['sha256'][:5] + "..."
-    metadata['products']['...'] = "..." 
+  """
+  project_name = os.path.basename(os.path.normpath(folder))
 
-    if len(metadata['materials']) > 10:
+  layout_name = "root.layout"
+  layout_path = os.path.join(folder, layout_name)
+  layout_title = os.path.join(project_name, layout_name)
+  layout = load_metadata(layout_path)
 
-      new_list = random.sample(metadata['materials'].keys(), 9)
-      material_subset = {x: metadata['materials'][x] for x in new_list}
-      metadata['materials'] = material_subset
-    for material in metadata['materials']:
-      metadata['materials'][material]['sha256'] =  metadata['materials'][material]['sha256'][:5] + "..."
-    metadata['materials']['...'] = "..." 
+  layout_str = METADATA_TEMPLATE.format(
+      title=layout_title,
+      metadata=json.dumps(beautify_layout(layout), indent=2))
 
-    for byproduct in metadata['byproducts']:
-      if len(metadata['byproducts'][byproduct]) > 200:
-        metadata['byproducts'][byproduct] = metadata['byproducts'][byproduct][:200] + "..."
-      metadata['byproducts'][byproduct] = metadata['byproducts'][byproduct].replace("'", "’")
+  links_str = ""
+  for step in layout["signed"]["steps"]:
+    link_paths = glob.glob(os.path.join(folder,
+        "{}.*.link".format(step["name"])))
 
-    for signature in metadata['signatures']:
-      signature['sig'] = signature['sig'][:40] + "..."
+    for link_path in link_paths:
+      link_name = os.path.basename(link_path)
+      link_title = os.path.join(project_name, link_name)
+      link = load_metadata(link_path)
+      links_str += METADATA_TEMPLATE.format(
+          title=link_title,
+          metadata=json.dumps(beautify_link(link), indent=2))
 
-    if not metadata['return_value']:
-      metadata['return_value'] = 0
+  description = layout["signed"]["readme"] or \
+      "*There is no readme for this layout*"
 
-    resulting_template += LINK_TEMPLATE.format(name=name, 
-        metadata=pformat(metadata).replace("'", '"'))
+  result = MAIN_TEMPLATE.format(
+      title=project_name,
+      description=description,
+      layout_str=layout_str,
+      links_str=links_str)
 
-  return resulting_template
-
-def populate_template(folder):
-
-  layout = load_layout_metadata(folder)
-  link_template = populate_link_template(folder)
-
-  description = "There is no readme for this layout"
-  name = "{name}root.layout".format(name=folder)
-
-  if 'readme' in layout:
-    description = layout['readme']
-    del layout['readme']
-
-  layout["signatures"] = ["..."]
-  for keyid in layout['keys']:
-    layout['keys'][keyid]['keyid'] = "..."
-    layout['keys'][keyid]['keyval']['public'] = "..."
-
-  result = MAIN_TEMPLATE.format(name=folder, description=description,
-      layout_filename=name, layout_metadata=pformat(layout).replace("'", '"'),
-      link_template=link_template)
-
-  output_filename = "{}.md".format(folder.strip(os.path.sep))
+  output_filename = "{}.md".format(project_name)
   with open(output_filename, "w") as fp:
     fp.write(result)
 
-def main():
 
+def main():
   parser = argparse.ArgumentParser(
-        description="Compiles a series of metadata located in the target"
-        "folder")
+      description="Generate Markdown-formatted summary from in-toto software "
+      " supply chain layout and link metadata.")
+
   # Whitespace padding to align with program name
-  lpad = (len(parser.prog) + 1) * " "
-  parser.usage = ("\n"
-      "%(prog)s  --example-folder <folder>\n{0}".format(lpad))
+  parser.usage = "%(prog)s  --example-folder <folder>"
   in_toto_args = parser.add_argument_group("example-settings")
   in_toto_args.add_argument("-f", "--example-folder", type=str, required=True,
-    help="The folder where a metadata group is located")
+      help="The folder where a metadata group is located. The layout name "
+      "is expected to be 'root.layout'. The passed folder name is used as "
+      "title and to write a '<name>.md' to cwd.")
 
   args = parser.parse_args()
-  populate_template(args.example_folder)
-
-def _load_metadata(folder, metadata_filename):
-
-  metadata_path = os.path.join(folder, metadata_filename)
-  with open(metadata_path) as fp:
-    metadata = json.load(fp)
-
-  return metadata 
+  create_markdown_summary(args.example_folder)
 
 # TODO: we could cleverly recurse and show the inherittance, but do we really
 # want to?
