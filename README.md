@@ -13,7 +13,7 @@ brief description
 - [demo](https://github.com/in-toto/demo) This is a very basic dummy supply
   chain example to help you understand the in-toto python toolchain. We
   recommend getting started here.
-- [kubectl-in-toto](https://in-toto/kubectl-in-toto). Inside of this repository
+- [kubectl-in-toto](https://github.com/in-toto/kubectl-in-toto). Inside of this repository
   you will find a demo to test a kubectl in-toto plugin to scan containers in
   your kubernetes deployment against in-toto metadata.
 - [demo OpenSUSE](https://github.com/in-toto/demo-opensuse). This repository
