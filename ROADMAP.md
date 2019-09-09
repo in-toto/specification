@@ -85,8 +85,8 @@ easily provide evidence of reproducibility.
 
 We intend to review the progress done in these efforts on these time windows.
 
-- End of August
-- End of November
+- [End of August](roadmap-reviews/2020/review_1_august_19.md)
+- End of December
 
 These time windows will also be used to update all stakeholders with the status
 of the in-toto project.
