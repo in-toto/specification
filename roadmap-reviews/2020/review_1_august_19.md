@@ -1,8 +1,8 @@
-# ROADMAP update (Q1)
+# ROADMAP review (End of August '19)
 
-We've reached the first quarter of our 2020 roadmap, and we are due a review of
-our activities. Here's a rundown of what has happened in the scope of the
-in-toto project's
+We've reached the end of the first evaluation period for our 2020 roadmap, and
+we are due a review of our activities. Here's a rundown of what has happened in
+the scope of the in-toto project's
 [ROADMAP](https://github.com/in-toto/docs/blob/master/ROADMAP.md) for this
 year.
 
@@ -36,8 +36,8 @@ reference implementation to our golang implementation.
 ### Jenkins
 
 Our jenkins implementation has mostly seen work on cosmetic changes, as well as
-simplifying the build procedures. We expect the rest of the quarters to take on
-the standard stream capturing features.
+simplifying the build procedures. We expect the rest of the roadmap period to
+take on the standard stream capturing features.
 
 ### Kubernetes components
 
@@ -113,9 +113,9 @@ and how in-toto participates by looking at their recent monthly reports:
 
 ## Closing remarks.
 
-This is it for this quarter. We are very excited about building a thriving
-community of people from Academia, Open Source and Industry. Across the whole
-in-toto project, we have almost doubled the amount of contributors since this
-year. We have also seen more occasional committers, as well as people looking
-for ways to contribute. We hope that from there we get more regular
-contributors to help us secure the software supply chain as a whole.
+This is it for this evaluation period. We are very excited about building a
+thriving community of people from Academia, Open Source and Industry. Across
+the whole in-toto project, we have almost doubled the amount of contributors
+since this year. We have also seen more occasional committers, as well as
+people looking for ways to contribute. We hope that from there we get more
+regular contributors to help us secure the software supply chain as a whole.
