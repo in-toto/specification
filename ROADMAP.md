@@ -85,7 +85,7 @@ easily provide evidence of reproducibility.
 
 We intend to review the progress done in these efforts on these time windows.
 
-- End of August
+- [End of August](roadmaps/2020/first-quarter-update.md)
 - End of November
 
 These time windows will also be used to update all stakeholders with the status
