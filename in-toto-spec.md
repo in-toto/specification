@@ -55,7 +55,7 @@ product.
 
 in-toto aims to provide integrity, authentication and auditability to the
 supply chain as a whole. This means that all the steps within the supply chain
-are clearly laid out, that the parties involved in carrying out  a step are
+are clearly laid out, that the parties involved in carrying out a step are
 explicitly stated, and that each step carried out meets the requirements
 specified by the actor responsible for this software product.
 
@@ -133,7 +133,7 @@ To achieve the goals stated above, we anticipate a system with the following
 properties:
 
 * **Final product authentication and integrity**: the product received by the
-  client was created by the intended party. This ensures the final product
+  client was created by the intended functionary. This ensures the final product
 matches bit-by-bit the final product reported by the last step in the supply
 chain.
 * **Process compliance and auditability**: the product received by the client
@@ -151,8 +151,8 @@ used and the resulting products.
   supply chain provides evidence of the step using an unforgeable identifier.
 This means if Alice tagged a release, the evidence provided could only be
 produced by Alice.
-* **Task and privilege separation**: the different steps within the supply chain
-  can be assigned to different parties to perform. This means, if Alice is the
+* **Task and privilege separation**: the different steps within the supply
+  chain can be assigned to different functionaries. This means, if Alice is the
 only functionary allowed to tag a release, releases tagged by Bob will not be
 trusted if present in the supply chain.
 
@@ -1342,6 +1342,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_materials": [ ],
         "expected_products": [
           ["CREATE", "foo.py"]
+          ["CREATE", "test.py"]
         ],
         "pubkeys": [
           "<ALICES_KEYID>"
@@ -1971,7 +1972,7 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `verify-vcs-commits.[KEYID-PREFIX]link` (upstream inspection):
+##### `verify-vcs-commits.[UPSTREAM-KEYID-PREFIX].link` (upstream inspection):
 
 ```json
 {"signed" : { 
@@ -1979,7 +1980,7 @@ A root.layout file that fulfills these requirements would look like this:
     "name": "package",
     "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
     "materials": {
-      "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
+      "vcs.log": { "sha256": "f62774ae9fd8bb655c48cee7f0f09e44..."}
     },
     "products": {
       "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}

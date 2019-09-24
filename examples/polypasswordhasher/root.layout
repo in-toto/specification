@@ -1,260 +1,309 @@
 {
-    "_type": "layout",
-    "expires": "2016-12-10T13:09:03.973807Z",
-    "inspect": [
-        {
-            "_type": "inspection",
-            "material_matchrules": [
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0.tar.gz",
-                    "AS",
-                    "dist/PolyPasswordHasher-0.2a0.tar.gz",
-                    "FROM",
-                    "build-sdist"
-                ],
-                [
-                    "CREATE",
-                    "*"
-                ]
-            ],
-            "name": "untar",
-            "product_matchrules": [
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0/polypasswordhasher/*.py",
-                    "AS",
-                    "polypasswordhasher/*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0/src/fastpolymath.c",
-                    "AS",
-                    "src/fastpolymath.c",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0/include/fastpolymath.h",
-                    "AS",
-                    "include/fastpolymath.h",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0/test/test*.py",
-                    "AS",
-                    "test/testfastshamirsecret.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "PolyPasswordHasher-0.2a0/setup.py",
-                    "AS",
-                    "setup.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "CREATE",
-                    "*"
-                ]
-            ],
-            "run": "tar xvf PolyPasswordHasher-0.2a0.tar.gz"
-        }
+ "signatures": [
+  {
+   "keyid": "ee4ca725ae71eb8be7971505a301f6c6b9d1b0b25ccbf18b1532e7171b9741b5",
+   "method": "RSASSA-PSS",
+   "sig": "90119b3329753ed3cf58e20071c99cf68e4eb56dcecd98bb409da4ff7ce3e1351d7045f1c39271e4eff8e87f27b9dcaf08ae81c2151fe9b0d93aad8521b954f1adf8a6fba578cc361657a6437905c2bb6a7c9ac3893a867e2c70e7808bf2f54eccd72fb9232331b22986924a07bb90ade3bdd984bff32157b9a8f9d0f2e1495e0089f3d869eaba5231ca1caf96b71728a5353c30228032965b556f1dabf55106f31bc42abd8a864af39b149e14ac749fbdaf6747445dbf9cbf30ee6df2c4fad830ebd3f5fc903662c3c87f67ba8b284c1fe8127c07b02711856eabd61352b728315f014490a082cbfac9ed5d04c82649e17252c856f698a8a95ca0a3ab8878ab6408948169b277fdcba00ddf6be96401fc6765ad228289142fca7e574590ddff8bd6ecdf8e26f3de6752b5298705c4d71a9f41af2a496d4b9df5f2118a577059a945b6eafe82dc1002d340b6e48a75c0ab411f3415e16d95f6ffe2ad4f2dad719b05faba375c5f17b5b779ca48414e3b2a33b07dc7089b0baa02d9c0fb9eff05"
+  }
+ ],
+ "signed": {
+  "_type": "layout",
+  "expires": "2016-12-10T13:09:03Z",
+  "inspect": [
+   {
+    "_type": "inspection",
+    "expected_materials": [
+     [
+      "MATCH",
+      "PolyPasswordHasher-0.2a0.tar.gz",
+      "WITH",
+      "PRODUCTS",
+      "IN",
+      "dist",
+      "FROM",
+      "build-sdist"
+     ],
+     [
+      "CREATE",
+      "*"
+     ]
     ],
-    "keys": {
-        "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f": {
-            "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
-            "keytype": "rsa",
-            "keyval": {
-                "private": "-----BEGIN RSA PRIVATE KEY-----\n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\n-----END RSA PRIVATE KEY-----",
-                "public": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAxoK1dIPqzvgBVEoA9JJU\nMqrvo0h1er5iI3i8Zsv7d2/Zr7kiNY0rwgUy2HOWR8I9GrfezwSQdPfe+1ALXe56\nhwAYm71oCsQ4TTTcf08TXntoXvNGeN+P3SsKJ6iw6HcYHyiqMuW8lpnDfd4mEPSe\nuv4ejNZzRHaMj1j9BX2Xi5lfEasLfsfKGdDhaOjsQm7Z1x5ONJFCeljtmr8FyiXV\n/0g2wUpa5nwdNYI9+DCorlvWV3z2xqotxzc5dfgGUN7Mz0MZP/qxNAEXV9cLNoQH\n5ijZUsCBnEbzg61HG9Dhw+TSDPKoz2MbRE0ick34YqdAqfGDfRDcOIQAG93guE1m\nle2/ZvP6VWdfPSPPXsRaKGUzxLlU7A5kPBhIcRzq6r2LoCVocT5b30XsaFuKzIrD\nF//k5sgu/hN5XCsWlp+p8h76h12IesPCTz7vFv6Em5aJvrOwkzUOR+Esn5aPjHij\nHvuH/RBcU8vJPEd0M6lcSg+OCOZ43nUUEQpqdHPaAiiNAgMBAAE=\n-----END PUBLIC KEY-----"
-            }
-        }
-    },
-    "signatures": [
-        {
-            "keyid": "ee4ca725ae71eb8be7971505a301f6c6b9d1b0b25ccbf18b1532e7171b9741b5",
-            "method": "RSASSA-PSS",
-            "sig": "90119b3329753ed3cf58e20071c99cf68e4eb56dcecd98bb409da4ff7ce3e1351d7045f1c39271e4eff8e87f27b9dcaf08ae81c2151fe9b0d93aad8521b954f1adf8a6fba578cc361657a6437905c2bb6a7c9ac3893a867e2c70e7808bf2f54eccd72fb9232331b22986924a07bb90ade3bdd984bff32157b9a8f9d0f2e1495e0089f3d869eaba5231ca1caf96b71728a5353c30228032965b556f1dabf55106f31bc42abd8a864af39b149e14ac749fbdaf6747445dbf9cbf30ee6df2c4fad830ebd3f5fc903662c3c87f67ba8b284c1fe8127c07b02711856eabd61352b728315f014490a082cbfac9ed5d04c82649e17252c856f698a8a95ca0a3ab8878ab6408948169b277fdcba00ddf6be96401fc6765ad228289142fca7e574590ddff8bd6ecdf8e26f3de6752b5298705c4d71a9f41af2a496d4b9df5f2118a577059a945b6eafe82dc1002d340b6e48a75c0ab411f3415e16d95f6ffe2ad4f2dad719b05faba375c5f17b5b779ca48414e3b2a33b07dc7089b0baa02d9c0fb9eff05"
-        }
+    "expected_products": [
+     [
+      "MATCH",
+      "*.py",
+      "IN",
+      "PolyPasswordHasher-0.2a0/polypasswordhasher",
+      "WITH",
+      "PRODUCTS",
+      "IN",
+      "polypasswordhasher",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "fastpolymath.c",
+      "IN",
+      "PolyPasswordHasher-0.2a0/src",
+      "WITH",
+      "PRODUCTS",
+      "IN",
+      "src",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "fastpolymath.h",
+      "IN",
+      "PolyPasswordHasher-0.2a0/include",
+      "WITH",
+      "PRODUCTS",
+      "IN",
+      "include",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test*.py",
+      "IN",
+      "PolyPasswordHasher-0.2a0/test",
+      "WITH",
+      "PRODUCTS",
+      "IN",
+      "test",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "setup.py",
+      "IN",
+      "PolyPasswordHasher-0.2a0",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "CREATE",
+      "*"
+     ]
     ],
-    "steps": [
-        {
-            "_type": "step",
-            "expected_command": "git tag",
-            "material_matchrules": [],
-            "name": "tag-release",
-            "product_matchrules": [
-                [
-                    "CREATE",
-                    "polypasswordhasher/*.py"
-                ],
-                [
-                    "CREATE",
-                    "setup.py"
-                ],
-                [
-                    "CREATE",
-                    "test/test*.py"
-                ],
-                [
-                    "CREATE",
-                    "test/__init__.py"
-                ],
-                [
-                    "CREATE",
-                    "test/runtests.py"
-                ],
-                [
-                    "CREATE",
-                    "src/fastpolymath.c"
-                ],
-                [
-                    "CREATE",
-                    "include/fastpolymath.h"
-                ]
-            ],
-            "pubkeys": [
-                "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
-            ]
-        },
-        {
-            "_type": "step",
-            "expected_command": "python setup.py sdist",
-            "material_matchrules": [
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "polypasswordhasher/*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "src/fastpolymath.c",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "include/fastpolymath.h",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "setup.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/test*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/__init__.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/runtests.py",
-                    "FROM",
-                    "tag-release"
-                ]
-            ],
-            "name": "build-sdist",
-            "product_matchrules": [
-                [
-                    "CREATE",
-                    "dist/PolyPasswordHasher-0.2a0.tar.gz"
-                ]
-            ],
-            "pubkeys": [
-                "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
-            ]
-        },
-        {
-            "_type": "step",
-            "expected_command": "python setup.py test",
-            "material_matchrules": [
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "polypasswordhasher/*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "src/fastpolymath.c",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "include/fastpolymath.h",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/test*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/__init__*.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "test/runtests.py",
-                    "FROM",
-                    "tag-release"
-                ],
-                [
-                    "MATCH",
-                    "PRODUCT",
-                    "setup.py",
-                    "FROM",
-                    "tag-release"
-                ]
-            ],
-            "name": "test",
-            "product_matchrules": [],
-            "pubkeys": [
-                "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
-            ]
-        }
+    "name": "untar",
+    "run": [
+     "tar",
+     "xvf",
+     "PolyPasswordHasher-0.2a0.tar.gz"
     ]
+   }
+  ],
+  "keys": {
+   "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f": {
+    "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
+    "keytype": "rsa",
+    "keyval": {
+     "private": "",
+     "public": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAxoK1dIPqzvgBVEoA9JJU\nMqrvo0h1er5iI3i8Zsv7d2/Zr7kiNY0rwgUy2HOWR8I9GrfezwSQdPfe+1ALXe56\nhwAYm71oCsQ4TTTcf08TXntoXvNGeN+P3SsKJ6iw6HcYHyiqMuW8lpnDfd4mEPSe\nuv4ejNZzRHaMj1j9BX2Xi5lfEasLfsfKGdDhaOjsQm7Z1x5ONJFCeljtmr8FyiXV\n/0g2wUpa5nwdNYI9+DCorlvWV3z2xqotxzc5dfgGUN7Mz0MZP/qxNAEXV9cLNoQH\n5ijZUsCBnEbzg61HG9Dhw+TSDPKoz2MbRE0ick34YqdAqfGDfRDcOIQAG93guE1m\nle2/ZvP6VWdfPSPPXsRaKGUzxLlU7A5kPBhIcRzq6r2LoCVocT5b30XsaFuKzIrD\nF//k5sgu/hN5XCsWlp+p8h76h12IesPCTz7vFv6Em5aJvrOwkzUOR+Esn5aPjHij\nHvuH/RBcU8vJPEd0M6lcSg+OCOZ43nUUEQpqdHPaAiiNAgMBAAE=\n-----END PUBLIC KEY-----"
+    }
+   }
+  },
+  "readme": "",
+  "steps": [
+   {
+    "_type": "step",
+    "expected_command": [
+     "git",
+     "tag"
+    ],
+    "expected_materials": [],
+    "expected_products": [
+     [
+      "CREATE",
+      "polypasswordhasher/*.py"
+     ],
+     [
+      "CREATE",
+      "setup.py"
+     ],
+     [
+      "CREATE",
+      "test/test*.py"
+     ],
+     [
+      "CREATE",
+      "test/__init__.py"
+     ],
+     [
+      "CREATE",
+      "test/runtests.py"
+     ],
+     [
+      "CREATE",
+      "src/fastpolymath.c"
+     ],
+     [
+      "CREATE",
+      "include/fastpolymath.h"
+     ]
+    ],
+    "name": "tag-release",
+    "pubkeys": [
+     "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "python",
+     "setup.py",
+     "sdist"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "polypasswordhasher/*.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "src/fastpolymath.c",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "include/fastpolymath.h",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "setup.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/test*.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/__init__.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/runtests.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "dist/PolyPasswordHasher-0.2a0.tar.gz"
+     ]
+    ],
+    "name": "build-sdist",
+    "pubkeys": [
+     "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "python",
+     "setup.py",
+     "test"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "polypasswordhasher/*.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "src/fastpolymath.c",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "include/fastpolymath.h",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/test*.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/__init__*.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "test/runtests.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ],
+     [
+      "MATCH",
+      "setup.py",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "tag-release"
+     ]
+    ],
+    "expected_products": [],
+    "name": "test",
+    "pubkeys": [
+     "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f"
+    ],
+    "threshold": 1
+   }
+  ]
+ }
 }

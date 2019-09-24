@@ -1,0 +1,195 @@
+{
+ "signatures": [
+  {
+   "keyid": "85ed317c5950f8c5921bb547bdecb4e7c697c9502164d60d9c922ff384b083c5",
+   "method": "RSASSA-PSS",
+   "sig": "ceb3ce5664472dccee0ec9fdf20a281418ab6b537374659786f75718e506b016005d69225a59c49c6b6de80213514c11122f8f72b41b1ca12699477bcc412fb635059ec3db21cbc324607fd047b65346fb3ad499cbaabe5639ba9db1f654bf02efb9855d3e3610919d1b4ed1585cf81d01ee3a1f1c11632d46f62ca90b9460065476fc31107661f33361dbd1b663ac79ae02185a0775f2094fc3511b1df22a444c9cdaf076df2187cf2e7ed4318ae8fb3ad0a9fe8f8eaf324768d50e9987b9ea0ba54c8c6a9c68127cf09fdbed292f0a6d9208ac0de552af7d3cd4104564b8751a379a2c20148e541555c8efd74c5ef6bd78894f18f6cdde6882b215e31576c5467f1613f01c9461a195ae78cdff8ea214b2762ef32bc4d0e4f1bba02f2f0467ed87873c153310537957dde0817105578b8d6fd897de79ccb407b7dfecfe6efdba2c4d5d5df153fdb34fe2f8ebaaac56a9847f047c3e3b2eb78d7e1f5a8c99110c01800ad7e3e5fab8b20f3f69d77b02d402d71272a7d8ab31cdd92983ee4eaa"
+  }
+ ],
+ "signed": {
+  "_type": "layout",
+  "expires": "2017-01-23T13:27:57Z",
+  "inspect": [
+   {
+    "_type": "inspection",
+    "expected_materials": [
+     [
+      "CREATE",
+      "*"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "seattle/seattle_repy/vesselinfo"
+     ],
+     [
+      "MATCH",
+      "seattle/*",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "dummy-untar-linux-base-installer"
+     ],
+     [
+      "CREATE",
+      "*"
+     ]
+    ],
+    "name": "untar-linux-installer",
+    "run": [
+     "tar",
+     "xf",
+     "seattle_linux.tgz"
+    ]
+   }
+  ],
+  "keys": {
+   "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5": {
+    "keyid": "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5",
+    "keytype": "rsa",
+    "keyval": {
+     "private": "",
+     "public": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAv0DVENRYodPzErrcDmtO\njp158JSG3fVPOCKG3JJdDRfAF72EzFSbOseuDKKLYB/l2uOdNluPjjsVwFcsBtfp\n1hchvDBg33dyyl0bgz2xJizxtRfiktASeW2ZZzgCGHos0knD6i89qSiBqkhQbFoX\nLUc03m70RU4vI2TOYZVoOP/jxKmlcEbrcLBYSFreXYH7onvuwLu+FyrVbpMztKB9\nq6exsNlvfZ/MpFRWhFSB4BuwqYIh1XtowVe/GvsywqDN5ViPDQxOXZvlqn92UCL9\ncFQlUhh8etXcJAozQpSrEsEqSDTX2OwHHY2p1k842IIDNbRs3vir6eSc4qJc/5eI\nTFB6rb37NxigTxmS0AmTaVInWsVYQUFQmPzJTSCwQFcD5yk/KPsJvE2dz8bvEQ6F\no6UU2/yoY2LnueaB/8kJsFTSHtbBgA2a4sk/MZN0H4fcmyOA+ZSy3s8HIQItYXdp\ndSObANA3DAiz5P7Iwce1mKwFwcEWQ9DdeX3DplgKe3SnAgMBAAE=\n-----END PUBLIC KEY-----"
+    }
+   }
+  },
+  "readme": "",
+  "steps": [
+   {
+    "_type": "step",
+    "expected_command": [
+     "python",
+     "initialize.py"
+    ],
+    "expected_materials": [],
+    "expected_products": [
+     [
+      "CREATE",
+      "installer-packaging/*"
+     ]
+    ],
+    "name": "clone-dependencies",
+    "pubkeys": [
+     "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "python",
+     "build.py"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "installer-packaging/*",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "clone-dependencies"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "installer-packaging/*"
+     ]
+    ],
+    "name": "build-runnable",
+    "pubkeys": [
+     "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "edit",
+     "files",
+     "manually"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "installer-packaging/RUNNABLE/*",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "build-runnable"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "installer-packaging/*"
+     ]
+    ],
+    "name": "pre-build-file-edit",
+    "pubkeys": [
+     "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "python",
+     "rebuild_base_installers.py",
+     "0.1-in-toto-in-seattle"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "installer-packaging/*",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "pre-build-file-edit"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "custominstallerbuilder/html/static/installers/base/*"
+     ]
+    ],
+    "name": "build-base-installers",
+    "pubkeys": [
+     "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5"
+    ],
+    "threshold": 1
+   },
+   {
+    "_type": "step",
+    "expected_command": [
+     "tar",
+     "xf",
+     "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz"
+    ],
+    "expected_materials": [
+     [
+      "MATCH",
+      "custominstallerbuilder/html/static/installers/base/seattle_linux.tgz",
+      "WITH",
+      "PRODUCTS",
+      "FROM",
+      "build-base-installers"
+     ]
+    ],
+    "expected_products": [
+     [
+      "CREATE",
+      "*"
+     ]
+    ],
+    "name": "dummy-untar-linux-base-installer",
+    "pubkeys": [
+     "d66d18e768284e519ed2d0774376faf4859cb6529bf6e392621b8d42752206d5"
+    ],
+    "threshold": 1
+   }
+  ]
+ }
+}

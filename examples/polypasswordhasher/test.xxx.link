@@ -1,63 +1,66 @@
 {
-    "_type": "Link",
-    "byproducts": {
-        "stderr": "",
-        "stdout": ""
-    },
-    "command": [
-        "python",
-        "setup.py",
-        "test"
-    ],
-    "materials": {
-        "include/fastpolymath.h": {
-            "sha256": "5be4945cdd1b958d3e8029c7b76333311485c2ccbc3e81ff64bfeb4e7a6fb5be"
-        },
-        "polypasswordhasher/__init__.py": {
-            "sha256": "a7464a8ee4ba930a554ff6cd87b3aad5b6328eda4732c5af55eb154e50569ac2"
-        },
-        "polypasswordhasher/fastshamirsecret.py": {
-            "sha256": "5b46ebba43be20ed20ea271b12c78e1b0fa8d53dbea8a53d48074977fe9b97cc"
-        },
-        "polypasswordhasher/polypasswordhasher.py": {
-            "sha256": "79b33112d045e244e8748b4e630aab3256ab664fc0dcc2cdc3262e847e180e13"
-        },
-        "polypasswordhasher/shamirsecret.py": {
-            "sha256": "cbc6d7dd59c65044300faadf1ce696469f8509622b35824643b1f35f5f8435fb"
-        },
-        "setup.py": {
-            "sha256": "f407ce7094ea452a3df6bd9cb8190fcd7c6e79e73593387cc84c70b94592f3d0"
-        },
-        "src/fastpolymath.c": {
-            "sha256": "79e0f36bf1e30460d0492e3f8bf1af4f40aabc54cddf47d68b6b28d124449a0f"
-        },
-        "test/__init__.py": {
-            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        "test/runtests.py": {
-            "sha256": "fc65bc6775a866c687e9d7dc6d5c5f0bb4f9ef2ab658d34287a99e86fd13acf2"
-        },
-        "test/testfastshamirsecret.py": {
-            "sha256": "22c4f3d794ded268232ee944aad035b7ae9b27221c31b371e9572abecf389a4d"
-        },
-        "test/testpolypasswordhasher.py": {
-            "sha256": "5eadcbc2fd68a5969b83b1c0537a39b8e22979745fa7574b4b7f9a6a3b5cae95"
-        },
-        "test/testpolypasswordhasher_nopartialverification.py": {
-            "sha256": "68c74fe1ffaae879ab9f637bdb848abedc9967c8af6423494902d42faefbfa80"
-        },
-        "test/testshamirsecret.py": {
-            "sha256": "702b9a4aa2d5003e08c13181c28d575724d39c9865eba573fa912bbe9e147271"
-        }
-    },
-    "name": "test",
-    "products": {},
-    "return_value": 0,
-    "signatures": [
-        {
-            "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
-            "method": "RSASSA-PSS",
-            "sig": "80977ff9bc0265724ceb952ad99c2c35206e4ad4364d843e2b9d8e79057e70515c1682ca031a74071afa870bd93d6fd975b131ff1a1c00112bfac7ee65518fbceff85dffd5ff4fc199456ba87af237262959ce0ffb37582df8b265766641402fa1e06fec05c2c7f90f90380fb1d316c24ba042ae0b5feaf3371deee6a8584e1e4d0155371fc2f53ec427d5a2dfdf5c523d3a05f2555aec394c2151e8d39091f9873b3177628dc5121565e834925ffe290f81d61d7fc2de057e093f793d56f1c6896184177a640fb96ca9b158f79f942f6ccba6cd7afd8233037852e76489cd66f23814e5417bc25fb1a701b83b4da2839d03b1f59df192113040a7ccc2996d978d14fe48031320ce906b22197d025c6a46dcfb79ba6b96cafecc75b63cf3b79ee4387a2d063ddf6e99d73a52ba712c8ca7f80ad6d9ba3633808ef871a1d2fc2e6090a4ed72a0421f1086a644b8899aa295c4bb9e033ecabc30f5fcd5725d74a819b609e7db826afc29297a3665438c4ecf615d0fefc4984fbf331306dc038bc5"
-        }
-    ]
+ "signatures": [
+  {
+   "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
+   "method": "RSASSA-PSS",
+   "sig": "80977ff9bc0265724ceb952ad99c2c35206e4ad4364d843e2b9d8e79057e70515c1682ca031a74071afa870bd93d6fd975b131ff1a1c00112bfac7ee65518fbceff85dffd5ff4fc199456ba87af237262959ce0ffb37582df8b265766641402fa1e06fec05c2c7f90f90380fb1d316c24ba042ae0b5feaf3371deee6a8584e1e4d0155371fc2f53ec427d5a2dfdf5c523d3a05f2555aec394c2151e8d39091f9873b3177628dc5121565e834925ffe290f81d61d7fc2de057e093f793d56f1c6896184177a640fb96ca9b158f79f942f6ccba6cd7afd8233037852e76489cd66f23814e5417bc25fb1a701b83b4da2839d03b1f59df192113040a7ccc2996d978d14fe48031320ce906b22197d025c6a46dcfb79ba6b96cafecc75b63cf3b79ee4387a2d063ddf6e99d73a52ba712c8ca7f80ad6d9ba3633808ef871a1d2fc2e6090a4ed72a0421f1086a644b8899aa295c4bb9e033ecabc30f5fcd5725d74a819b609e7db826afc29297a3665438c4ecf615d0fefc4984fbf331306dc038bc5"
+  }
+ ],
+ "signed": {
+  "_type": "link",
+  "byproducts": {
+   "return_value": 0,
+   "stderr": "",
+   "stdout": ""
+  },
+  "command": [
+   "python",
+   "setup.py",
+   "test"
+  ],
+  "environment": {},
+  "materials": {
+   "include/fastpolymath.h": {
+    "sha256": "5be4945cdd1b958d3e8029c7b76333311485c2ccbc3e81ff64bfeb4e7a6fb5be"
+   },
+   "polypasswordhasher/__init__.py": {
+    "sha256": "a7464a8ee4ba930a554ff6cd87b3aad5b6328eda4732c5af55eb154e50569ac2"
+   },
+   "polypasswordhasher/fastshamirsecret.py": {
+    "sha256": "5b46ebba43be20ed20ea271b12c78e1b0fa8d53dbea8a53d48074977fe9b97cc"
+   },
+   "polypasswordhasher/polypasswordhasher.py": {
+    "sha256": "79b33112d045e244e8748b4e630aab3256ab664fc0dcc2cdc3262e847e180e13"
+   },
+   "polypasswordhasher/shamirsecret.py": {
+    "sha256": "cbc6d7dd59c65044300faadf1ce696469f8509622b35824643b1f35f5f8435fb"
+   },
+   "setup.py": {
+    "sha256": "f407ce7094ea452a3df6bd9cb8190fcd7c6e79e73593387cc84c70b94592f3d0"
+   },
+   "src/fastpolymath.c": {
+    "sha256": "79e0f36bf1e30460d0492e3f8bf1af4f40aabc54cddf47d68b6b28d124449a0f"
+   },
+   "test/__init__.py": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   "test/runtests.py": {
+    "sha256": "fc65bc6775a866c687e9d7dc6d5c5f0bb4f9ef2ab658d34287a99e86fd13acf2"
+   },
+   "test/testfastshamirsecret.py": {
+    "sha256": "22c4f3d794ded268232ee944aad035b7ae9b27221c31b371e9572abecf389a4d"
+   },
+   "test/testpolypasswordhasher.py": {
+    "sha256": "5eadcbc2fd68a5969b83b1c0537a39b8e22979745fa7574b4b7f9a6a3b5cae95"
+   },
+   "test/testpolypasswordhasher_nopartialverification.py": {
+    "sha256": "68c74fe1ffaae879ab9f637bdb848abedc9967c8af6423494902d42faefbfa80"
+   },
+   "test/testshamirsecret.py": {
+    "sha256": "702b9a4aa2d5003e08c13181c28d575724d39c9865eba573fa912bbe9e147271"
+   }
+  },
+  "name": "test",
+  "products": {}
+ }
 }

@@ -1,67 +1,70 @@
 {
-    "_type": "Link",
-    "byproducts": {
-        "stderr": "",
-        "stdout": ""
-    },
-    "command": [
-        "python",
-        "setup.py",
-        "sdist"
-    ],
-    "materials": {
-        "include/fastpolymath.h": {
-            "sha256": "5be4945cdd1b958d3e8029c7b76333311485c2ccbc3e81ff64bfeb4e7a6fb5be"
-        },
-        "polypasswordhasher/__init__.py": {
-            "sha256": "a7464a8ee4ba930a554ff6cd87b3aad5b6328eda4732c5af55eb154e50569ac2"
-        },
-        "polypasswordhasher/fastshamirsecret.py": {
-            "sha256": "5b46ebba43be20ed20ea271b12c78e1b0fa8d53dbea8a53d48074977fe9b97cc"
-        },
-        "polypasswordhasher/polypasswordhasher.py": {
-            "sha256": "79b33112d045e244e8748b4e630aab3256ab664fc0dcc2cdc3262e847e180e13"
-        },
-        "polypasswordhasher/shamirsecret.py": {
-            "sha256": "cbc6d7dd59c65044300faadf1ce696469f8509622b35824643b1f35f5f8435fb"
-        },
-        "setup.py": {
-            "sha256": "f407ce7094ea452a3df6bd9cb8190fcd7c6e79e73593387cc84c70b94592f3d0"
-        },
-        "src/fastpolymath.c": {
-            "sha256": "79e0f36bf1e30460d0492e3f8bf1af4f40aabc54cddf47d68b6b28d124449a0f"
-        },
-        "test/__init__.py": {
-            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        },
-        "test/runtests.py": {
-            "sha256": "fc65bc6775a866c687e9d7dc6d5c5f0bb4f9ef2ab658d34287a99e86fd13acf2"
-        },
-        "test/testfastshamirsecret.py": {
-            "sha256": "22c4f3d794ded268232ee944aad035b7ae9b27221c31b371e9572abecf389a4d"
-        },
-        "test/testpolypasswordhasher.py": {
-            "sha256": "5eadcbc2fd68a5969b83b1c0537a39b8e22979745fa7574b4b7f9a6a3b5cae95"
-        },
-        "test/testpolypasswordhasher_nopartialverification.py": {
-            "sha256": "68c74fe1ffaae879ab9f637bdb848abedc9967c8af6423494902d42faefbfa80"
-        },
-        "test/testshamirsecret.py": {
-            "sha256": "702b9a4aa2d5003e08c13181c28d575724d39c9865eba573fa912bbe9e147271"
-        }
-    },
-    "name": "build-sdist",
-    "products": {
-        "dist/PolyPasswordHasher-0.2a0.tar.gz": {
-            "sha256": "3620c4cab08f973431c048ec958dd76a9f6c2baa4cefdb85227856e2de100075"
-        }
-    },
-    "return_value": 0,
-    "signatures": [
-        {
-            "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
-            "method": "RSASSA-PSS",
-            "sig": "a73e47fd3a9c7775431313c14c6e5d27a0d1e0e2396c0fd8b41bf0b7232d4f75c8e982f7145b1edee466ed7243bd9c66e41c9211d4a1cbd483ef6a06445b3c6e7fce12652bd4e9e071f9203b1b272317c480148ab3173d8d0cec4bfcb89d2562a050be91d2d2ec187b8acbd0ce638095839f8659149044d511f6f99605cb98eb2868857e03bef91d8938f4a68b07c6f2c132b72327399005aace8a38e0f1a2ecebf54dcb9a41fb41d90ce51e6c031350c5d72061a850f8056bd04fedaa1ec00f4b7fa9529985c7167245a211e4023d0bfe896d5728f5396f2031ec99c707fef6eff7304c0c460663afd49ca5a2677dfb94f1e84945f62f7d871400d0e04daf24b61298130fb6382d9e9890275d253ec445349cf9182e3045b159122ab870af9cc80739f3a56a00583c3a104e9e51838a780db02c857bb64fe9c784ef7734205d699dbc60263b6c330ffe507f0445a9a244d19d4845cd83a68a700c576cb528440ad63d0ae9c112a56e44326021166ab4ec7d21fa4fe6711f099de23d02832c8f"
-        }
-    ]
+ "signatures": [
+  {
+   "keyid": "48c92a75036a01a864a3a5546fddb601733e135692718afd3f896935474ffb7f",
+   "method": "RSASSA-PSS",
+   "sig": "a73e47fd3a9c7775431313c14c6e5d27a0d1e0e2396c0fd8b41bf0b7232d4f75c8e982f7145b1edee466ed7243bd9c66e41c9211d4a1cbd483ef6a06445b3c6e7fce12652bd4e9e071f9203b1b272317c480148ab3173d8d0cec4bfcb89d2562a050be91d2d2ec187b8acbd0ce638095839f8659149044d511f6f99605cb98eb2868857e03bef91d8938f4a68b07c6f2c132b72327399005aace8a38e0f1a2ecebf54dcb9a41fb41d90ce51e6c031350c5d72061a850f8056bd04fedaa1ec00f4b7fa9529985c7167245a211e4023d0bfe896d5728f5396f2031ec99c707fef6eff7304c0c460663afd49ca5a2677dfb94f1e84945f62f7d871400d0e04daf24b61298130fb6382d9e9890275d253ec445349cf9182e3045b159122ab870af9cc80739f3a56a00583c3a104e9e51838a780db02c857bb64fe9c784ef7734205d699dbc60263b6c330ffe507f0445a9a244d19d4845cd83a68a700c576cb528440ad63d0ae9c112a56e44326021166ab4ec7d21fa4fe6711f099de23d02832c8f"
+  }
+ ],
+ "signed": {
+  "_type": "link",
+  "byproducts": {
+   "return_value": 0,
+   "stderr": "",
+   "stdout": ""
+  },
+  "command": [
+   "python",
+   "setup.py",
+   "sdist"
+  ],
+  "environment": {},
+  "materials": {
+   "include/fastpolymath.h": {
+    "sha256": "5be4945cdd1b958d3e8029c7b76333311485c2ccbc3e81ff64bfeb4e7a6fb5be"
+   },
+   "polypasswordhasher/__init__.py": {
+    "sha256": "a7464a8ee4ba930a554ff6cd87b3aad5b6328eda4732c5af55eb154e50569ac2"
+   },
+   "polypasswordhasher/fastshamirsecret.py": {
+    "sha256": "5b46ebba43be20ed20ea271b12c78e1b0fa8d53dbea8a53d48074977fe9b97cc"
+   },
+   "polypasswordhasher/polypasswordhasher.py": {
+    "sha256": "79b33112d045e244e8748b4e630aab3256ab664fc0dcc2cdc3262e847e180e13"
+   },
+   "polypasswordhasher/shamirsecret.py": {
+    "sha256": "cbc6d7dd59c65044300faadf1ce696469f8509622b35824643b1f35f5f8435fb"
+   },
+   "setup.py": {
+    "sha256": "f407ce7094ea452a3df6bd9cb8190fcd7c6e79e73593387cc84c70b94592f3d0"
+   },
+   "src/fastpolymath.c": {
+    "sha256": "79e0f36bf1e30460d0492e3f8bf1af4f40aabc54cddf47d68b6b28d124449a0f"
+   },
+   "test/__init__.py": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   "test/runtests.py": {
+    "sha256": "fc65bc6775a866c687e9d7dc6d5c5f0bb4f9ef2ab658d34287a99e86fd13acf2"
+   },
+   "test/testfastshamirsecret.py": {
+    "sha256": "22c4f3d794ded268232ee944aad035b7ae9b27221c31b371e9572abecf389a4d"
+   },
+   "test/testpolypasswordhasher.py": {
+    "sha256": "5eadcbc2fd68a5969b83b1c0537a39b8e22979745fa7574b4b7f9a6a3b5cae95"
+   },
+   "test/testpolypasswordhasher_nopartialverification.py": {
+    "sha256": "68c74fe1ffaae879ab9f637bdb848abedc9967c8af6423494902d42faefbfa80"
+   },
+   "test/testshamirsecret.py": {
+    "sha256": "702b9a4aa2d5003e08c13181c28d575724d39c9865eba573fa912bbe9e147271"
+   }
+  },
+  "name": "build-sdist",
+  "products": {
+   "dist/PolyPasswordHasher-0.2a0.tar.gz": {
+    "sha256": "3620c4cab08f973431c048ec958dd76a9f6c2baa4cefdb85227856e2de100075"
+   }
+  }
+ }
 }
