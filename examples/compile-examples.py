@@ -87,7 +87,7 @@ def _beautify(obj, **kw):
     if len(obj) > kw["max_str_len"]:
       obj = obj[:kw["max_str_len"] - 3] + "..."
 
-  # Truncate list and recurse into _beautify for each  item
+  # Truncate list and recurse into _beautify for each item
   elif isinstance(obj, list):
     if len(obj) > kw["max_list_len"]:
       obj = obj[:kw["max_list_len"] - 1] + ["..."]
