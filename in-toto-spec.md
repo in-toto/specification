@@ -194,7 +194,7 @@ subsequent steps. Products are recorded as part of link metadata.
 * **Byproducts**: indirect results of carrying out a step, often used to verify
   that a step was performed correctly. A byproduct is information that will not
 be used as a material in a subsequent step, but may provide insight about the
-process. For example, the stdout, stdin and return values are common byproducts
+process. For example, the stdout, stderr and return values are common byproducts
 that can be inspected to verify the correctness of a step. Byproducts are
 recorded as part of link metadata.
 * **Final product**: the bundle containing all the files required for the
@@ -901,7 +901,7 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
      "..." : "..."
   },
   "byproducts": {
-    "stdin": "",
+    "stderr": "",
     "stdout": "",
     "return-value": ""
   },
@@ -928,7 +928,7 @@ The `"byproducts"` field is an opaque dictionary that contains additional
 information about the step performed. Byproducts are not verified by in-toto’s
 default verification routine. However, the information gathered can be used for
 further scrutiny during an inspection step. At a minimum, the byproducts
-dictionary should have standard output (stdout), standard input (stdin) and
+dictionary should have standard output (stdout), standard error (stderr) and
 return value (return-value), even if no values are filled in.
 
 Finally, the environment dictionary contains information about the environment
@@ -1225,7 +1225,7 @@ metadata:
       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
@@ -1259,7 +1259,7 @@ metadata:
       "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "foo.py",
       "return-value": "0"
     },
@@ -1424,7 +1424,7 @@ metadata:
        "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
@@ -1457,7 +1457,7 @@ metadata:
     },
     "products": { },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "....\nOk",
       "return-value": "0"
     },
@@ -1493,7 +1493,7 @@ looks really similar (modulo the signature and the filename).
        "foo.tar.gz": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "foo.py",
       "return-value": "0"
     },
@@ -1681,7 +1681,7 @@ link metadata:
     },
     "return-value": "0",
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
      },
@@ -1715,7 +1715,7 @@ link metadata:
       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
      },
@@ -1748,7 +1748,7 @@ link metadata:
        "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
@@ -1920,7 +1920,7 @@ A root.layout file that fulfills these requirements would look like this:
       "vcs.log": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts":  {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
@@ -1953,7 +1953,7 @@ A root.layout file that fulfills these requirements would look like this:
       "foo/doc/index.html": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
      },
@@ -1986,7 +1986,7 @@ A root.layout file that fulfills these requirements would look like this:
       "foo/foo.c": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts": {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
@@ -2019,7 +2019,7 @@ A root.layout file that fulfills these requirements would look like this:
        "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
     "byproducts":  {
-     "stdin": "",
+     "stderr": "",
      "stdout": "",
      "return-value": "0"
     },
@@ -2052,7 +2052,7 @@ A root.layout file that fulfills these requirements would look like this:
       "foo.tar.gz": { "sha256": "f73c9cd37d8a6e2035d0eed767f9cd5e..."}
     },
     "byproducts":  {
-      "stdin": "",
+      "stderr": "",
       "stdout": "",
       "return-value": "0"
     },
