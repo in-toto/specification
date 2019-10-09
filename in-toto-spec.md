@@ -1,6 +1,6 @@
 ﻿# in-toto Specification
 
-Apr 11, 2017
+Oct 1, 2019
 
 https://in-toto.io
 
