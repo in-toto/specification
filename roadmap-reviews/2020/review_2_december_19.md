@@ -1,4 +1,4 @@
-# ROADMAP review (End of August '19)
+# ROADMAP review (End of December '19)
 
 We've reached the end of the first evaluation period for our 2020 roadmap, and
 we are due a review of our activities. Here's a rundown of what has happened in
@@ -30,7 +30,7 @@ ITE-3.
 This time we proudly present ITE-4. It formalizes the second idea announced
 via the roadmap, that is a way to represent artifacts other than files
 in in-toto metadata. The work was mainly driven by one of the lab's master's
-students, Aditya Saky (@adityasaky), and proves our commitment to
+students, Aditya Sirish (@adityasaky), and proves our commitment to
 integrating with the Software Package Data Exchange (SPDX) open standard. ITE-4
 will allow in-toto to not only refer to artifacts as files, but rather as more
 rich elements, such as SPDX elements, or CI actions (like GitHub's) and more!
