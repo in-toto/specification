@@ -613,7 +613,7 @@ verification. We will elaborate on the specifics of this process in section
 Steps performed by a functionary in the supply chain are declared as follows:
 
 ```json
-{ "_name": "<NAME>",
+{ "name": "<NAME>",
   "threshold": "<THRESHOLD>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
@@ -678,7 +678,7 @@ chain.
 An inspection contains the following fields.
 
 ```json
-{ "_name": "<NAME>",
+{ "name": "<NAME>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
      "..."
@@ -890,7 +890,7 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
 ```json
 { "_type" : "link",
-  "_name" :  "<NAME>",
+  "name" :  "<NAME>",
   "command" : "<COMMAND>",
   "materials": {
      "<PATH>": "<HASH>",
@@ -1156,7 +1156,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "<ALICES_KEYID>": "<ALICES_PUBKEY>"
      },
     "steps" : [
-      { "_name": "write-code",
+      { "name": "write-code",
         "threshold": 1,
         "expected_materials": [],
         "expected_products": [
@@ -1167,7 +1167,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         ],
         "expected_command": "vi"
       },
-      { "_name": "package",
+      { "name": "package",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
@@ -1182,7 +1182,7 @@ A `root.layout` file that fulfills these requirements would look like this:
       }
     ],
     "inspect": [
-      { "_name": "inspect_tarball",
+      { "name": "inspect_tarball",
         "expected_materials": [
           ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]
         ],
@@ -1337,7 +1337,7 @@ A `root.layout` file that fulfills these requirements would look like this:
       "<ALFREDS_KEYID>" : "<ALFREDS_PUBKEY>"
      },
     "steps" : [
-       {"_name": "write-code",
+       {"name": "write-code",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1350,7 +1350,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "vi"
        },
        {
-         "_name": "test",
+         "name": "test",
          "threshold": 2,
          "expected_materials": [
             ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
@@ -1364,7 +1364,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "python test.py"
        },
        {
-        "_name": "package",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
@@ -1380,7 +1380,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     ],
     "inspect": [
        {
-         "_name": "inspect_tarball",
+         "name": "inspect_tarball",
          "expected_materials": [
             [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
          ],
@@ -1580,7 +1580,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     },
     "steps" : [
       {
-        "_name": "checkout-vcs",
+        "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1593,7 +1593,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "git tag"
       },
       {
-        "_name": "compilation",
+        "name": "compilation",
         "threshold": 1,
         "expected_materials": [
            ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
@@ -1607,7 +1607,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "gcc -o foo src/foo.c"
       },
       {
-        "_name": "package",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
            ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"]
@@ -1623,7 +1623,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     ],
     "inspect": [
       {
-        "_name": "check-package",
+        "name": "check-package",
         "expected_materials": [
            ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
         ],
@@ -1633,7 +1633,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "run": "inspect_tarball.sh foo.tar.gz"
       },
       {
-        "_name": "verify-vcs-commits",
+        "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
         ],
@@ -1797,7 +1797,7 @@ A root.layout file that fulfills these requirements would look like this:
         "<UPSTREAM_KEYID>" : "<UPSTREAM_KEYID>"
      },
     "steps" : [
-      { "_name": "fetch-upstream",
+      { "name": "fetch-upstream",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1808,7 +1808,7 @@ A root.layout file that fulfills these requirements would look like this:
         ],
         "expected_command": ""
       },
-      { "_name": "compilation",
+      { "name": "compilation",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"]
@@ -1821,7 +1821,7 @@ A root.layout file that fulfills these requirements would look like this:
         ],
         "expected_command": "gcc -o foo src/*"
       },
-      { "_name": "package",
+      { "name": "package",
         "threshold": 1,
         "expected_materials": [
            ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"]
@@ -1858,7 +1858,7 @@ A root.layout file that fulfills these requirements would look like this:
      },
     "steps" : [
       {
-        "_name": "checkout-vcs",
+        "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1871,7 +1871,7 @@ A root.layout file that fulfills these requirements would look like this:
         "expected_command": "git tag -s"
       },
       {
-        "_name": "compile-docs",
+        "name": "compile-docs",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
@@ -1887,7 +1887,7 @@ A root.layout file that fulfills these requirements would look like this:
      ],
      "inspect": [
       {
-        "_name": "verify-vcs-commits",
+        "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
         ],
