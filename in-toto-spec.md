@@ -1,6 +1,6 @@
 ﻿# in-toto Specification
 
-Oct 1, 2019
+Mar 25, 2020
 
 https://in-toto.io
 
@@ -473,7 +473,6 @@ All signed files (i.e., link and layout files) have the format:
   "signed" : "<ROLE>",
   "signatures" : [
       { "keyid" : "<KEYID>",
-        "method" : "<METHOD>",
         "sig" : "<SIGNATURE>" }, 
   "..."
   ]
@@ -482,8 +481,8 @@ All signed files (i.e., link and layout files) have the format:
 
 Where, ROLE is a dictionary whose "\_type" field describes the metadata type (as
 described in sections 4.3 and 4.4). KEYID is the identifier of the key signing
-the ROLE dictionary. METHOD is the key signing method used to generate the
-signature. SIGNATURE is a signature of the canonical JSON form of ROLE.
+the ROLE dictionary. SIGNATURE is a signature of the canonical JSON form of
+ROLE.
 
 The current reference implementation of in-toto defines three signing methods,
 although in-toto is not restricted to any particular key signing method, key
@@ -499,18 +498,22 @@ All keys have the format:
 
 ```json
   { "keytype" : "<KEYTYPE>",
+    "scheme" : "<SCHEME>",
     "keyval" : "<KEYVAL>" }
 ```
 
-where KEYTYPE is a string describing the type of the key, and how it is used to
-sign documents. The type determines the interpretation of KEYVAL.
+KEYTYPE is a string denoting a public key signature system, such as RSA or
+ECDSA. SCHEME is a string denoting a corresponding signature scheme. For
+example: "rsassa-pss-sha256" and "ecdsa-sha2-nistp256". KEYVAL is a dictionary
+containing the public portion of the key.
 
-We define two key types at present: 'rsa' and 'ed25519'.
+We define three key types at present: 'rsa', 'ed25519', and 'ecdsa'.
 
 The 'rsa' format is:
 
 ```json
   { "keytype" : "rsa",
+    "scheme" : "rsassa-pss-sha256",
     "keyval" : { "public" : "<PUBLIC>",
                  "private" : "<PRIVATE>" }
   }
@@ -523,6 +526,7 @@ The elliptic-curve variants ('ed25519' and 'ecdsa') format are:
 
 ```json
   { "keytype" : "ed25519",
+    "scheme" : "ed25519",
     "keyval" : { "public" : "<PUBLIC>",
                  "private" : "<PRIVATE>" }
   }
@@ -530,6 +534,7 @@ The elliptic-curve variants ('ed25519' and 'ecdsa') format are:
 
 ```json
   { "keytype" : "ecdsa",
+    "scheme" : "ecdsa-sha2-nistp256",
     "keyval" : { "public" : "<PUBLIC>",
                  "private" : "<PRIVATE>" }
   }
@@ -542,6 +547,7 @@ object:
 
 ```json
   { "keytype" : "rsa",
+    "scheme" : "rsassa-pss-sha256",
     "keyval" : { "public" : "<PUBLIC>"}
   }
 ```
