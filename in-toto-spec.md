@@ -221,7 +221,7 @@ auditability guarantees for the supply chain that created a final product that
 a client will install.
 
 To avoid ambiguity, we will refer to any files in the final product that
-in-toto does not use to verify supply chain integrity as "target files." Target
+in-toto does not use to verify supply chain integrity as "target files". Target
 files are opaque to the framework.  Whether target files are packages
 containing multiple files, single text files, or executable binaries is
 irrelevant to in-toto.
@@ -479,7 +479,7 @@ All signed files (i.e., link and layout files) have the format:
 }
 ```
 
-Where, ROLE is a dictionary whose "\_type" field describes the metadata type (as
+Where, ROLE is a dictionary whose `"\_type"` field describes the metadata type (as
 described in sections 4.3 and 4.4). KEYID is the identifier of the key signing
 the ROLE dictionary. SIGNATURE is a signature of the canonical JSON form of
 ROLE.
@@ -507,7 +507,7 @@ ECDSA. SCHEME is a string denoting a corresponding signature scheme. For
 example: "rsassa-pss-sha256" and "ecdsa-sha2-nistp256". KEYVAL is a dictionary
 containing the public portion of the key.
 
-We define three key types at present: 'rsa', 'ed25519', and 'ecdsa'.
+We define three key types at present: "rsa", "ed25519", and "ecdsa".
 
 The 'rsa' format is:
 
@@ -522,7 +522,7 @@ The 'rsa' format is:
 where PUBLIC and PRIVATE are in PEM format and are strings.  All RSA keys must
 be at least 2048 bits.
 
-The elliptic-curve variants ('ed25519' and 'ecdsa') format are:
+The elliptic-curve variants ("ed25519" and "ecdsa") format are:
 
 ```json
   { "keytype" : "ed25519",
@@ -586,7 +586,7 @@ The format of the layout file is as follows:
     "<STEP>",
     "..."
   ],
-  "inspections" : [
+  "inspect" : [
     "<INSPECTION>",
     "..."
   ]
@@ -599,7 +599,7 @@ longer trusted by clients. Clients MUST NOT trust an expired file.
 An optional README text can be added on the readme field. This is used to
 provide a human-readable description of this supply chain.
 
-The "keys" list will contain a list of all the public keys used in the steps
+The `"keys"` list will contain a list of all the public keys used in the steps
 section, as they are described in 4.2.
 
 The `"steps"` section will contain a list of restrictions for each step within
@@ -608,7 +608,7 @@ sublayouts, so that they can further specify requirements to a section of the
 supply chain (section 4.4.1).  We will describe the contents of the steps list
 in section 4.3.1.
 
-The `"inspections"` section will contain a list of restrictions for each step
+The `"inspect"` section will contain a list of restrictions for each step
 within the link. In contrast to steps, inspecting is done by the client upon
 verification. We will elaborate on the specifics of this process in section
 4.3.2.
@@ -619,7 +619,7 @@ verification. We will elaborate on the specifics of this process in section
 Steps performed by a functionary in the supply chain are declared as follows:
 
 ```json
-{ "_name": "<NAME>",
+{ "name": "<NAME>",
   "threshold": "<THRESHOLD>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
@@ -637,19 +637,19 @@ Steps performed by a functionary in the supply chain are declared as follows:
 }
 ```
 
-The `NAME` string will be used to identify this step within the supply chain.
+The NAME string will be used to identify this step within the supply chain.
 NAME values are unique and so they MUST not repeat in different step
 descriptions.
 
-The `"threshold"` field must contain an integer file indicating how many pieces
+The `"threshold"` field must contain an integer value indicating how many pieces
 of link metadata must be provided to verify this step. This field is intended
 to be used for steps that require a higher degree of trust, so multiple
 functionaries must perform the operation and report the same results. If only
-one functionary is expected to perform the step, then the "threshold" field
+one functionary is expected to perform the step, then the `"threshold"` field
 should be set to 1.
 
 The `"expected_materials"` and `"expected_products"` fields contain a list of
-`ARTIFACT_RULES`, as they are described in section 4.3.3. These rules are used
+ARTIFACT_RULES, as they are described in section 4.3.3. These rules are used
 to ensure that no materials or products were altered between steps.
 
 The `"pubkeys"` field will contain a list of KEYIDs (as described in section
@@ -673,18 +673,18 @@ sublayouts (as described in section 4.5).
 
 #### 4.3.2 Inspections
 
-In contrast to steps, inspections indicate operations that need to be performed
+In contrast to steps, inspect indicate operations that need to be performed
 on the final product at the time of verification.  For example, unpacking a tar
 archive to inspect its contents is an inspection step. When indicating
-inspections, ARTIFACT rules  can be defined to ensure the integrity of the
-final product. For example, MATCH rules are usually found in inspections to
+inspect, ARTIFACT rules  can be defined to ensure the integrity of the
+final product. For example, MATCH rules are usually found in inspect to
 provide insight about artifacts that were created or modified inside the supply
 chain.
 
 An inspection contains the following fields.
 
 ```json
-{ "_name": "<NAME>",
+{ "name": "<NAME>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
      "..."
@@ -697,9 +697,9 @@ An inspection contains the following fields.
 }
 ```
 
-Similar to steps, the `NAME` string will be used to identify this inspection
+Similar to steps, the NAME string will be used to identify this inspection
 within the supply chain. NAME values are unique and so they MUST NOT repeat in
-either steps or inspections.
+either steps or inspect.
 
 The `"expected_materials"` and `"expected_products"` products fields behave in
 the same way as they do for the steps as defined in section 4.3.1.
@@ -888,7 +888,7 @@ materials (products), as well as other host information.
 
 The name for link metadata files must contain two elements: the name of the
 step, and the first six bytes of the functionary’s keyid separated by a dot.
-The `KEYID` portion of the name is used to avoid collisions in steps that have
+The KEYID portion of the name is used to avoid collisions in steps that have
 thresholds higher than one.
 
 
@@ -896,7 +896,7 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
 ```json
 { "_type" : "link",
-  "_name" :  "<NAME>",
+  "name" :  "<NAME>",
   "command" : "<COMMAND>",
   "materials": {
      "<PATH>": "<HASH>",
@@ -919,16 +919,16 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 }
 ```
 
-To identify to which step a piece of link metadata belongs, the `NAME` field must
+To identify to which step a piece of link metadata belongs, the NAME field must
 be set to the same identifier as the step described in the layout, as specified
 in section 4.3.1.
 
-The `COMMAND` field contains the command and its arguments as executed by the
+The COMMAND field contains the command and its arguments as executed by the
 functionary.
 
 
 The `"materials"` and `"products"` fields are dictionaries keyed by a file’s
-`PATH`. Each `HASH` value is a hash object as described in section 4.2.1.
+PATH. Each HASH value is a hash object as described in section 4.2.1.
 
 The `"byproducts"` field is an opaque dictionary that contains additional
 information about the step performed. Byproducts are not verified by in-toto’s
@@ -1162,7 +1162,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "<ALICES_KEYID>": "<ALICES_PUBKEY>"
      },
     "steps" : [
-      { "_name": "write-code",
+      { "name": "write-code",
         "threshold": 1,
         "expected_materials": [],
         "expected_products": [
@@ -1173,7 +1173,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         ],
         "expected_command": "vi"
       },
-      { "_name": "package",
+      { "name": "package",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
@@ -1188,7 +1188,7 @@ A `root.layout` file that fulfills these requirements would look like this:
       }
     ],
     "inspect": [
-      { "_name": "inspect_tarball",
+      { "name": "inspect_tarball",
         "expected_materials": [
           ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]
         ],
@@ -1343,7 +1343,7 @@ A `root.layout` file that fulfills these requirements would look like this:
       "<ALFREDS_KEYID>" : "<ALFREDS_PUBKEY>"
      },
     "steps" : [
-       {"_name": "write-code",
+       {"name": "write-code",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1356,7 +1356,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "vi"
        },
        {
-         "_name": "test",
+         "name": "test",
          "threshold": 2,
          "expected_materials": [
             ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
@@ -1370,7 +1370,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "python test.py"
        },
        {
-        "_name": "package",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
@@ -1386,7 +1386,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     ],
     "inspect": [
        {
-         "_name": "inspect_tarball",
+         "name": "inspect_tarball",
          "expected_materials": [
             [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
          ],
@@ -1586,7 +1586,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     },
     "steps" : [
       {
-        "_name": "checkout-vcs",
+        "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1599,7 +1599,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "git tag"
       },
       {
-        "_name": "compilation",
+        "name": "compilation",
         "threshold": 1,
         "expected_materials": [
            ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
@@ -1613,7 +1613,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_command": "gcc -o foo src/foo.c"
       },
       {
-        "_name": "package",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
            ["MATCH", "foo", "WITH", "PRODUCTS", "FROM", "compilation"]
@@ -1629,7 +1629,7 @@ A `root.layout` file that fulfills these requirements would look like this:
     ],
     "inspect": [
       {
-        "_name": "check-package",
+        "name": "check-package",
         "expected_materials": [
            ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
         ],
@@ -1639,7 +1639,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "run": "inspect_tarball.sh foo.tar.gz"
       },
       {
-        "_name": "verify-vcs-commits",
+        "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
         ],
@@ -1788,7 +1788,7 @@ In this example, the maintainer will let the upstream developers define  the
 "write-code" task in a sublayout, while the compilation and package steps will
 be performed by local contributors to the project. For brevity, we will skip
 the pieces of link metadata that are relevant to the sublayout. In addition,
-inspections on the top-level layout will be omitted to simplify both layouts.
+inspect on the top-level layout will be omitted to simplify both layouts.
 
 A root.layout file that fulfills these requirements would look like this:
 
@@ -1803,7 +1803,7 @@ A root.layout file that fulfills these requirements would look like this:
         "<UPSTREAM_KEYID>" : "<UPSTREAM_KEYID>"
      },
     "steps" : [
-      { "_name": "fetch-upstream",
+      { "name": "fetch-upstream",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1814,7 +1814,7 @@ A root.layout file that fulfills these requirements would look like this:
         ],
         "expected_command": ""
       },
-      { "_name": "compilation",
+      { "name": "compilation",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"]
@@ -1827,7 +1827,7 @@ A root.layout file that fulfills these requirements would look like this:
         ],
         "expected_command": "gcc -o foo src/*"
       },
-      { "_name": "package",
+      { "name": "package",
         "threshold": 1,
         "expected_materials": [
            ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"]
@@ -1864,7 +1864,7 @@ A root.layout file that fulfills these requirements would look like this:
      },
     "steps" : [
       {
-        "_name": "checkout-vcs",
+        "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1877,7 +1877,7 @@ A root.layout file that fulfills these requirements would look like this:
         "expected_command": "git tag -s"
       },
       {
-        "_name": "compile-docs",
+        "name": "compile-docs",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
@@ -1893,7 +1893,7 @@ A root.layout file that fulfills these requirements would look like this:
      ],
      "inspect": [
       {
-        "_name": "verify-vcs-commits",
+        "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
         ],
