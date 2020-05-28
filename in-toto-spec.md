@@ -479,7 +479,7 @@ All signed files (i.e., link and layout files) have the format:
 }
 ```
 
-Where, ROLE is a dictionary whose `"\_type"` field describes the metadata type (as
+Where, ROLE is a dictionary whose `"_type"` field describes the metadata type (as
 described in sections 4.3 and 4.4). KEYID is the identifier of the key signing
 the ROLE dictionary. SIGNATURE is a signature of the canonical JSON form of
 ROLE.
