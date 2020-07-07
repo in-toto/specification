@@ -3,29 +3,48 @@
 We've reached (and slightly shot past) the end of our 2020 roadmap, and it's
 time to review of our activities over the past year.
 
+## Cloud Native Computing Foundation
+
+We are very proud to announce that in-toto
+[joined](https://github.com/cncf/toc/pull/252) the Cloud Native Computing
+Foundation (CNCF) sandbox in the last year. This is another positive step to
+broader integrations in the industry, especially in the Cloud Native space.
+
 ## Cross-implementation interoperability
 
-- __in-toto-golang__ Apart from
+- [__in-toto-golang__](https://github.com/in-toto/in-toto-golang) Apart from
   [ed25519 signing](https://github.com/in-toto/in-toto-golang/pull/48) and
   [bug fixes in the canonical JSON implementation](https://github.com/in-toto/in-toto-golang/pull/50)
   discussed in the previous reviews, work began in earnest on bringing
-  in-toto's _runlib_ to the Go implementation. Christian Rebischke (@shibumi)
-  joined the in-toto team to implement this as part of Google Summer of Code
-  (GSoC). in-toto is participating in GSoC through the Cloud Native Computing
-  Foundation(CNCF). In the process, Christian also identified a nil pointer
-  dereference in Go's standard library for RSA, and he opened a
+  in-toto's _runlib_ to the Go implementation. The implementation has already
+  gained the
+  [ability to record to symbolic links](https://github.com/in-toto/in-toto-golang/pull/55),
+  and work is under way to
+  [add exclude patterns](https://github.com/in-toto/in-toto-golang/pull/53).
+  Christian Rebischke (@shibumi) joined the in-toto team to implement _runlib_
+  as part of
+  [Google Summer of Code (GSoC)](https://summerofcode.withgoogle.com/projects/#4804162597945344)
+  and you can find his detailed plan [here](https://github.com/in-toto/in-toto-golang/pull/56).
+  in-toto is participating in GSoC through the CNCF.
+  In the process, Christian also identified a nil pointer dereference in Go's
+  standard library for RSA, and he opened a
   [pull request](https://go-review.googlesource.com/c/go/+/240008/) to address
   it. Efforts are also underway to improve interoperability between this
-  implementation and the reference implementation.
+  implementation and the reference implementation, and they're part of this work
+  on adding _runlib_.
 
-- __in-toto-rs__ Santiago Torres-Arias (@SantiagoTorres) began work on a Rust
-  implementation of in-toto. This broadens in-toto's attestation generation
-  capabilities, and in-toto-rs is being used to generate attestations in
-  _rebuilderd_ as part of the Reproducible Builds effort.
+- [__in-toto-rs__](https://github.com/SantiagoTorres/in-toto-rs) Santiago
+  Torres-Arias (@SantiagoTorres) began work on a Rust implementation of in-toto.
+  This broadens in-toto's attestation generation capabilities, and in-toto-rs is
+  [being added](https://github.com/kpcyrd/rebuilderd/pull/22) to _rebuilderd_ to
+  generate attestations as part of the Reproducible Builds effort.
 
-- __in-toto-java__ The Java implementation saw relatively lesser activity this
-  year. The only activity was the updating of some documentation and a minor
-  update to add a new feature to the in-toto Jenkins plugin. Additionally, a
+- [__in-toto-java__](https://github.com/in-toto/in-toto-java) The Java
+  implementation saw relatively lesser activity this year. The only activity was
+  the
+  [updating of some documentation](https://github.com/in-toto/in-toto-java/pull/16)
+  and a minor [update](https://github.com/in-toto/in-toto-java/pull/19) to
+  enable a new feature in the in-toto Jenkins plugin. Additionally, a
   third-party SaaS provider is working on a Java framework based on in-toto.
 
 ## ITE Proposals
@@ -64,7 +83,7 @@ Also, as noted earlier, work is ongoing to bring runlib to in-toto-golang,
 which will bring the implementation closer to being fully featured and spec
 compliant.
 
-## Maturing of existing sub-projects
+## Maturing of existing sub-projects and integrations
 
 As noted in our roadmap last year, we intended to mature the sub-projects that
 have sprouted, as well as beef up the in-toto integration in third-party
@@ -72,25 +91,27 @@ projects.
 
 ### Grafeas integration
 
-Grafeas is an open source artifact metadata API developed by Google. We worked
-with the Grafeas team to
+Grafeas is an open source artifact metadata API developed by Google. Santiago
+Torres-Arias (@SantiagoTorres) and Aditya Sirish (@adityasaky) worked with the
+Grafeas team to
 [integrate in-toto metadata](https://github.com/grafeas/grafeas/pull/391) as a
 metadata type in Grafeas, bringing in-toto's security properties to Grafeas.
 
 ### Jenkins plugin
 
-The official in-toto Jenkins plugin saw some activity in the form of some bug
-fixes with how generated metadata were written to a filesystem. But the bigger
-news with the plugin is the addition of Grafeas as a first-party transport.
-Now, any in-toto attestations generated for steps in a Jenkins pipeline can be
-directly stored on a Grafeas server.
+The official [in-toto Jenkins plugin](https://github.com/jenkinsci/in-toto-plugin)
+saw some activity in the form of some bug fixes with how generated metadata were
+written to a filesystem. But the bigger news with the plugin is the addition of
+Grafeas as a first-party transport. Now, any in-toto attestations generated for
+steps in a Jenkins pipeline can be directly stored on a Grafeas server.
 
 ### Kubernetes components
 
-As noted in an earlier review, we worked on the kubectl plugin, ensuring that
-in-toto continued to work with a newer version of kubectl.
-Further, a new user story combining Kubernetes, Grafeas, Jenkins (with the
-official plugin) was evaluated, and a demo combining these is brewing.
+As noted in an earlier review, we worked on the
+[in-toto kubectl plugin](https://github.com/in-toto/kubectl-in-toto), ensuring
+that in-toto continued to work with a newer version of kubectl. Further, a new
+user story combining Kubernetes, Grafeas, Jenkins (with the official plugin) was
+evaluated, and a demo combining these is brewing.
 
 ### Kubesec integration
 
@@ -112,12 +133,13 @@ submodule.
 
 ### Layout creation tools
 
-in-toto currently provides a web tool to generate layouts. We are working on
-extending this tool with the capabilities to generate layouts for existing
-software supply chains. To that end, we have a team of summer interns who are
-joining us to work on this effort. We're very excited to welcome Isha Dave
-(@IshaDave), Yuanrui Chen (@SolidifiedRay), and Benjamin Wu (@itsbenwu) to the
-team, and we hope to have more to report on this front in the coming months.
+in-toto currently provides a [web tool](https://github.com/in-toto/layout-web-tool)
+to generate layouts. We are working on extending this tool with the capabilities
+to generate layouts for existing software supply chains. To that end, we have a
+team of summer interns who are joining us to work on this effort. We're very
+excited to welcome Isha Dave (@IshaDave), Yuanrui Chen (@SolidifiedRay), and
+Benjamin Wu (@itsbenwu) to the team, and we hope to have more to report on this
+front in the coming months.
 
 ### Apt transport and rebuilders
 
@@ -164,7 +186,10 @@ community meetings. This has helped grow the in-toto community which is also
 good for software supply chain security as a whole. If you're interested in
 joining the next community meeting, please subscribe to the
 [in-toto mailing list](https://groups.google.com/forum/#!forum/in-toto-public).
-You can also find notes on the meetings held thus far.
+You can also find notes
+[[1](https://groups.google.com/forum/#!topic/in-toto-public/Bd3VF9hn1p4),
+[2](https://groups.google.com/forum/#!topic/in-toto-public/AZwXzCiY24A)] on the
+meetings held thus far in the archive.
 
 ## Closing Remarks
 
@@ -174,8 +199,8 @@ software supply chain security. We have met our goals of formalizing an
 approach to integrate TUF and in-toto to provide end-to-end guarantees, as well
 as a way to extend in-toto's properties to supply chain artifacts beyond files,
 through ITE-2, ITE-3, and ITE-4. We have also made progress towards achieving
-spec complaince in our reference implementation and in making in-toto-golang
-fully featured to enable its integration in cloud nativ / cloud first contexts.
+spec compliance in our reference implementation and in making in-toto-golang
+fully featured to enable its integration in cloud native / cloud first contexts.
 
 We have also grown our integrations with the industry by adding in-toto
 attestations to Grafeas and Kubesec. We believe this both improves the current
