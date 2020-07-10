@@ -87,7 +87,7 @@ We intend to review the progress done in these efforts on these time windows.
 
 - [End of August](roadmap-reviews/2020/review_1_august_19.md)
 - [End of December](roadmap-reviews/2020/review_2_december_19.md)
-- [End of Roadmap - June 2020](roadmap-reviews/2020/review_3_june_20.md)
+- [End of June - final review Roadmap 2020](roadmap-reviews/2020/review_3_june_20.md)
 
 These time windows will also be used to update all stakeholders with the status
 of the in-toto project.

@@ -1,4 +1,4 @@
-# End of ROADMAP 2020 review
+# ROADMAP review (End of June '20)
 
 We've reached (and slightly shot past) the end of our 2020 roadmap, and it's
 time to review of our activities over the past year.
@@ -33,7 +33,7 @@ broader integrations in the industry, especially in the Cloud Native space.
   implementation and the reference implementation, and they're part of this work
   on adding _runlib_.
 
-- [__in-toto-rs__](https://github.com/SantiagoTorres/in-toto-rs) Santiago
+- [__in-toto-rs__](https://github.com/in-toto/in-toto-rs) Santiago
   Torres-Arias (@SantiagoTorres) began work on a Rust implementation of in-toto.
   This broadens in-toto's attestation generation capabilities, and in-toto-rs is
   [being added](https://github.com/kpcyrd/rebuilderd/pull/22) to _rebuilderd_ to
