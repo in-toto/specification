@@ -59,9 +59,24 @@ As noted in the final roadmap review of 2020, Santiago Torres-Arias
 rebuilderd. We plan to continue working on this effort and to work towards using
 in-toto links as a verifiable format for results of rebuilders.
 
-### Tecton Project
+### Tekton Project
+
+We are very excited to see Tekton, a Kubernetes-based pipeline manager, to take
+a stab at the software supply chain security problem with their [chains](https://github.com/tektoncd/chains/)
+project. We are even more excited to see that chains will be able to create
+[in-toto](https://github.com/tektoncd/chains/pull/13) links to attest for the
+operations when using Tekton. This way, you can automagically secure the
+actions in your Tekton pipelines. This year, we will work closely with the
+Tekton community to make Chains a widespread, strong component of the software
+supply chain security ecosystem.
 
 ### Kubernetes components
+
+Our Kubernetes components (namely, a [kubectl plugin](https://github.com/in-toto/kubectl-in-toto) and a k8s [admission
+controller](https://github.com/in-toto/in-toto-webhook)) have seen little
+movement throughout the year. However, as we start supporting more and more
+cloud-native deployments, we are starting to see more use for these. This year,
+we will mature these projects into more reliable and easy-to-use tools.
 
 ### in-toto Jenkins plugin
 
