@@ -1,6 +1,9 @@
 Roadmap
 =======
 
+_Note: Previous roadmaps can be found with the roadmap reviews for that period.
+[Link to Roadmap 2020](roadmap-reviews/2020/ROADMAP.md)_
+
 This document spans the Roadmap for the in-toto project for the time window
 from August 2020 to August 2021. The main theme of this year's efforts are
 focused on further maturing of our various implementations and integrations in
