@@ -124,7 +124,7 @@ types. This experience will also help refine the ITE.
 As before, we intend to review the progress done in these efforts in the
 following windows.
 
-- [End of December]
+- [End of December](roadmap-reviews/2021/review_1_december_20.md)
 - [End of April]
 - [End of July]
 
