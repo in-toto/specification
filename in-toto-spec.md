@@ -166,7 +166,7 @@ systems that further verify the integrity of each step.
 version control system and end with the software product's installation on a
 client's system.
 * **Supply chain layout (or simply layout, or layout metadata)**: a signed file
-  that dictates the series of steps that need to be carried out in the SCC to
+  that dictates the series of steps that need to be carried out in the SSC to
 create a  final product. The layout includes ordered steps, requirements for
 such steps, and the list of actors (or functionaries) in charge of carrying out
 every step. The steps within the supply chain are laid out by a project owner.
