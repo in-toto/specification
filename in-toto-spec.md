@@ -1201,7 +1201,6 @@ A `root.layout` file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "method" : "ed25519",
       "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580be..."
     }
   ]
@@ -1243,7 +1242,6 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "method" : "ed25519",
       "sig" :
       "94df84890d7ace3ae3736a698e082e12c300dfe5aee92e..."
       }
@@ -1277,7 +1275,6 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
-      "method" : "ed25519",
       "sig" :
           "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a..."
       }
@@ -1399,7 +1396,6 @@ A `root.layout` file that fulfills these requirements would look like this:
   },
   "signatures" : [
       { "keyid" : "<ALICES_KEYID>",
-        "method" : "ed25519",
         "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080..."
       }
   ]
@@ -1442,7 +1438,6 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "method" : "ed25519",
       "sig" :
       "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
       }
@@ -1475,7 +1470,6 @@ metadata:
   },
   "signatures" : [
       { "keyid" : "<CAROLINES_KEYID>",
-        "method" : "ed25519",
         "sig" :
         "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a..."
         }
@@ -1511,7 +1505,6 @@ looks really similar (modulo the signature and the filename).
   },
   "signatures" : [
       { "keyid" : "<BOBS_KEYID>",
-        "method" : "ed25519",
         "sig" :
         "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
       }
@@ -1652,7 +1645,6 @@ A `root.layout` file that fulfills these requirements would look like this:
   },
   "signatures" : [
   { "keyid" : "<ALICES_KEYID>",
-    "method" : "ed25519",
     "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d..."
     }
   ]
@@ -1699,7 +1691,6 @@ link metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "method" : "ed25519",
       "sig" :
       "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
     }
@@ -1733,7 +1724,6 @@ link metadata:
    },
   "signatures" : [
     { "keyid" : "<ELEANORS_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c..."
     }
   ]
@@ -1766,7 +1756,6 @@ link metadata:
   },
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a699e082e12c300dfe5022a06c7a6c2..."
     }
   ]
@@ -1845,7 +1834,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "method" : "ed25519",
       "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080d1089..."
     }
   ]
@@ -1906,7 +1894,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<UPSTREAM_KEYID>",
-      "method" : "ed25519",
       "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd5..."
     }
   ]
@@ -1938,7 +1925,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV1_KEYID>",
-      "method" : "ed25519",
       "sig" : "a6a93a9f5771eb2e5ce0c93dd580bebc2080d10894623cfd6eaed..."
     }
   ]
@@ -1971,7 +1957,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV2_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
@@ -2004,7 +1989,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<UPSTREAM_DEV2_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
@@ -2037,7 +2021,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<ELEANORS_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
@@ -2070,7 +2053,6 @@ A root.layout file that fulfills these requirements would look like this:
   },
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
-      "method" : "ed25519",
       "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
     }
   ]
