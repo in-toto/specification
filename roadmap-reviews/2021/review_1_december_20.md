@@ -63,6 +63,7 @@ include it in the review for this evaluation period to get the word out, rather
 than wait several months.
 
 TODO (LP): Mention any work that has happened since the last review.
+
 TODO (LP): Mention 0.1.0 release -> request from adopters? SPIFFE??
 
 ### totoify-grafeas
@@ -91,7 +92,16 @@ efforts. As noted in a previous report, in-toto is also in the process of being
 adopted by rebuilderd, and the maintainer, kpcyrd, worked on integrating the
 [pull request](https://github.com/kpcyrd/rebuilderd/pull/22) into the project.
 
-TODO (LP): Mention recent activity on in-toto-apt-transport (member of QubesOS Core Team)
+### in-toto apt transport
+The client-side counterpart of the rebuilders has also seen a recent uptake in
+activity. That is, we have added finishing touches to an [initial downstream
+release](https://github.com/in-toto/apt-transport-in-toto/pull/26) of our
+in-toto-powered, reproducibility-checking [apt
+transport](https://github.com/in-toto/apt-transport-in-toto), which we hope to
+make available in [Debian Bullseye](https://wiki.debian.org/DebianBullseye).
+Big thanks go to Frédéric Pierret (@fepitre) from the @QubesOS core team and
+Holger Levsen (@h01ger) from the Reproducible Builds core team for their help.
+
 
 ### Layout Creation Tool
 
