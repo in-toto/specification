@@ -103,9 +103,17 @@ Big thanks go to Frédéric Pierret (@fepitre) from the @QubesOS core team and
 Holger Levsen (@h01ger) from the Reproducible Builds core team for their help.
 
 
-### Layout Creation Tool
+### Layout creation tooling
 
-TODO (LP): Mention Yuanrui's and Isha's work on layout creation tooling, update of layout webtool
+We have updated our beta instance of the [layout creation web
+tool](https://in-toto.engineering.nyu.edu/) to use the latest in-toto release.
+In addition to preparing that update, our student assistants Isha Dave
+(@IshaDave) and Yuanrui Chen (@SolidifiedRay) have made an effort to provide
+smarter artifact rule tooling on the layout creation backend (see
+[in-toto/layout-web-tool#46](https://github.com/in-toto/layout-web-tool/pull/46)
+and
+[in-toto/layout-web-tool#49](https://github.com/in-toto/layout-web-tool/pull/49)).
+
 
 ## Closing Remarks
 
