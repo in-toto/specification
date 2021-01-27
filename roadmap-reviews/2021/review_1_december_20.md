@@ -52,19 +52,33 @@ details its developments, and its latest roadmap review can be found
 
 ### in-toto-golang
 
-We released the first tagged version of in-toto-golang, making it easier for our
-adopters to pin and use the package. We are also using this release to evaluate
-the stability of in-toto-golang for a potential 1.0 release. You can find
-in-toto-golang v0.1.0
+We released\* the first tagged version of in-toto-golang, making it easier for
+our adopters to pin and use the package. We are also using this release to
+evaluate the stability of in-toto-golang for a potential 1.0 release. You can
+find in-toto-golang v0.1.0
 [here](https://github.com/in-toto/in-toto-golang/releases/tag/v0.1.0).
 
-Note: in-toto-golang v0.1.0 was released in mid January 2021, but we decided to
-include it in the review for this evaluation period to get the word out, rather
-than wait several months.
+As noted in the roadmap, Christian Rebischke (@shibumi) joined us in summer
+2020 as part of the Google Summer of Code. He implemented a "runlib", i.e., the
+stack that implements the in-toto-run workflow to generate link metadata.
+Previously, in-toto-golang only provided the in-toto-verify workflow. The
+changes made as part of the in-toto-run effort include:
 
-TODO (LP): Mention any work that has happened since the last review.
+- [Support for exclude patterns](https://github.com/in-toto/in-toto-golang/pull/53)
+- [Support for symbolic links in the file system](https://github.com/in-toto/in-toto-golang/pull/55)
+- [Transitioning to Go's built-in ECDSA methods](https://github.com/in-toto/in-toto-golang/pull/70)
+- [Support for multiple hashing algorithms](https://github.com/in-toto/in-toto-golang/pull/78)
+- [Addition of in-toto-run workflow](https://github.com/in-toto/in-toto-golang/pull/56)
+- [Code quality enhancements with error handling](https://github.com/in-toto/in-toto-golang/pull/52)
 
-TODO (LP): Mention 0.1.0 release -> request from adopters? SPIFFE??
+These important additions and changes were key to releasing an initial version
+of in-toto-golang for our adopters. We are currently evaluating the APIs exposed
+here for stability, which will enable us to release v1.0 further down the line.
+
+_\*Note: in-toto-golang v0.1.0 was released in mid January 2021, but we decided
+to include it in the review for this evaluation period to get the word out,
+rather than wait several months. The work that went into this release was
+performed during the evaluation period._
 
 ### totoify-grafeas
 
@@ -76,10 +90,6 @@ simplify the process of generating in-toto metadata in the Grafeas format, and
 pushing this metadata to Grafeas servers. Kristel Fung (@kristelfung)
 [worked](https://github.com/in-toto/totoify-grafeas/pull/3) to bring this
 translation layer to life.
-
-### kubesec integration
-
-TODO: Kristel's work here
 
 ### Arch Linux rebuilder
 
@@ -93,6 +103,7 @@ adopted by rebuilderd, and the maintainer, kpcyrd, worked on integrating the
 [pull request](https://github.com/kpcyrd/rebuilderd/pull/22) into the project.
 
 ### in-toto apt transport
+
 The client-side counterpart of the rebuilders has also seen a recent uptake in
 activity. That is, we have added finishing touches to an [initial downstream
 release](https://github.com/in-toto/apt-transport-in-toto/pull/26) of our
@@ -101,7 +112,6 @@ transport](https://github.com/in-toto/apt-transport-in-toto), which we hope to
 make available in [Debian Bullseye](https://wiki.debian.org/DebianBullseye).
 Big thanks go to Frédéric Pierret (@fepitre) from the @QubesOS core team and
 Holger Levsen (@h01ger) from the Reproducible Builds core team for their help.
-
 
 ### Layout creation tooling
 
