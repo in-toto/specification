@@ -909,7 +909,7 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
   "byproducts": {
     "stderr": "",
     "stdout": "",
-    "return-value": ""
+    "return-value": null
   },
   "environment": {
     "variables": "<ENV>",
@@ -935,7 +935,8 @@ information about the step performed. Byproducts are not verified by in-toto’s
 default verification routine. However, the information gathered can be used for
 further scrutiny during an inspection step. At a minimum, the byproducts
 dictionary should have standard output (stdout), standard error (stderr) and
-return value (return-value), even if no values are filled in.
+return value (return-value), even if no values are filled in. The return value
+should be stored as integer value.
 
 Finally, the environment dictionary contains information about the environment
 in which the step was carried out. Although the environment dictionary is an
@@ -1232,7 +1233,7 @@ metadata:
     "byproducts": {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1265,7 +1266,7 @@ metadata:
     "byproducts": {
       "stderr": "",
       "stdout": "foo.py",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1428,7 +1429,7 @@ metadata:
     "byproducts": {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1460,7 +1461,7 @@ metadata:
     "byproducts": {
       "stderr": "",
       "stdout": "....\nOk",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1495,7 +1496,7 @@ looks really similar (modulo the signature and the filename).
     "byproducts": {
       "stderr": "",
       "stdout": "foo.py",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1677,11 +1678,10 @@ link metadata:
        "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
        "vcs.log": { "sha256": "e64589ab156f325a4ab2bc5d532737d5a7..."}
     },
-    "return-value": "0",
     "byproducts": {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
      },
     "environment": {
       "variables": [""],
@@ -1714,7 +1714,7 @@ link metadata:
     "byproducts": {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
      },
     "environment": {
       "variables": [""],
@@ -1746,7 +1746,7 @@ link metadata:
     "byproducts":  {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1915,7 +1915,7 @@ A root.layout file that fulfills these requirements would look like this:
     "byproducts":  {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -1947,7 +1947,7 @@ A root.layout file that fulfills these requirements would look like this:
     "byproducts":  {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
      },
     "environment": {
       "variables": [""],
@@ -1979,7 +1979,7 @@ A root.layout file that fulfills these requirements would look like this:
     "byproducts": {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -2011,7 +2011,7 @@ A root.layout file that fulfills these requirements would look like this:
     "byproducts":  {
      "stderr": "",
      "stdout": "",
-     "return-value": "0"
+     "return-value": 0
     },
     "environment": {
       "variables": [""],
@@ -2043,7 +2043,7 @@ A root.layout file that fulfills these requirements would look like this:
     "byproducts":  {
       "stderr": "",
       "stdout": "",
-      "return-value": "0"
+      "return-value": 0
     },
     "environment": {
       "variables": [""],
