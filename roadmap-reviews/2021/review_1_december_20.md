@@ -27,10 +27,16 @@ modification of this specification and it now lives
 Santiago Torres-Arias (@santiagotorres) sponsored ITE-5 which proposes replacing
 the current in-toto signature wrapper with the new signing specification.
 
-Mark Lodato and his team also proposed ITE-6 which describes a generalized link
-format.
+In an attempt to further standardize the software supply chain security
+ecosystem, Mark Lodato and his team have drafted ITE-6, a generalized in-toto
+link metadata container format, which is compatible with [Binary
+Authorization](https://cloud.google.com/binary-authorization). The format
+allows to create more specialized attestations than the current link metadata
+format does, where each attestation may be tailored to the characteristics
+of concrete software supply chain steps, such as "code review", "container
+vulnerability scans" or "deployment policy decision", to name only a few. ITE-6
+is also sponsored by Santiago Torres-Arias.
 
-TODO describe ITE-6 @Santiago
 
 - [ITE-5: Replace signature wrapper with SSL signing spec](https://github.com/in-toto/ITE/pull/13)
 - [ITE-6: Generalized link format](https://github.com/in-toto/ITE/pull/15)
