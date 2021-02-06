@@ -124,8 +124,8 @@ keys for verification. We are exploring mechanisms to distribute layout keys
 securely.
 
 For cases where trust delegation is meaningful, a functionary should be able to
-delegate full or limited trust to other functionaries to perform steps on her
-or his behalf.
+delegate full or limited trust to other functionaries to perform steps on their
+behalf.
 
 #### 1.5.4 System properties
 
@@ -139,7 +139,7 @@ chain.
 * **Process compliance and auditability**: the product received by the client
   followed the layout specified by the project owner. All steps described have
 their materials and products correctly linked together, and, if audited by a
-third party, he or she can verify that all steps were performed as described.
+third party, they can verify that all steps were performed as described.
 For example, within the in-toto metadata, it is possible to see the unit test
 server’s signed statement that the software passed all of its unit tests, or
 check git commit signatures to validate that a certain code review policy was
@@ -239,7 +239,7 @@ case:
 1. The project owner creates a layout. This describes the steps that every
    functionary must perform, as well as the specific inspection steps that must
 be performed on the client's machine.
-2. Each functionary performs his or her usual tasks within the supply chain
+2. Each functionary performs their usual tasks within the supply chain
    (e.g., the functionary in charge of compilation compiles the binary), and
 records link metadata about that action. After all steps are performed by
 functionaries, the metadata and target files are aggregated into a final
@@ -289,7 +289,7 @@ inspection steps to be carried out when verifying the final product.
 Functionaries are intended to carry out steps within the supply chain, and to
 provide evidence of this by means of link metadata.
 
-A functionary is uniquely identified by the public key that he or she will use
+A functionary is uniquely identified by the public key that they will use
 to sign a piece of link metadata as evidence that a step within the supply
 chain was performed.
 
@@ -315,10 +315,9 @@ should be integrated into system installation tools, or package managers.
 
 Sublayouts allow a functionary to further define steps within the supply chain.
 When a functionary defines a sublayout, instead of carrying out the next step,
-she or he will define the series of steps required as if she or he was a
-project owner for the steps in this sublayout. This is helpful if the project
-owner does not know the specifics of a step, but trusts a functionary to
-specify them later.
+they will define the series of steps required as if they were a project owner
+for the steps in this sublayout. This is helpful if the project owner does not
+know the specifics of a step, but trusts a functionary to specify them later.
 
 Sublayouts can also be used for third-party sections of the supply chain. For
 example, a package maintainer for a Linux distribution will likely trust all
@@ -1079,7 +1078,7 @@ that includes most of the concepts explained in sections 3 and 4. This is an
 error-free case.
 
 1. The project owner defines the layout to be followed by, e.g. using the
-   in-toto CLI tools. When doing so, he or she instructs who is intended to
+   in-toto CLI tools. When doing so, they specify who is intended to
 sign for every piece of link metadata, any sublayouts that may exist, and how
 to further verify accompanying metadata.
 1. Functionaries perform the intended actions and produce link metadata for
