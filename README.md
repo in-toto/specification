@@ -8,7 +8,7 @@ Specification and other related documents.
 
 There are a couple of repositories within this organization that you can use to
 play around and better understand in-toto. Here's a list of them along with a
-brief description
+brief description.
 
 - [demo](https://github.com/in-toto/demo): This is a very basic dummy supply
   chain example to help you understand the in-toto python toolchain. We
@@ -22,6 +22,11 @@ brief description
 - [totoify-grafeas](https://github.com/in-toto/totoify-grafeas): This repository
   provides an interface that converts standard in-toto links into Grafeas
   occurrences, and back for use in an in-toto verification workflow.
+- [layout-web-tool](https://github.com/in-toto/layout-web-tool): The
+  layout-web-tool is a simple Flask-based web app that walks users through
+  creating an in-toto layout. This tool is
+  [hosted](https://in-toto.engineering.nyu.edu/) for interested project owners
+  to try out.
 
 
 ## Other informative repositories
