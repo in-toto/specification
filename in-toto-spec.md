@@ -618,7 +618,8 @@ verification. We will elaborate on the specifics of this process in section
 Steps performed by a functionary in the supply chain are declared as follows:
 
 ```json
-{ "name": "<NAME>",
+{ "_type": "step",
+  "name": "<NAME>",
   "threshold": "<THRESHOLD>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
