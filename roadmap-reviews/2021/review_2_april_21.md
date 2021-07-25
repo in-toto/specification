@@ -3,7 +3,7 @@
 We've reached the end of the second evaluation period for our 2021 roadmap, and
 we are due a review of our activities. Here's a rundown of what has happened in
 the scope of the in-toto project's current
-[ROADMAP](https://github.com/in-toto/docs/blob/master/ROADMAP.md).
+[ROADMAP](https://github.com/in-toto/docs/blob/master/roadmap-reviews/2021/ROADMAP.md).
 
 ## ITEs
 
@@ -54,7 +54,7 @@ The same contributors also added support for the new signature specification.
 This [change](https://github.com/in-toto/in-toto-golang/pull/101) makes
 in-toto-golang compliant with ITE-5.
 
-## in-toto-rs
+### in-toto-rs
 
 We listed our Rust implementation for this year's Google Summer of Code. We
 hope to [develop its functionality](https://github.com/in-toto/in-toto-rs/issues/4)
