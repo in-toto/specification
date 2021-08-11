@@ -126,7 +126,7 @@ following windows.
 
 - [End of December](roadmap-reviews/2021/review_1_december_20.md)
 - [End of April](roadmap-reviews/2021/review_2_april_21.md)
-- [End of July]
+- [End of July](roadmap-reviews/2021/review_3_july_21.md)
 
 These windows will also be used to update all stakeholders with the status of
 the in-toto project as a whole.
