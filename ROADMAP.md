@@ -2,131 +2,121 @@ Roadmap
 =======
 
 _Note: Previous roadmaps can be found with the roadmap reviews for that period.
-[Link to Roadmap 2020](roadmap-reviews/2020/ROADMAP.md)_
+[Link to Roadmap 2021](roadmap-reviews/2021/ROADMAP.md)_
 
-This document spans the Roadmap for the in-toto project for the time window
-from August 2020 to August 2021. The main theme of this year's efforts are
-focused on further maturing of our various implementations and integrations in
-an effort to encourage adoption, refining ITE-2 and ITE-3 to standardize the
-integration of TUF and in-toto in software supply chains, and developing an
-ecosystem for resolvers as defined in ITE-4.
+This document spans the Roadmap for the in-toto specification _and_ its
+implementations for the time window from August 2021 to August 2022. The main
+focus of this year is to adopt all the new and exciting features that are
+taking place in the ITE space:
 
-## Further maturing of implementations and integrations
+- ITE-4: Support abstract artifact resource types (more on this below)
+- ITE-5: Use a new, and pluggable signing specification
+- ITE-6: Support abstract link attestation types (e.g., vulnerability scan)
+- ITE-7: Support external identity providers for functionaries (e.g., x509 or SPIFFE)
 
-Apart from the reference implementation written in Python, in-toto now provides
-libraries in three different languages - in-toto-golang, in-toto-java,
-and in-toto-rs (written in Rust). This allows for in-toto attestations in
-a variety of use-cases. And as noted in the prior roadmap and the subsequent
-reviews, in-toto provides applications to integrate with platforms such as
-Jenkins, Kubernetes, apt for Debian, and rebuilderd for Reproducible Builds. We
-were able to improve cross-implementation interoperability in the last year,
-but we still lack a thorough integration test harness that ensures metadata
-generated in any of our various implementations and applications can be
-correctly verified. We plan to implement such a harness over the course of this
-next roadmap.
+That is, we envision that many of these features will slowly take place within
+the reference implementation to provide features that the community wants. 
 
-The further maturing of our implementations allows us to provide more guarantees
-to our adopters, enabling them to use in-toto to secure their supply chains
-without worry of any breaking changes. Our plan of releasing version 1.0 of the
-reference implementation in the next few months should go a long way to
-achieving that.
+## First class ITE support
 
-### in-toto-golang
+The previous years's roadmap aimed to culminate with in-toto's 1.0
+release, as we aimed to provide stability for our implementors. In contrast,
+this year has been filled with excitement and new energy on the software supply
+chain security space. We are very excited to work with more sister projects
+that aim to provide new ways to further protect the software supply chain
+(Shout out to Sigstore, Keylime, SPIFFE, and many others!)
 
-Christian Rebischke (@shibumi) joined us for the summer of 2020 to work on
-[in-toto-golang](https://github.com/in-toto/in-toto-golang)'s runlib
-capabilities as part of
-[Google Summer of Code](https://summerofcode.withgoogle.com/projects/#4804162597945344).
-We are very excited to see the maturing of this in-toto implementation, which
-will also help us further our interoperability.
+As such, we have spent a large part of the previous roadmap brianstorming and
+devising new elements of the in-toto spec. This being a reference
+impelementation, we will ensure we can provide these new, exciting features
+once they are mature enough.
 
-### in-toto-java
+### ITE-4: abstract resource types
 
-The [Java implentation of in-toto](https://github.com/in-toto/in-toto-java) is
-currently not entirely compliant with the in-toto specification. Instead, it
-aims to provide a reduced, but usable core feature-set. We aim to add more
-features in the next roadmap, as noted in the implementation's
-[documentation](https://github.com/in-toto/in-toto-java/blob/master/README.md).
+A perhaps already established ITE is ITE-4, which focuses on abstract
+resources. This is paramount for some uses, such as the CNAB security
+specification. In this case, we will be adding facilities for custom artifact
+hashers/resolvers. We also envision providing some baseline catalog of these
+hashers for common usecases so that people have something to reference when
+writing their own and --- of course --- use them.
 
-### in-toto-rs
+This year, we will spend time providing interfaces for the end-user tooling to
+simplify hashing and resolving of abstract resource types. Naturally, this will
+also come with human-related efforts to ensure the community can provide their
+own hashers/resolvers for these types.
 
-This [in-toto implementation](https://github.com/in-toto/in-toto-rs) was written
-to serve as a Rust library for generating in-toto attestations. In particular,
-it is handy for use in rebuilderd. Speaking of which....
+### ITE-5: The move to DSSE (and other wrappers)
 
-### rebuilderd
+A common pain point with implementers is our TUF-based metablock signing
+envelope. Although it's been around for a while (maybe more than ten years?!),
+it seems that that the ecosystem has grown around this particular space.
+Players like JWT (and the whole JOSE suite), COSE (for CBOR), PASETO and DSSE
+have surfaced as standalone and mature signing envelope specifications. Working
+with the community, we have developed ways to support new singing envelopes in
+golang, and we expect to provide a backwards-compatible way to sign and verify
+DSSE-based in-toto metadata in a new release of in-toto. Whether this will
+warrant a major version bump is yet to be decided.
 
-As noted in the final roadmap review of 2020, Santiago Torres-Arias
-(@SantiagoTorres) has been working on
-[adding in-toto attestations](https://github.com/kpcyrd/rebuilderd/pull/22) to
-rebuilderd. We plan to continue working on this effort and to work towards using
-in-toto links as a verifiable format for results of rebuilders.
+### ITE-6: Abstract link metadata types
 
-### Tekton Project
+When we first designed in-toto, we expected links to be opaque descriptors that
+could represent yet-to-be-known supply chain attestation types. As the
+ecosystem has matured (it's been almost half a decade since the first commit!),
+it appears that more expressive, ad-hoc types will simplify both
+policy-writing, as well as inspection engines and more.
 
-We are very excited to see Tekton, a Kubernetes-based pipeline manager, to take
-a stab at the software supply chain security problem with their [chains](https://github.com/tektoncd/chains/)
-project. We are even more excited to see that chains will be able to create
-[in-toto](https://github.com/tektoncd/chains/pull/13) links to attest for the
-operations when using Tekton. This way, you can automagically secure the
-actions in your Tekton pipelines. This year, we will work closely with the
-Tekton community to make Chains a widespread, strong component of the software
-supply chain security ecosystem.
+The previous cycle we worked closely with various people to come up with the
+[attestations](https://github.com/in-toto/attestation) repository. This
+describes various ways to represent common supply chain steps (e.g., building,
+scanning for CVEs, or even compiling a software bill of materials). Although
+old links are here to stay (and will still suffice for yet-to-be-known supply
+chain steps), we will put in place facilities that allow us to *create* these
+attestations. Likewise, we expect movement in the policy (layout) side of
+things --- what use is to create attestations if we can't verify them?
 
-### Kubernetes components
+### ITE-7: Leveraging further identity provider ecosystems.
 
-Our Kubernetes components (namely, a [kubectl plugin](https://github.com/in-toto/kubectl-in-toto) and a k8s [admission
-controller](https://github.com/in-toto/in-toto-webhook)) have seen little
-movement throughout the year. However, as we start supporting more and more
-cloud-native deployments, we are starting to see more use for these. This year,
-we will mature these projects into more reliable and easy-to-use tools.
+Many software ecosystems have mature identity provider ecosystems in place
+(think of the GPG ecosystem in the linux distribution world, or x509
+certificate chains for private infrastructure). We expect this ITE to provide
+building blocks for tools like SPIFFE or Sigstore's Fulcio to create
+functionary identification information that can be used to enroll them in
+in-toto layouts. This will allow for a tighter integration betwee in-toto and
+existing software pipelines, as well as the use of ephemeral worker keys (e.g.,
+by using SPIFFE) for short-lived supply chain workers. We expect this ITE to
+come around through this year (more on it on the organizational roadmap), and
+we expect to provide early implementations of this by the third review period.
 
-### in-toto Jenkins plugin
+## Measured supply chain execution using Keylime
 
-The [in-toto Jenkins plugin](https://github.com/jenkinsci/in-toto-plugin) is
-used to generate in-toto links for steps in Jenkins pipelines. During the last
-roadmap period, we added Grafeas as a native transport. During this next
-roadmap, we aim to work on further maturing the plugin with greater granularity,
-particularly in better specifying the artifacts to record while generating the
-attestations, and some other refactoring as recorded in the repository's issues.
+Although this is in very early stages of development, we hope to work closely
+with the keylime project to provide pathways to embed keylime TPM-ME
+metainformation in ITE-6 metadata. This will raise the bar about the integrity
+of a running host. The inclusion of trusted hardware semantics in the in-toto
+ecosystem is something we have been hoping to see for a while now.
 
-## TUF + in-toto
+## CII Gold badge
 
-We are continuing to work on better integrating in-toto with our sister project,
-The Update Framework (TUF).
+Last year we fell slightly short of our Gold badge goal. This year we will tick
+the missing boxes, and finally meet the gold standard (pun intended) on secure
+development practices.
 
-### ITE-2 and ITE-3
+## Release scheduling and roadmap review schedule
 
-Trishank Karthik Kuppusamy (@trishankatdatadog) sponsored
-[ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc) and
-[ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc) that
-detail how TUF and in-toto can be combined to provide end-to-end security
-guarantees. We aim to work with the stakeholders of these ITEs to standardize 
-the recommendations.
+This year we intend to continue our release schedule. This includes a more
+formal Service Level Agreement considering a four-month window between minor
+versions.
 
-### Streamline development of overlapping components
+- Months 1-2: Normal development. Including new features, refactoring, and bugfixes.
+- Month 3: Feature freeze. Only bugfixes and security vulnerabilities are allowed.
+- Month 4: Release candidate period. A new version is released by the end of
+  the fourth month.
 
-During this next year, we plan to propose an ITE (and perhaps a TAP) to
-coordinate the development of the overlapping parts of the specifications. The
-two projects share parts of the document formats, and it is beneficial to
-maintain consistency.
+This schedule will roughly match the following months:
 
-## ITE-4
+- End of December
+- End of April
+- End of July
 
-[ITE-4](https://github.com/in-toto/ITE/blob/master/ITE/4/README.adoc) introduced
-generic resource types to artifacts in in-toto. It is being implemented by Cloud
-Native Applicaton Bundles (CNAB) to verify the generation of their metadata. We
-aim to work with interested parties to develop resolvers for other resource
-types. This experience will also help refine the ITE.
-
-## Roadmap review schedule
-
-As before, we intend to review the progress done in these efforts in the
-following windows.
-
-- [End of December](roadmap-reviews/2021/review_1_december_20.md)
-- [End of April](roadmap-reviews/2021/review_2_april_21.md)
-- [End of July]
-
-These windows will also be used to update all stakeholders with the status of
-the in-toto project as a whole.
+These time windows will also be used to review and update all stakeholders with
+the status of in-toto.

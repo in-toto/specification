@@ -3,7 +3,7 @@
 We've reached the end of the first evaluation period for our 2021 roadmap, and
 we are due a review of our activities. Here's a rundown of what has happened in
 the scope of the in-toto project's
-[ROADMAP](https://github.com/in-toto/docs/blob/master/ROADMAP.md) for this year.
+[ROADMAP](https://github.com/in-toto/docs/blob/master/roadmap-reviews/2021/ROADMAP.md) for this year.
 
 ## ITEs
 
