@@ -33,7 +33,7 @@ once they are mature enough.
 
 ### ITE-4: abstract resource types
 
-A perhaps already established is ITE is ITE-4, which focuses on abstract
+A perhaps already established ITE is ITE-4, which focuses on abstract
 resources. This is paramount for some uses, such as the CNAB security
 specification. In this case, we will be adding facilities for custom artifact
 hashers/resolvers. We also envision providing some baseline catalog of these
