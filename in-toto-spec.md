@@ -1,6 +1,6 @@
 ﻿# in-toto Specification
 
-Apr 11, 2021
+Oct 1, 2021
 
 <https://in-toto.io>
 
