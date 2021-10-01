@@ -2,9 +2,80 @@
 
 Apr 11, 2021
 
-https://in-toto.io
+<https://in-toto.io>
 
 Version 0.9
+
+## Table of Contents
+
+- [in-toto Specification](#in-toto-specification)
+  - [Table of Contents](#table-of-contents)
+  - [1 Introduction](#1-introduction)
+    - [1.1 Scope](#11-scope)
+    - [1.2 Motivation](#12-motivation)
+    - [1.3 History and credit](#13-history-and-credit)
+    - [1.4 Context](#14-context)
+    - [1.5 Goals](#15-goals)
+      - [1.5.1 Goals for implementation](#151-goals-for-implementation)
+      - [1.5.2 Defender goals and non-goals](#152-defender-goals-and-non-goals)
+      - [1.5.3 Assumptions](#153-assumptions)
+      - [1.5.4 System properties](#154-system-properties)
+    - [1.6 Terminology](#16-terminology)
+  - [2 System overview](#2-system-overview)
+    - [2.1 Involved parties and their roles](#21-involved-parties-and-their-roles)
+      - [2.1.1 Project owner](#211-project-owner)
+      - [2.1.2 Functionaries](#212-functionaries)
+      - [2.1.3 Clients](#213-clients)
+      - [2.1.4 Third-party sublayouts](#214-third-party-sublayouts)
+    - [2.2 in-toto components](#22-in-toto-components)
+    - [2.3 System workflow example](#23-system-workflow-example)
+  - [3 The final product](#3-the-final-product)
+    - [3.1 Contents](#31-contents)
+      - [3.1.1 Supply chain Layout](#311-supply-chain-layout)
+      - [3.1.2 Link metadata](#312-link-metadata)
+      - [3.1.3 Target files](#313-target-files)
+      - [3.1.4 Additional metadata files](#314-additional-metadata-files)
+  - [4 Document formats](#4-document-formats)
+    - [4.1 Metaformat](#41-metaformat)
+    - [4.2 File formats: general principles](#42-file-formats-general-principles)
+      - [4.2.1 Hash object format](#421-hash-object-format)
+    - [4.3 File formats: layout](#43-file-formats-layout)
+      - [4.3.1 Steps](#431-steps)
+      - [4.3.2 Inspections](#432-inspections)
+        - [4.3.2.1 Inspection interface](#4321-inspection-interface)
+      - [4.3.3 Artifact Rules](#433-artifact-rules)
+        - [4.3.3.1 Rule processing](#4331-rule-processing)
+        - [4.3.3.2 MATCH rule behavior](#4332-match-rule-behavior)
+        - [4.3.3.3 DISALLOW rule behavior](#4333-disallow-rule-behavior)
+    - [4.4 File formats: `[name].[KEYID-PREFIX].link`](#44-file-formats-namekeyid-prefixlink)
+      - [4.4.1 Environment Information](#441-environment-information)
+    - [4.5 Specifying sublayouts](#45-specifying-sublayouts)
+      - [4.5.1 Artifact rules in sublayouts](#451-artifact-rules-in-sublayouts)
+      - [4.5.2 Namespacing link metadata](#452-namespacing-link-metadata)
+      - [4.5.3 Inspections on sublayouts](#453-inspections-on-sublayouts)
+  - [5 Detailed workflows](#5-detailed-workflows)
+    - [5.1 Workflow description](#51-workflow-description)
+    - [5.2 Verifying the final product](#52-verifying-the-final-product)
+    - [5.3 Supply chain examples](#53-supply-chain-examples)
+      - [5.3.1 Alice's Python script](#531-alices-python-script)
+      - [`write-code.[ALICE-KEYID-PREFIX].link:`](#write-codealice-keyid-prefixlink)
+      - [`package.[BOB-KEYID-PREFIX].link:`](#packagebob-keyid-prefixlink)
+      - [5.3.2 Alice uses testing (with a threshold of 2)](#532-alice-uses-testing-with-a-threshold-of-2)
+        - [`write-code.[ALICE-KEYID-PREFIX].link`:](#write-codealice-keyid-prefixlink-1)
+        - [`test.[CAROLINES_KEYID_PREFIX].link:`](#testcarolines_keyid_prefixlink)
+        - [`package.[BOB-KEYID-PREFIX].link`:](#packagebob-keyid-prefixlink-1)
+      - [Alice uses a version control system](#alice-uses-a-version-control-system)
+        - [`checkout-vcs.[ALICES-KEYID-PREFIX].link`](#checkout-vcsalices-keyid-prefixlink)
+        - [`compilation.[ELEANORS-KEYID-PREFIX].link`](#compilationeleanors-keyid-prefixlink)
+        - [`package.[BOBS-KEYID-PREFIX].link`](#packagebobs-keyid-prefixlink)
+      - [5.3.3  Alice uses a third party sublayout](#533--alice-uses-a-third-party-sublayout)
+        - [`fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`](#fetch-upstreamupstream-keyid-prefixlink)
+        - [`check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`](#check-out-vcsupstream-dev1-keyid-prefixlink)
+        - [`compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`](#compile-docsupstream-dev2-keyid-prefixlink)
+        - [`verify-vcs-commits.[UPSTREAM-KEYID-PREFIX].link` (upstream inspection)](#verify-vcs-commitsupstream-keyid-prefixlink-upstream-inspection)
+        - [`compilation.[ELEANORS-KEYID-PREFIX].link`:](#compilationeleanors-keyid-prefixlink-1)
+        - [`package.[BOBS-KEYID-PREFIX].link`:](#packagebobs-keyid-prefixlink-1)
+  - [6 Learn More](#6-learn-more)
 
 ## 1 Introduction
 
@@ -29,7 +100,6 @@ product for malicious intents that range from introducing backdoors in the
 source code to including vulnerable libraries in the final product. Because of
 its susceptibility to these threats, a supply chain breach is an impactful
 means for an attacker to affect multiple users at once.
-
 
 Although many frameworks ensuring security in the "last mile" (e.g., software
 updaters) exist, they may be providing integrity and authentication to a
@@ -265,7 +335,6 @@ and practices, this is a necessary requirement for in-toto.
 
 There are three roles in the framework:
 
-
 * **Project owner**: defines the layout of a software supply chain
 * **Functionary**: performs a step in the supply chain and provides a piece of
   link metadata as a record that such a step was carried out.
@@ -487,11 +556,11 @@ The current reference implementation of in-toto defines three signing methods,
 although in-toto is not restricted to any particular key signing method, key
 type, or cryptographic library:
 
-*   "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
+* "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
 The underlying hash function is SHA256.
-*   "ed25519" : Elliptic curve digital signature algorithm based on
+* "ed25519" : Elliptic curve digital signature algorithm based on
     [Twisted Edwards curves](http://ed25519.cr.yp.to/).
-*   "ecdsa" : [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
+* "ecdsa" : [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
 
 All keys have the format:
 
@@ -759,7 +828,6 @@ step. This is the case for steps that relocate files as part of their tasks. For
 example `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure
 that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 
-
 * **ALLOW**: indicates that artifacts matched by the pattern are allowed as
   materials or products of this step.
 * **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
@@ -772,7 +840,6 @@ that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
   as products of this step.
 * **MODIFY**: indicates that products matched by this pattern must appear as
   materials of this step, and their hashes must not by the same.
-
 
 ##### 4.3.3.1 Rule processing
 
@@ -803,7 +870,6 @@ for rule in rules:
 
 return SUCCESS
 ```
-
 
 ##### 4.3.3.2 MATCH rule behavior
 
@@ -858,7 +924,6 @@ for artifact in source_artifacts_filtered:
 return consumed_artifacts
 ```
 
-
 ##### 4.3.3.3 DISALLOW rule behavior
 
 The disallow rule is the only rule that can error out of rule processing. If a
@@ -879,18 +944,15 @@ return SUCCESS
 
 ### 4.4 File formats: `[name].[KEYID-PREFIX].link`
 
-
 The `[name].[KEYID-PREFIX].link` file will contain the information recorded
 from the execution of a supply chain step. It lists relevant information, such
 as the command executed, the materials used, and the changes made to such
 materials (products), as well as other host information.
 
-
 The name for link metadata files must contain two elements: the name of the
 step, and the first six bytes of the functionary’s keyid separated by a dot.
 The KEYID portion of the name is used to avoid collisions in steps that have
 thresholds higher than one.
-
 
 The format of the `[name].[KEYID-PREFIX].link` file is as follows:
 
@@ -926,7 +988,6 @@ in section 4.3.1.
 The COMMAND field contains the command and its arguments as executed by the
 functionary.
 
-
 The `"materials"` and `"products"` fields are dictionaries keyed by a file’s
 PATH. Each HASH value is a hash object as described in section 4.2.1.
 
@@ -941,7 +1002,7 @@ should be stored as integer value.
 Finally, the environment dictionary contains information about the environment
 in which the step was carried out. Although the environment dictionary is an
 opaque field, it should at least contain the `"variables"`, `"filesystem"`, and
-`"workdir"` keys, even if no values are filled in for them. 
+`"workdir"` keys, even if no values are filled in for them.
 
 #### 4.4.1 Environment Information
 
@@ -989,8 +1050,8 @@ The following is a depiction of the previous recommendation:
       "workdir": "/home/santiago/Documents/personal/programas/in-toto/docs"
   }
 }
-``` 
- 
+```
+
  The previous example contains a list of environment variables as printed out
 by the env command, a list of files as printed out by the mtree -c command and,
 finally, the output of the pwd command. This information can be used to infer
@@ -1039,7 +1100,6 @@ layout. The materials of this virtual piece of link metadata will be those of
 the first step on Bob's sublayout, and the products will be those on the last
 step of Bob's sublayout.
 
-
 #### 4.5.2 Namespacing link metadata
 
 Link metadata that pertains to a sublayout must be placed in a filesystem
@@ -1072,8 +1132,8 @@ layout.
 
 ## 5 Detailed workflows
 
+### 5.1 Workflow description
 
-### 5.1 Workflow description 
 To provide further detail of in-toto’s workflow, we describe a detailed case
 that includes most of the concepts explained in sections 3 and 4. This is an
 error-free case.
@@ -1091,11 +1151,10 @@ to further verify accompanying metadata.
    use the final product.
 
 ### 5.2 Verifying the final product
-  
- 
+
 The following algorithm contains an in-depth description of the verification
 procedure.
- 
+
 1. in-toto inspects the final product to find a root.layout file that describes
    the top-level layout for the project. The signature(s) on the file are
 checked using previously-acquired project owner public key(s).
@@ -1106,14 +1165,14 @@ expiration field, verification should fail.
    functionaries’ public keys are loaded from the root.layout in the pubkeys
 field.
 1. The steps, as defined in the layout, are loaded. For each step in the
-   layout, one or more pieces of link or layout metadata is loaded. 
+   layout, one or more pieces of link or layout metadata is loaded.
       1. If the loaded metadata file is a link metadata file, a data structure
          containing the materials and products is populated with the reported
 values.
       1. If the loaded metadata file is a layout file instead, the algorithm
          will recurse into that layout, starting from step 1. All the metadata
 relevant to that sub-layout should be contained in a subdirectory named after
-this step. 
+this step.
 1. Artifact rules are applied against the products and materials reported by
    each step as described by the algorithm in section 4.3.3.1.
 1. Inspection steps are executed, and the corresponding materials and products
@@ -1318,7 +1377,6 @@ must provide link metadata showing that the tests completed successfully.
 When providing Carl with the tarball, Alice's layout tells Carl's installation
 script that it must make sure of the following:
 
-
 * That the script was written by Alice herself
 * That the test suite was run by Caroline and Alfred
 * That the packaging was done by Bob
@@ -1414,7 +1472,7 @@ tarball.
 After both steps are performed, we expect to see the following pieces of link
 metadata:
 
-##### `write-code.[ALICE-KEYID-PREFIX].link:`
+##### `write-code.[ALICE-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : {
@@ -1449,7 +1507,7 @@ metadata:
 ##### `test.[CAROLINES_KEYID_PREFIX].link:`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "Name": "package",
     "command" : "python test.py",
@@ -1481,7 +1539,7 @@ metadata:
 To avoid repetitivity, we omit Alfred's version of the link metadata, which
 looks really similar (modulo the signature and the filename).
 
-##### `package.[BOB-KEYID-PREFIX].link:`
+##### `package.[BOB-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { "_type" : "link",
@@ -1569,7 +1627,7 @@ As a result of this, Alice's layout would have three steps and two inspections.
 A `root.layout` file that fulfills these requirements would look like this:
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
     "keys" : {
@@ -1666,10 +1724,10 @@ for the script and its parameters are agnostic to in-toto.
 When the three steps are carried out, we expect to see the following pieces of
 link metadata:
 
-##### `checkout-vcs.[ALICES-KEYID-PREFIX].link`:
+##### `checkout-vcs.[ALICES-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "checkout-vcs",
     "command" : "git tag 1.0",
@@ -1698,10 +1756,10 @@ link metadata:
 }
 ```
 
-##### `compilation.[ELEANORS-KEYID-PREFIX].link`:
+##### `compilation.[ELEANORS-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
@@ -1730,10 +1788,10 @@ link metadata:
 }
 ```
 
-##### `package.[BOBS-KEYID-PREFIX].link`:
+##### `package.[BOBS-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
@@ -1840,10 +1898,10 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`:
+##### `fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
     "keys" : {
@@ -1900,10 +1958,10 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`:
+##### `check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "compilation",
     "command" : "gcc -o foo foo.c",
@@ -1931,10 +1989,10 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`:
+##### `compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "package",
     "command" : "",
@@ -1963,10 +2021,10 @@ A root.layout file that fulfills these requirements would look like this:
 }
 ```
 
-##### `verify-vcs-commits.[UPSTREAM-KEYID-PREFIX].link` (upstream inspection):
+##### `verify-vcs-commits.[UPSTREAM-KEYID-PREFIX].link` (upstream inspection)
 
 ```json
-{"signed" : { 
+{"signed" : {
     "_type" : "link",
     "name": "package",
     "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
@@ -2030,7 +2088,7 @@ A root.layout file that fulfills these requirements would look like this:
 ##### `package.[BOBS-KEYID-PREFIX].link`:
 
 ```json
-{ "signed" : { 
+{ "signed" : {
     "_type" : "link",
     "name": "package",
     "command" : "tar zcvf foo.tar.gz foo",
