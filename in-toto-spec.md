@@ -839,7 +839,7 @@ that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 * **DELETE**: indicates that materials matched by the pattern must not appear
   as products of this step.
 * **MODIFY**: indicates that products matched by this pattern must appear as
-  materials of this step, and their hashes must not by the same.
+  materials of this step, and their hashes must not be the same.
 
 ##### 4.3.3.1 Rule processing
 
