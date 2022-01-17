@@ -44,11 +44,22 @@ TUF implementation. It can be found here:
 
 ### ITE-6: abstract attestation types
 
-<!-- TODO, @SantiagoTorres -->
+This period has seen plenty of movement in regards to experimentation and
+sketching. In particular, the SLSA provenance type saw three different
+iterations based on feedback from the community. It has seen plenty of use
+within Chains inside of the rekor transparency log. Likewise, other attestation
+types from projects such as Witness and SPDX have been created and submitted in
+the wild. Other attestations are being discussed. These include the ones for
+code review and vulnerability scanners.
+
+Beyond the various types of attestations, ITE-6 types will need a
+community-based process to allow discussion and agreement between different
+stakeholders for each individual type. We expect the coming period to include a
+discussion around these initiatives to better streamline the creation of new
+types.
+
 
 ### ITE-7: leveraging further identity provider ecosystems
-
-<!-- FIXME: ITE-7 draft status? -->
 
 in-toto now has support for x509 certificates and SPIFFE through SPIRE. We're
 excited for what this means to the broader ecosystem. ITE-7's semantics are now
@@ -56,6 +67,11 @@ available through a prerelease of the Go implementation for users to test. The
 code was contributed by the folks at BoxBoat and TestifySec, and their efforts
 mean that these features are available earlier than we expected in our initial
 roadmap!
+
+Further, as usage on the pre-release branch of ITE-7, and tools leverage these
+features it will be easier to fine tune the last details of the proposal. With
+this, we envision ITE-7 acceptance to move forward before the next roadmap
+review.
 
 ### Other ITE updates
 
