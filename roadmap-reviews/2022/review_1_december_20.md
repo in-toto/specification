@@ -101,6 +101,10 @@ be found
 and was reported by Parth Patel (pxp928) of BoxBoat. A fix was submitted by
 Brandon Mitchell (@sudo-bmitch), also of BoxBoat.
 
+Our Java implementation saw significant activity as well, and we welcomed a new
+maintainer, Sergio Felix (@Alos) of Google, to the team. The latest version,
+v0.4.0 includes support for DSSE as well as ITE-6 style attestations.
+
 Finally, as noted in prior updates, we have a Rust library that can generate
 in-toto link metadata. This has now been integrated into
 [rebuilderd](https://rebuilderd.com), meaning that rebuilders, like the [NYU
