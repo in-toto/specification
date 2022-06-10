@@ -45,7 +45,7 @@ will allow Jenkins users to make progress on SLSA compliance.
 ### ITE-9
 
 A new proposal, ITE-9, was introduced to describe a process for community
-members to _register_ new attestation types. This will ensure different in-toto
+members to _propose and agree on_ new attestation types. This will ensure different in-toto
 implementations can handle new attestation types without confusion while also
 ensuring the broader community is aware of the different options available to
 them within in-toto.
