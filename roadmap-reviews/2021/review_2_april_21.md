@@ -1,4 +1,4 @@
-# ROADMAP review (End of December '20)
+# ROADMAP review (End of April '21)
 
 We've reached the end of the second evaluation period for our 2021 roadmap, and
 we are due a review of our activities. Here's a rundown of what has happened in
