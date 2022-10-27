@@ -4,6 +4,20 @@ Specification and other related documents.
 - You can read the current version of the specification [here](https://github.com/in-toto/docs/blob/master/in-toto-spec.md).
 - The latest stable version (0.9) is [here](https://github.com/in-toto/docs/blob/v0.9/in-toto-spec.md).
 
+## Generating PDF
+
+### Requirements
+1. [git](https://git-scm.com/ "git")
+2. [Pandoc with LaTex, must include enumitem](https://pandoc.org/ "Pandoc")
+3. [GNU Make](https://www.gnu.org/software/make/ "GNU Make")
+
+The documentation can be generated into a printable PDF by compiling the
+markdown file.
+
+```bash
+make pdf
+```
+
 ## Examples and Demos
 
 There are a couple of repositories within this organization that you can use to
