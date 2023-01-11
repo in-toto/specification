@@ -821,10 +821,17 @@ fields of a step and are applied sequentially on a queue of `"materials"` or
 `"products"` from the step's corresponding link metadata. They operate in a
 similar fashion as firewall rules do. This means if an artifact is successfully
 consumed by a rule, it is removed from the queue and cannot be consumed by
-subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
-list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
-artifact was not consumed by an earlier rule. Here, we describe an algorithm to
-illustrate the behavior of the rules being applied:
+subsequent rules.
+
+**NOTE:** There is an implicit `"ALLOW *"` at the end of each rule list. By
+explicitly specifying `"DISALLOW *"`, in-toto verification fails if an artifact
+was not consumed by an earlier rule. Not including `"DISALLOW *"` at the end of
+a rule list could allow artifacts to sneak into the step or inspection
+undetected. AS such, it is generally recommended that all rule lists include a
+`"DISALLOW *"` at the end.
+
+Here, we describe an algorithm to illustrate the behavior of the rules being
+applied:
 
 ```python
 VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
