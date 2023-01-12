@@ -639,7 +639,9 @@ The format of the layout file is as follows:
 ```
 
 EXPIRES determines when layout metadata should be considered expired and no
-longer trusted by clients. Clients MUST NOT trust an expired file.
+longer trusted by clients. Clients MUST NOT trust an expired file. Note that
+EXPIRES indicates the time _after_ which the metadata is considered to be
+expired.
 
 An optional README text can be added in the `"readme"` field. This is used to
 provide a human-readable description of this supply chain.
