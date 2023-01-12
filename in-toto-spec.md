@@ -871,11 +871,11 @@ MATCH(source_materials_or_products_set, destination_materials_or_products_set,
   rule)
 
 # Filter source and destination materials using the rule’s patterns
-source_artifacts_filtered = filter(rule.source_prefix + rule.source_pattern,
+source_artifacts_filtered = filter(rule.source_prefix + rule.pattern,
                                    source_materials_or_products_set)
 
 destination_artifacts_filtered = \
-    filter(rule.destination_prefix + rule.destination_pattern,
+    filter(rule.destination_prefix + rule.pattern,
              destination_materials_or_products_set)
 
 # Apply the IN clauses, to the paths, if any
