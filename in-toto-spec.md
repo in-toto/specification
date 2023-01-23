@@ -20,7 +20,7 @@ Version 0.9
       - [1.5.2 Defender goals and non-goals](#152-defender-goals-and-non-goals)
       - [1.5.3 Assumptions](#153-assumptions)
       - [1.5.4 System properties](#154-system-properties)
-    - [1.6 in-toto Enhancements (ITEs)](#16-in-toto-enhancements-(ites))
+    - [1.6 in-toto Enhancements (ITEs)](#16-in-toto-enhancements-ites)
     - [1.7 Terminology](#17-terminology)
   - [2 System overview](#2-system-overview)
     - [2.1 Involved parties and their roles](#21-involved-parties-and-their-roles)
@@ -535,17 +535,17 @@ how it is laid out within link and layout metadata.
 
 ### 4.1 Metaformat
 
-To provide descriptive examples, we will adopt "canonical JSON," as described
-in
+We use JSON to provide descriptive examples of in-toto metadata. Additionally,
+we use "canonical JSON," as described in
 [http://wiki.laptop.org/go/Canonical\_JSON](http://wiki.laptop.org/go/Canonical_JSON),
-as the data format. However, applications that desire to implement in-toto are
-not required to use this flavor of CJSON.
+when calculating digests of metadata objects. However, in-toto implementations
+are not required to use this flavor of CJSON.
 
-With the acceptance and adoption of ITE-5, in-toto is agnostic to the signature
-envelope used for metadata. As such, the specification does not describe the
-previously used signature envelope. However, several examples still make use of
-this signature envelope and its specification can be found in the appendix to
-ITE-5 for reference.
+Indeed, with the acceptance and adoption of ITE-5, in-toto is agnostic to the
+signature envelope used for metadata. As such, the specification does not
+describe the previously used signature envelope. However, several examples still
+make use of this signature envelope and its specification can be found in the
+appendix of ITE-5 for reference.
 
 ### 4.2 General principles
 
@@ -576,14 +576,13 @@ denoting a corresponding signature scheme. KEYVAL is a dictionary containing the
 public portion of the key. The following table summarizes the expected entries
 for each signing algorithm supported by the reference implementation.
 
-| Method | KEYTYPE | SCHEME| KEYVAL | Notes |
+| Method | KEYTYPE | SCHEME| Public Key Format | Notes |
 |--------|---------|-------|--------|-------|
 | RSASSA-PSS | rsa | rsassa-pss-sha256 | PEM formatted string | RSA keys must be at least 2048 bits |
-| ED25519 | ed25519 | ed25519 | 256 bit strings | |
-| ECDSA | ecdsa | ecdsa-sha2-nistp256 | 256 bit strings | |
+| ED25519 | ed25519 | ed25519 | 512 bit Hexadecimal ASCII string | |
+| ECDSA | ecdsa | ecdsa-sha2-nistp256 | PEM formatted string | |
 
 Note: This key format is for representation of keys in in-toto metadata only.
-Implementations may serialize keys to disk using any format they prefer.
 
 Link and Layout metadata does not include the private portion of the key
 object:
@@ -829,7 +828,7 @@ subsequent rules.
 explicitly specifying `"DISALLOW *"`, in-toto verification fails if an artifact
 was not consumed by an earlier rule. Not including `"DISALLOW *"` at the end of
 a rule list could allow artifacts to sneak into the step or inspection
-undetected. AS such, it is generally recommended that all rule lists include a
+undetected. As such, it is generally recommended that all rule lists include a
 `"DISALLOW *"` at the end.
 
 Here, we describe an algorithm to illustrate the behavior of the rules being
