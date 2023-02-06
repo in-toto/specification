@@ -1,6 +1,6 @@
 ﻿# in-toto Specification
 
-Oct 1, 2021
+Dec 23, 2022
 
 <https://in-toto.io>
 
@@ -20,7 +20,8 @@ Version 0.9
       - [1.5.2 Defender goals and non-goals](#152-defender-goals-and-non-goals)
       - [1.5.3 Assumptions](#153-assumptions)
       - [1.5.4 System properties](#154-system-properties)
-    - [1.6 Terminology](#16-terminology)
+    - [1.6 in-toto Enhancements (ITEs)](#16-in-toto-enhancements-ites)
+    - [1.7 Terminology](#17-terminology)
   - [2 System overview](#2-system-overview)
     - [2.1 Involved parties and their roles](#21-involved-parties-and-their-roles)
       - [2.1.1 Project owner](#211-project-owner)
@@ -37,8 +38,10 @@ Version 0.9
       - [3.1.4 Additional metadata files](#314-additional-metadata-files)
   - [4 Document formats](#4-document-formats)
     - [4.1 Metaformat](#41-metaformat)
-    - [4.2 File formats: general principles](#42-file-formats-general-principles)
-      - [4.2.1 Hash object format](#421-hash-object-format)
+    - [4.2 General principles](#42-general-principles)
+      - [4.2.1 Key formats](#421-key-formats)
+      - [4.2.2 Date format](#422-date-format)
+      - [4.2.3 Hash object format](#423-hash-object-format)
     - [4.3 File formats: layout](#43-file-formats-layout)
       - [4.3.1 Steps](#431-steps)
       - [4.3.2 Inspections](#432-inspections)
@@ -229,7 +232,14 @@ trusted if present in the supply chain.
 In addition, the framework must provide an interface to interact with client
 systems that further verify the integrity of each step.
 
-### 1.6 Terminology
+### 1.6 in-toto Enhancements (ITEs)
+
+Enhancements to the in-toto specification can be submitted as
+[ITEs](https://github.com/in-toto/ITE).
+[ITE-1](https://github.com/in-toto/ITE/blob/master/ITE/1/README.adoc) describes
+this process in greater detail.
+
+### 1.7 Terminology
 
 * **Software supply chain (or SSC)**: the series of actions performed to create
   a software product. These steps usually begin with users committing to a
@@ -525,110 +535,76 @@ how it is laid out within link and layout metadata.
 
 ### 4.1 Metaformat
 
-To provide descriptive examples, we will adopt "canonical JSON," as described
-in
+We use JSON to provide descriptive examples of in-toto metadata. Additionally,
+we use "canonical JSON," as described in
 [http://wiki.laptop.org/go/Canonical\_JSON](http://wiki.laptop.org/go/Canonical_JSON),
-as the data format. However, applications that desire to implement in-toto are
-not required to use JSON.  Discussion about the intended data format for
-in-toto can be found in the in-toto website.
+when calculating digests of metadata objects. However, in-toto implementations
+are not required to use this flavor of CJSON.
 
-### 4.2 File formats: general principles
+Indeed, with the acceptance and adoption of ITE-5, in-toto is agnostic to the
+signature envelope used for metadata. As such, the specification does not
+describe the previously used signature envelope. However, several examples still
+make use of this signature envelope and its specification can be found in the
+appendix of ITE-5 for reference.
 
-All signed files (i.e., link and layout files) have the format:
+### 4.2 General principles
 
-```json
-{
-  "signed" : "<ROLE>",
-  "signatures" : [
-      { "keyid" : "<KEYID>",
-        "sig" : "<SIGNATURE>" }, 
-  "..."
-  ]
-}
-```
-
-Where, ROLE is a dictionary whose `"_type"` field describes the metadata type (as
-described in sections 4.3 and 4.4). KEYID is the identifier of the key signing
-the ROLE dictionary. SIGNATURE is a signature of the canonical JSON form of
-ROLE.
+#### 4.2.1 Key formats
 
 The current reference implementation of in-toto defines three signing methods,
 although in-toto is not restricted to any particular key signing method, key
 type, or cryptographic library:
 
-* "RSASSA-PSS" : RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
+* "RSASSA-PSS": RSA Probabilistic signature scheme with [appendix](http://tools.ietf.org/html/rfc3447#page-29).
 The underlying hash function is SHA256.
-* "ed25519" : Elliptic curve digital signature algorithm based on
+* "ed25519": Elliptic curve digital signature algorithm based on
     [Twisted Edwards curves](http://ed25519.cr.yp.to/).
-* "ecdsa" : [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
+* "ecdsa": [Elliptic curve digital signature algorithm](https://tools.ietf.org/html/rfc6979)
 
 All keys have the format:
 
 ```json
-  { "keytype" : "<KEYTYPE>",
-    "scheme" : "<SCHEME>",
-    "keyval" : "<KEYVAL>" }
+{
+  "keytype" : "<KEYTYPE>",
+  "scheme" : "<SCHEME>",
+  "keyval" : "<KEYVAL>"
+}
 ```
 
-KEYTYPE is a string denoting a public key signature system, such as RSA or
-ECDSA. SCHEME is a string denoting a corresponding signature scheme. For
-example: "rsassa-pss-sha256" and "ecdsa-sha2-nistp256". KEYVAL is a dictionary
-containing the public portion of the key.
+KEYTYPE is a string denoting a public key signature system. SCHEME is a string
+denoting a corresponding signature scheme. KEYVAL is a dictionary containing the
+public portion of the key. The following table summarizes the expected entries
+for each signing algorithm supported by the reference implementation.
 
-We define three key types at present: "rsa", "ed25519", and "ecdsa".
+| Method | KEYTYPE | SCHEME| Public Key Format | Notes |
+|--------|---------|-------|--------|-------|
+| RSASSA-PSS | rsa | rsassa-pss-sha256 | PEM formatted string | RSA keys must be at least 2048 bits |
+| ED25519 | ed25519 | ed25519 | 512 bit Hexadecimal ASCII string | |
+| ECDSA | ecdsa | ecdsa-sha2-nistp256 | PEM formatted string | |
 
-The 'rsa' format is:
-
-```json
-  { "keytype" : "rsa",
-    "scheme" : "rsassa-pss-sha256",
-    "keyval" : { "public" : "<PUBLIC>",
-                 "private" : "<PRIVATE>" }
-  }
-```
-
-where PUBLIC and PRIVATE are in PEM format and are strings.  All RSA keys must
-be at least 2048 bits.
-
-The elliptic-curve variants ("ed25519" and "ecdsa") format are:
-
-```json
-  { "keytype" : "ed25519",
-    "scheme" : "ed25519",
-    "keyval" : { "public" : "<PUBLIC>",
-                 "private" : "<PRIVATE>" }
-  }
-```
-
-```json
-  { "keytype" : "ecdsa",
-    "scheme" : "ecdsa-sha2-nistp256",
-    "keyval" : { "public" : "<PUBLIC>",
-                 "private" : "<PRIVATE>" }
-  }
-```
-
-where PUBLIC and PRIVATE are both 32-byte (256-bit) strings.
+Note: This key format is for representation of keys in in-toto metadata only.
 
 Link and Layout metadata does not include the private portion of the key
 object:
 
 ```json
-  { "keytype" : "rsa",
-    "scheme" : "rsassa-pss-sha256",
-    "keyval" : { "public" : "<PUBLIC>"}
-  }
+{ "keytype" : "rsa",
+  "scheme" : "rsassa-pss-sha256",
+  "keyval" : { "public" : "<PUBLIC>" }
+}
 ```
 
 The KEYID of a key is the hexadecimal encoding of the SHA-256 hash of the
-canonical JSON form of the key, where the "private" object key is excluded.
+canonical JSON form of the public key.
+
+### 4.2.2 Date format
 
 Date-time data follows the ISO 8601 standard.  The expected format of the
 combined date and time string is "YYYY-MM-DDTHH:MM:SSZ".  Time is always in
 UTC, and the "Z" time zone designator is attached to indicate a zero UTC
 offset.  An example date-time string is "1985-10-21T01:21:00Z".
 
-#### 4.2.1 Hash object format
+#### 4.2.3 Hash object format
 
 Hashes within in-toto are represented using a hash object. A hash object is a
 dictionary that specifies one or more hashes, including the cryptographic hash
@@ -662,25 +638,25 @@ The format of the layout file is as follows:
 ```
 
 EXPIRES determines when layout metadata should be considered expired and no
-longer trusted by clients. Clients MUST NOT trust an expired file.
+longer trusted by clients. Clients MUST NOT trust an expired file. Note that
+EXPIRES indicates the time _after_ which the metadata is considered to be
+expired.
 
-An optional README text can be added on the readme field. This is used to
+An optional README text can be added in the `"readme"` field. This is used to
 provide a human-readable description of this supply chain.
 
-The `"keys"` list will contain a list of all the public keys used in the steps
-section, as they are described in 4.2.
+The `"keys"` list contains a list of all the public keys used in the steps
+section, as they are described in 4.2.1.
 
-The `"steps"` section will contain a list of restrictions for each step within
-the supply chain. It is also possible to further define steps by means of
+The `"steps"` section contains a list of restrictions for each step within the
+supply chain. It is also possible to further define steps by means of
 sublayouts, so that they can further specify requirements to a section of the
 supply chain (section 4.4.1).  We will describe the contents of the steps list
 in section 4.3.1.
 
-The `"inspect"` section will contain a list of restrictions for each step
-within the link. In contrast to steps, inspecting is done by the client upon
-verification. We will elaborate on the specifics of this process in section
-4.3.2.
-
+The `"inspect"` section contains a list of checks that are to be executed by
+the client during verification. We will elaborate on the specifics of this
+process in section 4.3.2.
 
 #### 4.3.1 Steps
 
@@ -710,25 +686,25 @@ The NAME string will be used to identify this step within the supply chain.
 NAME values are unique and so they MUST not repeat in different step
 descriptions.
 
-The `"threshold"` field must contain an integer value indicating how many pieces
-of link metadata must be provided to verify this step. This field is intended
-to be used for steps that require a higher degree of trust, so multiple
-functionaries must perform the operation and report the same results. If only
-one functionary is expected to perform the step, then the `"threshold"` field
-should be set to 1.
+THRESHOLD must contain an integer value indicating how many pieces of link
+metadata must be provided to verify this step. This field is intended to be used
+for steps that require a higher degree of trust, so multiple functionaries must
+perform the operation and report the same results. If only one functionary is
+expected to perform the step, then THRESHOLD must be set to 1.
 
 The `"expected_materials"` and `"expected_products"` fields contain a list of
 ARTIFACT_RULES, as they are described in section 4.3.3. These rules are used
 to ensure that no materials or products were altered between steps.
 
 The `"pubkeys"` field will contain a list of KEYIDs (as described in section
-4.2) of the keys that can sign the link metadata that corresponds to this step.
+4.2.1) of the keys that can sign the link metadata that corresponds to this
+step.
 
-Finally, the `"expected_command"` field contains a string, COMMAND, describing
-the suggested command to run. It is important to mention that, in a case where
-a functionary’s key is compromised, this field can easily be forged (e.g., by
-changing the PATH environment variable in a host) and thus it should not be
-trusted for security checks. In addition, commands may be executed with
+Finally, the `"expected_command"` field contains a list of strings, COMMAND,
+describing the suggested command to run. It is important to mention that, in a
+case where a functionary’s key is compromised, this field can easily be forged
+(e.g., by changing the PATH environment variable in a host) and thus it should
+not be trusted for security checks. In addition, commands may be executed with
 different flags at the behest of the functionary's personal preference (e.g., a
 developer may run a command with --color=full or not). Because of this, during
 verification, clients should only show a warning if the expected command field
@@ -743,17 +719,16 @@ sublayouts (as described in section 4.5).
 #### 4.3.2 Inspections
 
 In contrast to steps, inspect indicate operations that need to be performed
-on the final product at the time of verification.  For example, unpacking a tar
-archive to inspect its contents is an inspection step. When indicating
-inspect, ARTIFACT rules  can be defined to ensure the integrity of the
-final product. For example, MATCH rules are usually found in inspect to
-provide insight about artifacts that were created or modified inside the supply
-chain.
+on the final product at the time of verification.  One example of an inspection
+is the unpacking a tar archive to inspect its contents. When indicating
+inspect, a list of ARTIFACT_RULES can be defined to ensure the integrity of the
+final product. These are described in section 4.3.3.
 
 An inspection contains the following fields.
 
 ```json
-{ "name": "<NAME>",
+{ "_type": "inspection",
+  "name": "<NAME>",
   "expected_materials": [
      [ "<ARTIFACT_RULE>" ],
      "..."
@@ -795,10 +770,10 @@ tool, in the same fashion as used to collect steps.
 
 Artifact rules are used to connect steps together through their materials or
 products. When connecting steps together, in-toto allows the project owner to
-enforce the existence of certain artifacts within a step (e.g., a "README.md" file can
-only be created in the "create-documentation" step) and authorize operations on
-artifacts (e.g., the "compile" step can use the materials from the "checkout-vcs" step).
-The artifact rule format is the following:
+enforce the existence of certain artifacts within a step (e.g., a "README.md"
+file can only be created in the "create-documentation" step) and authorize
+operations on artifacts (e.g., the "compile" step can use the materials from the
+"checkout-vcs" step). The artifact rule format is as follows:
 
 ```bash
     {MATCH <pattern> [IN <source-path-prefix>] WITH (MATERIALS|PRODUCTS) [IN <destination-path-prefix>] FROM <step> ||
@@ -811,23 +786,22 @@ The artifact rule format is the following:
 ```
 
 The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`). The
-following rules can be specified for a step or inspection:
+reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`).
+The following rules can be specified for a step or inspection:
 
-* **MATCH**: indicates that the artifacts filtered in using
-  `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"` from a
-destination step with the `"destination-path-prefix/pattern"` filter. For example,
-`"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file `"foo"`, a
-product of the step `"compilation"`, must correspond to either a material or a
-product in this step (depending on where this artifact rule was listed).  More
-complex uses of the MATCH rule are presented in the examples of section 5.3.
-
-The `"IN <prefix>"` clauses are optional, and they are used to match products
-and materials whose path differs from the one presented in the destination
-step. This is the case for steps that relocate files as part of their tasks. For
-example `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure
-that the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
-
+* **MATCH** indicates that the artifacts filtered in using
+`"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"`
+from a destination step with the `"destination-path-prefix/pattern"` filter. For
+example, `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file
+`"foo"`, a product of the step `"compilation"`, must correspond to either a
+material or a product in this step (depending on where this artifact rule was
+listed).  More complex uses of the MATCH rule are presented in the examples of
+section 5.3. The `"IN <prefix>"` clauses are optional, and they are used to
+match products and materials whose path differs from the one presented in the
+destination step. This is the case for steps that relocate files as part of
+their tasks. For example
+`"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure that
+the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
 * **ALLOW**: indicates that artifacts matched by the pattern are allowed as
   materials or products of this step.
 * **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
@@ -848,10 +822,17 @@ fields of a step and are applied sequentially on a queue of `"materials"` or
 `"products"` from the step's corresponding link metadata. They operate in a
 similar fashion as firewall rules do. This means if an artifact is successfully
 consumed by a rule, it is removed from the queue and cannot be consumed by
-subsequent rules. There is an implicit `"ALLOW *"` at the end of each rule
-list. By explicitly specifying `"DISALLOW *"`, in-toto verification fails if an
-artifact was not consumed by an earlier rule. Here, we describe an algorithm to
-illustrate the behavior of the rules being applied:
+subsequent rules.
+
+**NOTE:** There is an implicit `"ALLOW *"` at the end of each rule list. By
+explicitly specifying `"DISALLOW *"`, in-toto verification fails if an artifact
+was not consumed by an earlier rule. Not including `"DISALLOW *"` at the end of
+a rule list could allow artifacts to sneak into the step or inspection
+undetected. As such, it is generally recommended that all rule lists include a
+`"DISALLOW *"` at the end.
+
+Here, we describe an algorithm to illustrate the behavior of the rules being
+applied:
 
 ```python
 VERIFY_EXPECTED_ARTIFACTS(rule_set, link, target_links)
@@ -889,11 +870,11 @@ MATCH(source_materials_or_products_set, destination_materials_or_products_set,
   rule)
 
 # Filter source and destination materials using the rule’s patterns
-source_artifacts_filtered = filter(rule.source_prefix + rule.source_pattern,
+source_artifacts_filtered = filter(rule.source_prefix + rule.pattern,
                                    source_materials_or_products_set)
 
 destination_artifacts_filtered = \
-    filter(rule.destination_prefix + rule.destination_pattern,
+    filter(rule.destination_prefix + rule.pattern,
              destination_materials_or_products_set)
 
 # Apply the IN clauses, to the paths, if any
@@ -989,7 +970,7 @@ The COMMAND field contains the command and its arguments as executed by the
 functionary.
 
 The `"materials"` and `"products"` fields are dictionaries keyed by a file’s
-PATH. Each HASH value is a hash object as described in section 4.2.1.
+PATH. Each HASH value is a hash object as described in section 4.2.3.
 
 The `"byproducts"` field is an opaque dictionary that contains additional
 information about the step performed. Byproducts are not verified by in-toto’s
@@ -1217,12 +1198,14 @@ A `root.layout` file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
+    "readme" : "<README>",
     "keys" : {
         "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
         "<ALICES_KEYID>": "<ALICES_PUBKEY>"
      },
     "steps" : [
-      { "name": "write-code",
+      { "_type": "step",
+        "name": "write-code",
         "threshold": 1,
         "expected_materials": [],
         "expected_products": [
@@ -1231,9 +1214,10 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
           "<ALICES_KEYID>"
         ],
-        "expected_command": "vi"
+        "expected_command": ["vi"]
       },
-      { "name": "package",
+      { "_type": "step",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
@@ -1244,18 +1228,19 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
           "<BOBS_KEYID>"
         ],
-        "expected_command": "tar zcvf foo.tar.gz foo.py"
+        "expected_command": ["tar", "zcvf", "foo.tar.gz", "foo.py"]
       }
     ],
     "inspect": [
-      { "name": "inspect_tarball",
+      { "_type": "inspection",
+        "name": "inspect_tarball",
         "expected_materials": [
           ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]
         ],
         "expected_products": [
           ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
         ],
-        "run": "inspect_tarball.sh foo.tar.gz"
+        "run": ["inspect_tarball.sh", "foo.tar.gz"]
       }
     ]
   },
@@ -1284,10 +1269,10 @@ metadata:
 { "signed" : {
     "_type" : "link",
     "name": "write-code",
-    "command" : "vi foo.py",
+    "command" : ["vi", "foo.py"],
     "materials": { },
     "products": {
-      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
+      "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..." }
     },
     "byproducts": {
       "stderr": "",
@@ -1302,8 +1287,7 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92e..."
+      "sig" : "94df84890d7ace3ae3736a698e082e12c300dfe5aee92e..."
       }
     ]
 }
@@ -1315,7 +1299,7 @@ metadata:
 { "signed" : { 
     "_type" : "link",
     "Name": "package",
-    "command" : "tar zcvf foo.tar.gz foo.py",
+    "command" : ["tar", "zcvf", "foo.tar.gz", "foo.py"],
     "materials": {
       "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
@@ -1335,8 +1319,7 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<BOBS_KEYID>",
-      "sig" :
-          "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a..."
+      "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2a6a..."
       }
     ]
 }
@@ -1392,6 +1375,7 @@ A `root.layout` file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
+    "readme" : "<README>",
     "keys" : {
       "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
       "<ALICES_KEYID>" : "<ALICES_PUBKEY>",
@@ -1399,7 +1383,8 @@ A `root.layout` file that fulfills these requirements would look like this:
       "<ALFREDS_KEYID>" : "<ALFREDS_PUBKEY>"
      },
     "steps" : [
-       {"name": "write-code",
+      { "_type": "step",
+        "name": "write-code",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1409,12 +1394,12 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
           "<ALICES_KEYID>"
         ],
-        "expected_command": "vi"
-       },
-       {
-         "name": "test",
-         "threshold": 2,
-         "expected_materials": [
+        "expected_command": ["vi"]
+      },
+      { "_type": "step",
+        "name": "test",
+        "threshold": 2,
+        "expected_materials": [
             ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
             ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
         ],
@@ -1423,9 +1408,9 @@ A `root.layout` file that fulfills these requirements would look like this:
           "<CAROLINES_KEYID>",
           "<ALFREDS_KEYID>"
         ],
-        "expected_command": "python test.py"
-       },
-       {
+        "expected_command": ["python", "test.py"]
+      },
+      { "_type": "step",
         "name": "package",
         "threshold": 1,
         "expected_materials": [
@@ -1437,11 +1422,11 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
           "<BOBS_KEYID>"
         ],
-        "expected_command": "tar zcvf foo.tar.gz foo.py"
-        }
+        "expected_command": ["tar", "zcvf", "foo.tar.gz", "foo.py"]
+      }
     ],
     "inspect": [
-       {
+       { "_type": "inspection",
          "name": "inspect_tarball",
          "expected_materials": [
             [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
@@ -1449,7 +1434,7 @@ A `root.layout` file that fulfills these requirements would look like this:
          "expected_products": [
             ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
          ],
-         "run": "inspect_tarball.sh foo.tar.gz"
+         "run": ["inspect_tarball.sh", "foo.tar.gz"]
        }
     ]
   },
@@ -1478,7 +1463,7 @@ metadata:
 { "signed" : {
     "_type" : "link",
     "name": "write-code",
-    "command" : "vi foo.py",
+    "command" : ["vi", "foo.py"],
     "materials": { },
     "products": {
        "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
@@ -1497,8 +1482,7 @@ metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
+      "sig" : "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
       }
     ]
 }
@@ -1510,7 +1494,7 @@ metadata:
 { "signed" : {
     "_type" : "link",
     "Name": "package",
-    "command" : "python test.py",
+    "command" : ["python", "test.py"],
     "materials": {
        "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d"},
        "test.py": { "sha256": "e3ae3736a698e082e12c300dfe5aeee7cb"}
@@ -1529,22 +1513,21 @@ metadata:
   },
   "signatures" : [
       { "keyid" : "<CAROLINES_KEYID>",
-        "sig" :
-        "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8485022a06c7a..."
-        }
+        "sig" : "a2e5ce0c9e3aee92ea33a8cfd6eaedf1d5aa3efec2080d1094df8..."
+      }
     ]
 }
 ```
 
-To avoid repetitivity, we omit Alfred's version of the link metadata, which
-looks really similar (modulo the signature and the filename).
+To avoid repetition, we omit Alfred's version of the link metadata, which looks
+very similar (modulo the signature and the filename).
 
 ##### `package.[BOB-KEYID-PREFIX].link`:
 
 ```json
 { "signed" : { "_type" : "link",
     "Name": "package",
-    "command" : "tar zcvf foo.tar.gz foo.py",
+    "command" : ["tar", "zcvf", "foo.tar.gz foo.py"],
     "materials": {
        "foo.py": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
@@ -1564,8 +1547,7 @@ looks really similar (modulo the signature and the filename).
   },
   "signatures" : [
       { "keyid" : "<BOBS_KEYID>",
-        "sig" :
-        "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
+        "sig" : "ae3aee92ea33a8f461f736a698e082e12c300dfe5022a06c7a6c2..."
       }
     ]
 }
@@ -1630,6 +1612,7 @@ A `root.layout` file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
+    "readme" : "<README>",
     "keys" : {
       "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
       "<DIANAS_KEYID>" : "<DIANAS_PUBKEY>",
@@ -1637,7 +1620,7 @@ A `root.layout` file that fulfills these requirements would look like this:
       "<ALICES_KEYID>" : "<ALICES_PUBKEY>"
     },
     "steps" : [
-      {
+      { "_type": "step",
         "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
@@ -1648,9 +1631,9 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
           "<ALICES_KEYID>"
         ],
-        "expected_command": "git tag"
+        "expected_command": ["git", "tag"]
       },
-      {
+      { "_type": "step",
         "name": "compilation",
         "threshold": 1,
         "expected_materials": [
@@ -1662,9 +1645,9 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
            "<ELEANORS_KEYID>"
         ],
-        "expected_command": "gcc -o foo src/foo.c"
+        "expected_command": ["gcc", "-o", "foo", "src/foo.c"]
       },
-      {
+      { "_type": "step",
         "name": "package",
         "threshold": 1,
         "expected_materials": [
@@ -1676,11 +1659,11 @@ A `root.layout` file that fulfills these requirements would look like this:
         "pubkeys": [
            "<BOBS_KEYID>"
         ],
-        "expected_command": "tar -zcvf foo.tar.gz foo"
+        "expected_command": ["tar", "-zcvf", "foo.tar.gz", "foo"]
       }
     ],
     "inspect": [
-      {
+      { "_type": "inspection",
         "name": "check-package",
         "expected_materials": [
            ["MATCH", "foo.tar.gz", "WITH", "PRODUCTS","FROM", "package"]
@@ -1688,9 +1671,9 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_products": [
            ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
         ],
-        "run": "inspect_tarball.sh foo.tar.gz"
+        "run": ["inspect_tarball.sh", "foo.tar.gz"]
       },
-      {
+      { "_type": "inspection",
         "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
@@ -1698,7 +1681,7 @@ A `root.layout` file that fulfills these requirements would look like this:
         "expected_products": [
            ["MATCH", "src/foo.c", "WITH", "PRODUCTS", "FROM", "checkout-vcs"]
         ],
-        "run": "inspect_vcs_log -l vcs.log -P ALICES_PUBKEY -P DIANAS_PUBKEY"
+        "run": ["inspect_vcs_log", "-l", "vcs.log", "-P", "ALICES_PUBKEY", "-P", "DIANAS_PUBKEY"]
       }
     ]
   },
@@ -1730,7 +1713,7 @@ link metadata:
 { "signed" : {
     "_type" : "link",
     "name": "checkout-vcs",
-    "command" : "git tag 1.0",
+    "command" : ["git", "tag", "1.0"],
     "materials": { },
     "products": {
        "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
@@ -1749,8 +1732,7 @@ link metadata:
   },
   "signatures" : [
     { "keyid" : "<ALICES_KEYID>",
-      "sig" :
-      "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
+      "sig" : "94df84890d7ace3ae3736a698e082e12c300dfe5aee92ea33a8f461f..."
     }
   ]
 }
@@ -1762,7 +1744,7 @@ link metadata:
 { "signed" : {
     "_type" : "link",
     "name": "compilation",
-    "command" : "gcc -o foo foo.c",
+    "command" : ["gcc", "-o", "foo", "foo.c"],
     "materials": {
       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
@@ -1794,7 +1776,7 @@ link metadata:
 { "signed" : {
     "_type" : "link",
     "name": "package",
-    "command" : "tar zcvf foo.tar.gz foo",
+    "command" : ["tar", "zcvf", "foo.tar.gz", "foo"],
     "materials": {
        "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
@@ -1843,6 +1825,7 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : { 
     "_type" : "layout",
     "expires" : "<EXPIRES>",
+    "readme" : "<README>",
     "keys" : {
         "<BOBS_KEYID>" : "<BOBS_PUBKEY>",
         "<DIANAS_KEYID>" : "<DIANAS_PUBKEY>",
@@ -1850,7 +1833,8 @@ A root.layout file that fulfills these requirements would look like this:
         "<UPSTREAM_KEYID>" : "<UPSTREAM_KEYID>"
      },
     "steps" : [
-      { "name": "fetch-upstream",
+      { "_type": "step",
+        "name": "fetch-upstream",
         "threshold": 1,
         "expected_materials": [ ],
         "expected_products": [
@@ -1859,9 +1843,10 @@ A root.layout file that fulfills these requirements would look like this:
         "pubkeys": [
           "<UPSTREAM_KEYID>"
         ],
-        "expected_command": ""
+        "expected_command": []
       },
-      { "name": "compilation",
+      { "_type": "step",
+        "name": "compilation",
         "threshold": 1,
         "expected_materials": [
           ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "fetch-upstream"]
@@ -1872,9 +1857,10 @@ A root.layout file that fulfills these requirements would look like this:
         "pubkeys": [
           "<ELEANORS_KEYID>"
         ],
-        "expected_command": "gcc -o foo src/*"
+        "expected_command": ["gcc", "-o", "foo", "src/*"]
       },
-      { "name": "package",
+      { "_type": "step",
+        "name": "package",
         "threshold": 1,
         "expected_materials": [
            ["MATCH","foo", "WITH", "PRODUCTS", "FROM", "compilation"]
@@ -1885,7 +1871,7 @@ A root.layout file that fulfills these requirements would look like this:
         "pubkeys": [
            "<BOBS_KEYID>"
         ],
-        "expected_command": "tar -zcvf foo.tar.gz foo"
+        "expected_command": ["tar", "-zcvf", "foo.tar.gz", "foo"]
       }
      ],
      "inspect": []
@@ -1904,12 +1890,13 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "layout",
     "expires" : "<EXPIRES>",
+    "readme" : "<README>",
     "keys" : {
         "<UPSTREAM_DEV1_KEYID>" : "<UPSTREAM_DEV1_KEY>",
         "<UPSTREAM_DEV2_KEYID>" : "<UPSTREAM_DEV2_KEY>"
      },
     "steps" : [
-      {
+      { "_type": "step",
         "name": "checkout-vcs",
         "threshold": 1,
         "expected_materials": [ ],
@@ -1920,9 +1907,9 @@ A root.layout file that fulfills these requirements would look like this:
         "pubkeys": [
           "<UPSTREAM_DEV1_KEYID>"
         ],
-        "expected_command": "git tag -s"
+        "expected_command": ["git", "tag", "-s"]
       },
-      {
+      { "_type": "step",
         "name": "compile-docs",
         "threshold": 1,
         "expected_materials": [
@@ -1934,11 +1921,11 @@ A root.layout file that fulfills these requirements would look like this:
         "pubkeys": [
           "UPSTREAM_DEV2_KEYID"
         ],
-        "expected_command": "sphinx"
+        "expected_command": ["sphinx"]
       }
      ],
      "inspect": [
-      {
+      { "_type": "inspection",
         "name": "verify-vcs-commits",
         "expected_materials": [
            ["MATCH", "vcs.log", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
@@ -1946,7 +1933,7 @@ A root.layout file that fulfills these requirements would look like this:
         "expected_products": [
            ["MATCH", "src/*", "WITH", "PRODUCTS", "FROM", "check-out-vcs"]
         ],
-        "run": "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY"
+        "run": ["inspect_vcs_log", "-l", "vcs.log", "-P", "UPSTREAM_PUBKEY", "-P", "UPSTREAM_PUBKEY"]
       }
     ]
   },
@@ -1964,7 +1951,7 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "link",
     "name": "compilation",
-    "command" : "gcc -o foo foo.c",
+    "command" : ["gcc", "-o", "foo", "foo.c"],
     "materials": { },
     "products": {
       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."},
@@ -1995,7 +1982,7 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "link",
     "name": "package",
-    "command" : "",
+    "command" : [],
     "materials": {
       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
@@ -2027,7 +2014,7 @@ A root.layout file that fulfills these requirements would look like this:
 {"signed" : {
     "_type" : "link",
     "name": "package",
-    "command" : "inspect_vcs_log -l vcs.log -P UPSTREAM_PUBKEY -P UPSTREAM_PUBKEY",
+    "command" : ["inspect_vcs_log", "-l", "vcs.log", "-P", "UPSTREAM_PUBKEY", "-P", "UPSTREAM_PUBKEY"],
     "materials": {
       "vcs.log": { "sha256": "f62774ae9fd8bb655c48cee7f0f09e44..."}
     },
@@ -2059,7 +2046,7 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : { 
     "_type" : "link",
     "name": "compilation",
-    "command" : "gcc -o foo foo.c",
+    "command" : ["gcc", "-o", "foo", "foo.c"],
     "materials": {
       "src/foo.c": { "sha256": "2a0ffef5e9709e6164c629e8b31bae0d..."}
     },
@@ -2091,7 +2078,7 @@ A root.layout file that fulfills these requirements would look like this:
 { "signed" : {
     "_type" : "link",
     "name": "package",
-    "command" : "tar zcvf foo.tar.gz foo",
+    "command" : ["tar", "zcvf", "foo.tar.gz", "foo"],
     "materials": {
       "foo": { "sha256": "78a73f2e55ef15930b137e43b9e90a0b..."}
     },
