@@ -175,6 +175,12 @@ can verify that this is the case by verifying in-toto metadata regarding this
 operation.  We assume that there will not be two colluding (or deceived)
 developers who jointly introduce a vulnerability.
 
+Further, in-toto's artifact integrity guarantee is based on bit-for-bit
+equivalence of artifact contents. in-toto does not record or verify any
+accompanying artifact metadata such as file permissions and timestamps.
+Verifying the integrity of such metadata and attributes is out of scope for
+in-toto.
+
 We also assume the project owner laid out the supply chain (using a supply
 chain layout as described in section 4.3) so that testing, code review, and
 verification into the software supply chain gives meaningful security and
@@ -214,8 +220,8 @@ properties:
 
 * **Final product authentication and integrity**: the product received by the
   client was created by the intended functionary. This ensures the final product
-  matches bit-by-bit the final product reported by the last step in the supply
-  chain.
+  matches bit-by-bit the contents of the final product reported by the last step
+  in the supply chain.
 * **Process compliance and auditability**: the product received by the client
   followed the layout specified by the project owner. All steps described have
   their materials and products correctly linked together, and, if audited by a
@@ -522,9 +528,10 @@ and how the chain steps are interconnected via their materials and products.
 #### 3.1.2 Link metadata
 
 Link metadata is a statement that a step was carried out. Each piece of link
-metadata will be used by the framework to ensure that materials and products
-have not been altered in an unauthorized manner (e.g., while in transit), and,
-that any alterations have been done only by an intended functionary.
+metadata will be used by the framework to ensure that the contents of materials
+and products have not been altered in an unauthorized manner (e.g., while in
+transit), and, that any alterations have been done only by an intended
+functionary.
 
 A step may be performed a single time but it may be a part of multiple supply
 chains. in-toto supports such scenarios by not directly associating link
@@ -989,7 +996,8 @@ The COMMAND field contains the command and its arguments as executed by the
 functionary.
 
 The `"materials"` and `"products"` fields are dictionaries keyed by a file’s
-PATH. Each HASH value is a hash object as described in section 4.2.3.
+PATH. Each HASH value is a hash object calculated for the contents of the file
+as described in section 4.2.3.
 
 The `"byproducts"` field is an opaque dictionary that contains additional
 information about the step performed. Byproducts are not verified by in-toto’s
