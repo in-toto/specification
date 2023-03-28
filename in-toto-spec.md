@@ -248,7 +248,9 @@ this process in greater detail.
 The specification uses semantics described in
 [ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc) and
 [ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc) for
-bootstrapping trust for in-toto layouts and their public keys.
+bootstrapping trust for in-toto layouts and their public keys. The same
+mechanisms are used to associate link metadata files with each artifact being
+verified.
 
 ### 1.7 Terminology
 
@@ -522,6 +524,11 @@ Link metadata is a statement that a step was carried out. Each piece of link
 metadata will be used by the framework to ensure that materials and products
 have not been altered in an unauthorized manner (e.g., while in transit), and,
 that any alterations have been done only by an intended functionary.
+
+A step may be performed a single time but it may be a part of multiple supply
+chains. in-toto supports such scenarios by not directly associating link
+metadata with a specific layout. Multiple layouts, therefore, can use the same
+link metadata during their respective verifications.
 
 #### 3.1.3 Target files
 
