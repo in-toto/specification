@@ -190,10 +190,15 @@ may independently block or make judgments about the security of a specific
 layout.
 
 in-toto has been designed to verify the integrity of the software supply chain
-as a whole. However, adopters may deploy custom verification workflows or create
-layouts that are a subset of the full layout to enable partial verification of
-the supply chain prior to performing some step. The specifics of these
-deployments, however, are considered out of scope for the in-toto specification.
+as a whole. However,
+[certain scenarios](https://github.com/in-toto/docs/security/advisories/GHSA-p86f-xmg6-9q4x)
+may necessitate partial verification of a supply chain as it is executed.
+Adopters may deploy custom verification workflows or create layouts that are a
+subset of the full layout to enable partial verification of the supply chain
+prior to performing some step. The specifics of these deployments, however, are
+considered out of scope for the in-toto specification. Note that such scenarios
+may also be addressed with sufficient separation between components generating
+in-toto metadata and those executing a supply chain step.
 
 Finally, in-toto inherently does not protect against attackers replaying older,
 as-yet unexpired layouts. To ensure the right layouts are used during the
