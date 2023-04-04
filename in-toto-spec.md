@@ -198,7 +198,9 @@ subset of the full layout to enable partial verification of the supply chain
 prior to performing some step. The specifics of these deployments, however, are
 considered out of scope for the in-toto specification. Note that such scenarios
 may also be addressed with sufficient separation between components generating
-in-toto metadata and those executing a supply chain step.
+in-toto metadata and those executing a supply chain step. For example, in-toto's
+reference implementation provides the in-toto-record tool that can be used for
+such separation.
 
 Finally, in-toto inherently does not protect against attackers replaying older,
 as-yet unexpired layouts. To ensure the right layouts are used during the
