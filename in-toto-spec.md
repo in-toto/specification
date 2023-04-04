@@ -189,6 +189,19 @@ or block layouts  that are insecure. However, tools that integrate into in-toto
 may independently block or make judgments about the security of a specific
 layout.
 
+in-toto has been designed to verify the integrity of the software supply chain
+as a whole. However,
+[certain scenarios](https://github.com/in-toto/docs/security/advisories/GHSA-p86f-xmg6-9q4x)
+may necessitate partial verification of a supply chain as it is executed.
+Adopters may deploy custom verification workflows or create layouts that are a
+subset of the full layout to enable partial verification of the supply chain
+prior to performing some step. The specifics of these deployments, however, are
+considered out of scope for the in-toto specification. Note that such scenarios
+may also be addressed with sufficient separation between components generating
+in-toto metadata and those executing a supply chain step. For example, in-toto's
+reference implementation provides the in-toto-record tool that can be used for
+such separation.
+
 Finally, in-toto inherently does not protect against attackers replaying older,
 as-yet unexpired layouts. To ensure the right layouts are used during the
 verification workflow, we recommend using a system like
@@ -206,6 +219,9 @@ securely.
 For cases where trust delegation is meaningful, a functionary should be able to
 delegate full or limited trust to other functionaries to perform steps on their
 behalf.
+
+Finally, we recommend separating the mechanisms responsible for in-toto metadata
+generation from those executing the steps themselves.
 
 #### 1.5.4 System properties
 
