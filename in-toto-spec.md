@@ -193,7 +193,8 @@ Finally, in-toto inherently does not protect against attackers replaying older,
 as-yet unexpired layouts. To ensure the right layouts are used during the
 verification workflow, we recommend using a system like
 [The Update Framework (TUF)](https://theupdateframework.io/) to securely
-bootstrap the supply chain.
+bootstrap the supply chain. We have elaborated how TUF and in-toto can be used
+together as [in-toto Enhancements](#16-in-toto-enhancements-ites) 2 and 3.
 
 #### 1.5.3 Assumptions
 
