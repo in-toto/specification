@@ -850,8 +850,10 @@ operations on artifacts (e.g., the "compile" step can use the materials from the
 ```
 
 The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`).
-The following rules can be specified for a step or inspection:
+reported in the link metadata. It uses the Unix shell pattern matching
+conventions (see: [glob](https://man7.org/linux/man-pages/man7/glob.7.html)) to
+match one or more artifacts with the use of wildcards such as `*` and `?`.  The
+following rules can be specified for a step or inspection:
 
 * **MATCH** indicates that the artifacts filtered in using
 `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"`
