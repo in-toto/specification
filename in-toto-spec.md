@@ -270,26 +270,28 @@ Enhancements to the in-toto specification can be submitted as
 [ITEs](https://github.com/in-toto/ITE).
 [ITE-1](https://github.com/in-toto/ITE/blob/master/ITE/1/README.adoc) describes
 this process in greater detail. After an ITE is accepted, the changes it
-describes may be integrated into this document. Each version of the
+describes MAY be integrated into this document. Each version of the
 specification indicates the ITEs it adheres to.
 
 This version of the specification adheres to:
-* [ITE-1](https://github.com/in-toto/ITE/blob/master/ITE/1/README.adoc)
-* [ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc)
-* [ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc)
 * [ITE-4](https://github.com/in-toto/ITE/blob/master/ITE/4/README.adoc)
 * [ITE-5](https://github.com/in-toto/ITE/blob/master/ITE/5/README.adoc)
-
-ITE-2 and ITE-3 describe semantics for bootstrapping trust for in-toto layouts
-and their public keys. The same mechanisms are used to associate link metadata
-files with each artifact being verified.
 
 ITE-4 adds support to in-toto for artifacts that are not typical files. The ITE
 details how such abstract artifacts can be incorporated into in-toto metadata.
 
-ITE-5 detached the signature envelope definition from the in-toto specification.
+ITE-5 detaches the signature envelope definition from the in-toto specification.
 This makes in-toto agnostic to the signature wrapper used, though ITE-5
 recommends the use of [DSSE](https://github.com/secure-systems-lab/dsse).
+
+Finally, this version of the specification is aware of and recommends the use of
+semantics described in the following ITEs:
+* [ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc)
+* [ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc)
+
+ITE-2 and ITE-3 describe semantics for bootstrapping trust for in-toto layouts
+and their public keys. The same mechanisms are used to associate link metadata
+files with each artifact being verified.
 
 ### 1.7 Terminology
 
@@ -849,11 +851,13 @@ operations on artifacts (e.g., the "compile" step can use the materials from the
     DISALLOW <pattern>}
 ```
 
-The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata. It uses the Unix shell pattern matching
+The `"pattern"` value is a path-pattern that will be matched against artifact
+names reported in the link metadata. It uses the Unix shell pattern matching
 conventions (see: [glob](https://man7.org/linux/man-pages/man7/glob.7.html)) to
-match one or more artifacts with the use of wildcards such as `*` and `?`.  The
-following rules can be specified for a step or inspection:
+match one or more artifacts with the use of wildcards such as `*` and `?`.
+Despite using glob, pattern matching does not rely on artifacts in link metadata
+to be file paths, and can be applied against abstract artifacts as described in
+ITE-4. The following rules can be specified for a step or inspection:
 
 * **MATCH** indicates that the artifacts filtered in using
 `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"`
@@ -863,7 +867,7 @@ example, `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file
 material or a product in this step (depending on where this artifact rule was
 listed).  More complex uses of the MATCH rule are presented in the examples of
 section 5.3. The `"IN <prefix>"` clauses are optional, and they are used to
-match products and materials whose path differs from the one presented in the
+match products and materials whose name differs from the one presented in the
 destination step. This is the case for steps that relocate files as part of
 their tasks. For example
 `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure that
@@ -943,20 +947,20 @@ destination_artifacts_filtered = \
     filter(rule.destination_prefix + rule.pattern,
              destination_materials_or_products_set)
 
-# Apply the IN clauses, to the paths, if any
+# Apply the IN clauses, to the artifact names, if any
 for artifact in source_artifacts_filtered:
-  artifact.path -= rule.source_in_clause
+  artifact.name -= rule.source_in_clause
 for artifact in destination_artifacts_filtered:
-  artifact.path -= rule.destination_in_clause
+  artifact.name -= rule.destination_in_clause
 
 # Create an empty list for consumed artifacts
 consumed_artifacts = []
 
 # compare both sets
 for artifact in source_artifacts_filtered:
-  destination_artifact = find_artifact_by_path(destination_artifacts,
-                                                artifact.path)
-  # the artifact with this path does not exist?
+  destination_artifact = find_artifact_by_name(destination_artifacts,
+                                                artifact.name)
+  # the artifact with this name does not exist?
   if destination_artifact == NULL:
     continue
 
@@ -974,9 +978,9 @@ return consumed_artifacts
 ##### 4.3.3.3 DISALLOW rule behavior
 
 The disallow rule is the only rule that can error out of rule processing. If a
-disallow rule pattern finds any remaining files in the artifact queue it means
-that no prior rule has successfully consumed those artifacts, i.e. the
-artifacts were not authorized by any rule.
+disallow rule pattern matches any remaining artifacts in the queue it means that
+no prior rule has successfully consumed those artifacts, i.e. the artifacts were
+not authorized by any prior rule.
 
 ```python
 DISALLOW(rule, artifacts)
