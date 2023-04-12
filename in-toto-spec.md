@@ -49,7 +49,7 @@ Version 1.0-RC
       - [4.3.3 Artifact Rules](#433-artifact-rules)
         - [4.3.3.1 Rule processing](#4331-rule-processing)
         - [4.3.3.2 MATCH rule behavior](#4332-match-rule-behavior)
-        - [4.3.3.3 DISALLOW rule behavior](#4333-disallow-rule-behavior)
+        - [4.3.3.3 DISALLOW and REQUIRE rule behavior](#4333-disallow-and-require-rule-behavior)
     - [4.4 File formats: `[name].[KEYID-PREFIX].link`](#44-file-formats-namekeyid-prefixlink)
       - [4.4.1 Environment Information](#441-environment-information)
     - [4.5 Specifying sublayouts](#45-specifying-sublayouts)
@@ -847,7 +847,7 @@ operations on artifacts (e.g., the "compile" step can use the materials from the
     DELETE <pattern> ||
     MODIFY <pattern> ||
     ALLOW <pattern> ||
-    REQUIRE <pattern> ||
+    REQUIRE <artifact-name> ||
     DISALLOW <pattern>}
 ```
 
@@ -876,8 +876,8 @@ the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
   materials or products of this step.
 * **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
   as materials or products of this step.
-* **REQUIRE**: indicates that a pattern must appear as a material or product of
-  this step.
+* **REQUIRE**: indicates that the specified artifact must appear as a material
+  or product of this step.
 * **CREATE**: indicates that products matched by the pattern must not appear as
   materials of this step.
 * **DELETE**: indicates that materials matched by the pattern must not appear
@@ -975,19 +975,33 @@ for artifact in source_artifacts_filtered:
 return consumed_artifacts
 ```
 
-##### 4.3.3.3 DISALLOW rule behavior
+##### 4.3.3.3 DISALLOW and REQUIRE rule behavior
 
-The disallow rule is the only rule that can error out of rule processing. If a
-disallow rule pattern matches any remaining artifacts in the queue it means that
-no prior rule has successfully consumed those artifacts, i.e. the artifacts were
-not authorized by any prior rule.
+The disallow  and require rules are the only rules that can error out of rule
+processing. If a disallow rule pattern matches any remaining artifacts in the
+queue it means that no prior rule has successfully consumed those artifacts,
+i.e. the artifacts were not authorized by any prior rule.
 
 ```python
 DISALLOW(rule, artifacts)
 
 artifacts = filter(rule.pattern, artifacts)
 
-if artifacts
+if artifacts:
+  return ERROR
+
+return SUCCESS
+```
+
+The require rule is the only artifact rule that does not accept a pattern to
+match against artifacts, instead using the artifact name. If the specified
+artifact name is not present in the queue of remaining artifacts, rule
+processing errors out as the constraint on that required artifact is not met.
+
+```python
+REQUIRE(rule, artifacts)
+
+if rule.name not in artifacts:
   return ERROR
 
 return SUCCESS
