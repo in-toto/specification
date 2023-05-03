@@ -1,10 +1,10 @@
 ﻿# in-toto Specification
 
-Dec 23, 2022
+Apr 02, 2023
 
 <https://in-toto.io>
 
-Version 0.9
+Version 1.0-RC
 
 ## Table of Contents
 
@@ -49,7 +49,7 @@ Version 0.9
       - [4.3.3 Artifact Rules](#433-artifact-rules)
         - [4.3.3.1 Rule processing](#4331-rule-processing)
         - [4.3.3.2 MATCH rule behavior](#4332-match-rule-behavior)
-        - [4.3.3.3 DISALLOW rule behavior](#4333-disallow-rule-behavior)
+        - [4.3.3.3 DISALLOW and REQUIRE rule behavior](#4333-disallow-and-require-rule-behavior)
     - [4.4 File formats: `[name].[KEYID-PREFIX].link`](#44-file-formats-namekeyid-prefixlink)
       - [4.4.1 Environment Information](#441-environment-information)
     - [4.5 Specifying sublayouts](#45-specifying-sublayouts)
@@ -151,8 +151,9 @@ by which project owners define the supply chain.
 In the context of in-toto, a defender is the client (i.e., the person who will
 install the software product). We assume the actors performing steps in the
 supply chain (functionaries) and the actors in charge of a software product
-(project owners) are not acting maliciously. With this in mind, we describe the
-following goals for a defender.
+(project owners) are not acting maliciously. That said, we make it possible to
+associate a malicious actor with their actions when they are detected. With this
+in mind, we describe the following goals for a defender.
 
 **Goals**:
 
@@ -217,10 +218,12 @@ together as [in-toto Enhancements](#16-in-toto-enhancements-ites) 2 and 3.
 
 #### 1.5.3 Assumptions
 
-The client side tools should perform key-management on behalf of the user.
-Apart from the layout key, the client is never required to retrieve and provide
-keys for verification. We are exploring mechanisms to distribute layout keys
-securely.
+The client side tools should perform key-management on behalf of the user. Apart
+from the layout key, the client is never required to retrieve and provide keys
+for verification. We have elaborated the use of complementary frameworks such as
+The Update Framework (TUF) to securely distribute a layout and its keys. This is
+detailed below in the section about
+[in-toto Enhancements](#16-in-toto-enhancements-ites).
 
 For cases where trust delegation is meaningful, a functionary should be able to
 delegate full or limited trust to other functionaries to perform steps on their
@@ -231,7 +234,7 @@ generation from those executing the steps themselves.
 
 #### 1.5.4 System properties
 
-To achieve the goals stated above, we anticipate a system with the following
+To achieve the goals stated above, we present a system with the following
 properties:
 
 * **Final product authentication and integrity**: the product received by the
@@ -266,69 +269,86 @@ systems that further verify the integrity of each step.
 Enhancements to the in-toto specification can be submitted as
 [ITEs](https://github.com/in-toto/ITE).
 [ITE-1](https://github.com/in-toto/ITE/blob/master/ITE/1/README.adoc) describes
-this process in greater detail.
+this process in greater detail. After an ITE is accepted, the changes it
+describes MAY be integrated into this document. Each version of the
+specification indicates the ITEs it adheres to.
 
-The specification uses semantics described in
-[ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc) and
-[ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc) for
-bootstrapping trust for in-toto layouts and their public keys. The same
-mechanisms are used to associate link metadata files with each artifact being
-verified.
+This version of the specification adheres to:
+* [ITE-4](https://github.com/in-toto/ITE/blob/master/ITE/4/README.adoc)
+* [ITE-5](https://github.com/in-toto/ITE/blob/master/ITE/5/README.adoc)
+
+ITE-4 adds support to in-toto for artifacts that are not typical files. The ITE
+details how such abstract artifacts can be incorporated into in-toto metadata.
+
+ITE-5 detaches the signature envelope definition from the in-toto specification.
+This makes in-toto agnostic to the signature wrapper used, though ITE-5
+recommends the use of [DSSE](https://github.com/secure-systems-lab/dsse).
+
+Finally, this version of the specification is aware of and recommends the use of
+semantics described in the following ITEs:
+* [ITE-2](https://github.com/in-toto/ITE/blob/master/ITE/2/README.adoc)
+* [ITE-3](https://github.com/in-toto/ITE/blob/master/ITE/3/README.adoc)
+
+ITE-2 and ITE-3 describe semantics for bootstrapping trust for in-toto layouts
+and their public keys. The same mechanisms are used to associate link metadata
+files with each artifact being verified.
 
 ### 1.7 Terminology
 
 * **Software supply chain (or SSC)**: the series of actions performed to create
   a software product. These steps usually begin with users committing to a
-version control system and end with the software product's installation on a
-client's system.
+  version control system and end with the software product's installation on a
+  client's system.
 * **Supply chain layout (or simply layout, or layout metadata)**: a signed file
   that dictates the series of steps that need to be carried out in the SSC to
-create a  final product. The layout includes ordered steps, requirements for
-such steps, and the list of actors (or functionaries) in charge of carrying out
-every step. The steps within the supply chain are laid out by a project owner.
+  create a final product. The layout includes ordered steps, requirements for
+  such steps, and the list of actors (or functionaries) in charge of carrying
+  out every step. The steps within the supply chain are laid out by a project
+  owner.
 * **Sublayout**: A supply chain layout that describes steps as part of another
   supply chain layout.
 * **Project owner**: the authoritative figure within a project. The project
   owner will dictate which steps are to be carried out in the supply chain, and
-who is authorized to carry out each step  (i.e., define the layout).
+  who is authorized to carry out each step  (i.e., define the layout).
 * **Functionary**:  an individual or automated script that will perform an
   action within the supply chain. For example, the actor in charge of compiling
-a project's source code is a functionary.
+  a project's source code is a functionary.
 * **Supply chain step**: a single action in the software supply chain, which is
   performed by a functionary.
 * **Link**: metadata information gathered while performing a supply chain step
   or inspection, signed by the functionary that performed the step or the
-client that performed the inspection. This metadata includes information such
-as materials, products and byproducts.
+  client that performed the inspection. This metadata includes information such
+  as materials, products and byproducts.
 * **Materials**: the elements used (e.g., files) to perform a step in the
   supply chain. Files generated by one step (e.g., .o files) can be materials
-for a step further down the chain (e.g., linking).
+  for a step further down the chain (e.g., linking).
 * **Product**: the result of carrying out a step. Products are usually
   persistent (e.g,. files), and are often meant to be used as materials on
-subsequent steps. Products are recorded as part of link metadata.
+  subsequent steps. Products are recorded as part of link metadata.
 * **Artifact**: a material or a product, as described above.
 * **Byproducts**: indirect results of carrying out a step, often used to verify
   that a step was performed correctly. A byproduct is information that will not
-be used as a material in a subsequent step, but may provide insight about the
-process. For example, the stdout, stderr and return values are common byproducts
-that can be inspected to verify the correctness of a step. Byproducts are
-recorded as part of link metadata.
+  be used as a material in a subsequent step, but may provide insight about the
+  process. For example, the stdout, stderr and return values are common
+  byproducts that can be inspected to verify the correctness of a step.
+  Byproducts are recorded as part of link metadata.
 * **Final product**: the bundle containing all the files required for the
   software's installation on the client's system. This includes link metadata,
-layout metadata, target files, and any additional metadata required for the
-product's verification (e.g., a digital signature over the installation files).
+  layout metadata, target files, and any additional metadata required for the
+  product's verification (e.g., a digital signature over the installation
+  files).
 * **Client inspection step**: a step carried out on the client's machine to
   verify information contained in the final product. Client inspection steps
-also produce Link metadata that can be used by sublayouts and other inspection
-steps.
+  also produce Link metadata that can be used by sublayouts and other inspection
+  steps.
 * **Verification**: the process by which data and metadata included in the
   final product is used to ensure its correctness. Verification is performed by
-the client by checking the supply chain layout and links for correctness, as
-well as by performing the inspection steps.
+  the client by checking the supply chain layout and links for correctness, as
+  well as by performing the inspection steps.
 * **Target files**: Any file that is not part of in-toto metadata (i.e., not a
   layout or a link file).  In the case of an installer, these files will often
-be unpacked from within the final product and made ready for use on the user’s
-system.
+  be unpacked from within the final product and made ready for use on the user’s
+  system.
 
 ## 2 System overview
 
@@ -445,17 +465,17 @@ A in-toto implementation contains three main components:
 
 * A tool to generate and design supply chain layouts. This tool will be used by
   the project owner to generate a desired supply chain layout file. There are
-many tools in the reference implementation to aid project owners in creating
-and signing layouts.
+  many tools in the reference implementation to aid project owners in creating
+  and signing layouts.
 * A tool that functionaries can use to create link metadata about a step. For
-  example, in the reference implementation, this tool is called
-"in-toto-run.py".
+  example, in the reference implementation, this feature is provided by the
+  "in-toto-run" and "in-toto-record" tools.
 * A tool to be used by the client to perform verification on the final product.
   This tool uses all of the link and layout metadata generated by the previous
-tools.  It also performs the inspection steps, as directed by the layout.  This
-tool is often included in a package manager or system installer. In the case of
-the reference implementation, the tool performing this operation is
-"in-toto-verify.py".
+  tools. It also performs the inspection steps, as directed by the layout. This
+  tool is often included in a package manager or system installer. In the case
+  of the reference implementation, the tool performing this operation is
+  "in-toto-verify".
 
 ### 2.3 System workflow example
 
@@ -616,7 +636,11 @@ All keys have the format:
 KEYTYPE is a string denoting a public key signature system. SCHEME is a string
 denoting a corresponding signature scheme. KEYVAL is a dictionary containing the
 public portion of the key. The following table summarizes the expected entries
-for each signing algorithm supported by the reference implementation.
+for some signing algorithms supported by the reference implementation. It is not
+an exhaustive list of signing mechanisms supported by in-toto implementations as
+the in-toto specification does not mandate the use of one or more mechanisms.
+Implementations may communicate separately the mechanisms they support and the
+corresponding values for KEYTYPE and SCHEME.
 
 | Method | KEYTYPE | SCHEME| Public Key Format | Notes |
 |--------|---------|-------|--------|-------|
@@ -804,9 +828,9 @@ interface using the executable's return value:
 
 * If the return value is 0, then the inspection was successful. All the
   artifacts and the rest of the information is recorded using the in-toto-run
-tool, in the same fashion as used to collect steps.
-* If the result is greater than 0 and less than 127, then the inspection was
-  not successful and validation should halt.
+  tool, in the same fashion as used to collect steps.
+* If the result is not 0, then the inspection was not successful and validation
+  should halt.
 
 #### 4.3.3 Artifact Rules
 
@@ -823,13 +847,17 @@ operations on artifacts (e.g., the "compile" step can use the materials from the
     DELETE <pattern> ||
     MODIFY <pattern> ||
     ALLOW <pattern> ||
-    REQUIRE <pattern> ||
+    REQUIRE <artifact-name> ||
     DISALLOW <pattern>}
 ```
 
-The `"pattern"` value is a path-pattern that will be matched against paths
-reported in the link metadata, including bash-style wildcards (e.g.,  `"*"`).
-The following rules can be specified for a step or inspection:
+The `"pattern"` value is a path-pattern that will be matched against artifact
+names reported in the link metadata. It uses the Unix shell pattern matching
+conventions (see: [glob](https://man7.org/linux/man-pages/man7/glob.7.html)) to
+match one or more artifacts with the use of wildcards such as `*` and `?`.
+Despite using glob, pattern matching does not rely on artifacts in link metadata
+to be file paths, and can be applied against abstract artifacts as described in
+ITE-4. The following rules can be specified for a step or inspection:
 
 * **MATCH** indicates that the artifacts filtered in using
 `"source-path-prefix/pattern"` must be matched to a `"MATERIAL"` or `"PRODUCT"`
@@ -839,7 +867,7 @@ example, `"MATCH foo WITH PRODUCTS FROM compilation"` indicates that the file
 material or a product in this step (depending on where this artifact rule was
 listed).  More complex uses of the MATCH rule are presented in the examples of
 section 5.3. The `"IN <prefix>"` clauses are optional, and they are used to
-match products and materials whose path differs from the one presented in the
+match products and materials whose name differs from the one presented in the
 destination step. This is the case for steps that relocate files as part of
 their tasks. For example
 `"MATCH foo IN lib WITH PRODUCT IN build/lib FROM compilation"` will ensure that
@@ -848,8 +876,8 @@ the file `"lib/foo"` matches `"build/lib/foo"` from the compilation step.
   materials or products of this step.
 * **DISALLOW**: indicates that artifacts matched by the pattern are not allowed
   as materials or products of this step.
-* **REQUIRE**: indicates that a pattern must appear as a material or product of
-  this step.
+* **REQUIRE**: indicates that the specified artifact must appear as a material
+  or product of this step.
 * **CREATE**: indicates that products matched by the pattern must not appear as
   materials of this step.
 * **DELETE**: indicates that materials matched by the pattern must not appear
@@ -919,20 +947,20 @@ destination_artifacts_filtered = \
     filter(rule.destination_prefix + rule.pattern,
              destination_materials_or_products_set)
 
-# Apply the IN clauses, to the paths, if any
+# Apply the IN clauses, to the artifact names, if any
 for artifact in source_artifacts_filtered:
-  artifact.path -= rule.source_in_clause
+  artifact.name -= rule.source_in_clause
 for artifact in destination_artifacts_filtered:
-  artifact.path -= rule.destination_in_clause
+  artifact.name -= rule.destination_in_clause
 
 # Create an empty list for consumed artifacts
 consumed_artifacts = []
 
 # compare both sets
 for artifact in source_artifacts_filtered:
-  destination_artifact = find_artifact_by_path(destination_artifacts,
-                                                artifact.path)
-  # the artifact with this path does not exist?
+  destination_artifact = find_artifact_by_name(destination_artifacts,
+                                                artifact.name)
+  # the artifact with this name does not exist?
   if destination_artifact == NULL:
     continue
 
@@ -947,19 +975,33 @@ for artifact in source_artifacts_filtered:
 return consumed_artifacts
 ```
 
-##### 4.3.3.3 DISALLOW rule behavior
+##### 4.3.3.3 DISALLOW and REQUIRE rule behavior
 
-The disallow rule is the only rule that can error out of rule processing. If a
-disallow rule pattern finds any remaining files in the artifact queue it means
-that no prior rule has successfully consumed those artifacts, i.e. the
-artifacts were not authorized by any rule.
+The disallow  and require rules are the only rules that can error out of rule
+processing. If a disallow rule pattern matches any remaining artifacts in the
+queue it means that no prior rule has successfully consumed those artifacts,
+i.e. the artifacts were not authorized by any prior rule.
 
 ```python
 DISALLOW(rule, artifacts)
 
 artifacts = filter(rule.pattern, artifacts)
 
-if artifacts
+if artifacts:
+  return ERROR
+
+return SUCCESS
+```
+
+The require rule is the only artifact rule that does not accept a pattern to
+match against artifacts, instead using the artifact name. If the specified
+artifact name is not present in the queue of remaining artifacts, rule
+processing errors out as the constraint on that required artifact is not met.
+
+```python
+REQUIRE(rule, artifacts)
+
+if rule.name not in artifacts:
   return ERROR
 
 return SUCCESS
@@ -984,11 +1026,11 @@ The format of the `[name].[KEYID-PREFIX].link` file is as follows:
   "name" :  "<NAME>",
   "command" : "<COMMAND>",
   "materials": {
-     "<PATH>": "<HASH>",
+     "<ARTIFACT_NAME>": "<HASH>",
      "..." : "..."
   },
   "products": {
-     "<PATH>": "<HASH>",
+     "<ARTIFACT_NAME>": "<HASH>",
      "..." : "..."
   },
   "byproducts": {
@@ -1011,9 +1053,11 @@ in section 4.3.1.
 The COMMAND field contains the command and its arguments as executed by the
 functionary.
 
-The `"materials"` and `"products"` fields are dictionaries keyed by a file’s
-PATH. Each HASH value is a hash object calculated for the contents of the file
-as described in section 4.2.3.
+The `"materials"` and `"products"` fields are dictionaries keyed by
+ARTIFACT_NAME. For files, this is typically the path of the file. For abstract
+artifacts, it is determined using ITE-4 semantics. Each HASH value is a hash
+object calculated for the contents of the artifact as described in section
+4.2.3.
 
 The `"byproducts"` field is an opaque dictionary that contains additional
 information about the step performed. Byproducts are not verified by in-toto’s
@@ -1164,8 +1208,8 @@ error-free case.
 
 1. The project owner defines the layout to be followed by, e.g. using the
    in-toto CLI tools. When doing so, they specify who is intended to
-sign for every piece of link metadata, any sublayouts that may exist, and how
-to further verify accompanying metadata.
+   sign for every piece of link metadata, any sublayouts that may exist, and how
+   to further verify accompanying metadata.
 1. Functionaries perform the intended actions and produce link metadata for
    each step.
 1. Once all the steps are performed, the final product is shipped to the
@@ -1176,27 +1220,29 @@ to further verify accompanying metadata.
 
 ### 5.2 Verifying the final product
 
-The following algorithm contains an in-depth description of the verification
-procedure.
+The following algorithm contains an in-depth description of the in-toto
+verification procedure. Prior to initiating this workflow, the client tooling
+may first perform separate verification to ensure it received the right layout
+and keys, such as the procedure described in ITE-2.
 
 1. in-toto inspects the final product to find a root.layout file that describes
    the top-level layout for the project. The signature(s) on the file are
-checked using previously-acquired project owner public key(s).
+   checked using previously-acquired project owner public key(s).
 1. The expiration time is verified to ensure that this layout is still fresh.
    If the system's date is newer than the expiration date on the layout's
-expiration field, verification should fail.
+   expiration field, verification should fail.
 1. Subsequently, if the layout signature and expiration are valid, the
    functionaries’ public keys are loaded from the root.layout in the pubkeys
-field.
+   field.
 1. The steps, as defined in the layout, are loaded. For each step in the
    layout, one or more pieces of link or layout metadata is loaded.
-      1. If the loaded metadata file is a link metadata file, a data structure
-         containing the materials and products is populated with the reported
-values.
-      1. If the loaded metadata file is a layout file instead, the algorithm
-         will recurse into that layout, starting from step 1. All the metadata
-relevant to that sub-layout should be contained in a subdirectory named after
-this step.
+    1. If the loaded metadata file is a link metadata file, a data structure
+       containing the materials and products is populated with the reported
+       values.
+    1. If the loaded metadata file is a layout file instead, the algorithm
+       will recurse into that layout, starting from step 1. All the metadata
+       relevant to that sub-layout should be contained in a subdirectory named
+       after this step.
 1. Artifact rules are applied against the products and materials reported by
    each step as described by the algorithm in section 4.3.3.1.
 1. Inspection steps are executed, and the corresponding materials and products
@@ -1232,7 +1278,7 @@ script that it must make sure of the following:
 * That the packaging was done by Bob
 * Finally, since Bob is sometimes sloppy when packaging, Carl must also make
   sure that the script contained in the tarball matches the one that Alice
-reported on the link metadata.
+  reported on the link metadata.
 
 As a result of this, Alice's layout would have two steps and one inspection.
 A `root.layout` file that fulfills these requirements would look like this:
@@ -2167,4 +2213,5 @@ specific to each supply chain. This allows the framework to offer a large
 degree of flexibility to meet varied applications.
 
 We invite all interested parties to test our reference implementation of
-in-toto here, take a look at our examples, or read more about in-toto [here](https://in-toto.io).
+in-toto here, take a look at our examples, or read more about in-toto
+[here](https://in-toto.io).
