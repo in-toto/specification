@@ -1,10 +1,10 @@
 ﻿# in-toto Specification
 
-Apr 02, 2023
+Jun 02, 2023
 
 <https://in-toto.io>
 
-Version 1.0-RC
+Version 1.0.0
 
 ## Table of Contents
 
