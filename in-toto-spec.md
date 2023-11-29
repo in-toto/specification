@@ -524,7 +524,8 @@ the extracted foo.py matches the one that was written by Diana.
 If all of these verifications pass, then installation continues as usual.
 
 ![figure 1](https://raw.githubusercontent.com/in-toto/image-resources/master/diagrams/png/in-toto-metadata.png)
-*Figure 1: The supply chain pieces for this example*
+
+    <sup>Figure 1: The supply chain pieces for this example</sup>
 
 ## 3 The final product
 
