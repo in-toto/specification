@@ -428,10 +428,10 @@ A functionary is uniquely identified by the public key that they will use
 to sign a piece of link metadata as evidence that a step within the supply
 chain was performed.
 
-A functionary can allow a third-party define a step or series of steps of the
-supply chain a sublayout. In this case, a subset of the steps to be performed
-are defined by such a functionary, who adopts the role of a project owner for
-this sublayout.
+A functionary can allow a third-party to define a step or series of steps of
+the supply chain using a sublayout. In this case, a subset of the steps to be
+performed are defined by such a functionary, who adopts the role of a project
+owner for this sublayout.
 
 #### 2.1.3 Clients
 
@@ -523,8 +523,7 @@ the extracted foo.py matches the one that was written by Diana.
 
 If all of these verifications pass, then installation continues as usual.
 
-![figure 1](https://raw.githubusercontent.com/in-toto/image-resources/master/diagrams/png/in-toto-metadata.png)
-    <sup>Figure 1: The supply chain pieces for this example</sup>
+![figure 1](https://raw.githubusercontent.com/in-toto/image-resources/master/diagrams/png/in-toto-metadata.png "Figure 1: The supply chain pieces for this example")
 
 ## 3 The final product
 
