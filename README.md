@@ -2,7 +2,7 @@
 Specification and other related documents.
 
 - You can read the current version of the specification [here](https://github.com/in-toto/docs/blob/master/in-toto-spec.md).
-- The latest stable version (0.9) is [here](https://github.com/in-toto/docs/blob/v0.9/in-toto-spec.md).
+- The latest stable version (1.0) is [here](https://github.com/in-toto/docs/blob/v1.0/in-toto-spec.md).
 
 ## Generating PDF
 
