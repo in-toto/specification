@@ -1,8 +1,16 @@
 # Docs
-Specification and other related documents.
+This repostiory contains the specification and other related documents.
 
 - You can read the current version of the specification [here](https://github.com/in-toto/docs/blob/master/in-toto-spec.md).
 - The latest stable version (1.0) is [here](https://github.com/in-toto/docs/blob/v1.0/in-toto-spec.md).
+
+## Release Cadence
+Note that the specification is released whenever there is a change deemed important enough by a majority of [the ITSC](https://github.com/in-toto/community/blob/main/GOVERNANCE.md#the-in-toto-steering-committee-itsc).   As this is a specification, it is not expected to change frequently, hence many months will regularly pass before a new release is provided.   See the [ITE repository](https://github.com/in-toto/ITE) for information about how to propose changes to the specification and get more immediate feedback.
+
+## Support For Old Releases
+The specification is a living document and as such is expected to improve over time.  The expectation is that changes will improve the security and usability over in-toto implementations and thus will be desirable for implementers to adopt.   However, the community will also happily answer questions about implementations that match older versions of the specification.   In particular, we expect changes around why a specific change was made to occur whenever a non-trivial alteration is performed.   Feel free to ask on our slack channel or in a commnuity call!
+
+Given the slow rate of change of the specification and the incremental nature of those changes, we do not have any cutoff for which versions of the specification we will answer questions about.   We reserve the right to change this in the future.
 
 ## Generating PDF
 
