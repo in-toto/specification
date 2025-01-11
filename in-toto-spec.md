@@ -67,11 +67,11 @@ Version 1.0.0
         - [`write-code.[ALICE-KEYID-PREFIX].link`:](#write-codealice-keyid-prefixlink-1)
         - [`test.[CAROLINES_KEYID_PREFIX].link:`](#testcarolines_keyid_prefixlink)
         - [`package.[BOB-KEYID-PREFIX].link`:](#packagebob-keyid-prefixlink-1)
-      - [Alice uses a version control system](#alice-uses-a-version-control-system)
+      - [5.3.3 Alice uses a version control system](#533--alice-uses-a-version-control-system)
         - [`checkout-vcs.[ALICES-KEYID-PREFIX].link`](#checkout-vcsalices-keyid-prefixlink)
         - [`compilation.[ELEANORS-KEYID-PREFIX].link`](#compilationeleanors-keyid-prefixlink)
         - [`package.[BOBS-KEYID-PREFIX].link`](#packagebobs-keyid-prefixlink)
-      - [5.3.3  Alice uses a third party sublayout](#533--alice-uses-a-third-party-sublayout)
+      - [5.3.4  Alice uses a third party sublayout](#534--alice-uses-a-third-party-sublayout)
         - [`fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`](#fetch-upstreamupstream-keyid-prefixlink)
         - [`check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`](#check-out-vcsupstream-dev1-keyid-prefixlink)
         - [`compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`](#compile-docsupstream-dev2-keyid-prefixlink)
@@ -1662,7 +1662,7 @@ against the script that Alice reported in the link metadata.
 
 If all of these verifications pass, then installation continues as usual.
 
-#### Alice uses a version control system
+#### 5.3.3  Alice uses a version control system
 
 This time, Alice uses a Version Control System (VCS) to ease collaboration with
 Diana, a new developer on the team. Since efficiency is now an issue, Alice
@@ -1894,7 +1894,7 @@ link metadata:
 With these three pieces of metadata, along with foo.tar.gz, Carl can now
 perform verification as we described in the previous example.
 
-#### 5.3.3  Alice uses a third party sublayout
+#### 5.3.4  Alice uses a third party sublayout
 
 A common scenario in software distributions is that source code is produced
 upstream. For example, in Linux distributions, the source code for bash (the
