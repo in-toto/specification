@@ -61,23 +61,24 @@ Version 1.0.0
     - [5.2 Verifying the final product](#52-verifying-the-final-product)
     - [5.3 Supply chain examples](#53-supply-chain-examples)
       - [5.3.1 Alice's Python script](#531-alices-python-script)
-      - [`write-code.[ALICE-KEYID-PREFIX].link:`](#write-codealice-keyid-prefixlink)
-      - [`package.[BOB-KEYID-PREFIX].link:`](#packagebob-keyid-prefixlink)
+        - [`write-code.[ALICE-KEYID-PREFIX].link:`](#write-codealice-keyid-prefixlink)
+        - [`package.[BOB-KEYID-PREFIX].link:`](#packagebob-keyid-prefixlink)
       - [5.3.2 Alice uses testing (with a threshold of 2)](#532-alice-uses-testing-with-a-threshold-of-2)
         - [`write-code.[ALICE-KEYID-PREFIX].link`:](#write-codealice-keyid-prefixlink-1)
         - [`test.[CAROLINES_KEYID_PREFIX].link:`](#testcarolines_keyid_prefixlink)
         - [`package.[BOB-KEYID-PREFIX].link`:](#packagebob-keyid-prefixlink-1)
-      - [Alice uses a version control system](#alice-uses-a-version-control-system)
+      - [5.3.3 Alice uses a version control system](#533--alice-uses-a-version-control-system)
         - [`checkout-vcs.[ALICES-KEYID-PREFIX].link`](#checkout-vcsalices-keyid-prefixlink)
         - [`compilation.[ELEANORS-KEYID-PREFIX].link`](#compilationeleanors-keyid-prefixlink)
         - [`package.[BOBS-KEYID-PREFIX].link`](#packagebobs-keyid-prefixlink)
-      - [5.3.3  Alice uses a third party sublayout](#533--alice-uses-a-third-party-sublayout)
+      - [5.3.4  Alice uses a third party sublayout](#534--alice-uses-a-third-party-sublayout)
         - [`fetch-upstream.[UPSTREAM-KEYID-PREFIX].link`](#fetch-upstreamupstream-keyid-prefixlink)
         - [`check-out-vcs.[UPSTREAM-DEV1-KEYID-PREFIX].link`](#check-out-vcsupstream-dev1-keyid-prefixlink)
         - [`compile-docs.[UPSTREAM-DEV2-KEYID-PREFIX].link`](#compile-docsupstream-dev2-keyid-prefixlink)
         - [`verify-vcs-commits.[UPSTREAM-KEYID-PREFIX].link` (upstream inspection)](#verify-vcs-commitsupstream-keyid-prefixlink-upstream-inspection)
         - [`compilation.[ELEANORS-KEYID-PREFIX].link`:](#compilationeleanors-keyid-prefixlink-1)
         - [`package.[BOBS-KEYID-PREFIX].link`:](#packagebobs-keyid-prefixlink-1)
+      - [5.3.5 Verifying the materials prior to running the step](#535-verifying-the-materials-prior-to-running-the-step)
   - [6 Learn More](#6-learn-more)
 
 ## 1 Introduction
@@ -1662,7 +1663,7 @@ against the script that Alice reported in the link metadata.
 
 If all of these verifications pass, then installation continues as usual.
 
-#### Alice uses a version control system
+#### 5.3.3  Alice uses a version control system
 
 This time, Alice uses a Version Control System (VCS) to ease collaboration with
 Diana, a new developer on the team. Since efficiency is now an issue, Alice
@@ -1894,7 +1895,7 @@ link metadata:
 With these three pieces of metadata, along with foo.tar.gz, Carl can now
 perform verification as we described in the previous example.
 
-#### 5.3.3  Alice uses a third party sublayout
+#### 5.3.4  Alice uses a third party sublayout
 
 A common scenario in software distributions is that source code is produced
 upstream. For example, in Linux distributions, the source code for bash (the
@@ -2203,6 +2204,173 @@ link metadata that is signed with the same key as the layout. If this piece of
 link metadata was missing, the client would be in charge of running the
 inspection (which would require the vcs.log file to be shipped along with the
 final product).
+
+#### 5.3.5 Verifying the materials prior to running the step
+
+> This section explains how functionaries can verify that the materials they are
+> consuming were produced by trusted steps in response to [GHSA-p86f-xmg6-9q4x](https://github.com/in-toto/specification/security/advisories/GHSA-p86f-xmg6-9q4x).
+> The threat scenario that this section will not directly tackle is a product produced
+> by a compromised functionary. This can be resolved by introducing thresholds.
+
+In certain scenarios, some operations in a supply chain can be costly to run.
+Therefore, in order to avoid carrying out costly steps unnecessaryily, the step's
+materials can be verified and checked against the products of previous steps that
+produced it. Such checks can also protect a supply chain against operations that
+may be undesirable to carry out if any of the materials are adversarial that could
+compromise the functionary or further obfuscate the compromise, e.g. running a
+binary for local testing.
+
+Depending on the complexity and threat model of the supply chain, the security
+admin can apply one of the following techniques:
+
+- Provide the functionaries the links that produce the expected materials and the
+link's public keys and have functionaries verify the provided link signatures and
+the material artifacts against the prorducts of the provided links.
+- Utilize sublayouts to define a section of the supply chain, and carry out the
+sublayout verification as a verification of the material artifacts prior to running
+the next step.
+
+The following examples will use the scenario provided in [5.3.2 Alice uses testing](#532-alice-uses-testing-with-a-threshold-of-2)
+as the base supply chain and expand upon it. The following changes will be made:
+
+- Alice will only be in charge of managing the layouts
+- Caroline and Daniel are in charge of testing the code written by Emily.
+- The steps of writing and testing are delegated to a sublayout signed by Alice
+
+The new `root.layout` would look like this:
+
+```json
+{ "signed" : {
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "readme" : "<README>",
+    "keys" : {
+      "<ALICES_KEYID>" : "<ALICES_PUBKEY>",
+      "<BOBS_KEYID>" : "<BOBS_PUBKEY>"
+     },
+    "steps" : [
+      { "_type": "step",
+        "name": "write-and-test-code",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+          ["CREATE", "foo.py"]
+          ["CREATE", "test.py"]
+        ],
+        "pubkeys": [
+          "<ALICES_KEYID>"
+        ],
+        "expected_command": []
+      },
+      { "_type": "step",
+        "name": "package",
+        "threshold": 1,
+        "expected_materials": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "expected_products": [
+          ["CREATE", "foo.tar.gz"]
+        ],
+        "pubkeys": [
+          "<BOBS_KEYID>"
+        ],
+        "expected_command": ["tar", "zcvf", "foo.tar.gz", "foo.py"]
+      }
+    ],
+    "inspect": [
+       { "_type": "inspection",
+         "name": "inspect_tarball",
+         "expected_materials": [
+            [["MATCH", "foo.tar.gz", "WITH", "PRODUCTS", "FROM", "package"]]
+         ],
+         "expected_products": [
+            ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+         ],
+         "run": ["inspect_tarball.sh", "foo.tar.gz"]
+       }
+    ]
+  },
+  "signatures" : [
+      { "keyid" : "<ALICES_KEYID>",
+        "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080..."
+      }
+  ]
+}
+```
+
+##### `write-and-test-code.[ALICES-KEYID-PREFIX].link`
+
+```json
+{ "signed" : {
+    "_type" : "layout",
+    "expires" : "<EXPIRES>",
+    "readme" : "<README>",
+    "keys" : {
+      "<CAROLINES_KEYID>" : "<CAROLINES_PUBKEY>",
+      "<DANIELS_KEYID>" : "<DANIELS_PUBKEY>",
+      "<EMILYS_KEYID>" : "<EMILYS_PUBKEY>"
+     },
+    "steps" : [
+      { "_type": "step",
+        "name": "write-code",
+        "threshold": 1,
+        "expected_materials": [ ],
+        "expected_products": [
+          ["CREATE", "foo.py"]
+          ["CREATE", "test.py"]
+        ],
+        "pubkeys": [
+          "<EMILYS_KEYID>"
+        ],
+        "expected_command": []
+      },
+      { "_type": "step",
+        "name": "test",
+        "threshold": 2,
+        "expected_materials": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
+          ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "expected_products": [
+          ["MATCH", "foo.py", "WITH", "PRODUCTS", "FROM", "write-code"],
+          ["MATCH", "test.py", "WITH", "PRODUCTS", "FROM", "write-code"]
+        ],
+        "pubkeys": [
+          "<CAROLINES_KEYID>",
+          "<DANIELS_KEYID>"
+        ],
+        "expected_command": ["python", "test.py"]
+      }
+    ],
+    "inspect": []
+  },
+  "signatures" : [
+      { "keyid" : "<ALICES_KEYID>",
+        "sig" : "90d2a06c7a6c2a6a93a9f5771eb2e5ce0c93dd580bebc2080..."
+      }
+  ]
+}
+```
+
+The remaining links would look the same as the ones defined in [5.3.2](#532-alice-uses-testing-with-a-threshold-of-2).
+
+##### Caroline and Daniel verify that the tests they are running are from Emily
+
+Caroline and Daniel are provided both python files, [`write-code.[EMILYS-KEYID-PREFIX].link`](#write-codealice-keyid-prefixlink-1),
+and Emily's public key. They can then verify that the python files they are
+testing are Emily's by checking the link signature and verifying that the python
+files they have match the file hashes in the products of the link.
+
+This check will make sure that if any of the python files were modified between transit
+with malicious code, Caroline and Daniel will not risk running malicious code on
+their machines and become compromised.
+
+##### Bob verifies that the code packaged is written and tested as expected
+
+Bob can verify the layout [`write-and-test-code.[ALICES-KEYID-PREFIX].link`](#write-and-test-codealices-keyid-prefixlink)
+to make sure they are packaging trusted and tested code. They will the links
+provided by Alice (`write-and-test-code` layout), Caroline (`test`), Daniel
+(`test`), and Emily (`write-code`), as well as their respective public keys.
 
 ## 6 Learn More
 
