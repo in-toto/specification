@@ -2,10 +2,9 @@
 
 ## Code of Conduct
 
-Contact for Code of Conduct issues or inquiries:  Justin Cappos <jcappos@nyu.edu>
+in-toto is a [Cloud Native Computing Foundation](https://www.cncf.io/) project and follows the [in-toto Community Code of Conduct](https://github.com/in-toto/community/blob/main/CODE-OF-CONDUCT.md), which abides by the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/main/code-of-conduct.md).
 
-[Ideally list two different individuals above (not a generic mailing list) as someone submitting a Code of Conduct complaint will want to know exactly who is receiving the complaint. We recommend two individuals in the case one of the individuals is the subject of or directly involved in the subject of a complaint.]
-
+Contact for Code of Conduct issues or inquiries: the CNCF Code of Conduct Committee <conduct@cncf.io>.
 
 ## License Acceptance
 
