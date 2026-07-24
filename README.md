@@ -54,3 +54,9 @@ Along with this Docs repository, the in-toto enhancements
 ([ITE](https://github.com/in-toto/ITE)) repository contains information about
 features, recommendations and other extensions that are not part of the core
 specification
+
+## Governance & Licensing
+- [Scope](governance/02-scope.md)
+- [Notices](governance/03-notices.md)
+- [License](governance/04-license.md)
+- [Governance](governance/05-governance.md)
